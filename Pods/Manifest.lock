@@ -1,0 +1,47 @@
+PODS:
+  - Alamofire (1.2.3)
+  - Bond (3.8.0)
+  - CocoaSoundCloudAPI (1.0.1):
+    - NXOAuth2Client (= 1.2.1)
+  - NXOAuth2Client (1.2.1)
+  - StreamingKit (0.1.25)
+  - SwiftyJSON (2.2.0)
+
+DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift-2.0`)
+  - Bond (from `https://github.com/SwiftBond/Bond.git`, branch `swift-2.0`)
+  - CocoaSoundCloudAPI (= 1.0.1)
+  - StreamingKit
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
+
+EXTERNAL SOURCES:
+  Alamofire:
+    :branch: swift-2.0
+    :git: https://github.com/Alamofire/Alamofire.git
+  Bond:
+    :branch: swift-2.0
+    :git: https://github.com/SwiftBond/Bond.git
+  SwiftyJSON:
+    :branch: xcode7
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: fd71afb3a0af2042b9f05a6b9f29317ad4903703
+    :git: https://github.com/Alamofire/Alamofire.git
+  Bond:
+    :commit: d58b6980f050674d103fd0bb188230dcbc4f62c0
+    :git: https://github.com/SwiftBond/Bond.git
+  SwiftyJSON:
+    :commit: fb9f6b43cd8d3684c3129793057eb2a2564e2430
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+
+SPEC CHECKSUMS:
+  Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  Bond: a7a7b06cb23ad80470d752e9f964afd2925cabd8
+  CocoaSoundCloudAPI: e8e1f2e463fa9bb9d68b2dcf361572787c7a6c3f
+  NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
+  StreamingKit: f00c054cfd0f59d88c8be7a2270e208302ce48c4
+  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
+
+COCOAPODS: 0.37.2

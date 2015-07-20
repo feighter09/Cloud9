@@ -1,0 +1,6 @@
+framework module CocoaSoundCloudAPI {
+  umbrella header "Pods-SoundCloud Pro-CocoaSoundCloudAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}

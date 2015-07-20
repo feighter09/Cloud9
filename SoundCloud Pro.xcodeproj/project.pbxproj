@@ -1,0 +1,660 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56001B5186B700817B5C /* ManagedTableController.swift */; };
+		7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */; };
+		7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */; };
+		7AAB56071B518F3500817B5C /* StreamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56061B518F3500817B5C /* StreamTableViewController.swift */; };
+		7AAB56091B5194F600817B5C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56081B5194F600817B5C /* TableViewController.swift */; };
+		7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB560A1B5197A600817B5C /* StreamCell.swift */; };
+		7AAB560D1B5197A600817B5C /* StreamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB560B1B5197A600817B5C /* StreamCell.xib */; };
+		7AAB56101B51AC0F00817B5C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB560F1B51AC0F00817B5C /* Track.swift */; };
+		7AAB56131B51E46D00817B5C /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56121B51E46D00817B5C /* AudioPlayer.swift */; };
+		7AAB56171B52305900817B5C /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56161B52305900817B5C /* PlayPauseButton.swift */; };
+		7AAB56191B52313300817B5C /* PlayPauseButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB56181B52313300817B5C /* PlayPauseButton.xib */; };
+		7AAB561C1B523EE200817B5C /* Listener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB561B1B523EE200817B5C /* Listener.swift */; };
+		7AAEC36B1B506F7A00AE6945 /* SCAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAEC36A1B506F7A00AE6945 /* SCAPI.swift */; };
+		7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF7224A1B54BA2400C4C945 /* UIImageView+AFNetworking.swift */; };
+		7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */; };
+		7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */; };
+		7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */; };
+		7AFFA7601B42E9BB0002BB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */; };
+		7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7611B42E9BB0002BB84 /* Images.xcassets */; };
+		7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7631B42E9BB0002BB84 /* LaunchScreen.xib */; };
+		7AFFA7711B42E9BB0002BB84 /* SoundCloud_ProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7701B42E9BB0002BB84 /* SoundCloud_ProTests.swift */; };
+		DCD4B21F649BFE4299FFF38F /* Pods_SoundCloud_Pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7AFFA76B1B42E9BB0002BB84 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7AFFA74A1B42E9BB0002BB84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7AFFA7511B42E9BB0002BB84;
+			remoteInfo = "SoundCloud Pro";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloud Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro.release.xcconfig"; sourceTree = "<group>"; };
+		4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloud_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoundCloud_Pro-Bridging-Header.h"; path = "../SoundCloud_Pro-Bridging-Header.h"; sourceTree = "<group>"; };
+		7AAB56001B5186B700817B5C /* ManagedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedTableController.swift; path = ../../ManagedTableView/Example/ManagedTableController.swift; sourceTree = "<group>"; };
+		7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleSectionTableController.swift; path = ../../ManagedTableView/Example/SingleSectionTableController.swift; sourceTree = "<group>"; };
+		7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiSectionTableController.swift; path = ../../ManagedTableView/Example/MultiSectionTableController.swift; sourceTree = "<group>"; };
+		7AAB56061B518F3500817B5C /* StreamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamTableViewController.swift; sourceTree = "<group>"; };
+		7AAB56081B5194F600817B5C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		7AAB560A1B5197A600817B5C /* StreamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamCell.swift; sourceTree = "<group>"; };
+		7AAB560B1B5197A600817B5C /* StreamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreamCell.xib; sourceTree = "<group>"; };
+		7AAB560F1B51AC0F00817B5C /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		7AAB56121B51E46D00817B5C /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		7AAB56161B52305900817B5C /* PlayPauseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
+		7AAB56181B52313300817B5C /* PlayPauseButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayPauseButton.xib; sourceTree = "<group>"; };
+		7AAB561B1B523EE200817B5C /* Listener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Listener.swift; sourceTree = "<group>"; };
+		7AAEC36A1B506F7A00AE6945 /* SCAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SCAPI.swift; sourceTree = "<group>"; };
+		7AF7224A1B54BA2400C4C945 /* UIImageView+AFNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+AFNetworking.swift"; sourceTree = "<group>"; };
+		7AFFA7521B42E9BB0002BB84 /* SoundCloud Pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SoundCloud Pro.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AFFA7561B42E9BB0002BB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7AFFA75A1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoundCloud_Pro.xcdatamodel; sourceTree = "<group>"; };
+		7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7AFFA75F1B42E9BB0002BB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7AFFA7611B42E9BB0002BB84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7AFFA7641B42E9BB0002BB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		7AFFA76A1B42E9BB0002BB84 /* SoundCloud ProTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SoundCloud ProTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7AFFA76F1B42E9BB0002BB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7AFFA7701B42E9BB0002BB84 /* SoundCloud_ProTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundCloud_ProTests.swift; sourceTree = "<group>"; };
+		B7F0C39BA980C3FD03C6F3C9 /* Pods-SoundCloud Pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloud Pro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7AFFA74F1B42E9BB0002BB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCD4B21F649BFE4299FFF38F /* Pods_SoundCloud_Pro.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AFFA7671B42E9BB0002BB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7AAB55F91B51869600817B5C /* ManagedTable */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB56001B5186B700817B5C /* ManagedTableController.swift */,
+				7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */,
+				7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */,
+			);
+			name = ManagedTable;
+			sourceTree = "<group>";
+		};
+		7AAB560E1B5197AD00817B5C /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB560A1B5197A600817B5C /* StreamCell.swift */,
+				7AAB560B1B5197A600817B5C /* StreamCell.xib */,
+			);
+			name = "Table Cells";
+			sourceTree = "<group>";
+		};
+		7AAB56111B51AC1300817B5C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB560F1B51AC0F00817B5C /* Track.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		7AAB56141B51E47500817B5C /* Audio Playing */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB56121B51E46D00817B5C /* AudioPlayer.swift */,
+			);
+			name = "Audio Playing";
+			sourceTree = "<group>";
+		};
+		7AAB56151B52303200817B5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB56161B52305900817B5C /* PlayPauseButton.swift */,
+				7AAB56181B52313300817B5C /* PlayPauseButton.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		7AAB561A1B523ECE00817B5C /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				7AAB561B1B523EE200817B5C /* Listener.swift */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		7AAEC36C1B506F8800AE6945 /* Interface Builder */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */,
+				7AFFA7631B42E9BB0002BB84 /* LaunchScreen.xib */,
+			);
+			name = "Interface Builder";
+			sourceTree = "<group>";
+		};
+		7AAEC36D1B506F9400AE6945 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */,
+				7AAB56061B518F3500817B5C /* StreamTableViewController.swift */,
+				7AAB56081B5194F600817B5C /* TableViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		7AAEC36E1B506F9C00AE6945 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7AAEC36A1B506F7A00AE6945 /* SCAPI.swift */,
+				7AF7224A1B54BA2400C4C945 /* UIImageView+AFNetworking.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		7AFFA7491B42E9BB0002BB84 = {
+			isa = PBXGroup;
+			children = (
+				7AFFA7541B42E9BB0002BB84 /* SoundCloud Pro */,
+				7AFFA76D1B42E9BB0002BB84 /* SoundCloud ProTests */,
+				7AFFA7531B42E9BB0002BB84 /* Products */,
+				E6EC41A202065ED83100997B /* Pods */,
+				8AD4C6348EF54B2DFB765938 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		7AFFA7531B42E9BB0002BB84 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA7521B42E9BB0002BB84 /* SoundCloud Pro.app */,
+				7AFFA76A1B42E9BB0002BB84 /* SoundCloud ProTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7AFFA7541B42E9BB0002BB84 /* SoundCloud Pro */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */,
+				7AAB561A1B523ECE00817B5C /* Utility */,
+				7AAB56151B52303200817B5C /* Views */,
+				7AAB56141B51E47500817B5C /* Audio Playing */,
+				7AAB56111B51AC1300817B5C /* Models */,
+				7AAB560E1B5197AD00817B5C /* Table Cells */,
+				7AAEC36D1B506F9400AE6945 /* ViewControllers */,
+				7AAEC36C1B506F8800AE6945 /* Interface Builder */,
+				7AAEC36E1B506F9C00AE6945 /* Networking */,
+				7AFFA7551B42E9BB0002BB84 /* Supporting Files */,
+				7AAB55F91B51869600817B5C /* ManagedTable */,
+			);
+			path = "SoundCloud Pro";
+			sourceTree = "<group>";
+		};
+		7AFFA7551B42E9BB0002BB84 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */,
+				7AFFA7611B42E9BB0002BB84 /* Images.xcassets */,
+				7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */,
+				7AFFA7561B42E9BB0002BB84 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7AFFA76D1B42E9BB0002BB84 /* SoundCloud ProTests */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA7701B42E9BB0002BB84 /* SoundCloud_ProTests.swift */,
+				7AFFA76E1B42E9BB0002BB84 /* Supporting Files */,
+			);
+			path = "SoundCloud ProTests";
+			sourceTree = "<group>";
+		};
+		7AFFA76E1B42E9BB0002BB84 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7AFFA76F1B42E9BB0002BB84 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8AD4C6348EF54B2DFB765938 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E6EC41A202065ED83100997B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7F0C39BA980C3FD03C6F3C9 /* Pods-SoundCloud Pro.debug.xcconfig */,
+				29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7AFFA7511B42E9BB0002BB84 /* SoundCloud Pro */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AFFA7741B42E9BB0002BB84 /* Build configuration list for PBXNativeTarget "SoundCloud Pro" */;
+			buildPhases = (
+				4B6521FA34412882FE5506F4 /* Check Pods Manifest.lock */,
+				7AFFA74E1B42E9BB0002BB84 /* Sources */,
+				7AFFA74F1B42E9BB0002BB84 /* Frameworks */,
+				7AFFA7501B42E9BB0002BB84 /* Resources */,
+				98EC7C3DF295D1722EF94610 /* Copy Pods Resources */,
+				914937CC53458598345AB619 /* Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SoundCloud Pro";
+			productName = "SoundCloud Pro";
+			productReference = 7AFFA7521B42E9BB0002BB84 /* SoundCloud Pro.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7AFFA7691B42E9BB0002BB84 /* SoundCloud ProTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7AFFA7771B42E9BB0002BB84 /* Build configuration list for PBXNativeTarget "SoundCloud ProTests" */;
+			buildPhases = (
+				7AFFA7661B42E9BB0002BB84 /* Sources */,
+				7AFFA7671B42E9BB0002BB84 /* Frameworks */,
+				7AFFA7681B42E9BB0002BB84 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7AFFA76C1B42E9BB0002BB84 /* PBXTargetDependency */,
+			);
+			name = "SoundCloud ProTests";
+			productName = "SoundCloud ProTests";
+			productReference = 7AFFA76A1B42E9BB0002BB84 /* SoundCloud ProTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7AFFA74A1B42E9BB0002BB84 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Lost in Flight";
+				TargetAttributes = {
+					7AFFA7511B42E9BB0002BB84 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					7AFFA7691B42E9BB0002BB84 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = 7AFFA7511B42E9BB0002BB84;
+					};
+				};
+			};
+			buildConfigurationList = 7AFFA74D1B42E9BB0002BB84 /* Build configuration list for PBXProject "SoundCloud Pro" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7AFFA7491B42E9BB0002BB84;
+			productRefGroup = 7AFFA7531B42E9BB0002BB84 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7AFFA7511B42E9BB0002BB84 /* SoundCloud Pro */,
+				7AFFA7691B42E9BB0002BB84 /* SoundCloud ProTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7AFFA7501B42E9BB0002BB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AFFA7601B42E9BB0002BB84 /* Main.storyboard in Resources */,
+				7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */,
+				7AAB56191B52313300817B5C /* PlayPauseButton.xib in Resources */,
+				7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */,
+				7AAB560D1B5197A600817B5C /* StreamCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AFFA7681B42E9BB0002BB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4B6521FA34412882FE5506F4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		914937CC53458598345AB619 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		98EC7C3DF295D1722EF94610 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7AFFA74E1B42E9BB0002BB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */,
+				7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */,
+				7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */,
+				7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */,
+				7AAEC36B1B506F7A00AE6945 /* SCAPI.swift in Sources */,
+				7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */,
+				7AAB56071B518F3500817B5C /* StreamTableViewController.swift in Sources */,
+				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
+				7AAB56091B5194F600817B5C /* TableViewController.swift in Sources */,
+				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
+				7AAB56101B51AC0F00817B5C /* Track.swift in Sources */,
+				7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */,
+				7AAB561C1B523EE200817B5C /* Listener.swift in Sources */,
+				7AAB56171B52305900817B5C /* PlayPauseButton.swift in Sources */,
+				7AAB56131B51E46D00817B5C /* AudioPlayer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AFFA7661B42E9BB0002BB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7AFFA7711B42E9BB0002BB84 /* SoundCloud_ProTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7AFFA76C1B42E9BB0002BB84 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7AFFA7511B42E9BB0002BB84 /* SoundCloud Pro */;
+			targetProxy = 7AFFA76B1B42E9BB0002BB84 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AFFA75F1B42E9BB0002BB84 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7AFFA7631B42E9BB0002BB84 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7AFFA7641B42E9BB0002BB84 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7AFFA7721B42E9BB0002BB84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7AFFA7731B42E9BB0002BB84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7AFFA7751B42E9BB0002BB84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B7F0C39BA980C3FD03C6F3C9 /* Pods-SoundCloud Pro.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+			};
+			name = Debug;
+		};
+		7AFFA7761B42E9BB0002BB84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+			};
+			name = Release;
+		};
+		7AFFA7781B42E9BB0002BB84 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SoundCloud ProTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundCloud Pro.app/SoundCloud Pro";
+			};
+			name = Debug;
+		};
+		7AFFA7791B42E9BB0002BB84 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SoundCloud ProTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SoundCloud Pro.app/SoundCloud Pro";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7AFFA74D1B42E9BB0002BB84 /* Build configuration list for PBXProject "SoundCloud Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AFFA7721B42E9BB0002BB84 /* Debug */,
+				7AFFA7731B42E9BB0002BB84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AFFA7741B42E9BB0002BB84 /* Build configuration list for PBXNativeTarget "SoundCloud Pro" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AFFA7751B42E9BB0002BB84 /* Debug */,
+				7AFFA7761B42E9BB0002BB84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7AFFA7771B42E9BB0002BB84 /* Build configuration list for PBXNativeTarget "SoundCloud ProTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7AFFA7781B42E9BB0002BB84 /* Debug */,
+				7AFFA7791B42E9BB0002BB84 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7AFFA75A1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodel */,
+			);
+			currentVersion = 7AFFA75A1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodel */;
+			path = SoundCloud_Pro.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 7AFFA74A1B42E9BB0002BB84 /* Project object */;
+}
