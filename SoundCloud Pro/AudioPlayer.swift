@@ -6,10 +6,11 @@
 //  Copyright © 2015 Lost in Flight. All rights reserved.
 //
 
-protocol AudioPlayerListener: Listener {
-  func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
-  func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
-  func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
+@objc protocol AudioPlayerListener: Listener {
+  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
+  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
+  optional func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
+  optional func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
 }
 
 let kAudioPlayerDefaultSeekDelta: Double = 4
@@ -20,10 +21,9 @@ class AudioPlayer: NSObject {
   private static var audioPlayer = STKAudioPlayer()
   
   var currentTrack: Track?
-  var listeners = ListenerArray()
-  
-  var seekDelta = kAudioPlayerDefaultSeekDelta
-  var seekTimer: NSTimer?
+  private var playlist: [Track] = []
+
+  var listeners = ListenerArray<AudioPlayerListener>()
   
   override init()
   {
@@ -33,14 +33,42 @@ class AudioPlayer: NSObject {
 }
 
 // MARK: - Interface
+// MARK: Play State
+extension AudioPlayer {
+  var playPauseState: PlayPauseState {
+    switch AudioPlayer.audioPlayer.state {
+    case .Playing:
+      return .Play
+    case .Buffering:
+      return .Loading
+    default:
+      return .Pause
+    }
+  }
+  
+  var isPlaying: Bool {
+    return playPauseState == .Play || playPauseState == .Loading
+  }
+  
+  func seekTimeForTrack(track: Track) -> Double
+  {
+    return currentTrack == track ? AudioPlayer.audioPlayer.progress : 0
+  }
+}
+
+// MARK: Playback Controls
 extension AudioPlayer {
   func play(track: Track)
   {
     if track == currentTrack && AudioPlayer.audioPlayer.state == .Paused {
       AudioPlayer.audioPlayer.resume()
     } else {
+      if currentTrack != nil {
+        listeners.announce { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
+      }
+      
       currentTrack = track
-      AudioPlayer.audioPlayer.play("\(track.streamURL)?client_id=\(kSoundCloudClientID)")
+      AudioPlayer.audioPlayer.play(track.streamURL)
     }
   }
   
@@ -62,14 +90,12 @@ extension AudioPlayer {
     AudioPlayer.audioPlayer.seekToTime(0)
   }
   
-  func durationForTrack(track: Track) -> Double?
+  func playNextTrack()
   {
-    return currentTrack == track ? AudioPlayer.audioPlayer.duration : nil
-  }
-  
-  func seekTimeForTrack(track: Track) -> Double
-  {
-    return currentTrack == track ? AudioPlayer.audioPlayer.progress : 0
+    if playlist.count > 0 {
+      currentTrack = playlist.removeAtIndex(0)
+      play(currentTrack!)
+    }
   }
   
   func seekTrack(track: Track, toTime time: Double)
@@ -78,6 +104,24 @@ extension AudioPlayer {
     AudioPlayer.audioPlayer.seekToTime(time)
   }
   
+  func addTracksToPlaylist(tracks: [Track], clearExisting: Bool = false)
+  {
+    assert(tracks.count > 0, "can't add 0 tracks to playlist")
+    
+    if clearExisting { playlist = [] }
+    if playlist.count == 0 { AudioPlayer.audioPlayer.queue(tracks.first!.streamURL) }
+    
+    playlist += tracks
+  }
+  
+  func addTrackToPlaylist(track: Track, clearExisting: Bool = false)
+  {
+    addTracksToPlaylist([track], clearExisting: clearExisting)
+  }
+}
+
+// MARK: Listeners
+extension AudioPlayer {
   func addListener(listener: AudioPlayerListener)
   {
     listeners.addListener(listener)
@@ -93,7 +137,18 @@ extension AudioPlayer {
 extension AudioPlayer: STKAudioPlayerDelegate {
   func audioPlayer(audioPlayer: STKAudioPlayer!, didStartPlayingQueueItemId queueItemId: NSObject!)
   {
-    NSLog("buffering: \(queueItemId)")
+    if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
+      let newTrack = playlist[trackIndex]
+      listeners.announce { listener in
+        if let currentTrack = self.currentTrack {
+          listener.audioPlayer?(self, didStopTrack: currentTrack)
+        }
+        
+        listener.audioPlayer?(self, didBeginPlayingTrack: newTrack)
+      }
+      
+      currentTrack = newTrack
+    }
   }
   
   func audioPlayer(audioPlayer: STKAudioPlayer!, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject!)
@@ -106,34 +161,28 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     NSLog("State changed from: \(previousState.rawValue) to: \(state.rawValue)")
     switch state {
     case STKAudioPlayerState.Buffering:
-      listeners.announce({ (listener) -> Void in
-        let audioListener = listener as! AudioPlayerListener
-        audioListener.audioPlayer(self, didBeginBufferingTrack: self.currentTrack!)
-      })
+      listeners.announce { listener in listener.audioPlayer?(self, didBeginBufferingTrack: self.currentTrack!) }
     case STKAudioPlayerState.Playing:
-      listeners.announce({ (listener) -> Void in
-        let audioListener = listener as! AudioPlayerListener
-        audioListener.audioPlayer(self, didBeginPlayingTrack: self.currentTrack!)
-      })
+      listeners.announce { listener in listener.audioPlayer?(self, didBeginPlayingTrack: self.currentTrack!) }
     case STKAudioPlayerState.Paused:
-      listeners.announce({ (listener) -> Void in
-        let audioListener = listener as! AudioPlayerListener
-        audioListener.audioPlayer(self, didPauseTrack: self.currentTrack!)
-      })
+      listeners.announce { listener in listener.audioPlayer?(self, didPauseTrack: self.currentTrack!) }
+    case STKAudioPlayerState.Stopped:
+      listeners.announce { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
+      
+      if Int(previousState.rawValue) & Int(STKAudioPlayerState.Running.rawValue) > 0 {
+        playNextTrack()
+      }
     case STKAudioPlayerState.Ready:
       fallthrough
     case STKAudioPlayerState.Running:
       fallthrough
-    case STKAudioPlayerState.Stopped:
-      fallthrough
     case STKAudioPlayerState.Error:
+      NSLog("Audio player error: \(audioPlayer.stopReason)")
       fallthrough
     case STKAudioPlayerState.Disposed:
       break
     }
-    if state == STKAudioPlayerState.Error {
-      NSLog("Audio player error: \(audioPlayer.stopReason)")
-    }
+    
   }
   
   func audioPlayer(audioPlayer: STKAudioPlayer!,
@@ -158,51 +207,5 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   @objc func audioPlayer(audioPlayer: STKAudioPlayer!, didCancelQueuedItems queuedItems: [AnyObject]!)
   {
     
-  }
-}
-
-// MARK: - Helpers
-extension AudioPlayer {
-  private func resetSeeking()
-  {
-    seekTimer?.invalidate()
-    seekDelta = kAudioPlayerDefaultSeekDelta
-    AudioPlayer.audioPlayer.resume()
-  }
-}
-
-// MARK: - Remnants
-extension AudioPlayer {
-  func rewind()
-  {
-    // TODO: come on clean this up
-    seekTimer?.invalidate()
-    
-    let seekTime = AudioPlayer.audioPlayer.progress - seekDelta--
-    AudioPlayer.audioPlayer.pause()
-    AudioPlayer.audioPlayer.seekToTime(seekTime)
-    seekTimer = NSTimer.scheduledTimerWithTimeInterval(kAudioPlayerSeekTimeInterval, target: self, selector: "rewind", userInfo: nil, repeats: true)
-    AudioPlayer.audioPlayer.resume()
-  }
-  
-  func stopRewind()
-  {
-    resetSeeking()
-  }
-  
-  func fastForward()
-  {
-    seekTimer?.invalidate()
-    
-    let seekTime = AudioPlayer.audioPlayer.progress + seekDelta++
-    AudioPlayer.audioPlayer.pause()
-    AudioPlayer.audioPlayer.seekToTime(seekTime)
-    seekTimer = NSTimer.scheduledTimerWithTimeInterval(kAudioPlayerSeekTimeInterval, target: self, selector: "fastForward", userInfo: nil, repeats: true)
-    AudioPlayer.audioPlayer.resume()
-  }
-  
-  func stopFastForward()
-  {
-    resetSeeking()
   }
 }

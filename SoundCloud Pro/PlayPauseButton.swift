@@ -37,7 +37,6 @@ class PlayPauseButton: UIButton, Listener {
     makeCircular()
     updateImage()
   }
-
 }
 
 // MARK: - Helpers

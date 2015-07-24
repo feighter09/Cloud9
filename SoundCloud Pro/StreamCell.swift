@@ -10,9 +10,7 @@ import UIKit
 import Bond
 
 protocol StreamCellDelegate {
-  func streamCell(streamCell: StreamCell, tappedUpVoteTrack track: Track)
-  func streamCell(streamCell: StreamCell, tappedDownVoteTrack track: Track)
-  func streamCellTappedNextTrack(streamCell: StreamCell)
+  func streamCell(streamCell: StreamCell, beganPlayingTrack track: Track)
 }
 
 let kStreamCellControlsHeight: CGFloat = 32
@@ -21,22 +19,13 @@ let kStreamCellControlsMargin: CGFloat = 4
 class StreamCell: UITableViewCell {
   var listenerId: Int = 0
   var track: Track! {
-    didSet { updateLabels() }
+    didSet { updateViews() }
   }
   
   var delegate: StreamCellDelegate?
   
   @IBOutlet private weak var seekProgressBar: UISlider!
   private var seekTimer: NSTimer!
-  // This seems like some shit to me
-  private var tableView: UITableView? {
-    var table = superview
-    while !(table is UITableView) && table != nil {
-      table = table!.superview
-    }
-    
-    return table as? UITableView
-  }
   
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var artistLabel: UILabel!
@@ -55,6 +44,17 @@ class StreamCell: UITableViewCell {
 //    
 //    self.layoutIfNeeded()
 //  }
+  
+  required init?(coder aDecoder: NSCoder)
+  {
+    super.init(coder: aDecoder)
+    AudioPlayer.sharedPlayer.addListener(self)
+  }
+
+  deinit
+  {
+    AudioPlayer.sharedPlayer.removeListener(self)
+  }
 }
 
 // MARK: - Life Cycle
@@ -70,9 +70,7 @@ extension StreamCell {
   
   override func prepareForReuse()
   {
-    // TODO: fill in
-//    expandCell(false, animated: false)
-
+    stopTrack()
   }
 }
 
@@ -81,24 +79,21 @@ extension StreamCell {
   @IBAction func playPauseTapped(button: PlayPauseButton)
   {
     if button.playState == .Pause {
-      AudioPlayer.sharedPlayer.play(track, withListener: self)
-      startUpdatingSeekTime()
-      expandCell(true, animated: true)
+      playTrack()
     } else {
       AudioPlayer.sharedPlayer.pause()
-      stopUpdatingSeekTime()
-      expandCell(false, animated: true)
+      stopTrack()
     }
   }
   
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    delegate?.streamCell(self, tappedUpVoteTrack: track)
+    UserPreferences.addUpvote(track)
   }
   
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    delegate?.streamCell(self, tappedDownVoteTrack: track)
+    UserPreferences.addDownvote(track)
   }
   
   @IBAction func beginningTapped(sender: AnyObject)
@@ -108,7 +103,7 @@ extension StreamCell {
   
   @IBAction func endTapped(sender: AnyObject)
   {
-    delegate?.streamCellTappedNextTrack(self)
+    AudioPlayer.sharedPlayer.playNextTrack()
   }
   
   @IBAction func seekTouchDown(sender: AnyObject)
@@ -125,26 +120,39 @@ extension StreamCell {
   {
     AudioPlayer.sharedPlayer.seekTrack(track, toTime: Double(slider.value))
   }
+  
+  override func setSelected(selected: Bool, animated: Bool)
+  {
+    super.setSelected(selected, animated: animated)
+    
+    if selected {
+      if !trackIsCurrentlyPlaying { playTrack() }
+      setSelected(false, animated: animated)
+    }
+  }
 }
 
 extension StreamCell: AudioPlayerListener {
   func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
+    expandCell(track == self.track, animated: true)
+    
     if track == self.track {
       playPauseButton.playState = .Loading
+      startUpdatingSeekTime() // #1 might call for a refactor
     } else {
       playPauseButton.playState = .Pause
+      stopUpdatingSeekTime()
     }
+
+    delegate?.streamCell(self, beganPlayingTrack: track)
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
   {
-    if track == self.track {
-      playPauseButton.playState = .Play
-    } else {
-      // TODO: shouldn't need this, confirm.
-      playPauseButton.playState = .Pause
-    }
+    expandCell(track == self.track, animated: true)
+    playPauseButton.playState = track == self.track ? .Play : .Pause
+    startUpdatingSeekTime() // #1 might call for a refactor
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
@@ -153,21 +161,46 @@ extension StreamCell: AudioPlayerListener {
       playPauseButton.playState = .Pause
     }
   }
+  
+  func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
+  {
+    if track == self.track {
+      stopTrack()
+    }
+  }
 }
 
 // MARK: - Helpers
 extension StreamCell {
-  private func updateLabels()
+  private func playTrack()
+  {
+    AudioPlayer.sharedPlayer.play(track)
+    startUpdatingSeekTime()
+    expandCell(true, animated: true)
+  }
+  
+  private func stopTrack()
+  {
+    stopUpdatingSeekTime()
+    playPauseButton.playState = .Pause
+    expandCell(false, animated: true)
+  }
+  
+  private var trackIsCurrentlyPlaying: Bool {
+    return AudioPlayer.sharedPlayer.currentTrack == track && AudioPlayer.sharedPlayer.isPlaying
+  }
+  
+  private func updateViews()
   {
     assert(track != nil, "Track must not be nil")
     titleLabel.text = track.title
     artistLabel.text = track.artist
-    
-//    if track == AudioPlayer.sharedPlayer.currentTrack {
-//      expandCell(true, animated: false)
-//    }
-//    
-//    playPauseButton.playState = track == AudioPlayer.sharedPlayer.currentTrack ? .Play : .Pause
+  
+    if track == AudioPlayer.sharedPlayer.currentTrack {
+      startUpdatingSeekTime()
+      expandCell(true, animated: false)
+      playPauseButton.playState = AudioPlayer.sharedPlayer.playPauseState
+    }
 //    if let waveformURL = track.waveformURL {
 //      self.getWaveformWithURL(waveformURL)
 //    }
@@ -180,9 +213,12 @@ extension StreamCell {
       self.controlsHeight.constant = expand ? kStreamCellControlsHeight : 0
       self.controlsMargin.constant = expand ? kStreamCellControlsMargin : 0
       self.seekProgressBar.hidden = !expand
+      
       self.layoutIfNeeded()
-      self.tableView?.beginUpdates()
-      self.tableView?.endUpdates()
+      if self.tableView!.visibleCells.contains(self) {
+        self.tableView?.beginUpdates()
+        self.tableView?.endUpdates()
+      }
     }
   }
   
@@ -206,8 +242,18 @@ extension StreamCell {
   
   private func stopUpdatingSeekTime()
   {
-    seekTimer.invalidate()
+    seekTimer?.invalidate()
     seekTimer = nil
+  }
+  
+  // This seems like some shit to me
+  private var tableView: UITableView? {
+    var table = superview
+    while !(table is UITableView) && table != nil {
+      table = table!.superview
+    }
+    
+    return table as? UITableView
   }
 }
 

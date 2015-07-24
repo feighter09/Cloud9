@@ -41,17 +41,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1B-e5-SqN">
-                        <rect key="frame" x="280" y="0.0" width="40" height="60"/>
+                        <rect key="frame" x="280" y="0.0" width="40" height="58"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-n6-pbt">
-                                <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="29"/>
                                 <state key="normal" title="Up"/>
                                 <connections>
                                     <action selector="upVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VvX-dR-HyZ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf">
-                                <rect key="frame" x="0.0" y="30" width="40" height="30"/>
+                                <rect key="frame" x="0.0" y="29" width="40" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="7t0-kM-PqX"/>
+                                </constraints>
                                 <state key="normal" title="Down"/>
                                 <connections>
                                     <action selector="downVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hRM-in-oP2"/>
@@ -72,7 +75,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Tq9-9y-y7I">
-                        <rect key="frame" x="8" y="58" width="304" height="0.0"/>
+                        <rect key="frame" x="8" y="58" width="264" height="0.0"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOM-i8-dlv">
                                 <rect key="frame" x="0.0" y="0.0" width="32" height="0.0"/>
@@ -82,14 +85,14 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM8-ca-FKW">
-                                <rect key="frame" x="272" y="0.0" width="32" height="0.0"/>
+                                <rect key="frame" x="232" y="0.0" width="32" height="0.0"/>
                                 <state key="normal" image="End"/>
                                 <connections>
                                     <action selector="endTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bv0-o0-V0z"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-Nf-8Nm">
-                                <rect key="frame" x="38" y="0.0" width="228" height="1"/>
+                                <rect key="frame" x="38" y="0.0" width="188" height="1"/>
                                 <connections>
                                     <action selector="seekEnd:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="3ic-Ad-uMV"/>
                                     <action selector="seekEnd:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Phd-FW-MUv"/>
@@ -117,7 +120,6 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="d1B-e5-SqN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2el-pD-UKr"/>
-                    <constraint firstItem="Tq9-9y-y7I" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="5KQ-UC-vuP"/>
                     <constraint firstItem="Tq9-9y-y7I" firstAttribute="top" secondItem="nBa-JJ-0Pz" secondAttribute="bottom" constant="8" id="9m7-vE-c2C"/>
                     <constraint firstAttribute="bottom" secondItem="Tq9-9y-y7I" secondAttribute="bottom" id="FCM-hG-hOY"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="top" secondItem="zsi-Tm-KZU" secondAttribute="bottom" constant="4" id="FfT-oc-mnW"/>
@@ -129,6 +131,8 @@
                     <constraint firstItem="Tq9-9y-y7I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ej6-eC-FUj"/>
                     <constraint firstItem="GgD-Dw-r1m" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="kIC-BB-kT8"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="leading" secondItem="GgD-Dw-r1m" secondAttribute="trailing" constant="8" id="vKM-Nh-zlp"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="leading" secondItem="Tq9-9y-y7I" secondAttribute="trailing" constant="8" id="veU-L7-T5Y"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xCG-9F-9oX"/>
                     <constraint firstItem="d1B-e5-SqN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nBa-JJ-0Pz" secondAttribute="trailing" constant="4" id="xkz-9N-cBp"/>
                 </constraints>
             </tableViewCellContentView>

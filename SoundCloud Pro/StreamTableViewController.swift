@@ -14,6 +14,7 @@ class StreamTableViewController: UITableViewController {
   var tracks: [Track] = [] {
     didSet { tableView.reloadData() }
   }
+  var listenerId = 0
 }
 
 // MARK: - Life Cycle
@@ -21,6 +22,7 @@ extension StreamTableViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
     initTable()
   }
   
@@ -30,27 +32,22 @@ extension StreamTableViewController {
     
     tableView.estimatedRowHeight = 59
     tableView.rowHeight = UITableViewAutomaticDimension
-
-    tableView.allowsSelection = false
   }
 }
 
 // MARK: - Stream Cell Delegate
 extension StreamTableViewController: StreamCellDelegate {
-  
-  func streamCell(streamCell: StreamCell, tappedUpVoteTrack track: Track)
+  func streamCell(streamCell: StreamCell, beganPlayingTrack track: Track)
   {
-    NSLog("upvote")
-  }
-
-  func streamCell(streamCell: StreamCell, tappedDownVoteTrack track: Track)
-  {
-    NSLog("downvote")
-  }
-  
-  func streamCellTappedNextTrack(streamCell: StreamCell)
-  {
-    //
+    let index = tracks.indexOf(track)!
+    if index < tracks.count {
+      let playlistTracks = Array(tracks[index + 1 ..< tracks.count])
+      print(track)
+      playlistTracks.map { print($0) }
+      AudioPlayer.sharedPlayer.addTracksToPlaylist(playlistTracks, clearExisting: true)
+    } else {
+      // TODO: handle end of stream
+    }
   }
 }
 
@@ -72,7 +69,7 @@ extension StreamTableViewController {
   }
 }
 
+
 // MARK: - Table View Delegate
 extension StreamTableViewController {
-
 }

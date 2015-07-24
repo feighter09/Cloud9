@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */; };
+		7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */; };
 		7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56001B5186B700817B5C /* ManagedTableController.swift */; };
 		7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */; };
 		7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */; };
@@ -44,7 +46,9 @@
 /* Begin PBXFileReference section */
 		29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloud Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro.release.xcconfig"; sourceTree = "<group>"; };
 		4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloud_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoundCloud_Pro-Bridging-Header.h"; path = "../SoundCloud_Pro-Bridging-Header.h"; sourceTree = "<group>"; };
+		7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		7AAB56001B5186B700817B5C /* ManagedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedTableController.swift; path = ../../ManagedTableView/Example/ManagedTableController.swift; sourceTree = "<group>"; };
 		7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleSectionTableController.swift; path = ../../ManagedTableView/Example/SingleSectionTableController.swift; sourceTree = "<group>"; };
 		7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiSectionTableController.swift; path = ../../ManagedTableView/Example/MultiSectionTableController.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				7AAB561B1B523EE200817B5C /* Listener.swift */,
+				7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */,
+				7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 			buildPhases = (
 				4B6521FA34412882FE5506F4 /* Check Pods Manifest.lock */,
 				7AFFA74E1B42E9BB0002BB84 /* Sources */,
+				7A81E3661B5DF8A000339CA3 /* ShellScript */,
 				7AFFA74F1B42E9BB0002BB84 /* Frameworks */,
 				7AFFA7501B42E9BB0002BB84 /* Resources */,
 				98EC7C3DF295D1722EF94610 /* Copy Pods Resources */,
@@ -373,6 +380,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		7A81E3661B5DF8A000339CA3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "TAGS=\"TODO:|FIXME:|HACK:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+		};
 		914937CC53458598345AB619 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -411,6 +431,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */,
+				7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */,
 				7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */,
 				7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */,
 				7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */,
@@ -419,6 +440,7 @@
 				7AAB56071B518F3500817B5C /* StreamTableViewController.swift in Sources */,
 				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
 				7AAB56091B5194F600817B5C /* TableViewController.swift in Sources */,
+				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7AAB56101B51AC0F00817B5C /* Track.swift in Sources */,
 				7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */,

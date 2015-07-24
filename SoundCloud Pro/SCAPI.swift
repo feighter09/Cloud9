@@ -21,12 +21,11 @@ class SoundCloud {
                             withAccount: SCSoundCloud.account(),
                             sendingProgressHandler: nil) { (response, data, error) -> Void in
       NSLog("response: \(response)")
-                              if requestSucceeded(response, error: error) {
-      processStreamJSON(data, callback: callback)
-                              }
+      if requestSucceeded(response, error: error) {
+        processStreamJSON(data, callback: callback)
+      }
     }
   }
-
 }
 
 // MARK: - Helpers
@@ -50,7 +49,11 @@ extension SoundCloud {
     let json = JSON(data: data)
     NSLog("stream json: \(json)")
     
-    let tracks = json["collection"].array!.map { return Track(json: $0) }
+    let tracks = json["collection"].array!.filter { !$0["type"].stringValue.hasPrefix("playlist") }  // remove playlist types for now
+                                          .map { Track(json: $0) }
+                                          // this is fucked up. .contains doesn't by default call "==" on all the elements
+                                          .filter { track in !UserPreferences.downvotes.contains { track == $0 } }
+                                          .uniqueElements()
     callback(tracks: tracks)
   }
 }

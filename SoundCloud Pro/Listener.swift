@@ -6,7 +6,7 @@
 //  Copyright © 2015 Lost in Flight. All rights reserved.
 //
 
-protocol Listener: NSObjectProtocol {
+@objc protocol Listener: NSObjectProtocol {
   var listenerId: Int { get set }
 }
 
@@ -15,15 +15,15 @@ func ==(lhs: Listener, rhs: Listener) -> Bool
   return lhs.listenerId == rhs.listenerId
 }
 
-class ListenerArray {
-  var listeners: [Listener] = []
+class ListenerArray<ListenerType: Listener> {
+  var listeners: [ListenerType] = []
 
   private var listenerIdsInUse = Set<Int>()
 }
 
 // MARK: - Interface
 extension ListenerArray {
-  func addListener(listener: Listener)
+  func addListener(listener: ListenerType)
   {
     if !listeners.contains({ return $0 == listener }) {
       setListenerUniqueId(listener)
@@ -32,7 +32,7 @@ extension ListenerArray {
     }
   }
   
-  func removeListener(listener: Listener)
+  func removeListener(listener: ListenerType)
   {
     if let index = listeners.indexOf({ return $0 == listener }) {
       listeners.removeAtIndex(index)
@@ -40,7 +40,7 @@ extension ListenerArray {
     }
   }
   
-  func announce(announcement: (Listener) -> Void)
+  func announce(announcement: (ListenerType) -> Void)
   {
     listeners.map { announcement($0) }
   }

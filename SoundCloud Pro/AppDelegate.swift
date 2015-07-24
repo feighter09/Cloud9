@@ -18,8 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
-  {
-    
+  {    
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: "SoundCloudPro://OAuth"))
     return true
   }
@@ -31,6 +30,7 @@ extension AppDelegate {
   {
     NSLog("opening url: \(url)")
     SCSoundCloud.handleRedirectURL(url)
+    print("penis")
     return true
   }
   
