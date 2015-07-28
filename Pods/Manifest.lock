@@ -4,6 +4,7 @@ PODS:
   - CocoaSoundCloudAPI (1.0.1):
     - NXOAuth2Client (= 1.2.1)
   - NXOAuth2Client (1.2.1)
+  - SCLAlertView-Objective-C (0.7.3)
   - StreamingKit (0.1.25)
   - SwiftyJSON (2.2.0)
 
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift-2.0`)
   - Bond (from `https://github.com/SwiftBond/Bond.git`, branch `swift-2.0`)
   - CocoaSoundCloudAPI (= 1.0.1)
+  - SCLAlertView-Objective-C
   - StreamingKit
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
 
@@ -41,6 +43,7 @@ SPEC CHECKSUMS:
   Bond: a7a7b06cb23ad80470d752e9f964afd2925cabd8
   CocoaSoundCloudAPI: e8e1f2e463fa9bb9d68b2dcf361572787c7a6c3f
   NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
+  SCLAlertView-Objective-C: 4bf9a07c8a8d1840e5174e643e16bc032239914d
   StreamingKit: f00c054cfd0f59d88c8be7a2270e208302ce48c4
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 

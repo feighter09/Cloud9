@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "54413F8C4C7290DFAB9CE787"
+               BlueprintIdentifier = "4386452292F051B36ACAA3DC"
                BuildableName = "Bond.framework"
                BlueprintName = "Pods-SoundCloud Pro-Bond"
                ReferencedContainer = "container:Pods.xcodeproj">

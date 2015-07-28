@@ -11,5 +11,6 @@
 
 #import "SCAPI.h"
 #import "STKAudioPlayer.h"
+#import "SCLAlertView.h"
 
 #endif /* SoundCloud_Pro_Bridging_Header_h */

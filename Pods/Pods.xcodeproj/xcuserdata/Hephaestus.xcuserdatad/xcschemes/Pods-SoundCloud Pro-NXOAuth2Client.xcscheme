@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E48B668A393C7EA90563930F"
+               BlueprintIdentifier = "5766697F3CB967C07317EA07"
                BuildableName = "NXOAuth2Client.framework"
                BlueprintName = "Pods-SoundCloud Pro-NXOAuth2Client"
                ReferencedContainer = "container:Pods.xcodeproj">

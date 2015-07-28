@@ -21,7 +21,7 @@ class AudioPlayer: NSObject {
   private static var audioPlayer = STKAudioPlayer()
   
   var currentTrack: Track?
-  private var playlist: [Track] = []
+  private(set) var playlist: [Track] = []
 
   var listeners = ListenerArray<AudioPlayerListener>()
   
@@ -147,6 +147,7 @@ extension AudioPlayer: STKAudioPlayerDelegate {
         listener.audioPlayer?(self, didBeginPlayingTrack: newTrack)
       }
       
+      playlist.removeAtIndex(0)
       currentTrack = newTrack
     }
   }

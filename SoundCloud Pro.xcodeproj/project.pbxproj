@@ -580,7 +580,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
 			};
 			name = Debug;
 		};
@@ -595,7 +595,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
 			};
 			name = Release;
 		};

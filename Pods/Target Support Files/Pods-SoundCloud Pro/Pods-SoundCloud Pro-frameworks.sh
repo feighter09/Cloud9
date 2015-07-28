@@ -52,6 +52,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Bond.framework'
   install_framework 'CocoaSoundCloudAPI.framework'
   install_framework 'NXOAuth2Client.framework'
+  install_framework 'SCLAlertView_Objective_C.framework'
   install_framework 'StreamingKit.framework'
   install_framework 'SwiftyJSON.framework'
 fi
@@ -60,6 +61,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Bond.framework'
   install_framework 'CocoaSoundCloudAPI.framework'
   install_framework 'NXOAuth2Client.framework'
+  install_framework 'SCLAlertView_Objective_C.framework'
   install_framework 'StreamingKit.framework'
   install_framework 'SwiftyJSON.framework'
 fi

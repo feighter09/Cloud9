@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7AD8B0FED0B7C0A63451285E"
+               BlueprintIdentifier = "851109B4DBBF880F40028452"
                BuildableName = "StreamingKit.framework"
                BlueprintName = "Pods-SoundCloud Pro-StreamingKit"
                ReferencedContainer = "container:Pods.xcodeproj">

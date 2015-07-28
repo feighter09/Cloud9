@@ -81,16 +81,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/AudioPlayer.swift"
-            timestampString = "459448781.269612"
+            timestampString = "459710612.276176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "playNextTrack()"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "audioPlayer(_:didStartPlayingQueueItemId:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
