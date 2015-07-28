@@ -63,7 +63,7 @@ extension AudioPlayer {
       AudioPlayer.audioPlayer.resume()
     } else {
       if currentTrack != nil {
-        listeners.announce { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
+        listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
       }
       
       AudioPlayer.audioPlayer.play(track.streamURL)
@@ -161,7 +161,7 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     
     if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
       let newTrack = playlist[trackIndex]
-      listeners.announce { listener in
+      listeners.announceOnMainQueue { listener in
         if let currentTrack = self.currentTrack {
           listener.audioPlayer?(self, didStopTrack: currentTrack)
         }
@@ -185,26 +185,26 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     NSLog("State changed from: \(previousState.toString) to: \(state.toString)")
     
     switch state {
-    case STKAudioPlayerState.Buffering:
-      listeners.announce { listener in listener.audioPlayer?(self, didBeginBufferingTrack: self.currentTrack!) }
-    case STKAudioPlayerState.Playing:
-      listeners.announce { listener in listener.audioPlayer?(self, didBeginPlayingTrack: self.currentTrack!) }
-    case STKAudioPlayerState.Paused:
-      listeners.announce { listener in listener.audioPlayer?(self, didPauseTrack: self.currentTrack!) }
-    case STKAudioPlayerState.Stopped:
-      listeners.announce { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
+    case .Buffering:
+      listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didBeginBufferingTrack: self.currentTrack!) }
+    case .Playing:
+      listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didBeginPlayingTrack: self.currentTrack!) }
+    case .Paused:
+      listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didPauseTrack: self.currentTrack!) }
+    case .Stopped:
+      listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
       
       if Int(previousState.rawValue) & Int(STKAudioPlayerState.Running.rawValue) > 0 {
         playNextTrack()
       }
-    case STKAudioPlayerState.Ready:
+    case .Ready:
       fallthrough
-    case STKAudioPlayerState.Running:
+    case .Running:
       fallthrough
-    case STKAudioPlayerState.Error:
+    case .Error:
       NSLog("Audio player error: \(audioPlayer.stopReason)")
       fallthrough
-    case STKAudioPlayerState.Disposed:
+    case .Disposed:
       break
     }
   }
