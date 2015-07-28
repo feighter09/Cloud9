@@ -1,1 +1,0 @@
-../../../CocoaSoundCloudAPI/Sources/SoundCloudAPI/SCSoundCloud.h

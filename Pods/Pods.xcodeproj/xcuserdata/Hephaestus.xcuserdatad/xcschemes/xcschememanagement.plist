@@ -4,37 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-SoundCloud Pro-Alamofire.xcscheme</key>
+		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SoundCloud Pro-Bond.xcscheme</key>
+		<key>Bond.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SoundCloud Pro-CocoaSoundCloudAPI.xcscheme</key>
+		<key>CocoaSoundCloudAPI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SoundCloud Pro-NXOAuth2Client.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SoundCloud Pro-SCLAlertView-Objective-C.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SoundCloud Pro-StreamingKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-SoundCloud Pro-SwiftyJSON.xcscheme</key>
+		<key>NXOAuth2Client.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -44,45 +29,60 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SCLAlertView-Objective-C.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>StreamingKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>3AD33C364E468A58411243AD</key>
+		<key>0BDFD2FC2A88AC28748DE1D420073FAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4386452292F051B36ACAA3DC</key>
+		<key>1BB35621ABAFED707F12BF15B6E914A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5766697F3CB967C07317EA07</key>
+		<key>91EED889E60E0CAC77D9F1B7F7E73260</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>851109B4DBBF880F40028452</key>
+		<key>9CB3DCD225E9F2FF4BD6A356CDC1FE3C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E1CC75A8F7779E2D33086D3</key>
+		<key>9CB99B9EA450C6ACAA6D9FB69D504648</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AB7E25F556DACE5B855A37B3</key>
+		<key>ACA998A591E65152694CD1C745152A75</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C27A6833A17FAE8D69FA37E3</key>
+		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFBE24DE4819A0F7DFEAB957</key>
+		<key>CC87AE09EB9C90770709069EE4D786A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

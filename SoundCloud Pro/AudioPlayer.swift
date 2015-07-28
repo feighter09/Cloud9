@@ -7,8 +7,8 @@
 //
 
 @objc protocol AudioPlayerListener: Listener {
+  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)//, forTheFirstTime firstTime: Bool)
   optional func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
-  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   optional func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
   optional func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
 }
@@ -46,9 +46,7 @@ extension AudioPlayer {
     }
   }
   
-  var isPlaying: Bool {
-    return playPauseState == .Play || playPauseState == .Loading
-  }
+  var isPlaying: Bool { return playPauseState == .Play || playPauseState == .Loading }
   
   func seekTimeForTrack(track: Track) -> Double
   {
@@ -58,7 +56,8 @@ extension AudioPlayer {
 
 // MARK: Playback Controls
 extension AudioPlayer {
-  func play(track: Track)
+  /// Plays the provided track and clears the playlist if specified
+  func play(track: Track, clearingPlaylist: Bool = false)
   {
     if track == currentTrack && AudioPlayer.audioPlayer.state == .Paused {
       AudioPlayer.audioPlayer.resume()
@@ -67,17 +66,26 @@ extension AudioPlayer {
         listeners.announce { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
       }
       
-      currentTrack = track
       AudioPlayer.audioPlayer.play(track.streamURL)
+      currentTrack = track
+    }
+    
+    if clearingPlaylist {
+      playlist = []
+    } else {
+      playlist.map { AudioPlayer.audioPlayer.queue($0.streamURL) }
     }
   }
   
-  func play(track: Track, withListener listener: AudioPlayerListener)
+  /// Plays the provided track, subscribes the provided listener to audio events and clears the playlist if specified
+  func play(track: Track, withListener listener: AudioPlayerListener, clearingPlaylist: Bool = false)
   {
     addListener(listener)
-    play(track)
+    play(track, clearingPlaylist: clearingPlaylist)
   }
   
+  /// Pauses the player. Requires that the player is playing or buffering a track
+  // TODO: Put the assert somewhere else?
   func pause()
   {
     assert(AudioPlayer.audioPlayer.state == STKAudioPlayerState.Playing ||
@@ -85,11 +93,13 @@ extension AudioPlayer {
     AudioPlayer.audioPlayer.pause()
   }
   
+  /// Seeks the current track to time 0
   func restartTrack()
   {
     AudioPlayer.audioPlayer.seekToTime(0)
   }
   
+  /// Pops the first track off the playlist and plays it
   func playNextTrack()
   {
     if playlist.count > 0 {
@@ -98,25 +108,35 @@ extension AudioPlayer {
     }
   }
   
+  /// Seeks the track provided to the time specified. Requires that the track provided is current playing track
+  // TODO: put assert before call?
   func seekTrack(track: Track, toTime time: Double)
   {
     assert(currentTrack == track)
     AudioPlayer.audioPlayer.seekToTime(time)
   }
   
+  /// Appends tracks provided to playlist, clearing the existing enqueued tracks if specified
   func addTracksToPlaylist(tracks: [Track], clearExisting: Bool = false)
   {
     assert(tracks.count > 0, "can't add 0 tracks to playlist")
     
-    if clearExisting { playlist = [] }
-    if playlist.count == 0 { AudioPlayer.audioPlayer.queue(tracks.first!.streamURL) }
+    if clearExisting { clearPlaylist() }
+    tracks.map { AudioPlayer.audioPlayer.queue($0.streamURL) }
     
     playlist += tracks
   }
   
+  /// Appends track to playlist, clearing the existing enqueued tracks if specified
   func addTrackToPlaylist(track: Track, clearExisting: Bool = false)
   {
     addTracksToPlaylist([track], clearExisting: clearExisting)
+  }
+  
+  func clearPlaylist()
+  {
+    AudioPlayer.audioPlayer.clearQueue()
+    playlist = []
   }
 }
 
@@ -137,6 +157,8 @@ extension AudioPlayer {
 extension AudioPlayer: STKAudioPlayerDelegate {
   func audioPlayer(audioPlayer: STKAudioPlayer!, didStartPlayingQueueItemId queueItemId: NSObject!)
   {
+    if currentTrack?.streamURL == queueItemId as? String { return }
+    
     if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
       let newTrack = playlist[trackIndex]
       listeners.announce { listener in
@@ -154,12 +176,14 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   
   func audioPlayer(audioPlayer: STKAudioPlayer!, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject!)
   {
-    NSLog("playing: \(queueItemId)")
+    // TODO: can this cause "didBeginBufferingTrack" to not be called?
+    NSLog("finished buffering item from queue: \(queueItemId)")
   }
   
   func audioPlayer(audioPlayer: STKAudioPlayer!, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState)
   {
-    NSLog("State changed from: \(previousState.rawValue) to: \(state.rawValue)")
+    NSLog("State changed from: \(previousState.toString) to: \(state.toString)")
+    
     switch state {
     case STKAudioPlayerState.Buffering:
       listeners.announce { listener in listener.audioPlayer?(self, didBeginBufferingTrack: self.currentTrack!) }
@@ -183,7 +207,6 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     case STKAudioPlayerState.Disposed:
       break
     }
-    
   }
   
   func audioPlayer(audioPlayer: STKAudioPlayer!,
@@ -202,11 +225,39 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   
   @objc func audioPlayer(audioPlayer: STKAudioPlayer!, logInfo line: String!)
   {
-    NSLog(line)
+    NSLog("Audio player log: " + line)
   }
   
   @objc func audioPlayer(audioPlayer: STKAudioPlayer!, didCancelQueuedItems queuedItems: [AnyObject]!)
   {
     
   }
+}
+
+extension STKAudioPlayerState {
+  var toString: String {
+    switch self {
+    case .Ready:
+      return "Ready"
+    case .Running:
+      return "Running"
+    case .Playing:
+      return "Playing"
+    case .Buffering:
+      return "Buffering"
+    case .Paused:
+      return "Paused"
+    case .Stopped:
+      return "Stopped"
+    case .Error:
+      return "Error"
+    case .Disposed:
+      return "Disposed"
+    }
+  }
+}
+
+// MARK: - Helpers
+extension AudioPlayer {
+  
 }

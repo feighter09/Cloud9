@@ -44,15 +44,16 @@
 #include "UIKit/UIApplication.h"
 #endif
 
-typedef NS_ENUM(NSUInteger, STKAudioPlayerState) {
-    STKAudioPlayerStateReady,
-    STKAudioPlayerStateRunning = 1,
-    STKAudioPlayerStatePlaying = (1 << 1) | STKAudioPlayerStateRunning,
-    STKAudioPlayerStateBuffering = (1 << 2) | STKAudioPlayerStateRunning,
-    STKAudioPlayerStatePaused = (1 << 3) | STKAudioPlayerStateRunning,
-    STKAudioPlayerStateStopped = (1 << 4),
-    STKAudioPlayerStateError = (1 << 5),
-    STKAudioPlayerStateDisposed = (1 << 6)
+typedef NS_ENUM(NSUInteger, STKAudioPlayerState)
+{
+  STKAudioPlayerStateReady,
+  STKAudioPlayerStateRunning = 1,
+  STKAudioPlayerStatePlaying = (1 << 1) | STKAudioPlayerStateRunning,
+  STKAudioPlayerStateBuffering = (1 << 2) | STKAudioPlayerStateRunning,
+  STKAudioPlayerStatePaused = (1 << 3) | STKAudioPlayerStateRunning,
+  STKAudioPlayerStateStopped = (1 << 4),
+  STKAudioPlayerStateError = (1 << 5),
+  STKAudioPlayerStateDisposed = (1 << 6)
 };
 
 typedef enum

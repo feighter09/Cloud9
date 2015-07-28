@@ -1,1 +1,0 @@
-PODS_SOUNDCLOUD_PRO_STREAMINGKIT_OTHER_LDFLAGS = -framework "AudioToolbox" -framework "CFNetwork" -framework "CoreFoundation" -framework "SystemConfiguration"

@@ -9,10 +9,6 @@
 import UIKit
 import Bond
 
-protocol StreamCellDelegate {
-  func streamCell(streamCell: StreamCell, beganPlayingTrack track: Track)
-}
-
 let kStreamCellControlsHeight: CGFloat = 32
 let kStreamCellControlsMargin: CGFloat = 4
 
@@ -21,8 +17,6 @@ class StreamCell: UITableViewCell {
   var track: Track! {
     didSet { updateViews() }
   }
-  
-  var delegate: StreamCellDelegate?
   
   @IBOutlet private weak var seekProgressBar: UISlider!
   private var seekTimer: NSTimer!
@@ -144,8 +138,6 @@ extension StreamCell: AudioPlayerListener {
       playPauseButton.playState = .Pause
       stopUpdatingSeekTime()
     }
-
-    delegate?.streamCell(self, beganPlayingTrack: track)
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
@@ -215,9 +207,13 @@ extension StreamCell {
       self.seekProgressBar.hidden = !expand
       
       self.layoutIfNeeded()
-      if self.tableView!.visibleCells.contains(self) {
-        self.tableView?.beginUpdates()
-        self.tableView?.endUpdates()
+      if self.tableView != nil && self.tableView!.visibleCells.contains(self) {
+        do {
+          try self.tableView?.beginUpdates()
+          try self.tableView?.endUpdates()
+        } catch _ {
+          print("Something went wrong expanding cell")
+        }
       }
     }
   }

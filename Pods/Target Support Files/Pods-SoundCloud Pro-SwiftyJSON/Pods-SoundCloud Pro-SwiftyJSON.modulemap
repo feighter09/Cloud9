@@ -1,6 +1,0 @@
-framework module SwiftyJSON {
-  umbrella header "Pods-SoundCloud Pro-SwiftyJSON-umbrella.h"
-
-  export *
-  module * { export * }
-}

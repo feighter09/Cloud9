@@ -25,6 +25,7 @@ extension StreamTableViewController {
     super.viewDidLoad()
     
     initTable()
+    AudioPlayer.sharedPlayer.addListener(self)
   }
   
   private func initTable()
@@ -39,24 +40,37 @@ extension StreamTableViewController {
 }
 
 // MARK: - Stream Cell Delegate
-extension StreamTableViewController: StreamCellDelegate {
-  func streamCell(streamCell: StreamCell, beganPlayingTrack track: Track)
+extension StreamTableViewController: AudioPlayerListener {
+  func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
-    addStreamToPlaylistBeginningWithTrack(track)
+    addStreamToPlaylistAfterTrack(track)
   }
   
-  private func addStreamToPlaylistBeginningWithTrack(track: Track)
+  func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
   {
-    if track == AudioPlayer.sharedPlayer.playlist.first { return }
-    
-    let index = tracks.indexOf(track)!
-    if index < tracks.count {
-      let playlistTracks = Array(tracks[index + 1 ..< tracks.count])
-      playlistTracks.map { print($0) }
-      AudioPlayer.sharedPlayer.addTracksToPlaylist(playlistTracks, clearExisting: true)
+    addStreamToPlaylistAfterTrack(track)
+  }
+  
+  private func addStreamToPlaylistAfterTrack(track: Track)
+  {
+    // TODO: this might not be very robust
+    if let tracksToAdd = tracksFollowingTrack(track) {
+      if tracksToAdd.first != AudioPlayer.sharedPlayer.playlist.first  {
+//        tracksToAdd.map { print($0) }
+        AudioPlayer.sharedPlayer.addTracksToPlaylist(tracksToAdd, clearExisting: true)
+      }
     } else {
-      // TODO: handle end of stream
+      // TODO: Handle end of stream
     }
+  }
+  
+  private func tracksFollowingTrack(track: Track) -> [Track]?
+  {
+    if let index = tracks.indexOf(track) {
+      if index + 1 < tracks.count { return Array(tracks[index + 1 ..< tracks.count]) }
+    }
+    
+    return nil
   }
   
   private func shouldAddStreamToPlaylistBeginningWithTrack(track: Track) -> Bool
@@ -82,14 +96,10 @@ extension StreamTableViewController {
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
   {
     let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
-
     cell.track = tracks[indexPath.row]
-    cell.delegate = self
-
     return cell
   }
 }
-
 
 // MARK: - Table View Delegate
 extension StreamTableViewController {
