@@ -9,35 +9,54 @@
 import SwiftyJSON
 
 @objc class Track: NSObject, NSCoding {
-  private var jsonData: JSON
+  var title: String!
+  var artist: String!
+  var duration: Double!
+  var streamURL: String!
+  
+  private var jsonData: JSON!
   
   init(json: JSON)
   {
-    jsonData = json
+    // I wish I could just save jsonData to json or json["origin"] but that doesn't work
+    if json["origin"].dictionary != nil {
+      title = json["origin"]["title"].string!
+      artist = json["origin"]["user"]["username"].string!
+      duration = json["origin"]["duration"].doubleValue / 1000
+      streamURL = json["origin"]["stream_url"].string! + "?client_id=\(kSoundCloudClientID)"
+    } else {
+      title = json["title"].string
+      artist = json["user"]["username"].string
+      duration = json["duration"].doubleValue / 1000
+      streamURL = json["stream_url"].string! + "?client_id=\(kSoundCloudClientID)"
+    }
+    
+    jsonData = json["origin"]
     super.init()
+
+    assert(title != nil && artist != nil && duration != nil && streamURL != nil)
   }
   
   required init?(coder aDecoder: NSCoder)
   {
+    title = aDecoder.decodeObjectForKey(kTitleKey) as! String
+    artist = aDecoder.decodeObjectForKey(kArtistKey) as! String
+    duration = aDecoder.decodeDoubleForKey(kDurationKey)
+    streamURL = aDecoder.decodeObjectForKey(kStreamURLKey) as! String
     jsonData = JSON(data: aDecoder.decodeObjectForKey(kTrackJSON) as! NSData)
   }
 }
 
 // MARK: - Interface
 extension Track {
-  var title: String! { return jsonData["origin"]["title"].string }
-  var artist: String! { return jsonData["origin"]["user"]["username"].string }
-  var duration: Double! { return jsonData["origin"]["duration"].doubleValue / 1000 }
-  var streamURL: String! { return jsonData["origin"]["stream_url"].string! + "?client_id=\(kSoundCloudClientID)" }
-  
   var waveformURL: NSURL? {
-    if let urlString = jsonData["origin"]["waveform_url"].string {
+    if let urlString = jsonData["waveform_url"].string {
       return NSURL(string: urlString)
     } else {
       return nil
     }
   }
-  var artworkURL: NSURL! { return NSURL(string: jsonData["origin"]["artwork_url"].string!) }
+  var artworkURL: NSURL! { return NSURL(string: jsonData["artwork_url"].string!) }
 }
 
 // MARK: - Helpers
@@ -50,11 +69,19 @@ extension Track {
 
 // MARK: - NSCoding
 let kTrackJSON = "json"
+let kTitleKey = "title"
+let kArtistKey = "artist"
+let kDurationKey = "duration"
+let kStreamURLKey = "streamURL"
 
 extension Track {
   func encodeWithCoder(aCoder: NSCoder)
   {
     try! aCoder.encodeObject(jsonData.rawData(), forKey: kTrackJSON)
+    aCoder.encodeObject(title, forKey: kTitleKey)
+    aCoder.encodeObject(artist, forKey: kArtistKey)
+    aCoder.encodeDouble(duration, forKey: kDurationKey)
+    aCoder.encodeObject(streamURL, forKey: kStreamURLKey)
   }
 }
 

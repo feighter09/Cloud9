@@ -8,7 +8,8 @@
 
 import SwiftyJSON
 
-typealias StreamFetchCallback = (tracks: [Track]!, error: NSError!) -> Void
+typealias NetworkCallback = (response: NSURLResponse!, responseData: NSData!, error: NSError!) -> Void
+typealias FetchTracksCallback = (tracks: [Track]!, error: NSError!) -> Void
 
 class SoundCloud {
   private static var nextStreamUrl: String?
@@ -16,28 +17,36 @@ class SoundCloud {
 
 // MARK: - Interface
 extension SoundCloud {
-  class func getStream(callback: StreamFetchCallback)
+  class func getStream(callback: FetchTracksCallback)
   {
     getStreamWithURLString(kSCSoundCloudAPIURL + "me/activities/tracks/affiliated", callback: callback)
   }
   
-  class func getMoreStream(callback: StreamFetchCallback)
+  class func getMoreStream(callback: FetchTracksCallback)
   {
     getStreamWithURLString(nextStreamUrl!, callback: callback)
   }
   
-  private class func getStreamWithURLString(urlString: String, callback: StreamFetchCallback)
+  class func getTracksMatching(searchString: String, callback: FetchTracksCallback)
   {
-    let url = NSURL(string: urlString)
-    let params = ["limit": "30"]
-    SCRequest.performMethod(SCRequestMethodGET,
-                            onResource: url,
-                            usingParameters: params,
-                            withAccount: SCSoundCloud.account(),
-                            sendingProgressHandler: nil) { (response, data, error) -> Void in
-      NSLog("response: \(response)")
+    let params = ["q": searchString]
+    GET(kSCSoundCloudAPIURL + "tracks", params: params) { (response, responseData, error) -> Void in
       if requestSucceeded(response, error: error) {
-        processStreamJSON(data, callback: callback)
+        let tracks = processSearchJSON(responseData)
+        callback(tracks: tracks, error: nil)
+      } else {
+        callback(tracks: nil, error: error)
+      }
+    }
+  }
+  
+  private class func getStreamWithURLString(urlString: String, callback: FetchTracksCallback)
+  {
+    let params = ["limit": "30"]
+    GET(urlString, params: params) { (response, responseData, error) -> Void in
+      if requestSucceeded(response, error: error) {
+        let tracks = processStreamJSON(responseData)
+        callback(tracks: tracks, error: nil)
       } else {
         callback(tracks: nil, error: error)
       }
@@ -47,6 +56,16 @@ extension SoundCloud {
 
 // MARK: - Helpers
 extension SoundCloud {
+  private class func GET(urlString: String, params: [NSObject: AnyObject], callback: NetworkCallback)
+  {
+    SCRequest.performMethod(SCRequestMethodGET,
+                            onResource: NSURL(string: urlString),
+                            usingParameters: params,
+                            withAccount: SCSoundCloud.account(),
+                            sendingProgressHandler: nil,
+                            responseHandler: callback)
+  }
+  
   private class func requestSucceeded(response: NSURLResponse, error: NSError?) -> Bool
   {
     if let httpResponse = response as? NSHTTPURLResponse {
@@ -56,7 +75,7 @@ extension SoundCloud {
     return error != nil
   }
   
-  private class func processStreamJSON(data: NSData, callback: StreamFetchCallback)
+  private class func processStreamJSON(data: NSData) -> [Track]
   {
     let json = JSON(data: data)
     print("stream json: \(json)")
@@ -67,6 +86,13 @@ extension SoundCloud {
                                           // this is fucked up. .contains doesn't by default call "==" on all the elements
                                           .filter { track in !UserPreferences.downvotes.contains { track == $0 } }
                                           .uniqueElements()
-    callback(tracks: tracks, error: nil)
+    return tracks
+  }
+  
+  private class func processSearchJSON(data: NSData) -> [Track]
+  {
+    let json = JSON(data: data)
+    print("search json: \(json)")
+    return json.array!.map { Track(json: $0) }
   }
 }

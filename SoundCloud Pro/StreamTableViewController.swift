@@ -17,6 +17,7 @@ protocol StreamTableViewControllerDelegate {
 }
 
 class StreamTableViewController: UITableViewController {
+  /// The tracks shown. Automatically updates tableView if set with `=`
   var tracks: [Track] = [] {
     didSet { tableView.reloadData() }
   }
@@ -24,6 +25,20 @@ class StreamTableViewController: UITableViewController {
   var delegate: StreamTableViewControllerDelegate?
   
   var listenerId = 0
+}
+
+// MARK: - Interface
+extension StreamTableViewController {
+  func addToView(view: UIView,
+    inViewController viewController: UIViewController,
+    withDelegate delegate: StreamTableViewControllerDelegate?)
+  {
+    self.delegate = delegate
+    
+    view.addSubview(tableView)
+    viewController.addChildViewController(self)
+    self.didMoveToParentViewController(viewController)
+  }
 }
 
 // MARK: - Life Cycle

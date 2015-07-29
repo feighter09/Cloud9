@@ -85,11 +85,10 @@ extension AudioPlayer {
   }
   
   /// Pauses the player. Requires that the player is playing or buffering a track
-  // TODO: Put the assert somewhere else?
   func pause()
   {
     assert(AudioPlayer.audioPlayer.state == STKAudioPlayerState.Playing ||
-           AudioPlayer.audioPlayer.state == STKAudioPlayerState.Buffering)
+           AudioPlayer.audioPlayer.state == STKAudioPlayerState.Buffering) // TODO: Put the assert somewhere else?
     AudioPlayer.audioPlayer.pause()
   }
   
@@ -109,10 +108,9 @@ extension AudioPlayer {
   }
   
   /// Seeks the track provided to the time specified. Requires that the track provided is current playing track
-  // TODO: put assert before call?
   func seekTrack(track: Track, toTime time: Double)
   {
-    assert(currentTrack == track)
+    assert(currentTrack == track) // TODO: put assert before call?
     AudioPlayer.audioPlayer.seekToTime(time)
   }
   
@@ -133,6 +131,7 @@ extension AudioPlayer {
     addTracksToPlaylist([track], clearExisting: clearExisting)
   }
   
+  /// Removes all pending tracks from playlist
   func clearPlaylist()
   {
     AudioPlayer.audioPlayer.clearQueue()
@@ -187,16 +186,17 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     switch state {
     case .Buffering:
       listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didBeginBufferingTrack: self.currentTrack!) }
+      
     case .Playing:
       listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didBeginPlayingTrack: self.currentTrack!) }
+      
     case .Paused:
       listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didPauseTrack: self.currentTrack!) }
+      
     case .Stopped:
       listeners.announceOnMainQueue { listener in listener.audioPlayer?(self, didStopTrack: self.currentTrack!) }
+      if Int(previousState.rawValue) & Int(STKAudioPlayerState.Running.rawValue) > 0 { playNextTrack() }
       
-      if Int(previousState.rawValue) & Int(STKAudioPlayerState.Running.rawValue) > 0 {
-        playNextTrack()
-      }
     case .Ready:
       fallthrough
     case .Running:

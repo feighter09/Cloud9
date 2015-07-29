@@ -13,6 +13,7 @@
 		7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */; };
 		7A5FA5DC1B6862A8009467B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */; };
 		7A5FA5DE1B6865E8009467B7 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */; };
+		7A5FA5E01B694746009467B7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5DF1B694746009467B7 /* SearchViewController.swift */; };
 		7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */; };
 		7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56001B5186B700817B5C /* ManagedTableController.swift */; };
 		7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */; };
@@ -55,6 +56,7 @@
 		7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoundCloud_Pro-Bridging-Header.h"; path = "../SoundCloud_Pro-Bridging-Header.h"; sourceTree = "<group>"; };
 		7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		7A5FA5DF1B694746009467B7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		7AAB56001B5186B700817B5C /* ManagedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedTableController.swift; path = ../../ManagedTableView/Example/ManagedTableController.swift; sourceTree = "<group>"; };
 		7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleSectionTableController.swift; path = ../../ManagedTableView/Example/SingleSectionTableController.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				7AAB56061B518F3500817B5C /* StreamTableViewController.swift */,
 				7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */,
 				7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */,
+				7A5FA5DF1B694746009467B7 /* SearchViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7AAB56101B51AC0F00817B5C /* Track.swift in Sources */,
+				7A5FA5E01B694746009467B7 /* SearchViewController.swift in Sources */,
 				7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */,
 				7AAB561C1B523EE200817B5C /* Listener.swift in Sources */,
 				7A5FA5DE1B6865E8009467B7 /* ErrorHandler.swift in Sources */,

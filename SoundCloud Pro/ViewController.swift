@@ -11,17 +11,14 @@ import UIKit
 let kTableViewOffset: CGFloat = 64
 
 class ViewController: UIViewController {
-  var streamList = StreamTableViewController()
+  private var streamList = StreamTableViewController()
 }
 
 extension ViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
-    
-    streamList.delegate = self
-    streamList.tableView.frame = UIView.rectWithinBars()
-    view.addSubview(streamList.tableView)
+    setupStreamList()
   }
 
   override func viewDidAppear(animated: Bool)
@@ -33,6 +30,12 @@ extension ViewController {
     } else {
       loadStream()
     }
+  }
+  
+  private func setupStreamList()
+  {
+    streamList.tableView.frame = UIView.rectWithinBars()
+    streamList.addToView(view, inViewController: self, withDelegate: self)
   }
 }
 
@@ -60,7 +63,7 @@ extension ViewController {
     alert.customViewColor = .orangeColor()
     alert.showWaiting(self, title: "Loading Stream", subTitle: nil, closeButtonTitle: nil, duration: 0)
 
-    SoundCloud.getStream({ (tracks, error) -> Void in
+    SoundCloud.getStream({ (tracks, error) -> Void in      
       alert.hideView()
       
       if error == nil {

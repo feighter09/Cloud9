@@ -27,7 +27,7 @@
         <!--Search-->
         <scene sceneID="DVU-Ho-6im">
             <objects>
-                <viewController id="dSx-d2-m1Z" sceneMemberID="viewController">
+                <viewController id="dSx-d2-m1Z" customClass="SearchViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yCT-1O-7oW"/>
                         <viewControllerLayoutGuide type="bottom" id="Uej-Ur-8zJ"/>
@@ -40,24 +40,26 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="NCC-so-PWh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSb-U3-UBb">
                                 <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zlI-gH-36W" firstAttribute="leading" secondItem="8eL-aH-ffM" secondAttribute="leading" id="5eq-NQ-tiy"/>
-                            <constraint firstItem="NCC-so-PWh" firstAttribute="top" secondItem="zlI-gH-36W" secondAttribute="bottom" id="8hD-Zf-LYV"/>
-                            <constraint firstItem="Uej-Ur-8zJ" firstAttribute="top" secondItem="NCC-so-PWh" secondAttribute="bottom" id="Gia-cD-hc0"/>
-                            <constraint firstItem="NCC-so-PWh" firstAttribute="leading" secondItem="8eL-aH-ffM" secondAttribute="leading" id="Kva-zI-0d8"/>
-                            <constraint firstAttribute="trailing" secondItem="NCC-so-PWh" secondAttribute="trailing" id="Qr6-Ix-Q3T"/>
+                            <constraint firstItem="WSb-U3-UBb" firstAttribute="leading" secondItem="8eL-aH-ffM" secondAttribute="leading" id="CT8-9g-iND"/>
+                            <constraint firstItem="WSb-U3-UBb" firstAttribute="top" secondItem="zlI-gH-36W" secondAttribute="bottom" id="T8d-S2-kgG"/>
+                            <constraint firstAttribute="trailing" secondItem="WSb-U3-UBb" secondAttribute="trailing" id="elK-kk-tUp"/>
                             <constraint firstItem="zlI-gH-36W" firstAttribute="top" secondItem="yCT-1O-7oW" secondAttribute="bottom" id="hfl-jj-C20"/>
                             <constraint firstAttribute="trailing" secondItem="zlI-gH-36W" secondAttribute="trailing" id="in9-kd-qbu"/>
+                            <constraint firstItem="Uej-Ur-8zJ" firstAttribute="top" secondItem="WSb-U3-UBb" secondAttribute="bottom" id="n9b-tc-2tz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="tUT-kH-uco"/>
                     <connections>
+                        <outlet property="containerView" destination="WSb-U3-UBb" id="PQV-n1-Mzf"/>
+                        <outlet property="searchBar" destination="zlI-gH-36W" id="icc-zN-CjQ"/>
                         <outlet property="searchDisplayController" destination="p4l-P8-8pa" id="My2-zY-G1W"/>
                     </connections>
                 </viewController>
