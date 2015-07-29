@@ -11,13 +11,15 @@ import UIKit
 let kTableViewOffset: CGFloat = 64
 
 class ViewController: UIViewController {
-
   var streamList = StreamTableViewController()
-  
+}
+
+extension ViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
     
+    streamList.delegate = self
     streamList.tableView.frame = UIView.rectWithinBars()
     view.addSubview(streamList.tableView)
   }
@@ -34,10 +36,19 @@ class ViewController: UIViewController {
   }
 }
 
+// MARK: - Stream Table Delegate
+extension ViewController: StreamTableViewControllerDelegate {
+  func streamTableControllerDidScrollToEnd(streamTableController: StreamTableViewController)
+  {
+    loadMoreStream()
+  }
+}
+
 // MARK: - Helpers
 extension ViewController {
   private func authorizeSoundCloud()
   {
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "didAuthenticate", name: kSoundCloudDidAuthenticate, object: nil)
     SCSoundCloud.requestAccessWithPreparedAuthorizationURLHandler { (url) -> Void in
       UIApplication.sharedApplication().openURL(url)
     }
@@ -49,10 +60,32 @@ extension ViewController {
     alert.customViewColor = .orangeColor()
     alert.showWaiting(self, title: "Loading Stream", subTitle: nil, closeButtonTitle: nil, duration: 0)
 
-    SoundCloud.getStream({ (tracks) -> Void in
-      self.streamList.tracks = tracks
+    SoundCloud.getStream({ (tracks, error) -> Void in
       alert.hideView()
+      
+      if error == nil {
+        self.streamList.tracks = tracks
+      } else {
+        ErrorHandler.handleNetworkingError("stream", error: error)
+      }
     })
+  }
+  
+  private func loadMoreStream()
+  {
+    SoundCloud.getMoreStream { (tracks, error) -> Void in
+      if error == nil {
+        self.streamList.tracks += tracks
+      } else {
+        ErrorHandler.handleNetworkingError("more stream tracks", error: error)
+      }
+    }
+  }
+  
+  func didAuthenticate()
+  {
+    loadStream()
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 }
 

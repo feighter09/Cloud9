@@ -57,6 +57,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-SoundCloud Pro/CocoaSoundCloudAPI.framework'
   install_framework 'Pods-SoundCloud Pro/NXOAuth2Client.framework'
   install_framework 'Pods-SoundCloud Pro/SCLAlertView_Objective_C.framework'
+  install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'
   install_framework 'Pods-SoundCloud Pro/SwiftyJSON.framework'
 fi
@@ -66,6 +67,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-SoundCloud Pro/CocoaSoundCloudAPI.framework'
   install_framework 'Pods-SoundCloud Pro/NXOAuth2Client.framework'
   install_framework 'Pods-SoundCloud Pro/SCLAlertView_Objective_C.framework'
+  install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'
   install_framework 'Pods-SoundCloud Pro/SwiftyJSON.framework'
 fi

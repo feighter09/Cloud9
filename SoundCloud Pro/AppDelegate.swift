@@ -12,6 +12,8 @@ import CoreData
 let kSoundCloudClientID = "823363d3a8c33bfb0a1c608da13141b2"
 let kSoundCloudClientSecret = "ad456d110c3c4a8f7ac9dacfb2f3c6c6"
 
+let kSoundCloudDidAuthenticate = "soundCloudDidAuthenticate"
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
@@ -28,9 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
   func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool
   {
-    NSLog("opening url: \(url)")
+    NSLog("handle opening url: \(url)")
     SCSoundCloud.handleRedirectURL(url)
-    print("penis")
+    NSNotificationCenter.defaultCenter().postNotificationName(kSoundCloudDidAuthenticate, object: nil)
     return true
   }
   
@@ -38,6 +40,7 @@ extension AppDelegate {
   {
     NSLog("opening url: \(url)")
     SCSoundCloud.handleRedirectURL(url)
+    NSNotificationCenter.defaultCenter().postNotificationName(kSoundCloudDidAuthenticate, object: nil)
     return true
   }
 }

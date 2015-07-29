@@ -12,6 +12,7 @@ target 'SoundCloud Pro' do
   pod 'CocoaSoundCloudAPI', '1.0.1'
   pod 'StreamingKit'
   pod 'SCLAlertView-Objective-C'
+  pod 'SVPullToRefresh'
 end
 
 target 'SoundCloud ProTests' do

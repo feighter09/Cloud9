@@ -60,7 +60,7 @@ extension ListenerArray {
   private func setListenerUniqueId(listener: Listener)
   {
     while true {
-      listener.listenerId = Int(arc4random())
+      listener.listenerId = Int(arc4random() % UInt32(INT32_MAX))
       
       if !listenerIdsInUse.contains(listener.listenerId) {
         listenerIdsInUse.insert(listener.listenerId)

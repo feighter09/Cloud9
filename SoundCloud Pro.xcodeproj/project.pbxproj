@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A1351C81B6822B700C2F7FA /* VotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */; };
+		7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CB1B68544C00C2F7FA /* VoteCell.swift */; };
+		7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */; };
 		7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */; };
+		7A5FA5DC1B6862A8009467B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */; };
+		7A5FA5DE1B6865E8009467B7 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */; };
 		7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */; };
 		7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56001B5186B700817B5C /* ManagedTableController.swift */; };
 		7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */; };
 		7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */; };
 		7AAB56071B518F3500817B5C /* StreamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56061B518F3500817B5C /* StreamTableViewController.swift */; };
-		7AAB56091B5194F600817B5C /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56081B5194F600817B5C /* TableViewController.swift */; };
 		7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB560A1B5197A600817B5C /* StreamCell.swift */; };
 		7AAB560D1B5197A600817B5C /* StreamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB560B1B5197A600817B5C /* StreamCell.xib */; };
 		7AAB56101B51AC0F00817B5C /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB560F1B51AC0F00817B5C /* Track.swift */; };
@@ -26,7 +30,6 @@
 		7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */; };
 		7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */; };
 		7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */; };
-		7AFFA7601B42E9BB0002BB84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA75E1B42E9BB0002BB84 /* Main.storyboard */; };
 		7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7611B42E9BB0002BB84 /* Images.xcassets */; };
 		7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7631B42E9BB0002BB84 /* LaunchScreen.xib */; };
 		7AFFA7711B42E9BB0002BB84 /* SoundCloud_ProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7701B42E9BB0002BB84 /* SoundCloud_ProTests.swift */; };
@@ -46,14 +49,17 @@
 /* Begin PBXFileReference section */
 		29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloud Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro.release.xcconfig"; sourceTree = "<group>"; };
 		4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloud_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesTableViewController.swift; sourceTree = "<group>"; };
+		7A1351CB1B68544C00C2F7FA /* VoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
+		7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SoundCloud_Pro-Bridging-Header.h"; path = "../SoundCloud_Pro-Bridging-Header.h"; sourceTree = "<group>"; };
+		7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		7AAB56001B5186B700817B5C /* ManagedTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedTableController.swift; path = ../../ManagedTableView/Example/ManagedTableController.swift; sourceTree = "<group>"; };
 		7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleSectionTableController.swift; path = ../../ManagedTableView/Example/SingleSectionTableController.swift; sourceTree = "<group>"; };
 		7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiSectionTableController.swift; path = ../../ManagedTableView/Example/MultiSectionTableController.swift; sourceTree = "<group>"; };
 		7AAB56061B518F3500817B5C /* StreamTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamTableViewController.swift; sourceTree = "<group>"; };
-		7AAB56081B5194F600817B5C /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		7AAB560A1B5197A600817B5C /* StreamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamCell.swift; sourceTree = "<group>"; };
 		7AAB560B1B5197A600817B5C /* StreamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StreamCell.xib; sourceTree = "<group>"; };
 		7AAB560F1B51AC0F00817B5C /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 			children = (
 				7AAB560A1B5197A600817B5C /* StreamCell.swift */,
 				7AAB560B1B5197A600817B5C /* StreamCell.xib */,
+				7A1351CB1B68544C00C2F7FA /* VoteCell.swift */,
 			);
 			name = "Table Cells";
 			sourceTree = "<group>";
@@ -146,6 +153,7 @@
 				7AAB561B1B523EE200817B5C /* Listener.swift */,
 				7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */,
 				7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */,
+				7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -164,7 +172,8 @@
 			children = (
 				7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */,
 				7AAB56061B518F3500817B5C /* StreamTableViewController.swift */,
-				7AAB56081B5194F600817B5C /* TableViewController.swift */,
+				7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */,
+				7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				TargetAttributes = {
 					7AFFA7511B42E9BB0002BB84 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 4KG26Y879R;
 					};
 					7AFFA7691B42E9BB0002BB84 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -347,7 +357,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7AFFA7601B42E9BB0002BB84 /* Main.storyboard in Resources */,
+				7A5FA5DC1B6862A8009467B7 /* Main.storyboard in Resources */,
 				7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */,
 				7AAB56191B52313300817B5C /* PlayPauseButton.xib in Resources */,
 				7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */,
@@ -433,18 +443,21 @@
 				7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */,
 				7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */,
 				7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */,
+				7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */,
 				7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */,
 				7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */,
+				7A1351C81B6822B700C2F7FA /* VotesTableViewController.swift in Sources */,
 				7AAEC36B1B506F7A00AE6945 /* SCAPI.swift in Sources */,
+				7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */,
 				7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */,
 				7AAB56071B518F3500817B5C /* StreamTableViewController.swift in Sources */,
 				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
-				7AAB56091B5194F600817B5C /* TableViewController.swift in Sources */,
 				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7AAB56101B51AC0F00817B5C /* Track.swift in Sources */,
 				7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */,
 				7AAB561C1B523EE200817B5C /* Listener.swift in Sources */,
+				7A5FA5DE1B6865E8009467B7 /* ErrorHandler.swift in Sources */,
 				7AAB56171B52305900817B5C /* PlayPauseButton.swift in Sources */,
 				7AAB56131B51E46D00817B5C /* AudioPlayer.swift in Sources */,
 			);
@@ -575,12 +588,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/**";
 			};
 			name = Debug;
 		};
@@ -590,12 +607,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/**";
 			};
 			name = Release;
 		};

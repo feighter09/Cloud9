@@ -12,11 +12,17 @@ import Bond
 let kStreamCellControlsHeight: CGFloat = 32
 let kStreamCellControlsMargin: CGFloat = 4
 
+protocol StreamCellDelegate {
+  func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
+}
+
 class StreamCell: UITableViewCell {
   var listenerId: Int = 0
   var track: Track! {
     didSet { updateViews() }
   }
+  
+  var delegate: StreamCellDelegate?
   
   @IBOutlet private weak var seekProgressBar: UISlider!
   private var seekTimer: NSTimer!
@@ -88,6 +94,7 @@ extension StreamCell {
   @IBAction func downVoteTapped(sender: AnyObject)
   {
     UserPreferences.addDownvote(track)
+    delegate?.streamCell(self, didDownvoteTrack: track)
   }
   
   @IBAction func beginningTapped(sender: AnyObject)

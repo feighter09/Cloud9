@@ -25,7 +25,11 @@ extension UserPreferences {
   
   class func removeUpvote(track: Track)
   {
-    upvotes = upvotes.filter { return $0 != track }
+    // Can only delete 1 at a time as per UITableView's requirements on deletion of a row
+    if let index = upvotes.indexOf({ $0 == track }) {
+      upvotes.removeAtIndex(index)
+      saveTracks(upvotes, forKey: upvoteKey)
+    }
   }
   
   class func addDownvote(track: Track)
@@ -36,7 +40,11 @@ extension UserPreferences {
   
   class func removeDownvote(track: Track)
   {
-    downvotes = downvotes.filter { return $0 != track }
+    // Can only delete 1 at a time as per UITableView's requirements on deletion of a row
+    if let index = downvotes.indexOf({ $0 == track }) {
+      downvotes.removeAtIndex(index)
+      saveTracks(downvotes, forKey: downvoteKey)
+    }
   }
   
   private(set) static var upvotes: [Track] {
@@ -48,6 +56,12 @@ extension UserPreferences {
   private(set) static var downvotes: [Track] {
     get { return getTracksForKey(downvoteKey) }
     set { saveTracks(newValue, forKey: downvoteKey) }
+  }
+  
+  class func clearAllSettings()
+  {
+    upvotes = []
+    downvotes = []
   }
 }
 

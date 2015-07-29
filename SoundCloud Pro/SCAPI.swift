@@ -8,12 +8,27 @@
 
 import SwiftyJSON
 
+typealias StreamFetchCallback = (tracks: [Track]!, error: NSError!) -> Void
+
 class SoundCloud {
   private static var nextStreamUrl: String?
-  
-  class func getStream(callback: (tracks: [Track]) -> Void)
+}
+
+// MARK: - Interface
+extension SoundCloud {
+  class func getStream(callback: StreamFetchCallback)
   {
-    let url = urlWithEndpoint("me/activities/tracks/affiliated")
+    getStreamWithURLString(kSCSoundCloudAPIURL + "me/activities/tracks/affiliated", callback: callback)
+  }
+  
+  class func getMoreStream(callback: StreamFetchCallback)
+  {
+    getStreamWithURLString(nextStreamUrl!, callback: callback)
+  }
+  
+  private class func getStreamWithURLString(urlString: String, callback: StreamFetchCallback)
+  {
+    let url = NSURL(string: urlString)
     let params = ["limit": "30"]
     SCRequest.performMethod(SCRequestMethodGET,
                             onResource: url,
@@ -23,6 +38,8 @@ class SoundCloud {
       NSLog("response: \(response)")
       if requestSucceeded(response, error: error) {
         processStreamJSON(data, callback: callback)
+      } else {
+        callback(tracks: nil, error: error)
       }
     }
   }
@@ -30,11 +47,6 @@ class SoundCloud {
 
 // MARK: - Helpers
 extension SoundCloud {
-  private class func urlWithEndpoint(endpoint: String) -> NSURL!
-  {
-    return NSURL(string: kSCSoundCloudAPIURL + endpoint)
-  }
-  
   private class func requestSucceeded(response: NSURLResponse, error: NSError?) -> Bool
   {
     if let httpResponse = response as? NSHTTPURLResponse {
@@ -44,16 +56,17 @@ extension SoundCloud {
     return error != nil
   }
   
-  private class func processStreamJSON(data: NSData, callback: (tracks: [Track]) -> Void)
+  private class func processStreamJSON(data: NSData, callback: StreamFetchCallback)
   {
     let json = JSON(data: data)
-    NSLog("stream json: \(json)")
+    print("stream json: \(json)")
+    nextStreamUrl = json["next_href"].string
     
     let tracks = json["collection"].array!.filter { !$0["type"].stringValue.hasPrefix("playlist") }  // remove playlist types for now
                                           .map { Track(json: $0) }
                                           // this is fucked up. .contains doesn't by default call "==" on all the elements
                                           .filter { track in !UserPreferences.downvotes.contains { track == $0 } }
                                           .uniqueElements()
-    callback(tracks: tracks)
+    callback(tracks: tracks, error: nil)
   }
 }

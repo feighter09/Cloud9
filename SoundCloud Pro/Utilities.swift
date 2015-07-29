@@ -34,3 +34,10 @@ extension Array where Element: Track {
   }
 }
 
+
+// MARK: - Delay
+func delay(queue: dispatch_queue_t = dispatch_get_main_queue(), delay: Double, block:() -> Void)
+{
+  let goTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+  dispatch_after(goTime, queue, block)
+}

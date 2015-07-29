@@ -6,6 +6,7 @@ PODS:
   - NXOAuth2Client (1.2.1)
   - SCLAlertView-Objective-C (0.7.3)
   - StreamingKit (0.1.25)
+  - SVPullToRefresh (0.4.1)
   - SwiftyJSON (2.2.0)
 
 DEPENDENCIES:
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - CocoaSoundCloudAPI (= 1.0.1)
   - SCLAlertView-Objective-C
   - StreamingKit
+  - SVPullToRefresh
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, branch `xcode7`)
 
 EXTERNAL SOURCES:
@@ -45,6 +47,7 @@ SPEC CHECKSUMS:
   NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
   SCLAlertView-Objective-C: 4bf9a07c8a8d1840e5174e643e16bc032239914d
   StreamingKit: f00c054cfd0f59d88c8be7a2270e208302ce48c4
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
 
 COCOAPODS: 0.38.2

@@ -66,6 +66,11 @@ func ==(lhs: Track, rhs: Track) -> Bool
   return (lhs.title == rhs.title && lhs.artist == rhs.artist) || lhs.streamURL == rhs.streamURL
 }
 
+func !=(lhs: Track, rhs: Track) -> Bool
+{
+  return !(lhs == rhs)
+}
+
 func ==(lhs: AnyObject, rhs: Track) -> Bool
 {
   if lhs is Track { return lhs as! Track == rhs }

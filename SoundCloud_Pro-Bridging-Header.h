@@ -12,5 +12,6 @@
 #import "SCAPI.h"
 #import "STKAudioPlayer.h"
 #import "SCLAlertView.h"
+#import "UIScrollView+SVInfiniteScrolling.h"
 
 #endif /* SoundCloud_Pro_Bridging_Header_h */
