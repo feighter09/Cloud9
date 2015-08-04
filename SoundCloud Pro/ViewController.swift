@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 let kTableViewOffset: CGFloat = 64
 
 class ViewController: UIViewController {
-  private var streamList = StreamTableViewController()
+  private lazy var tracksList: TracksTableViewController = {
+    let tracks = TracksTableViewController()
+    tracks.infiniteScrolling = true
+    return tracks
+  }()
 }
 
 extension ViewController {
@@ -25,23 +30,28 @@ extension ViewController {
   {
     super.viewDidAppear(animated)
 
-    if SCSoundCloud.account() == nil {
-      authorizeSoundCloud()
+    if tracksList.tracks.count == 0 {
+      loginAndLoadStream()
     } else {
-      loadStream()
+      loadStreamWithAlert(false)
     }
   }
   
   private func setupStreamList()
   {
-    streamList.tableView.frame = UIView.rectWithinBars()
-    streamList.addToView(view, inViewController: self, withDelegate: self)
+    tracksList.tableView.frame = UIView.rectWithinBars()
+    tracksList.addToView(view, inViewController: self, withDelegate: self)
   }
 }
 
 // MARK: - Stream Table Delegate
-extension ViewController: StreamTableViewControllerDelegate {
-  func streamTableControllerDidScrollToEnd(streamTableController: StreamTableViewController)
+extension ViewController: TracksTableViewControllerDelegate {
+  func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
+  {
+    loadStreamWithAlert(false)
+  }
+  
+  func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
   {
     loadMoreStream()
   }
@@ -49,25 +59,32 @@ extension ViewController: StreamTableViewControllerDelegate {
 
 // MARK: - Helpers
 extension ViewController {
-  private func authorizeSoundCloud()
+  private func loginAndLoadStream()
   {
-    NSNotificationCenter.defaultCenter().addObserver(self, selector: "didAuthenticate", name: kSoundCloudDidAuthenticate, object: nil)
-    SCSoundCloud.requestAccessWithPreparedAuthorizationURLHandler { (url) -> Void in
-      UIApplication.sharedApplication().openURL(url)
+    if SCSoundCloud.account() == nil || PFUser.currentUser() == nil {
+      SoundCloud.authenticateUser({ (success, error) -> Void in
+        if success {
+          self.loadStreamWithAlert(true)
+        }
+        else {
+          ErrorHandler.handleNetworkingError("user credentials", error: error!)
+        }
+      })
+    }
+    else {
+      loadStreamWithAlert(true)
     }
   }
   
-  private func loadStream()
+  private func loadStreamWithAlert(showAlert: Bool)
   {
-    let alert = SCLAlertView()
-    alert.customViewColor = .orangeColor()
-    alert.showWaiting(self, title: "Loading Stream", subTitle: nil, closeButtonTitle: nil, duration: 0)
+    let alert: SCLAlertView? = (showAlert ? Utilities.showLoadingAlert("Loading Stream", onViewController: self) : nil)
 
-    SoundCloud.getStream({ (tracks, error) -> Void in      
-      alert.hideView()
+    SoundCloud.getStream({ (tracks, error) -> Void in
+      alert?.hideView()
       
       if error == nil {
-        self.streamList.tracks = tracks
+        self.tracksList.tracks = tracks
       } else {
         ErrorHandler.handleNetworkingError("stream", error: error)
       }
@@ -78,17 +95,11 @@ extension ViewController {
   {
     SoundCloud.getMoreStream { (tracks, error) -> Void in
       if error == nil {
-        self.streamList.tracks += tracks
+        self.tracksList.tracks += tracks
       } else {
         ErrorHandler.handleNetworkingError("more stream tracks", error: error)
       }
     }
-  }
-  
-  func didAuthenticate()
-  {
-    loadStream()
-    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
 }
 

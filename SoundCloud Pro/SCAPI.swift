@@ -7,15 +7,41 @@
 //
 
 import SwiftyJSON
+import Parse
+import PromiseKit
 
 typealias NetworkCallback = (response: NSURLResponse!, responseData: NSData!, error: NSError!) -> Void
-typealias FetchTracksCallback = (tracks: [Track]!, error: NSError!) -> Void
 
-class SoundCloud {
+typealias SuccessCallback = (success: Bool, error: NSError?) -> Void
+typealias FetchTracksCallback = (tracks: [Track]!, error: NSError!) -> Void
+typealias FetchPlaylistsCallback = (playlists: [Playlist]!, error: NSError!) -> Void
+
+class SoundCloud: NSObject {
   private static var nextStreamUrl: String?
+  private static var authCallback: SuccessCallback?
 }
 
-// MARK: - Interface
+// MARK: - Auth
+extension SoundCloud {
+  static var userIsAuthenticated: Bool { return SCSoundCloud.account() != nil && PFUser.currentUser() != nil }
+  
+  class func authenticateUser(callback: SuccessCallback)
+  {
+    if userIsAuthenticated {
+      callback(success: true, error: nil)
+      return
+    }
+    
+    authCallback = callback
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "didAuthenticate", name: kSoundCloudDidAuthenticate, object: nil)
+    
+    SCSoundCloud.requestAccessWithPreparedAuthorizationURLHandler { (url) -> Void in
+      UIApplication.sharedApplication().openURL(url)
+    }
+  }
+}
+
+// MARK: - Tracks / Stream
 extension SoundCloud {
   class func getStream(callback: FetchTracksCallback)
   {
@@ -32,10 +58,117 @@ extension SoundCloud {
     let params = ["q": searchString]
     GET(kSCSoundCloudAPIURL + "tracks", params: params) { (response, responseData, error) -> Void in
       if requestSucceeded(response, error: error) {
-        let tracks = processSearchJSON(responseData)
+        let tracks = parseSearchJSON(responseData)
         callback(tracks: tracks, error: nil)
       } else {
         callback(tracks: nil, error: error)
+      }
+    }
+  }
+}
+
+// MARK: - Playlists
+extension SoundCloud {
+  class func getMyPlaylists(callback: FetchPlaylistsCallback)
+  {
+    let urlString = kSCSoundCloudAPIURL + "me/playlists"
+    GET(urlString, params: nil) { (response, responseData, error) -> Void in
+      if requestSucceeded(response, error: error) {
+        let playlists = parsePlaylistJSON(responseData)
+        callback(playlists: playlists, error: nil)
+      } else {
+        NSLog("response: \(response)")
+        callback(playlists: [], error: error)
+      }
+    }
+  }
+  
+  class func getSharedPlaylists(callback: FetchPlaylistsCallback)
+  {
+    // TODO: this
+    let query = ParsePlaylist.query()!
+    query.whereKey("contributors", equalTo: PFUser.currentUser()!)
+    query.includeKey("tracks")
+    query.findObjectsInBackgroundWithBlock({ (playlists, error) -> Void in
+      let parsePlaylists = playlists as! [ParsePlaylist]
+      let playlists = parsePlaylists.map { Playlist.fromParsePlaylist($0) }
+      callback(playlists: playlists, error: error)
+    })
+  }
+  
+  class func createPlaylistWithName(name: String, type: PlaylistType, callback: SuccessCallback)
+  {
+    switch type {
+      case .Normal:
+        // TODO:
+        break
+      case .Shared:
+        ParsePlaylist(name: name).saveInBackgroundWithBlock(callback)
+    }
+  }
+  
+  class func addTrack(track: Track, toPlaylist playlist: Playlist, callback: SuccessCallback)
+  {
+    switch playlist.type {
+    case .Normal:
+      // TODO: Add to SC playlist
+      break
+    case .Shared:
+      addTrackToSharedPlaylist(track, toPlaylist: playlist, callback: callback)
+    }
+  }
+  
+  private class func addTrackToSharedPlaylist(track: Track, toPlaylist playlist: Playlist, callback: SuccessCallback)
+  {
+    playlist.parsePlaylist { (playlist) -> Void in
+      if playlist != nil {
+        playlist.tracks.append(track.serializeToParseObject())
+        playlist.saveInBackgroundWithBlock(callback)
+      } else {
+        callback(success: false, error: nil)
+      }
+    }
+  }
+}
+
+// MARK: - Helpers
+extension SoundCloud {
+  class func didAuthenticate()
+  {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+    if PFUser.currentUser() != nil {
+      authCallback!(success: true, error: nil)
+    } else {
+      // HACK: I need SCSoundCloud.account, which is just a wrapper for NXOAuth accounts, which are set async.
+      // I can't observe NXOAuth actually saving the SoundCloud credentials, so I just delay the code a second
+      delay(delay: 1, block: { () -> Void in
+        signUpOrLoginOnParse()
+      })
+    }
+  }
+  
+  private class func signUpOrLoginOnParse()
+  {
+    let username = SCSoundCloud.account().identifier
+    let password = "password"
+//    PFUser.promiseSignUp(username, password: password).then({ success -> PFUser in
+//      
+//      return PFUser.currentUser()!
+//    }).recover({ error -> Promise<PFUser> in
+//      return PFUser.promiseLogIn(username, password: password)
+//    })
+    
+    // I wish I could get promiseKit to improve this
+    let user = PFUser()
+    user.username = username
+    user.password = password
+    user.signUpInBackgroundWithBlock { (success, error) -> Void in
+      if success {
+        authCallback!(success: true, error: nil)
+      } else {
+        PFUser.logInWithUsernameInBackground(username, password: password) { (user, error) -> Void in
+          authCallback!(success: user != nil, error: error)
+        }
       }
     }
   }
@@ -45,18 +178,15 @@ extension SoundCloud {
     let params = ["limit": "30"]
     GET(urlString, params: params) { (response, responseData, error) -> Void in
       if requestSucceeded(response, error: error) {
-        let tracks = processStreamJSON(responseData)
+        let tracks = parseStreamJSON(responseData)
         callback(tracks: tracks, error: nil)
       } else {
         callback(tracks: nil, error: error)
       }
     }
   }
-}
-
-// MARK: - Helpers
-extension SoundCloud {
-  private class func GET(urlString: String, params: [NSObject: AnyObject], callback: NetworkCallback)
+  
+  private class func GET(urlString: String, params: [NSObject: AnyObject]!, callback: NetworkCallback)
   {
     SCRequest.performMethod(SCRequestMethodGET,
                             onResource: NSURL(string: urlString),
@@ -75,13 +205,20 @@ extension SoundCloud {
     return error != nil
   }
   
-  private class func processStreamJSON(data: NSData) -> [Track]
+  private class func userExists(error: NSError!) -> Bool
+  {
+    // TODO: fill this in with error code
+    return error != nil
+  }
+  
+  private class func parseStreamJSON(data: NSData) -> [Track]
   {
     let json = JSON(data: data)
-    print("stream json: \(json)")
+//    print("stream json: \(json)")
     nextStreamUrl = json["next_href"].string
     
     let tracks = json["collection"].array!.filter { !$0["type"].stringValue.hasPrefix("playlist") }  // remove playlist types for now
+                                          .filter { Track.isStreamable($0) }
                                           .map { Track(json: $0) }
                                           // this is fucked up. .contains doesn't by default call "==" on all the elements
                                           .filter { track in !UserPreferences.downvotes.contains { track == $0 } }
@@ -89,10 +226,17 @@ extension SoundCloud {
     return tracks
   }
   
-  private class func processSearchJSON(data: NSData) -> [Track]
+  private class func parseSearchJSON(data: NSData) -> [Track]
   {
     let json = JSON(data: data)
-    print("search json: \(json)")
+//    print("search json: \(json)")
     return json.array!.map { Track(json: $0) }
   }
+  
+  private class func parsePlaylistJSON(data: NSData) -> [Playlist]
+  {
+    let json = JSON(data: data)
+//    print("playlists: \(json)")
+    return json.array!.map { Playlist(json: $0) }
+  }  
 }

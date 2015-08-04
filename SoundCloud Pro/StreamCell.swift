@@ -9,17 +9,23 @@
 import UIKit
 import Bond
 
-let kStreamCellControlsHeight: CGFloat = 32
-let kStreamCellControlsMargin: CGFloat = 4
+let kStreamCellPlaybackControlsHeight: CGFloat = 32
+let kStreamCellPlaybackControlsMargin: CGFloat = 4
+let kStreamCellVoteControlsWidth: CGFloat = 40
 
 protocol StreamCellDelegate {
   func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
+  func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
 }
 
 class StreamCell: UITableViewCell {
   var listenerId: Int = 0
   var track: Track! {
     didSet { updateViews() }
+  }
+  
+  var voteControlsEnabled = true {
+    didSet { voteControlsWidth.constant = (voteControlsEnabled ? kStreamCellVoteControlsWidth : 0) }
   }
   
   var delegate: StreamCellDelegate?
@@ -33,8 +39,10 @@ class StreamCell: UITableViewCell {
   
   private var waveformImage: Dynamic<UIImage?>!
   
-  @IBOutlet private weak var controlsHeight: NSLayoutConstraint!
-  @IBOutlet private weak var controlsMargin: NSLayoutConstraint!
+  @IBOutlet private weak var playbackControlsHeight: NSLayoutConstraint!
+  @IBOutlet private weak var playbackControlsMargin: NSLayoutConstraint!
+  
+  @IBOutlet private weak var voteControlsWidth: NSLayoutConstraint!
 //  @IBOutlet private weak var waveformImageView: UIImageView!
 //  @IBOutlet private weak var waveformHeight: NSLayoutConstraint!
 //  @IBOutlet private weak var waveformMargin: NSLayoutConstraint!
@@ -131,8 +139,14 @@ extension StreamCell {
       setSelected(false, animated: animated)
     }
   }
+  
+  @IBAction func addToPlaylist(sender: AnyObject)
+  {
+    delegate?.streamCell(self, didTapAddToPlaylist: track)
+  }
 }
 
+// MARK: - Audio Play Listener
 extension StreamCell: AudioPlayerListener {
   func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
@@ -209,18 +223,14 @@ extension StreamCell {
   {
     let animationDuration = animated ? 0.4 : 0
     UIView.animateWithDuration(animationDuration) { () -> Void in
-      self.controlsHeight.constant = expand ? kStreamCellControlsHeight : 0
-      self.controlsMargin.constant = expand ? kStreamCellControlsMargin : 0
+      self.playbackControlsHeight.constant = expand ? kStreamCellPlaybackControlsHeight : 0
+      self.playbackControlsMargin.constant = expand ? kStreamCellPlaybackControlsMargin : 0
       self.seekProgressBar.hidden = !expand
       
       self.layoutIfNeeded()
       if self.tableView != nil && self.tableView!.visibleCells.contains(self) {
-        do {
-          try self.tableView?.beginUpdates()
-          try self.tableView?.endUpdates()
-        } catch _ {
-          print("Something went wrong expanding cell")
-        }
+        self.tableView?.beginUpdates()
+        self.tableView?.endUpdates()
       }
     }
   }
@@ -233,7 +243,6 @@ extension StreamCell {
     if seekTime >= track.duration {
       stopUpdatingSeekTime()
       playPauseButton.playState = .Pause
-      // TODO: pause player
     }
   }
   

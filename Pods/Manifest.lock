@@ -1,9 +1,32 @@
 PODS:
   - Alamofire (1.3.0)
+  - Bolts/Tasks (1.2.0)
   - Bond (3.8.0)
+  - BOZPongRefreshControl (1.0.1)
   - CocoaSoundCloudAPI (1.0.1):
     - NXOAuth2Client (= 1.2.1)
   - NXOAuth2Client (1.2.1)
+  - OMGHTTPURLRQ (3.0.0):
+    - OMGHTTPURLRQ/RQ (= 3.0.0)
+  - OMGHTTPURLRQ/FormURLEncode (3.0.0)
+  - OMGHTTPURLRQ/RQ (3.0.0):
+    - OMGHTTPURLRQ/FormURLEncode
+    - OMGHTTPURLRQ/UserAgent
+  - OMGHTTPURLRQ/UserAgent (3.0.0)
+  - Parse (1.7.5.3):
+    - Bolts/Tasks (>= 1.2.0)
+  - PromiseKit (3.0.0):
+    - PromiseKit/Foundation (= 3.0.0)
+    - PromiseKit/QuartzCore (= 3.0.0)
+    - PromiseKit/UIKit (= 3.0.0)
+  - PromiseKit/CorePromise (3.0.0)
+  - PromiseKit/Foundation (3.0.0):
+    - OMGHTTPURLRQ (~> 3.0.0)
+    - PromiseKit/CorePromise
+  - PromiseKit/QuartzCore (3.0.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (3.0.0):
+    - PromiseKit/CorePromise
   - SCLAlertView-Objective-C (0.7.3)
   - StreamingKit (0.1.25)
   - SVPullToRefresh (0.4.1)
@@ -12,7 +35,10 @@ PODS:
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift-2.0`)
   - Bond (from `https://github.com/SwiftBond/Bond.git`, branch `swift-2.0`)
+  - BOZPongRefreshControl
   - CocoaSoundCloudAPI (= 1.0.1)
+  - Parse
+  - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift-2.0-beta4`)
   - SCLAlertView-Objective-C
   - StreamingKit
   - SVPullToRefresh
@@ -25,6 +51,9 @@ EXTERNAL SOURCES:
   Bond:
     :branch: swift-2.0
     :git: https://github.com/SwiftBond/Bond.git
+  PromiseKit:
+    :branch: swift-2.0-beta4
+    :git: https://github.com/mxcl/PromiseKit.git
   SwiftyJSON:
     :branch: xcode7
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -36,15 +65,23 @@ CHECKOUT OPTIONS:
   Bond:
     :commit: 4fe136f97da1671c8df7831842a49079a9ba6de7
     :git: https://github.com/SwiftBond/Bond.git
+  PromiseKit:
+    :commit: d1e131ce0b4866df8f0622da98a4d9b903e309ba
+    :git: https://github.com/mxcl/PromiseKit.git
   SwiftyJSON:
     :commit: 88c3f8ca078a0c74df8d94bb1d85df69b649e7ad
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: e57db85401895fda01783b3b9bda5b32d9f347ff
+  Bolts: d176cb1e0012175589e389a9db49b85e27787576
   Bond: 6324624f32d535cd8d8e387f3f73df2641fa4078
+  BOZPongRefreshControl: c956ee1f1bed94d3554ad081c4ff1450cfc6d349
   CocoaSoundCloudAPI: e8e1f2e463fa9bb9d68b2dcf361572787c7a6c3f
   NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
+  OMGHTTPURLRQ: 45cd892e5643206a5a359307621df7678625ebec
+  Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
+  PromiseKit: acf123b5656d0051c715b946e67e91a08b589b3c
   SCLAlertView-Objective-C: 4bf9a07c8a8d1840e5174e643e16bc032239914d
   StreamingKit: f00c054cfd0f59d88c8be7a2270e208302ce48c4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c

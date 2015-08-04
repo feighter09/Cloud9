@@ -1,5 +1,5 @@
 //
-//  StreamTableViewController.swift
+//  TracksTableViewController.swift
 //  SoundCloud Pro
 //
 //  Created by Austin Feight on 7/11/15.
@@ -12,26 +12,37 @@ import Bond
 let kStreamCellIdentifier = "streamCell"
 let kStreamPlaylistMinimum = 1
 
-protocol StreamTableViewControllerDelegate {
-  func streamTableControllerDidScrollToEnd(streamTableController: StreamTableViewController)
+protocol TracksTableViewControllerDelegate {
+  func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
+  func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
 }
 
-class StreamTableViewController: UITableViewController {
+class TracksTableViewController: UITableViewController {
   /// The tracks shown. Automatically updates tableView if set with `=`
   var tracks: [Track] = [] {
-    didSet { tableView.reloadData() }
+    didSet {
+      tableView.reloadData()
+      pullToRefresh.finishedLoading()
+      tableView.infiniteScrollingView?.stopAnimating()
+    }
   }
 
-  var delegate: StreamTableViewControllerDelegate?
+  var infiniteScrolling = false
+  var voteControlsEnabled = true
+  
+  var delegate: TracksTableViewControllerDelegate?
   
   var listenerId = 0
+  
+  private var pullToRefresh: BOZPongRefreshControl!
+  private var trackToAddToPlaylist: Track?
 }
 
 // MARK: - Interface
-extension StreamTableViewController {
+extension TracksTableViewController {
   func addToView(view: UIView,
     inViewController viewController: UIViewController,
-    withDelegate delegate: StreamTableViewControllerDelegate?)
+    withDelegate delegate: TracksTableViewControllerDelegate?)
   {
     self.delegate = delegate
     
@@ -39,10 +50,22 @@ extension StreamTableViewController {
     viewController.addChildViewController(self)
     self.didMoveToParentViewController(viewController)
   }
+  
+  func beginLoading()
+  {
+    pullToRefresh.beginLoading()
+    tableView.setContentOffset(CGPoint(x: 0, y: -65), animated: true)
+  }
+  
+  func finishedLoading()
+  {
+    pullToRefresh.finishedLoading()
+    tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+  }
 }
 
 // MARK: - Life Cycle
-extension StreamTableViewController {
+extension TracksTableViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -59,15 +82,25 @@ extension StreamTableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
 
     tableView.tableFooterView = UIView(frame: CGRectZero)
+
+    pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView, withRefreshTarget: self, andRefreshAction: "refreshTracks")
+    pullToRefresh.backgroundColor = .orangeColor()
     
-    tableView.addInfiniteScrollingWithActionHandler { () -> Void in
-      delegate?.streamTableControllerDidScrollToEnd(self)
+    if infiniteScrolling {
+      tableView.addInfiniteScrollingWithActionHandler { () -> Void in
+        delegate?.tracksTableControllerDidScrollToEnd(self)
+      }
     }
+  }
+  
+  func refreshTracks()
+  {
+    delegate?.tracksTableControllerDidTriggerRefresh(self)
   }
 }
 
 // MARK: - Audio Playback Delegate
-extension StreamTableViewController: AudioPlayerListener {
+extension TracksTableViewController: AudioPlayerListener {
   func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
     addStreamToPlaylistAfterTrack(track)
@@ -113,7 +146,7 @@ extension StreamTableViewController: AudioPlayerListener {
 }
 
 // MARK: - Stream Cell Delegate
-extension StreamTableViewController: StreamCellDelegate {
+extension TracksTableViewController: StreamCellDelegate {
   func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
   {
     tableView.beginUpdates()
@@ -124,10 +157,34 @@ extension StreamTableViewController: StreamCellDelegate {
     
     tableView.endUpdates()
   }
+  
+  func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
+  {
+    let playlistPicker = PlaylistPickerViewController()
+    trackToAddToPlaylist = track
+    playlistPicker.delegate = self
+    
+    let presentingController: UIViewController = navigationController ?? self
+    presentingController.presentViewController(UINavigationController(rootViewController: playlistPicker), animated: true, completion: nil)
+  }
+}
+
+// MARK: - Stream Cell Delegate
+extension TracksTableViewController: PlaylistPickerDelegate {
+  func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
+  {
+    let presentingController: UIViewController = navigationController ?? self
+    presentingController.dismissViewControllerAnimated(true, completion: nil)
+    SoundCloud.addTrack(trackToAddToPlaylist!, toPlaylist: playlist) { (success, error) -> Void in
+      if !success {
+        ErrorHandler.handleNetworkingError("adding to playlist", error: nil)
+      }
+    }
+  }
 }
 
 // MARK: - Table View Data Source
-extension StreamTableViewController {
+extension TracksTableViewController {
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
     return tracks.count
@@ -138,8 +195,22 @@ extension StreamTableViewController {
     let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
     
     cell.track = tracks[indexPath.row]
+    cell.voteControlsEnabled = voteControlsEnabled
     cell.delegate = self
     
     return cell
+  }
+}
+
+// MARK: - Scroll Delegate for Pong Refresh
+extension TracksTableViewController {
+  override func scrollViewDidScroll(scrollView: UIScrollView)
+  {
+    pullToRefresh.scrollViewDidScroll()
+  }
+  
+  override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
+  {
+    pullToRefresh.scrollViewDidEndDragging()
   }
 }

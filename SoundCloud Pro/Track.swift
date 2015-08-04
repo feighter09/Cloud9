@@ -7,6 +7,7 @@
 //
 
 import SwiftyJSON
+import Parse
 
 @objc class Track: NSObject, NSCoding {
   var title: String!
@@ -45,6 +46,14 @@ import SwiftyJSON
     streamURL = aDecoder.decodeObjectForKey(kStreamURLKey) as! String
     jsonData = JSON(data: aDecoder.decodeObjectForKey(kTrackJSON) as! NSData)
   }
+  
+  private init(object: PFObject)
+  {
+    title = object[kTitleKey] as! String
+    artist = object[kArtistKey] as! String
+    duration = object[kDurationKey] as! Double
+    streamURL = object[kStreamURLKey] as! String
+  }
 }
 
 // MARK: - Interface
@@ -57,6 +66,32 @@ extension Track {
     }
   }
   var artworkURL: NSURL! { return NSURL(string: jsonData["artwork_url"].string!) }
+  
+  func serializeToParseObject() -> PFObject
+  {
+    let track = PFObject(className: "Track")
+    track[kTitleKey] = title
+    track[kArtistKey] = artist
+    track[kDurationKey] = duration
+    track[kStreamURLKey] = streamURL
+    
+    return track
+  }
+  
+  class func serializeFromParseObject(track: PFObject) -> Track
+  {
+    assert(track.parseClassName == "Track", "Can only serialize from Parse Track objects")
+    return Track(object: track)
+  }
+}
+
+// MARK: - Public Helpers
+extension Track {
+  class func isStreamable(json: JSON) -> Bool
+  {
+    return json["streamable"].boolValue || json["origin"]["streamable"].boolValue ||
+            json["streamURL"].string != nil || json["origin"]["streamURL"].string != nil
+  }
 }
 
 // MARK: - Helpers

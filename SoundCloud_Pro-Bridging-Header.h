@@ -13,5 +13,8 @@
 #import "STKAudioPlayer.h"
 #import "SCLAlertView.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
+#import "BOZPongRefreshControl.h"
+
+#import "NXOAuth2.h"
 
 #endif /* SoundCloud_Pro_Bridging_Header_h */

@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CDD458B2F91D81662B5758C0"
+               BlueprintIdentifier = "83F514A466ACB44AA46DD5CF"
                BuildableName = "NXOAuth2Client.framework"
                BlueprintName = "NXOAuth2Client"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -9,10 +9,15 @@
 import UIKit
 
 class ErrorHandler {
-  class func handleNetworkingError(requestDescription: String, error: NSError)
+  class func handleNetworkingError(requestDescription: String, error: NSError!)
   {
     let alert = SCLAlertView()
-    alert.showError("There was a problem fetching \(requestDescription), please check your internet connection and try again.", subTitle: nil, closeButtonTitle: "Ok", duration: 2)
-    NSLog("Error fetching \(requestDescription), details: \(error)")
+    alert.showError("There was a problem \(requestDescription), please check your internet connection and try again.", subTitle: nil, closeButtonTitle: "Ok", duration: 2)
+    
+    if error != nil {
+      NSLog("Error \(requestDescription), details: \(error)")
+    } else {
+      NSLog("Error \(requestDescription)")
+    }
   }
 }

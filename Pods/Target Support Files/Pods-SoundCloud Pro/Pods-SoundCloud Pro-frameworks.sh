@@ -53,9 +53,14 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-SoundCloud Pro/Alamofire.framework'
+  install_framework 'Pods-SoundCloud Pro/BOZPongRefreshControl.framework'
+  install_framework 'Pods-SoundCloud Pro/Bolts.framework'
   install_framework 'Pods-SoundCloud Pro/Bond.framework'
   install_framework 'Pods-SoundCloud Pro/CocoaSoundCloudAPI.framework'
   install_framework 'Pods-SoundCloud Pro/NXOAuth2Client.framework'
+  install_framework 'Pods-SoundCloud Pro/OMGHTTPURLRQ.framework'
+  install_framework 'Pods-SoundCloud Pro/Parse.framework'
+  install_framework 'Pods-SoundCloud Pro/PromiseKit.framework'
   install_framework 'Pods-SoundCloud Pro/SCLAlertView_Objective_C.framework'
   install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'
@@ -63,9 +68,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-SoundCloud Pro/Alamofire.framework'
+  install_framework 'Pods-SoundCloud Pro/BOZPongRefreshControl.framework'
+  install_framework 'Pods-SoundCloud Pro/Bolts.framework'
   install_framework 'Pods-SoundCloud Pro/Bond.framework'
   install_framework 'Pods-SoundCloud Pro/CocoaSoundCloudAPI.framework'
   install_framework 'Pods-SoundCloud Pro/NXOAuth2Client.framework'
+  install_framework 'Pods-SoundCloud Pro/OMGHTTPURLRQ.framework'
+  install_framework 'Pods-SoundCloud Pro/Parse.framework'
+  install_framework 'Pods-SoundCloud Pro/PromiseKit.framework'
   install_framework 'Pods-SoundCloud Pro/SCLAlertView_Objective_C.framework'
   install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'

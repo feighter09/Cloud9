@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BOZPongRefreshControl.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bond.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -24,7 +34,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>OMGHTTPURLRQ.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Parse.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SoundCloud Pro.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>PromiseKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,22 +77,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>079DF4A0D7241186542B8D68262212BC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>1BB35621ABAFED707F12BF15B6E914A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>261FF31C8A910B60F4EFC79C92F55B90</key>
+		<key>4624CF8E611A6CC247E453869E616CEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5FE8A598E618E8CF8D714AF9118A649F</key>
+		<key>479FC06628FEDC159003D26E50EA9D02</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5FBC9FC16366AA3E47B8E508ECA548B8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +102,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6681594230E4B19C7B02469C4208D44B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6A9AC4A02FDF4B53ACCBE1B018F7E4A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6DBE7CD13626916248DFB0CC2A05E701</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72D8B9640EBA3E93E72202F49B5C04DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>865D0796086DD9260CEB170CAED9BDEB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B9A04D3C9B208813656510FDA8ADAE02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BEDE60C990CAAAB03D6848452FEC070E</key>
+		<key>CBE3102A0DDD8B4E52C17F1570AFB84E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E3CDE4FEBA598711B7C2C557E8F80694</key>
+		<key>DAB5B0031C016B14392C291D6E3C770C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

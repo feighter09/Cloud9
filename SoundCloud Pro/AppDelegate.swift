@@ -7,12 +7,15 @@
 //
 
 import UIKit
-import CoreData
+import Parse
 
 let kSoundCloudClientID = "823363d3a8c33bfb0a1c608da13141b2"
 let kSoundCloudClientSecret = "ad456d110c3c4a8f7ac9dacfb2f3c6c6"
-
+let kSoundCloudAuthURL = "soundcloudpro://OAuth"
 let kSoundCloudDidAuthenticate = "soundCloudDidAuthenticate"
+
+let kParseApplicationId = "Xbb0RlJY5ph6YwusEiKmvBiaIbI85A88oYipzcTZ"
+let kParseClientKey = "4pOtIpBxfHZHsc96smkLLXL6bwZuOtG9ZjQZOT3e"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -21,8 +24,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
   {
-    SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: "SoundCloudPro://OAuth"))
+    SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
+    initParse()
+    
     return true
+  }
+  
+  private func initParse()
+  {
+    Parse.setApplicationId(kParseApplicationId, clientKey: kParseClientKey)
+    PFUser.registerSubclass()
+    ParsePlaylist.registerSubclass()
   }
 }
 
@@ -32,16 +44,24 @@ extension AppDelegate {
   {
     NSLog("handle opening url: \(url)")
     SCSoundCloud.handleRedirectURL(url)
-    NSNotificationCenter.defaultCenter().postNotificationName(kSoundCloudDidAuthenticate, object: nil)
     return true
   }
   
   func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
   {
     NSLog("opening url: \(url)")
-    SCSoundCloud.handleRedirectURL(url)
-    NSNotificationCenter.defaultCenter().postNotificationName(kSoundCloudDidAuthenticate, object: nil)
-    return true
+    if isAuthUrl(url) {
+      SCSoundCloud.handleRedirectURL(url)
+      NSNotificationCenter.defaultCenter().postNotificationName(kSoundCloudDidAuthenticate, object: nil)
+      return true
+    }
+    
+    return false
+  }
+  
+  private func isAuthUrl(url: NSURL) -> Bool
+  {
+    return url.absoluteString.hasPrefix(kSoundCloudAuthURL)
   }
 }
 

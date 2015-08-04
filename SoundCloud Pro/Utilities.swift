@@ -12,6 +12,23 @@ class Utilities {
 
 }
 
+// MARK: - Loading Alert
+extension Utilities {
+  class func showLoadingAlert(title: String, onViewController vc: UIViewController?) -> SCLAlertView
+  {
+    let alert = SCLAlertView()
+    alert.customViewColor = .orangeColor()
+    
+    if vc == nil {
+      alert.showWaiting(title, subTitle: nil, closeButtonTitle: nil, duration: 0)
+    } else {
+      alert.showWaiting(vc, title: title, subTitle: nil, closeButtonTitle: nil, duration: 0)
+    }
+    
+    return alert
+  }
+}
+
 // MARK: - UIView Extensions
 extension UIView {
   class func rectWithinBars(navigationBar: Bool = true, tabBar: Bool = true) -> CGRect

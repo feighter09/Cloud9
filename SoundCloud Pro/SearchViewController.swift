@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
   @IBOutlet private weak var searchBar: UISearchBar!
   @IBOutlet private weak var containerView: UIView!
   
-  private var searchResultsController = StreamTableViewController()
+  private var searchResultsController = TracksTableViewController()
 }
 
 // MARK: - View Life Cycle
@@ -36,7 +36,15 @@ extension SearchViewController {
 extension SearchViewController: UISearchBarDelegate {
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
   {
+    if searchText == "" {
+      searchResultsController.tracks = []
+      return
+    }
+    
+    searchResultsController.beginLoading()
     SoundCloud.getTracksMatching(searchText) { (tracks, error) -> Void in
+      self.searchResultsController.finishedLoading()
+      
       if error == nil {
         self.searchResultsController.tracks = tracks
       } else {
