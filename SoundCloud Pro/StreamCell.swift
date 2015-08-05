@@ -72,7 +72,6 @@ extension StreamCell {
   override func awakeFromNib()
   {
     super.awakeFromNib()
-    seekProgressBar.hidden = true
 //    waveformImageView.dynImage.bindTo(waveformImageLoaded, fire: false)
   }
   
@@ -208,8 +207,8 @@ extension StreamCell {
     assert(track != nil, "Track must not be nil")
     titleLabel.text = track.title
     artistLabel.text = track.artist
-  
-    if track == AudioPlayer.sharedPlayer.currentTrack {
+    
+    if let currentTrack = AudioPlayer.sharedPlayer.currentTrack where track == currentTrack {
       startUpdatingSeekTime()
       expandCell(true, animated: false)
       playPauseButton.playState = AudioPlayer.sharedPlayer.playPauseState
@@ -221,11 +220,12 @@ extension StreamCell {
   
   private func expandCell(expand: Bool, animated: Bool)
   {
+    if expand && playbackControlsHeight.constant != 0 { return }  // already expanded
+    
     let animationDuration = animated ? 0.4 : 0
     UIView.animateWithDuration(animationDuration) { () -> Void in
       self.playbackControlsHeight.constant = expand ? kStreamCellPlaybackControlsHeight : 0
       self.playbackControlsMargin.constant = expand ? kStreamCellPlaybackControlsMargin : 0
-      self.seekProgressBar.hidden = !expand
       
       self.layoutIfNeeded()
       if self.tableView != nil && self.tableView!.visibleCells.contains(self) {

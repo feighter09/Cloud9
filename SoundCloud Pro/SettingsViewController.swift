@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class SettingsViewController: UITableViewController {
 }
@@ -19,8 +20,20 @@ extension SettingsViewController {
       let votesTableViewController = storyboard?.instantiateViewControllerWithIdentifier(kVotesStoryboardId) as! VotesTableViewController
       votesTableViewController.voteType = (indexPath.row == 0 ? .Up : .Down)
       navigationController!.pushViewController(votesTableViewController, animated: true)
-    } else {
-      
+    } else if indexPath.section == 2 {
+      SCSoundCloud.removeAccess()
+      PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
+        if error == nil {
+          self.showLogin()
+        } else {
+          ErrorHandler.handleNetworkingError("logging out - lol", error: error)
+        }
+      })
     }
+  }
+  
+  private func showLogin()
+  {
+    tabBarController?.selectedIndex = 0
   }
 }

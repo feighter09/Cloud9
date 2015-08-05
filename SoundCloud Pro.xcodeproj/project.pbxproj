@@ -654,14 +654,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/** $(SRCROOT)/Pods/NXOAuth2Client/** $(SRCROOT)/Pods/BOZPongRefreshControl/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/** $(SRCROOT)/Pods/NXOAuth2Client/** $(SRCROOT)/Pods/BOZPongRefreshControl/** $(SRCROOT)/Pods/Parse/**";
 			};
 			name = Debug;
 		};
@@ -673,14 +679,20 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/**",
+				);
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "SoundCloud Pro/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoundCloud_Pro-Bridging-Header.h";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/** $(SRCROOT)/Pods/NXOAuth2Client/** $(SRCROOT)/Pods/BOZPongRefreshControl/**";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/SCLAlertView-Objective-C/** $(SRCROOT)/Pods/CocoaSoundCloudAPI/** $(SRCROOT)/Pods/StreamingKit/** $(SRCROOT)/Pods/SVPullToRefresh/** $(SRCROOT)/Pods/NXOAuth2Client/** $(SRCROOT)/Pods/BOZPongRefreshControl/** $(SRCROOT)/Pods/Parse/**";
 			};
 			name = Release;
 		};

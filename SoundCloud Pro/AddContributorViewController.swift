@@ -87,7 +87,17 @@ extension AddContributorViewController: UISearchBarDelegate {
 extension AddContributorViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
+    let alert = Utilities.showLoadingAlert("Adding Contributor", onViewController: self)
+    
     let contributor = tableViewDataSource.dataItems[indexPath.row] as! PFUser
-    playlist.addContributor(contributor)
+    playlist.addContributor(contributor) { (success, error) -> Void in
+      alert.hideView()
+
+      if !success {
+        ErrorHandler.handleNetworkingError("adding contributor", error: error)
+      }
+    }
+    
+    
   }
 }

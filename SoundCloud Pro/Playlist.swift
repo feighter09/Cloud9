@@ -41,11 +41,17 @@ class Playlist {
 
 // MARK: - Interface
 extension Playlist {
-  func addContributor(contributor: PFUser)
+  func addContributor(contributor: PFUser, callback: SuccessCallback)
   {
+    if contributors.contains({ $0.objectId == contributor.objectId }) {
+      callback(success: true, error: nil)
+      return
+    }
+    
     contributors.append(contributor)
     parsePlaylist { (playlist) -> Void in
-      playlist.saveEventually(nil)
+      playlist.contributors.append(contributor)
+      playlist.saveEventually(callback)
     }
   }
   
@@ -59,4 +65,13 @@ extension Playlist {
       }
     })
   }
+}
+
+// MARK: - Equatable
+extension Playlist: Equatable {
+}
+
+func ==(lhs: Playlist, rhs: Playlist) -> Bool
+{
+  return lhs.name == rhs.name && lhs.tracks == rhs.tracks && lhs.contributors == rhs.contributors
 }

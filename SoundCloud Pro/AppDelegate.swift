@@ -42,12 +42,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
   func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool
   {
-    NSLog("handle opening url: \(url)")
-    SCSoundCloud.handleRedirectURL(url)
-    return true
+    return handleOpenURL(url)
   }
   
   func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool
+  {
+    return handleOpenURL(url)
+  }
+  
+  private func handleOpenURL(url: NSURL) -> Bool
   {
     NSLog("opening url: \(url)")
     if isAuthUrl(url) {
@@ -58,7 +61,7 @@ extension AppDelegate {
     
     return false
   }
-  
+
   private func isAuthUrl(url: NSURL) -> Bool
   {
     return url.absoluteString.hasPrefix(kSoundCloudAuthURL)

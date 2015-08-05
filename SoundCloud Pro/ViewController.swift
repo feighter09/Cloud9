@@ -30,9 +30,10 @@ extension ViewController {
   {
     super.viewDidAppear(animated)
 
-    if tracksList.tracks.count == 0 {
+    if tracksList.tracks.count == 0 || !SoundCloud.userIsAuthenticated {
       loginAndLoadStream()
-    } else {
+    }
+    else {
       loadStreamWithAlert(false)
     }
   }
@@ -85,7 +86,8 @@ extension ViewController {
       
       if error == nil {
         self.tracksList.tracks = tracks
-      } else {
+      }
+      else {
         ErrorHandler.handleNetworkingError("stream", error: error)
       }
     })
@@ -96,7 +98,8 @@ extension ViewController {
     SoundCloud.getMoreStream { (tracks, error) -> Void in
       if error == nil {
         self.tracksList.tracks += tracks
-      } else {
+      }
+      else {
         ErrorHandler.handleNetworkingError("more stream tracks", error: error)
       }
     }

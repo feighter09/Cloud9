@@ -162,7 +162,7 @@ extension AllPlaylistsViewController {
   private func playlistForIndexPath(indexPath: NSIndexPath) -> Playlist!
   {
     let playlist = playlistsForSection(indexPath.section)
-    return playlist != nil ? playlist[indexPath.row] : nil
+    return playlist.count > 0 ? playlist[indexPath.row] : nil
   }
   
   private func playlistForSectionIsEmpty(section: Int) -> Bool

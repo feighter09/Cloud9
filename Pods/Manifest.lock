@@ -27,10 +27,10 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (3.0.0):
     - PromiseKit/CorePromise
-  - SCLAlertView-Objective-C (0.7.3)
+  - SCLAlertView-Objective-C (0.7.4)
   - StreamingKit (0.1.25)
   - SVPullToRefresh (0.4.1)
-  - SwiftyJSON (2.2.0)
+  - SwiftyJSON (2.2.1)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`, branch `swift-2.0`)
@@ -60,7 +60,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Alamofire:
-    :commit: 5f2c29751b35069ec1452046e24dfba506cbc603
+    :commit: 1a12318dcf6b6918687dd3babe28e521e8b8842c
     :git: https://github.com/Alamofire/Alamofire.git
   Bond:
     :commit: 4fe136f97da1671c8df7831842a49079a9ba6de7
@@ -69,7 +69,7 @@ CHECKOUT OPTIONS:
     :commit: d1e131ce0b4866df8f0622da98a4d9b903e309ba
     :git: https://github.com/mxcl/PromiseKit.git
   SwiftyJSON:
-    :commit: 88c3f8ca078a0c74df8d94bb1d85df69b649e7ad
+    :commit: 45ca854ce75948858f65e31fbc58cbf214669250
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
@@ -82,9 +82,9 @@ SPEC CHECKSUMS:
   OMGHTTPURLRQ: 45cd892e5643206a5a359307621df7678625ebec
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881
   PromiseKit: acf123b5656d0051c715b946e67e91a08b589b3c
-  SCLAlertView-Objective-C: 4bf9a07c8a8d1840e5174e643e16bc032239914d
+  SCLAlertView-Objective-C: 15ebfdac06ca289ba1f29fe34b5a03da6bd3fe37
   StreamingKit: f00c054cfd0f59d88c8be7a2270e208302ce48c4
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
-  SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
+  SwiftyJSON: ae2d0a3d68025d136602a33c4ee215091ced3e33
 
 COCOAPODS: 0.38.2

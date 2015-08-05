@@ -20,7 +20,7 @@ class ViewContributorsViewController: UITableViewController {
     self.playlist = playlist
     self.contributors = playlist.contributors
     
-    super.init(style: .Plain)
+    super.init(nibName: nil, bundle: nil)
   }
   
   required init?(coder aDecoder: NSCoder)
@@ -45,7 +45,8 @@ extension ViewContributorsViewController {
   
   func addContributor()
   {
-    // TODO: show add contributor
+    let addContributorsVC = AddContributorViewController(playlist: playlist)
+    navigationController!.pushViewController(addContributorsVC, animated: true)
   }
 }
 

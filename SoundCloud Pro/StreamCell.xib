@@ -78,7 +78,7 @@
                             <constraint firstAttribute="width" constant="40" id="zuA-tX-8FQ"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Tq9-9y-y7I">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="playback" translatesAutoresizingMaskIntoConstraints="NO" id="Tq9-9y-y7I">
                         <rect key="frame" x="8" y="58" width="304" height="0.0"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YOM-i8-dlv">
@@ -95,7 +95,7 @@
                                     <action selector="endTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Bv0-o0-V0z"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-Nf-8Nm">
+                            <slider opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="VF3-Nf-8Nm">
                                 <rect key="frame" x="38" y="0.0" width="198" height="1"/>
                                 <connections>
                                     <action selector="seekEnd:" destination="KGk-i7-Jjw" eventType="touchUpOutside" id="3ic-Ad-uMV"/>

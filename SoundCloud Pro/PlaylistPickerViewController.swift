@@ -10,6 +10,7 @@ import UIKit
 
 protocol PlaylistPickerDelegate {
   func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
+  func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
 }
 
 class PlaylistPickerViewController: UITableViewController {
@@ -25,6 +26,8 @@ extension PlaylistPickerViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
     tableView.registerNib(PlaylistCell.nib, forCellReuseIdentifier: kPlaylistCellIdentifier)
     loadPlaylists()
   }
@@ -49,6 +52,11 @@ extension PlaylistPickerViewController {
         ErrorHandler.handleNetworkingError("fetching playlists", error: error)
       }
     }
+  }
+  
+  func cancel()
+  {
+    delegate?.playlistPickerDidTapCancel(self)
   }
 }
 

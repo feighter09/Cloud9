@@ -173,13 +173,24 @@ extension TracksTableViewController: StreamCellDelegate {
 extension TracksTableViewController: PlaylistPickerDelegate {
   func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
   {
-    let presentingController: UIViewController = navigationController ?? self
-    presentingController.dismissViewControllerAnimated(true, completion: nil)
+    dismissPlaylistPicker()
+    
     SoundCloud.addTrack(trackToAddToPlaylist!, toPlaylist: playlist) { (success, error) -> Void in
       if !success {
         ErrorHandler.handleNetworkingError("adding to playlist", error: nil)
       }
     }
+  }
+  
+  func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
+  {
+    dismissPlaylistPicker()
+  }
+  
+  private func dismissPlaylistPicker()
+  {
+    let presentingController: UIViewController = navigationController ?? self
+    presentingController.dismissViewControllerAnimated(true, completion: nil)
   }
 }
 
