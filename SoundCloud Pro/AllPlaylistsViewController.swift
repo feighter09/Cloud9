@@ -1,5 +1,5 @@
 //
-//  PlaylistsViewController.swift
+//  AllPlaylistsViewController.swift
 //  SoundCloud Pro
 //
 //  Created by Austin Feight on 7/29/15.
@@ -14,7 +14,7 @@ let kNoPlaylistsCellIdentifier = "noPlaylists"
 let kSharedPlaylistSection = 0
 let kMyPlaylistSection = 1
 
-class PlaylistsViewController: UIViewController {
+class AllPlaylistsViewController: UIViewController {
   var sharedPlaylists: [Playlist]! {
     didSet { tableView.reloadData() }
   }
@@ -28,7 +28,7 @@ class PlaylistsViewController: UIViewController {
 
 
 // MARK: - View Life Cycle
-extension PlaylistsViewController {
+extension AllPlaylistsViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -71,7 +71,7 @@ extension PlaylistsViewController {
 }
 
 // MARK: - Table View Data Source
-extension PlaylistsViewController: UITableViewDataSource {
+extension AllPlaylistsViewController: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int
   {
     return 2
@@ -119,7 +119,7 @@ extension PlaylistsViewController: UITableViewDataSource {
 }
 
 // MARK: - UI Actions
-extension PlaylistsViewController: UITableViewDelegate {
+extension AllPlaylistsViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -143,15 +143,13 @@ extension PlaylistsViewController: UITableViewDelegate {
   
   private func presentPlaylist(playlist: Playlist)
   {
-    let tracksVC = TracksTableViewController()
-    tracksVC.tracks = playlist.tracks
-    tracksVC.navigationItem.title = playlist.name
-    navigationController?.pushViewController(tracksVC, animated: true)
+    let playlistVC = PlaylistViewController(playlist: playlist)
+    navigationController?.pushViewController(playlistVC, animated: true)
   }
 }
 
 // MARK: - Helpers
-extension PlaylistsViewController {
+extension AllPlaylistsViewController {
   private func playlistsForSection(section: Int) -> [Playlist]!
   {
     switch section {

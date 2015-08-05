@@ -34,5 +34,6 @@ extern NSString * const SCAccountDidFailToGetAccessToken;
 #pragma mark Accessors
 
 @property (nonatomic, readonly) NSString *identifier;
+@property (nonatomic, copy) NSDictionary *userInfo;
 
 @end

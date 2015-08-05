@@ -19,9 +19,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="0ZF-AZ-zBc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="web-Y9-daQ"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="0ZF-AZ-zBc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -78,10 +76,10 @@
             </objects>
             <point key="canvasLocation" x="2310" y="1191"/>
         </scene>
-        <!--Playlists View Controller-->
+        <!--All Playlists View Controller-->
         <scene sceneID="iwJ-tf-u8V">
             <objects>
-                <viewController id="5fP-qD-hKb" customClass="PlaylistsViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5fP-qD-hKb" customClass="AllPlaylistsViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HF5-16-gvY"/>
                         <viewControllerLayoutGuide type="bottom" id="FeE-ML-9Ar"/>

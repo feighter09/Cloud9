@@ -21,7 +21,7 @@ class SoundCloud: NSObject {
   private static var authCallback: SuccessCallback?
 }
 
-// MARK: - Auth
+// MARK: - Auth / Users
 extension SoundCloud {
   static var userIsAuthenticated: Bool { return SCSoundCloud.account() != nil && PFUser.currentUser() != nil }
   
@@ -37,6 +37,71 @@ extension SoundCloud {
     
     SCSoundCloud.requestAccessWithPreparedAuthorizationURLHandler { (url) -> Void in
       UIApplication.sharedApplication().openURL(url)
+    }
+  }
+  
+  class func didAuthenticate()
+  {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
+
+    // HACK: I need SCSoundCloud.account, which is just a wrapper for NXOAuth accounts, which are set async.
+    // I can't observe NXOAuth actually saving the SoundCloud credentials, so I just delay the code a second
+    delay(delay: 1, block: { () -> Void in
+      if PFUser.currentUser() != nil {
+        authCallback!(success: true, error: nil)
+      } else {
+        GET(kSCSoundCloudAPIURL + "me", params: nil) { (response, responseData, error) -> Void in
+          if requestSucceeded(response, error: error) {
+            let json = JSON(data: responseData)
+            let username = json["username"].stringValue
+            let fullName = json["full_name"].stringValue
+            signUpOrLoginOnParse(fullName, username: username, password: "password")
+          }
+          else {
+            authCallback!(success: false, error: error)
+          }
+        }
+      }
+    })
+  }
+  
+  class func getUsersMatchingText(text: String, callback: (users: [PFUser]!, error: NSError!) -> Void)
+  {
+    if text == "" {
+      callback(users: [], error: nil)
+      return
+    }
+    
+    let usernameQuery = PFUser.query()!, fullnameQuery = PFUser.query()!
+    usernameQuery.whereKey("username", matchesRegex: text, modifiers: "i")
+    fullnameQuery.whereKey("fullname", matchesRegex: text, modifiers: "i")
+    PFQuery.orQueryWithSubqueries([usernameQuery, fullnameQuery]).findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+      callback(users: objects as! [PFUser], error: error)
+    }
+  }
+  
+  private class func signUpOrLoginOnParse(fullname: String, username: String, password: String)
+  {
+    //    PFUser.promiseSignUp(username, password: password).then({ success -> PFUser in
+    //
+    //      return PFUser.currentUser()!
+    //    }).recover({ error -> Promise<PFUser> in
+    //      return PFUser.promiseLogIn(username, password: password)
+    //    })
+    
+    // I wish I could get promiseKit to improve this
+    let user = PFUser()
+    user["fullname"] = fullname
+    user.username = username
+    user.password = password
+    user.signUpInBackgroundWithBlock { (success, error) -> Void in
+      if success {
+        authCallback!(success: true, error: nil)
+      } else {
+        PFUser.logInWithUsernameInBackground(username, password: password) { (user, error) -> Void in
+          authCallback!(success: user != nil, error: error)
+        }
+      }
     }
   }
 }
@@ -85,13 +150,13 @@ extension SoundCloud {
   
   class func getSharedPlaylists(callback: FetchPlaylistsCallback)
   {
-    // TODO: this
     let query = ParsePlaylist.query()!
     query.whereKey("contributors", equalTo: PFUser.currentUser()!)
     query.includeKey("tracks")
+    query.includeKey("contributors")
     query.findObjectsInBackgroundWithBlock({ (playlists, error) -> Void in
       let parsePlaylists = playlists as! [ParsePlaylist]
-      let playlists = parsePlaylists.map { Playlist.fromParsePlaylist($0) }
+      let playlists = parsePlaylists.map { Playlist(parsePlaylist: $0) }
       callback(playlists: playlists, error: error)
     })
   }
@@ -133,46 +198,6 @@ extension SoundCloud {
 
 // MARK: - Helpers
 extension SoundCloud {
-  class func didAuthenticate()
-  {
-    NSNotificationCenter.defaultCenter().removeObserver(self)
-    if PFUser.currentUser() != nil {
-      authCallback!(success: true, error: nil)
-    } else {
-      // HACK: I need SCSoundCloud.account, which is just a wrapper for NXOAuth accounts, which are set async.
-      // I can't observe NXOAuth actually saving the SoundCloud credentials, so I just delay the code a second
-      delay(delay: 1, block: { () -> Void in
-        signUpOrLoginOnParse()
-      })
-    }
-  }
-  
-  private class func signUpOrLoginOnParse()
-  {
-    let username = SCSoundCloud.account().identifier
-    let password = "password"
-//    PFUser.promiseSignUp(username, password: password).then({ success -> PFUser in
-//      
-//      return PFUser.currentUser()!
-//    }).recover({ error -> Promise<PFUser> in
-//      return PFUser.promiseLogIn(username, password: password)
-//    })
-    
-    // I wish I could get promiseKit to improve this
-    let user = PFUser()
-    user.username = username
-    user.password = password
-    user.signUpInBackgroundWithBlock { (success, error) -> Void in
-      if success {
-        authCallback!(success: true, error: nil)
-      } else {
-        PFUser.logInWithUsernameInBackground(username, password: password) { (user, error) -> Void in
-          authCallback!(success: user != nil, error: error)
-        }
-      }
-    }
-  }
-  
   private class func getStreamWithURLString(urlString: String, callback: FetchTracksCallback)
   {
     let params = ["limit": "30"]

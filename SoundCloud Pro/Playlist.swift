@@ -18,7 +18,7 @@ class Playlist {
   var name: String
   var tracks: [Track]
   var trackCount: Int { return tracks.count }
-  var contributors: [PFUser]!
+  private(set) var contributors: [PFUser]!
   
   var type: PlaylistType { return parseId == nil ? .Normal : .Shared }
   private var parseId: String!
@@ -35,31 +35,20 @@ class Playlist {
     name = parsePlaylist.name
     tracks = parsePlaylist.tracks.map { Track.serializeFromParseObject($0) }
     contributors = parsePlaylist.contributors
-    print("id: \(parsePlaylist.objectId)")
     parseId = parsePlaylist.objectId
-    print("has id: \(parseId)")
-  }
-  
-  private init()
-  {
-    name = ""
-    tracks = []
-    contributors = []
-  }
-  
-  class func fromParsePlaylist(parsePlaylist: ParsePlaylist) -> Playlist
-  {
-    let playlist = Playlist()
-    playlist.name = parsePlaylist.name
-    playlist.tracks = parsePlaylist.tracks.map { Track.serializeFromParseObject($0) }
-    playlist.contributors = parsePlaylist.contributors
-//    playlist.parseId = parsePlaylist.objectId
-
-    return playlist
   }
 }
 
+// MARK: - Interface
 extension Playlist {
+  func addContributor(contributor: PFUser)
+  {
+    contributors.append(contributor)
+    parsePlaylist { (playlist) -> Void in
+      playlist.saveEventually(nil)
+    }
+  }
+  
   func parsePlaylist(callback: (playlist: ParsePlaylist!) -> Void)
   {
     ParsePlaylist.query()?.getObjectInBackgroundWithId(parseId, block: { (object, error) -> Void in
