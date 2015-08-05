@@ -29,6 +29,11 @@ extension SearchViewController {
   {
     searchResultsController.tableView.frame = containerView.bounds
     searchResultsController.addToView(containerView, inViewController: self, withDelegate: nil)
+    
+    let hideKeyboardRecognizer = UITapGestureRecognizer(target: searchBar, action: "resignFirstResponder")
+    hideKeyboardRecognizer.cancelsTouchesInView = false
+    searchResultsController.tableView.addGestureRecognizer(hideKeyboardRecognizer)
+    searchResultsController.tableView.keyboardDismissMode = .OnDrag
   }
 }
 
@@ -47,10 +52,16 @@ extension SearchViewController: UISearchBarDelegate {
       
       if error == nil {
         self.searchResultsController.tracks = tracks
-      } else {
+      }
+      else {
         ErrorHandler.handleNetworkingError("tracks", error: error)
       }
     }
+  }
+  
+  func searchBarSearchButtonClicked(searchBar: UISearchBar)
+  {
+    searchBar.resignFirstResponder()
   }
 }
 

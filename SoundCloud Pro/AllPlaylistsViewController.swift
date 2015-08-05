@@ -24,6 +24,7 @@ class AllPlaylistsViewController: UIViewController {
   }
 
   @IBOutlet private weak var tableView: UITableView!
+  private var pullToRefresh: BOZPongRefreshControl!
 }
 
 
@@ -33,16 +34,32 @@ extension AllPlaylistsViewController {
   {
     super.viewDidLoad()
     
-    tableView.dataSource = self
-    tableView.delegate = self
-    
     loadPlaylists()
   }
   
-  private func loadPlaylists()
+  override func viewDidLayoutSubviews()
   {
+    super.viewDidLayoutSubviews()
+    setupTableIfNecessary()
+  }
+  
+  func loadPlaylists()
+  {
+    pullToRefresh?.finishedLoading()
+    myPlaylists = nil
+    sharedPlaylists = nil
+    
     loadSharedPlaylists()
     loadMyPlaylists()
+  }
+
+  private func setupTableIfNecessary()
+  {
+    if pullToRefresh != nil { return }
+    
+    tableView.dataSource = self
+    tableView.delegate = self
+    pullToRefresh = BOZPongRefreshControl.attachToTableView(tableView, withRefreshTarget: self, andRefreshAction: "loadPlaylists")
   }
   
   private func loadMyPlaylists()
@@ -134,9 +151,9 @@ extension AllPlaylistsViewController: UITableViewDelegate {
     alert.addAction(UIAlertAction(title: "New Shared Playlist", style: .Default, handler: { (action) -> Void in
       self.showAddPlaylistAlert(.Shared)
     }))
-    alert.addAction(UIAlertAction(title: "New Playlist", style: .Default, handler: { (action) -> Void in
-      self.showAddPlaylistAlert(.Normal)
-    }))
+//    alert.addAction(UIAlertAction(title: "New Playlist", style: .Default, handler: { (action) -> Void in
+//      self.showAddPlaylistAlert(.Normal)
+//    }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
     presentViewController(alert, animated: true, completion: nil)
   }
@@ -188,8 +205,22 @@ extension AllPlaylistsViewController {
   {
     if error == nil {
       loadPlaylists()
-    } else {
+    }
+    else {
       ErrorHandler.handleNetworkingError("creating playlists", error: error!)
     }
+  }
+}
+
+// MARK: - Pull To Refresh
+extension AllPlaylistsViewController {
+  func scrollViewDidScroll(scrollView: UIScrollView)
+  {
+    pullToRefresh.scrollViewDidScroll()
+  }
+  
+  func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
+  {
+    pullToRefresh.scrollViewDidEndDragging()
   }
 }
