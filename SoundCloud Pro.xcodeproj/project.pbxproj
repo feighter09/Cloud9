@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A02E5AD1B73B0D0007C8099 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E5AB1B73B0D0007C8099 /* SearchViewController.xib */; };
 		7A1351C81B6822B700C2F7FA /* VotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */; };
 		7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CB1B68544C00C2F7FA /* VoteCell.swift */; };
 		7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */; };
@@ -17,6 +18,7 @@
 		7A5FA5E21B69A972009467B7 /* AllPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5E11B69A972009467B7 /* AllPlaylistsViewController.swift */; };
 		7A5FA5E41B69A9CA009467B7 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5E31B69A9CA009467B7 /* Playlist.swift */; };
 		7A5FA5E61B69ACF8009467B7 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5E51B69ACF8009467B7 /* PlaylistCell.swift */; };
+		7A62A5281B73A041004E61CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62A5271B73A041004E61CF /* TabBarController.swift */; };
 		7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */; };
 		7A8392831B71133000E8A3BB /* ParsePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8392821B71133000E8A3BB /* ParsePlaylist.swift */; };
 		7A8392851B713FC300E8A3BB /* PlaylistPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8392841B713FC300E8A3BB /* PlaylistPickerViewController.swift */; };
@@ -43,7 +45,7 @@
 		7AF9ABD31B6FBC6400919DA8 /* Parse+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9ABD21B6FBC6400919DA8 /* Parse+PromiseKit.swift */; };
 		7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */; };
 		7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */; };
-		7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */; };
+		7AFFA75D1B42E9BB0002BB84 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA75C1B42E9BB0002BB84 /* StreamViewController.swift */; };
 		7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7611B42E9BB0002BB84 /* Images.xcassets */; };
 		7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AFFA7631B42E9BB0002BB84 /* LaunchScreen.xib */; };
 		7AFFA7711B42E9BB0002BB84 /* SoundCloud_ProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7701B42E9BB0002BB84 /* SoundCloud_ProTests.swift */; };
@@ -63,6 +65,7 @@
 /* Begin PBXFileReference section */
 		29C85976F8B0CD294689E844 /* Pods-SoundCloud Pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloud Pro.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoundCloud Pro/Pods-SoundCloud Pro.release.xcconfig"; sourceTree = "<group>"; };
 		4C3F8CF593630298889BC088 /* Pods_SoundCloud_Pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloud_Pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A02E5AB1B73B0D0007C8099 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesTableViewController.swift; sourceTree = "<group>"; };
 		7A1351CB1B68544C00C2F7FA /* VoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
 		7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +76,7 @@
 		7A5FA5E11B69A972009467B7 /* AllPlaylistsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPlaylistsViewController.swift; sourceTree = "<group>"; };
 		7A5FA5E31B69A9CA009467B7 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		7A5FA5E51B69ACF8009467B7 /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
+		7A62A5271B73A041004E61CF /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		7A8392821B71133000E8A3BB /* ParsePlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsePlaylist.swift; sourceTree = "<group>"; };
 		7A8392841B713FC300E8A3BB /* PlaylistPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPickerViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +105,7 @@
 		7AFFA7561B42E9BB0002BB84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFFA75A1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoundCloud_Pro.xcdatamodel; sourceTree = "<group>"; };
-		7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7AFFA75C1B42E9BB0002BB84 /* StreamViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
 		7AFFA75F1B42E9BB0002BB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7AFFA7611B42E9BB0002BB84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		7AFFA7641B42E9BB0002BB84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -203,16 +207,18 @@
 		7AAEC36D1B506F9400AE6945 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				7AFFA75C1B42E9BB0002BB84 /* ViewController.swift */,
+				7AFFA75C1B42E9BB0002BB84 /* StreamViewController.swift */,
 				7AAB56061B518F3500817B5C /* TracksTableViewController.swift */,
 				7A1351C71B6822B700C2F7FA /* VotesTableViewController.swift */,
 				7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */,
 				7A5FA5DF1B694746009467B7 /* SearchViewController.swift */,
+				7A02E5AB1B73B0D0007C8099 /* SearchViewController.xib */,
 				7A5FA5E11B69A972009467B7 /* AllPlaylistsViewController.swift */,
 				7A8392841B713FC300E8A3BB /* PlaylistPickerViewController.swift */,
 				7ABB799C1B7188230065EEAE /* PlaylistViewController.swift */,
 				7ABB799E1B718BC40065EEAE /* ViewContributorsViewController.swift */,
 				7ABB79A01B7197B60065EEAE /* AddContributorViewController.swift */,
+				7A62A5271B73A041004E61CF /* TabBarController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 			files = (
 				7A5FA5DC1B6862A8009467B7 /* Main.storyboard in Resources */,
 				7AFFA7651B42E9BB0002BB84 /* LaunchScreen.xib in Resources */,
+				7A02E5AD1B73B0D0007C8099 /* SearchViewController.xib in Resources */,
 				7AAB56191B52313300817B5C /* PlayPauseButton.xib in Resources */,
 				7A8B63181B717A5700EF1562 /* PlaylistCell.xib in Resources */,
 				7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */,
@@ -496,7 +503,7 @@
 				7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */,
 				7AF9ABD31B6FBC6400919DA8 /* Parse+PromiseKit.swift in Sources */,
 				7ABB79A31B7198710065EEAE /* LFTableViewDataSource.swift in Sources */,
-				7AFFA75D1B42E9BB0002BB84 /* ViewController.swift in Sources */,
+				7AFFA75D1B42E9BB0002BB84 /* StreamViewController.swift in Sources */,
 				7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */,
 				7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */,
 				7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */,
@@ -514,6 +521,7 @@
 				7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7A5FA5E21B69A972009467B7 /* AllPlaylistsViewController.swift in Sources */,
+				7A62A5281B73A041004E61CF /* TabBarController.swift in Sources */,
 				7AA4BF3A1B6A6BFB00F07E12 /* AsyncAggregator.swift in Sources */,
 				7AAB56101B51AC0F00817B5C /* Track.swift in Sources */,
 				7A5FA5E01B694746009467B7 /* SearchViewController.swift in Sources */,

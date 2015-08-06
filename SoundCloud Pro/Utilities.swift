@@ -8,8 +8,28 @@
 
 import UIKit
 
-class Utilities {
+class Utilities {}
 
+// MARK: - Search Button
+protocol SearchPresenterDelegate: NSObjectProtocol {
+  func presentSearchViewController()
+}
+
+extension Utilities {
+  class func addSearchButtonToNavigationController(navigationItem: UINavigationItem, searchPresenter: SearchPresenterDelegate)
+  {
+    let existingButtons: [UIBarButtonItem]
+    if let rightButtons = navigationItem.rightBarButtonItems {
+      existingButtons = rightButtons
+    } else if let rightButton = navigationItem.rightBarButtonItem {
+      existingButtons = [rightButton]
+    } else {
+      existingButtons = []
+    }
+    
+    let searchButton = UIBarButtonItem(barButtonSystemItem: .Search, target: searchPresenter, action: "presentSearchViewController")
+    navigationItem.rightBarButtonItems = existingButtons + [searchButton]
+  }
 }
 
 // MARK: - Buffering Alert
@@ -34,8 +54,8 @@ extension UIView {
   class func rectWithinBars(navigationBar: Bool = true, tabBar: Bool = true) -> CGRect
   {
     let screenSize = UIScreen.mainScreen().bounds
-    let yOffset: CGFloat = navigationBar ? 64 : 0
-    let height = screenSize.height - yOffset - (tabBar ? 49 : 0)
+    let yOffset: CGFloat = (navigationBar ? 64 : 0) + (tabBar ? 49 : 0)
+    let height = screenSize.height - yOffset
     
     return CGRect(x: 0, y: yOffset, width: screenSize.width, height: height)
   }

@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Stream View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="ViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="StreamViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -25,57 +25,6 @@
             </objects>
             <point key="canvasLocation" x="2310" y="478"/>
         </scene>
-        <!--Search-->
-        <scene sceneID="DVU-Ho-6im">
-            <objects>
-                <viewController id="dSx-d2-m1Z" customClass="SearchViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="yCT-1O-7oW"/>
-                        <viewControllerLayoutGuide type="bottom" id="Uej-Ur-8zJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8eL-aH-ffM">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zlI-gH-36W">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSb-U3-UBb">
-                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="zlI-gH-36W" firstAttribute="leading" secondItem="8eL-aH-ffM" secondAttribute="leading" id="5eq-NQ-tiy"/>
-                            <constraint firstItem="WSb-U3-UBb" firstAttribute="leading" secondItem="8eL-aH-ffM" secondAttribute="leading" id="CT8-9g-iND"/>
-                            <constraint firstItem="WSb-U3-UBb" firstAttribute="top" secondItem="zlI-gH-36W" secondAttribute="bottom" id="T8d-S2-kgG"/>
-                            <constraint firstAttribute="trailing" secondItem="WSb-U3-UBb" secondAttribute="trailing" id="elK-kk-tUp"/>
-                            <constraint firstItem="zlI-gH-36W" firstAttribute="top" secondItem="yCT-1O-7oW" secondAttribute="bottom" id="hfl-jj-C20"/>
-                            <constraint firstAttribute="trailing" secondItem="zlI-gH-36W" secondAttribute="trailing" id="in9-kd-qbu"/>
-                            <constraint firstItem="Uej-Ur-8zJ" firstAttribute="top" secondItem="WSb-U3-UBb" secondAttribute="bottom" id="n9b-tc-2tz"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Search" id="tUT-kH-uco"/>
-                    <connections>
-                        <outlet property="containerView" destination="WSb-U3-UBb" id="PQV-n1-Mzf"/>
-                        <outlet property="searchBar" destination="zlI-gH-36W" id="icc-zN-CjQ"/>
-                        <outlet property="searchDisplayController" destination="p4l-P8-8pa" id="My2-zY-G1W"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xlb-go-bA9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="p4l-P8-8pa">
-                    <connections>
-                        <outlet property="delegate" destination="dSx-d2-m1Z" id="Xzn-Xd-72i"/>
-                        <outlet property="searchContentsController" destination="dSx-d2-m1Z" id="lpN-x9-OvE"/>
-                        <outlet property="searchResultsDataSource" destination="dSx-d2-m1Z" id="0Ow-Ay-6Mp"/>
-                        <outlet property="searchResultsDelegate" destination="dSx-d2-m1Z" id="brZ-vE-x8X"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="2310" y="1191"/>
-        </scene>
         <!--All Playlists View Controller-->
         <scene sceneID="iwJ-tf-u8V">
             <objects>
@@ -89,7 +38,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgt-8r-Me9">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="49" width="600" height="502"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="jmI-fb-6YA">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
@@ -161,7 +110,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="jmI-fb-6YA" secondAttribute="bottom" id="IP2-7Q-Qa2"/>
+                                    <constraint firstItem="jmI-fb-6YA" firstAttribute="bottom" secondItem="Sgt-8r-Me9" secondAttribute="bottom" constant="49" id="IP2-7Q-Qa2"/>
                                     <constraint firstItem="jmI-fb-6YA" firstAttribute="leading" secondItem="Sgt-8r-Me9" secondAttribute="leading" id="Lal-2f-a6i"/>
                                     <constraint firstAttribute="trailing" secondItem="jmI-fb-6YA" secondAttribute="trailing" id="buZ-gh-WvS"/>
                                     <constraint firstItem="jmI-fb-6YA" firstAttribute="top" secondItem="Sgt-8r-Me9" secondAttribute="top" id="dw3-hC-HHs"/>
@@ -171,8 +120,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Sgt-8r-Me9" secondAttribute="trailing" id="6wW-Qc-QQw"/>
-                            <constraint firstItem="FeE-ML-9Ar" firstAttribute="top" secondItem="Sgt-8r-Me9" secondAttribute="bottom" id="c5R-ru-hPS"/>
-                            <constraint firstItem="Sgt-8r-Me9" firstAttribute="top" secondItem="gmw-VO-fW1" secondAttribute="topMargin" id="gSk-ct-LZY"/>
+                            <constraint firstItem="Sgt-8r-Me9" firstAttribute="bottom" secondItem="FeE-ML-9Ar" secondAttribute="top" id="c5R-ru-hPS"/>
+                            <constraint firstItem="Sgt-8r-Me9" firstAttribute="top" secondItem="gmw-VO-fW1" secondAttribute="topMargin" constant="49" id="gSk-ct-LZY"/>
                             <constraint firstItem="Sgt-8r-Me9" firstAttribute="leading" secondItem="gmw-VO-fW1" secondAttribute="leading" id="mvP-Fi-Dy0"/>
                         </constraints>
                     </view>
@@ -298,18 +247,17 @@
         <!--Tab Bar Controller-->
         <scene sceneID="60k-LG-Uqm">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8ST-1h-TGZ" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="8ST-1h-TGZ" customClass="TabBarController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="TpX-3y-lqa">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="uZt-ww-G03" kind="relationship" relationship="viewControllers" id="Lqm-Il-94o"/>
-                        <segue destination="gkV-xB-gaR" kind="relationship" relationship="viewControllers" id="9bX-Kg-CKs"/>
                         <segue destination="upW-tI-YCP" kind="relationship" relationship="viewControllers" id="nFG-uI-EaB"/>
-                        <segue destination="5jw-JE-lCQ" kind="relationship" relationship="viewControllers" id="IqZ-ol-kSc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EE-Ev-aGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -334,25 +282,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lpr-on-c4f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1498" y="478"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ING-xp-oeA">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gkV-xB-gaR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="evu-8L-8zf"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Sy5-GA-lji">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="dSx-d2-m1Z" kind="relationship" relationship="rootViewController" id="ruY-Iz-enu"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="miu-ux-EIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1498" y="1191"/>
         </scene>
         <!--Settings-->
         <scene sceneID="jtb-B8-Idd">

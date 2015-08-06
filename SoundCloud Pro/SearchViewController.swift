@@ -8,11 +8,26 @@
 
 import UIKit
 
+let kSearchViewControllerNib = "SearchViewController"
+
+protocol SearchViewControllerDelegate {
+  func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
+}
+
 class SearchViewController: UIViewController {
+  var delegate: SearchViewControllerDelegate?
+  
   @IBOutlet private weak var searchBar: UISearchBar!
   @IBOutlet private weak var containerView: UIView!
   
   private var searchResultsController = TracksTableViewController()
+  
+  class func instanceFromNib(delegate delegate: SearchViewControllerDelegate? = nil) -> UIViewController
+  {
+    let searchController = SearchViewController(nibName: kSearchViewControllerNib, bundle: nil)
+    searchController.delegate = delegate
+    return UINavigationController(rootViewController: searchController)
+  }
 }
 
 // MARK: - View Life Cycle
@@ -23,6 +38,8 @@ extension SearchViewController {
     
     searchBar.delegate = self
     setupSearchResults()
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
   }
   
   private func setupSearchResults()
@@ -34,6 +51,11 @@ extension SearchViewController {
     hideKeyboardRecognizer.cancelsTouchesInView = false
     searchResultsController.tableView.addGestureRecognizer(hideKeyboardRecognizer)
     searchResultsController.tableView.keyboardDismissMode = .OnDrag
+  }
+  
+  func cancel()
+  {
+    delegate?.searchViewControllerDidTapCancel(self)
   }
 }
 

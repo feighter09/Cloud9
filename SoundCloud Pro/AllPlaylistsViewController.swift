@@ -37,9 +37,9 @@ extension AllPlaylistsViewController {
     loadPlaylists()
   }
   
-  override func viewDidLayoutSubviews()
+  override func viewDidAppear(animated: Bool)
   {
-    super.viewDidLayoutSubviews()
+    super.viewDidAppear(animated)
     setupTableIfNecessary()
   }
   

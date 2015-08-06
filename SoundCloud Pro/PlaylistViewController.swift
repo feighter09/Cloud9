@@ -74,7 +74,7 @@ extension PlaylistViewController: TracksTableViewControllerDelegate {
   }
 }
 
-// MARK: - Tracks Table Delegate
+// MARK: - Helpers
 extension PlaylistViewController {
   private func viewContributors()
   {

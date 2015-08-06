@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StreamViewController.swift
 //  SoundCloud Pro
 //
 //  Created by Austin Feight on 6/30/15.
@@ -11,7 +11,7 @@ import Parse
 
 let kTableViewOffset: CGFloat = 64
 
-class ViewController: UIViewController {
+class StreamViewController: UIViewController {
   private lazy var tracksList: TracksTableViewController = {
     let tracks = TracksTableViewController()
     tracks.infiniteScrolling = true
@@ -19,11 +19,12 @@ class ViewController: UIViewController {
   }()
 }
 
-extension ViewController {
+extension StreamViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
     setupStreamList()
+    Utilities.addSearchButtonToNavigationController(navigationItem, searchPresenter: self)
   }
 
   override func viewDidAppear(animated: Bool)
@@ -46,7 +47,7 @@ extension ViewController {
 }
 
 // MARK: - Stream Table Delegate
-extension ViewController: TracksTableViewControllerDelegate {
+extension StreamViewController: TracksTableViewControllerDelegate {
   func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
   {
     loadStreamWithAlert(false)
@@ -58,8 +59,25 @@ extension ViewController: TracksTableViewControllerDelegate {
   }
 }
 
+// MARK: - Search Presenter Delegate
+extension StreamViewController: SearchPresenterDelegate {
+  func presentSearchViewController()
+  {
+    let searchViewController = SearchViewController.instanceFromNib(delegate: self)
+    presentViewController(searchViewController, animated: true, completion: nil)
+  }
+}
+
+// MARK: - Search Presenter Delegate
+extension StreamViewController: SearchViewControllerDelegate {
+  func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
+  {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+}
+
 // MARK: - Helpers
-extension ViewController {
+extension StreamViewController {
   private func loginAndLoadStream()
   {
     if SCSoundCloud.account() == nil || PFUser.currentUser() == nil {
