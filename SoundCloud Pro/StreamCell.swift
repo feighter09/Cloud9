@@ -21,37 +21,28 @@ protocol StreamCellDelegate {
 class StreamCell: UITableViewCell {
   var listenerId: Int = 0
   var track: Track! {
-    didSet { updateViews() }
-  }
-  
-  var voteControlsEnabled = true {
-    didSet { voteControlsWidth.constant = (voteControlsEnabled ? kStreamCellVoteControlsWidth : 0) }
+    didSet {
+      assert(track != nil, "Cannot set Track to nil")
+      titleLabel.text = track.title
+      artistLabel.text = track.artist
+      
+      if let currentTrack = AudioPlayer.sharedPlayer.currentTrack where track == currentTrack {
+        playState = AudioPlayer.sharedPlayer.playState
+      } else {
+        playState = .Stopped
+      }
+    }
   }
   
   var delegate: StreamCellDelegate?
   
-  @IBOutlet private weak var seekProgressBar: UISlider!
-  private var seekTimer: NSTimer!
+  private var playState: PlayState = .Stopped {
+    didSet { playingLabel.text = playState != .Stopped ? "[\(playState.rawValue)]" : "" }
+  }
   
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var artistLabel: UILabel!
-  @IBOutlet private weak var playPauseButton: PlayPauseButton!
-  
-  private var waveformImage: Dynamic<UIImage?>!
-  
-  @IBOutlet private weak var playbackControlsHeight: NSLayoutConstraint!
-  @IBOutlet private weak var playbackControlsMargin: NSLayoutConstraint!
-  
-  @IBOutlet private weak var voteControlsWidth: NSLayoutConstraint!
-//  @IBOutlet private weak var waveformImageView: UIImageView!
-//  @IBOutlet private weak var waveformHeight: NSLayoutConstraint!
-//  @IBOutlet private weak var waveformMargin: NSLayoutConstraint!
-//  private lazy var waveformImageLoaded: Bond<UIImage?> = Bond<UIImage?>() { image in
-//    self.waveformHeight.constant = kStreamCellWaveformHeight
-//    self.waveformMargin.constant = kStreamCellWaveformMargin
-//    
-//    self.layoutIfNeeded()
-//  }
+  @IBOutlet private weak var playingLabel: UILabel!
   
   required init?(coder aDecoder: NSCoder)
   {
@@ -72,26 +63,16 @@ extension StreamCell {
   override func awakeFromNib()
   {
     super.awakeFromNib()
-//    waveformImageView.dynImage.bindTo(waveformImageLoaded, fire: false)
   }
   
   override func prepareForReuse()
   {
-    stopTrack()
+    playState = .Stopped
   }
 }
 
 // MARK: - UI Action
 extension StreamCell {
-  @IBAction func playPauseTapped(button: PlayPauseButton)
-  {
-    if button.playState == .Pause {
-      playTrack()
-    } else {
-      AudioPlayer.sharedPlayer.pause()
-      stopTrack()
-    }
-  }
   
   @IBAction func upVoteTapped(sender: AnyObject)
   {
@@ -103,38 +84,15 @@ extension StreamCell {
     UserPreferences.addDownvote(track)
     delegate?.streamCell(self, didDownvoteTrack: track)
   }
-  
-  @IBAction func beginningTapped(sender: AnyObject)
-  {
-    AudioPlayer.sharedPlayer.restartTrack()
-  }
-  
-  @IBAction func endTapped(sender: AnyObject)
-  {
-    AudioPlayer.sharedPlayer.playNextTrack()
-  }
-  
-  @IBAction func seekTouchDown(sender: AnyObject)
-  {
-    stopUpdatingSeekTime()
-  }
-  
-  @IBAction func seekEnd(sender: UISlider)
-  {
-    startUpdatingSeekTime()
-  }
-  
-  @IBAction func seekValueChanged(slider: UISlider)
-  {
-    AudioPlayer.sharedPlayer.seekTrack(track, toTime: Double(slider.value))
-  }
-  
+
   override func setSelected(selected: Bool, animated: Bool)
   {
     super.setSelected(selected, animated: animated)
     
     if selected {
-      if !trackIsCurrentlyPlaying { playTrack() }
+      if !trackIsCurrentlyPlaying {
+        AudioPlayer.sharedPlayer.play(track, clearingPlaylist: true)
+      }
       setSelected(false, animated: animated)
     }
   }
@@ -145,127 +103,33 @@ extension StreamCell {
   }
 }
 
-// MARK: - Audio Play Listener
+// MARK: - Audio Playing Listener
 extension StreamCell: AudioPlayerListener {
   func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
-    expandCell(track == self.track, animated: true)
-    
-    if track == self.track {
-      playPauseButton.playState = .Loading
-      startUpdatingSeekTime() // #1 might call for a refactor
-    } else {
-      playPauseButton.playState = .Pause
-      stopUpdatingSeekTime()
-    }
+    if track == self.track { playState = .Buffering }
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
   {
-    expandCell(track == self.track, animated: true)
-    playPauseButton.playState = track == self.track ? .Play : .Pause
-    startUpdatingSeekTime() // #1 might call for a refactor
+    if track == self.track { playState = .Playing }
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
   {
-    if track == self.track {
-      playPauseButton.playState = .Pause
-    }
+    if track == self.track { playState = .Paused }
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
   {
-    if track == self.track {
-      stopTrack()
-    }
+    if track == self.track { playState = .Stopped }
   }
 }
 
 // MARK: - Helpers
 extension StreamCell {
-  private func playTrack()
-  {
-    AudioPlayer.sharedPlayer.play(track)
-    startUpdatingSeekTime()
-    expandCell(true, animated: true)
-  }
-  
-  private func stopTrack()
-  {
-    stopUpdatingSeekTime()
-    playPauseButton.playState = .Pause
-    expandCell(false, animated: true)
-  }
-  
   private var trackIsCurrentlyPlaying: Bool {
     return AudioPlayer.sharedPlayer.currentTrack == track && AudioPlayer.sharedPlayer.isPlaying
-  }
-  
-  private func updateViews()
-  {
-    assert(track != nil, "Track must not be nil")
-    titleLabel.text = track.title
-    artistLabel.text = track.artist
-    
-    if let currentTrack = AudioPlayer.sharedPlayer.currentTrack where track == currentTrack {
-      startUpdatingSeekTime()
-      expandCell(true, animated: false)
-      playPauseButton.playState = AudioPlayer.sharedPlayer.playPauseState
-    }
-//    if let waveformURL = track.waveformURL {
-//      self.getWaveformWithURL(waveformURL)
-//    }
-  }
-  
-  private func expandCell(expand: Bool, animated: Bool)
-  {
-    if expand && playbackControlsHeight.constant != 0 { return }  // already expanded
-    
-    let animationDuration = animated ? 0.4 : 0
-    UIView.animateWithDuration(animationDuration) { () -> Void in
-      self.playbackControlsHeight.constant = expand ? kStreamCellPlaybackControlsHeight : 0
-      self.playbackControlsMargin.constant = expand ? kStreamCellPlaybackControlsMargin : 0
-      
-      self.layoutIfNeeded()
-      if self.tableView != nil && self.tableView!.visibleCells.contains(self) {
-        self.tableView?.beginUpdates()
-        self.tableView?.endUpdates()
-      }
-    }
-  }
-  
-  func updateSeekTime()
-  {
-    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(track)
-    seekProgressBar.setValue(Float(seekTime), animated: false)
-    
-    if seekTime >= track.duration {
-      stopUpdatingSeekTime()
-      playPauseButton.playState = .Pause
-    }
-  }
-  
-  private func startUpdatingSeekTime()
-  {
-    seekProgressBar.maximumValue = Float(track.duration)
-    seekTimer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "updateSeekTime", userInfo: nil, repeats: true)
-  }
-  
-  private func stopUpdatingSeekTime()
-  {
-    seekTimer?.invalidate()
-    seekTimer = nil
-  }
-  
-  // This seems like some shit to me
-  private var tableView: UITableView? {
-    var table = superview
-    while !(table is UITableView) && table != nil {
-      table = table!.superview
-    }
-    
-    return table as? UITableView
-  }
+  }  
 }
 

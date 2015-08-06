@@ -8,23 +8,9 @@
 
 import UIKit
 
-enum PlayPauseState: String {
-  case Play = "Play"
-  case Pause = "Pause"
-  case Loading = "Loading"
-  
-  var image: UIImage! {
-    switch self {
-    case .Play: return UIImage(named: "Pause")
-    case .Pause: return UIImage(named: "Play")
-    case .Loading: return nil
-    }
-  }
-}
-
 class PlayPauseButton: UIButton, Listener {
   var listenerId = 0
-  var playState: PlayPauseState = .Pause {
+  var playState: PlayState = .Paused {
     didSet { updateImage() }
   }
   
@@ -49,25 +35,23 @@ extension PlayPauseButton {
   private func updateImage()
   {
     switch playState {
-      case .Play:
+      case .Playing:
         fallthrough
-      case .Pause:
+      case .Paused:
         removeBufferingView()
         setImage(playState.image, forState: .Normal)
-      case .Loading:
+      case .Buffering:
         addBufferingView()
+      case .Stopped:
+        break
     }
   }
   
   private func addBufferingView()
   {
     if bufferingView == nil {
-      NSLog("frame: \(frame), bounds: \(bounds), center: \(center)")
       bufferingView = UIActivityIndicatorView(frame: bounds)
-      
-//      bufferingView.center = center
       addSubview(bufferingView)
-      NSLog("bufferingView frame: \(bufferingView.frame), center: \(bufferingView.center)")
     }
     
     setImage(nil, forState: .Normal)

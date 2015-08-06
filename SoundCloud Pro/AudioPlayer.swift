@@ -6,6 +6,22 @@
 //  Copyright © 2015 Lost in Flight. All rights reserved.
 //
 
+enum PlayState: String {
+  case Playing
+  case Paused
+  case Buffering
+  case Stopped
+  
+  var image: UIImage! {
+    switch self {
+      case .Playing: return UIImage(named: "Pause")
+      case .Paused: return UIImage(named: "Play")
+      case .Buffering: fallthrough
+      case .Stopped: return nil
+    }
+  }
+}
+
 @objc protocol AudioPlayerListener: Listener {
   optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)//, forTheFirstTime firstTime: Bool)
   optional func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
@@ -33,24 +49,27 @@ class AudioPlayer: NSObject {
 }
 
 // MARK: - Interface
-// MARK: Play State
+// MARK: Playing State
 extension AudioPlayer {
-  var playPauseState: PlayPauseState {
+  var playState: PlayState {
     switch AudioPlayer.audioPlayer.state {
-    case .Playing:
-      return .Play
-    case .Buffering:
-      return .Loading
-    default:
-      return .Pause
+      case .Playing:
+        return .Playing
+      case .Buffering:
+        return .Buffering
+      case .Paused:
+        return .Paused
+      default:
+        return .Stopped
     }
   }
   
-  var isPlaying: Bool { return playPauseState == .Play || playPauseState == .Loading }
+  var isPlaying: Bool { return playState == .Playing || playState == .Buffering }
   
   func seekTimeForTrack(track: Track) -> Double
   {
-    return currentTrack == track ? AudioPlayer.audioPlayer.progress : 0
+//    return currentTrack == track ? AudioPlayer.audioPlayer.progress : 0
+    return AudioPlayer.audioPlayer.progress
   }
 }
 

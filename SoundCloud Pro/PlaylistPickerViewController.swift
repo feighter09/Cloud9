@@ -37,21 +37,17 @@ extension PlaylistPickerViewController {
     // TODO: PromiseKit bro
     let alert = Utilities.showLoadingAlert("Loading playlists", onViewController: self)
     
-    SoundCloud.getMyPlaylists { (myPlaylists, error) -> Void in
+    SoundCloud.getSharedPlaylists({ (sharedPlaylists, error) -> Void in
+      alert.hideView()
+      
       if error == nil {
-        SoundCloud.getSharedPlaylists({ (sharedPlaylists, error) -> Void in
-          alert.hideView()
-
-          if error == nil {
-            self.playlists = sharedPlaylists + myPlaylists
-          } else {
-            ErrorHandler.handleNetworkingError("fetching playlists", error: error)
-          }
-        })
+        self.playlists = sharedPlaylists
       } else {
         ErrorHandler.handleNetworkingError("fetching playlists", error: error)
       }
-    }
+    })
+    
+//    SoundCloud.getMyPlaylists { (myPlaylists, error) -> Void in }
   }
   
   func cancel()

@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/PlayPauseButton.swift"
-            timestampString = "459124893.469058"
+            timestampString = "460561626.880015"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "removeBufferingView()"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,6 +74,22 @@
             startingLineNumber = "1365"
             endingLineNumber = "1365"
             landmarkName = "-startInternal"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SoundCloud Pro/AudioPlayer.swift"
+            timestampString = "460561841.178113"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "seekTimeForTrack(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

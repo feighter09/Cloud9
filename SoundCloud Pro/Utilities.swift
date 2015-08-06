@@ -12,7 +12,7 @@ class Utilities {
 
 }
 
-// MARK: - Loading Alert
+// MARK: - Buffering Alert
 extension Utilities {
   class func showLoadingAlert(title: String, onViewController vc: UIViewController?) -> SCLAlertView
   {

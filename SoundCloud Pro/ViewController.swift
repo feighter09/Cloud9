@@ -79,7 +79,7 @@ extension ViewController {
   
   private func loadStreamWithAlert(showAlert: Bool)
   {
-    let alert: SCLAlertView? = (showAlert ? Utilities.showLoadingAlert("Loading Stream", onViewController: self) : nil)
+    let alert: SCLAlertView? = (showAlert ? Utilities.showLoadingAlert("Buffering Stream", onViewController: self) : nil)
 
     SoundCloud.getStream({ (tracks, error) -> Void in
       alert?.hideView()

@@ -28,7 +28,6 @@ class TracksTableViewController: UITableViewController {
   }
 
   var infiniteScrolling = false
-  var voteControlsEnabled = true
   
   var delegate: TracksTableViewControllerDelegate?
   
@@ -206,7 +205,6 @@ extension TracksTableViewController {
     let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
     
     cell.track = tracks[indexPath.row]
-    cell.voteControlsEnabled = voteControlsEnabled
     cell.delegate = self
     
     return cell

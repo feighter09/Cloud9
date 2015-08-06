@@ -15,8 +15,6 @@ import Parse
   var duration: Double!
   var streamURL: String!
   
-  private var jsonData: JSON!
-  
   init(json: JSON)
   {
     // I wish I could just save jsonData to json or json["origin"] but that doesn't work
@@ -32,7 +30,6 @@ import Parse
       streamURL = json["stream_url"].string! + "?client_id=\(kSoundCloudClientID)"
     }
     
-    jsonData = json["origin"]
     super.init()
 
     assert(title != nil && artist != nil && duration != nil && streamURL != nil)
@@ -44,7 +41,6 @@ import Parse
     artist = aDecoder.decodeObjectForKey(kArtistKey) as! String
     duration = aDecoder.decodeDoubleForKey(kDurationKey)
     streamURL = aDecoder.decodeObjectForKey(kStreamURLKey) as! String
-    jsonData = JSON(data: aDecoder.decodeObjectForKey(kTrackJSON) as! NSData)
   }
   
   private init(object: PFObject)
@@ -58,15 +54,6 @@ import Parse
 
 // MARK: - Interface
 extension Track {
-  var waveformURL: NSURL? {
-    if let urlString = jsonData["waveform_url"].string {
-      return NSURL(string: urlString)
-    } else {
-      return nil
-    }
-  }
-  var artworkURL: NSURL! { return NSURL(string: jsonData["artwork_url"].string!) }
-  
   func serializeToParseObject() -> PFObject
   {
     let track = PFObject(className: "Track")
@@ -112,7 +99,6 @@ let kStreamURLKey = "streamURL"
 extension Track {
   func encodeWithCoder(aCoder: NSCoder)
   {
-    try! aCoder.encodeObject(jsonData.rawData(), forKey: kTrackJSON)
     aCoder.encodeObject(title, forKey: kTitleKey)
     aCoder.encodeObject(artist, forKey: kArtistKey)
     aCoder.encodeDouble(duration, forKey: kDurationKey)
