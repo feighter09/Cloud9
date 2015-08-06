@@ -76,6 +76,14 @@ extension StreamViewController: SearchViewControllerDelegate {
   }
 }
 
+// MARK: - Slide Navigation Delegate
+extension StreamViewController: SlideNavigationControllerDelegate {
+  func slideNavigationControllerShouldDisplayLeftMenu() -> Bool
+  {
+    return true
+  }
+}
+
 // MARK: - Helpers
 extension StreamViewController {
   private func loginAndLoadStream()

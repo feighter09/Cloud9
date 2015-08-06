@@ -65,6 +65,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'
   install_framework 'Pods-SoundCloud Pro/SwiftyJSON.framework'
+  install_framework 'Pods-SoundCloud Pro/iOS_Slide_Menu.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-SoundCloud Pro/Alamofire.framework'
@@ -80,4 +81,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-SoundCloud Pro/SVPullToRefresh.framework'
   install_framework 'Pods-SoundCloud Pro/StreamingKit.framework'
   install_framework 'Pods-SoundCloud Pro/SwiftyJSON.framework'
+  install_framework 'Pods-SoundCloud Pro/iOS_Slide_Menu.framework'
 fi

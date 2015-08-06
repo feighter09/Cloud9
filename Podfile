@@ -17,6 +17,7 @@ target 'SoundCloud Pro' do
   pod 'SCLAlertView-Objective-C'
   pod 'SVPullToRefresh'
   pod 'BOZPongRefreshControl'
+  pod 'iOS-Slide-Menu'
 end
 
 target 'SoundCloud ProTests' do

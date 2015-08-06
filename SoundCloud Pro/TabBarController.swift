@@ -9,13 +9,21 @@
 import UIKit
 
 class TabBarController: UITabBarController {
+  
+  override func viewDidLoad()
+  {
+    super.viewDidLoad()
+    let navHeight: CGFloat = 64
+    let tabBarHeight = tabBar.bounds.height
+    let dy = -(UIScreen.mainScreen().bounds.height - navHeight - tabBarHeight)
+    tabBar.frame.offset(dx: 0, dy: dy)
+  }
+}
 
-    override func viewDidLoad()
-    {
-      super.viewDidLoad()
-      let navHeight: CGFloat = 64
-      let tabBarHeight = tabBar.bounds.height
-      let dy = -(UIScreen.mainScreen().bounds.height - navHeight - tabBarHeight)
-      tabBar.frame.offset(dx: 0, dy: dy)
-    }
+// MARK: - Slide Navigation Delegate
+extension TabBarController: SlideNavigationControllerDelegate {
+  func slideNavigationControllerShouldDisplayLeftMenu() -> Bool
+  {
+    return true
+  }
 }

@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
     initParse()
+    SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
     
     return true
   }

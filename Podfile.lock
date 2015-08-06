@@ -5,6 +5,7 @@ PODS:
   - BOZPongRefreshControl (1.0.1)
   - CocoaSoundCloudAPI (1.0.1):
     - NXOAuth2Client (= 1.2.1)
+  - iOS-Slide-Menu (1.4.6)
   - NXOAuth2Client (1.2.1)
   - OMGHTTPURLRQ (3.0.0):
     - OMGHTTPURLRQ/RQ (= 3.0.0)
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - Bond (from `https://github.com/SwiftBond/Bond.git`, branch `swift-2.0`)
   - BOZPongRefreshControl
   - CocoaSoundCloudAPI (= 1.0.1)
+  - iOS-Slide-Menu
   - Parse
   - PromiseKit (from `https://github.com/mxcl/PromiseKit.git`, branch `swift-2.0-beta4`)
   - SCLAlertView-Objective-C
@@ -78,6 +80,7 @@ SPEC CHECKSUMS:
   Bond: 6324624f32d535cd8d8e387f3f73df2641fa4078
   BOZPongRefreshControl: c956ee1f1bed94d3554ad081c4ff1450cfc6d349
   CocoaSoundCloudAPI: e8e1f2e463fa9bb9d68b2dcf361572787c7a6c3f
+  iOS-Slide-Menu: 3a8b157f87694fce888899f169e05b433575ff90
   NXOAuth2Client: 4705ee7d3532c106e2758e2f10f4e9964b5aec68
   OMGHTTPURLRQ: 45cd892e5643206a5a359307621df7678625ebec
   Parse: 373adbb1ad2e34d383542c3b28f678c49ebe4881

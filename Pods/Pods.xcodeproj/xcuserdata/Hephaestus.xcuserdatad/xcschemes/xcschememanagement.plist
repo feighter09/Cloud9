@@ -74,10 +74,15 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>iOS-Slide-Menu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1AFA8813274FD60A8189279ED947CB82</key>
+		<key>1366428AACFA0F62C17206E966CCB5AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,17 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A82D4B0FDF7B9344EA2EE7FE0062CFA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>5FBC9FC16366AA3E47B8E508ECA548B8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>634C7B850CE6DC6448863CD12CC28767</key>
+		<key>35BFA7BB1F782521256978DF9B32006B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +102,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>690D8710C29721B5E5CAD7A95D44B529</key>
+		<key>7DA43966C67EE0BF93536FA072F2248C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,22 +112,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87B28B53C31CF70E2B3342D55373B6F1</key>
+		<key>87E49C83A466C3331D47056BB70D1E02</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>896F62D472FD0CE4C62486CCFB1AD894</key>
+		<key>8ED6EAC0A50E2744F90B1F1118A50899</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CD27272787FB66CAC1FE62C6F6AEA1D</key>
+		<key>A91C531261883C60B6A58FE1DB59E549</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A5E29390F25B7CEFDCA8D0E120F8E2F0</key>
+		<key>ADFFF2B38025A920C7B6FE60A59C0727</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +137,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BB7029E302A66EF3B04C00B6A2E35D42</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C6F0F2FE203268519D59E74A71DB12E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CC87AE09EB9C90770709069EE4D786A1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D760EA73BF738BEDA6FD818463665319</key>
 		<dict>
 			<key>primary</key>
 			<true/>

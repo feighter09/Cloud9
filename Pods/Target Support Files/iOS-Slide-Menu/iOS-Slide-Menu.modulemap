@@ -1,0 +1,6 @@
+framework module iOS_Slide_Menu {
+  umbrella header "iOS-Slide-Menu-umbrella.h"
+
+  export *
+  module * { export * }
+}

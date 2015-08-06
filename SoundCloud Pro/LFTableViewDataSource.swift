@@ -22,10 +22,11 @@ class LFTableViewDataSource: NSObject, UITableViewDataSource {
   private var cellIdentifiers = [NSIndexPath: String]()
   private var constructCellBlock: LFConstructTableCellBlock
   
-  init(defaultCellIdentifier: String, constructCellBlock: LFConstructTableCellBlock)
+  init(defaultCellIdentifier: String, dataItems: [AnyObject] = [], constructCellBlock: LFConstructTableCellBlock)
   {
     self.defaultCellIdentifier = defaultCellIdentifier
     self.constructCellBlock = constructCellBlock
+    self.dataItems = dataItems
   }
 }
 

@@ -1,5 +1,5 @@
 //
-//  VotesTableViewController.swift
+//  VotesViewController.swift
 //  SoundCloud Pro
 //
 //  Created by Austin Feight on 7/28/15.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-let kVotesStoryboardId = "votesTableViewController"
+let kVotesViewControllerNib = "VotesViewController"
 let kVotesCellIdentifier = "voteCell"
 
 enum VoteType {
   case Up, Down
 }
 
-class VotesTableViewController: UITableViewController {
+class VotesViewController: UIViewController {
   var voteType: VoteType! {
     didSet {
       loadVotes()
@@ -23,39 +23,44 @@ class VotesTableViewController: UITableViewController {
     }
   }
   
-  private var votes: [Track]! {
-    didSet { tableView.reloadData() }
+  class func instanceFromNib() -> VotesViewController
+  {
+    return VotesViewController(nibName: kVotesViewControllerNib, bundle: nil)
   }
+  
+  private var votes: [Track]! {
+    didSet { tableView?.reloadData() }
+  }
+  
+  @IBOutlet private weak var tableView: UITableView!
 }
 
 // MARK: - View Life Cycle
-extension VotesTableViewController {
+extension VotesViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
 
     navigationItem.rightBarButtonItem = editButtonItem()
+    setupTableView()
+  }
+  
+  private func setupTableView()
+  {
+    let dataSource = LFTableViewDataSource(defaultCellIdentifier: kVotesCellIdentifier, dataItems: votes) { (cell, data) -> Void in
+      let voteCell = cell as! VoteCell
+      voteCell.track = data as! Track
+    }
+    dataSource.deleteCellBlock = { self.removeItemAtIndexPath($0) }
+    tableView.dataSource = dataSource
+    
     tableView.tableFooterView = UIView(frame: CGRectZero)
   }
 }
 
 // MARK: - Table view data source
-extension VotesTableViewController {
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-  {
-    return votes.count
-  }
-  
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
-  {
-    let cell = tableView.dequeueReusableCellWithIdentifier(kVotesCellIdentifier, forIndexPath: indexPath) as! VoteCell
-    cell.track = votes[indexPath.row]
-    
-    return cell
-  }
-  
-  // Override to support editing the table view.
-  override func tableView(tableView: UITableView,
+extension VotesViewController {
+  func tableView(tableView: UITableView,
                           commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                           forRowAtIndexPath indexPath: NSIndexPath)
   {
@@ -66,7 +71,7 @@ extension VotesTableViewController {
 }
 
 // MARK: - Helpers
-extension VotesTableViewController {
+extension VotesViewController {
   private func loadVotes()
   {
     votes = (voteType == .Up ? UserPreferences.upvotes : UserPreferences.downvotes)
