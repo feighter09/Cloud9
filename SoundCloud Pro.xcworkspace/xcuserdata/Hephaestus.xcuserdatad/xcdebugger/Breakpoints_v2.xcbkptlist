@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/Utilities.swift"
-            timestampString = "460564805.296998"
+            timestampString = "460654228.328632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "addSearchButtonToNavigationController(_:searchPresenter:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/TabBarController.swift"
-            timestampString = "460608030.358649"
+            timestampString = "460664804.65301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "slideNavigationControllerShouldDisplayLeftMenu()"
             landmarkType = "5">
          </BreakpointContent>

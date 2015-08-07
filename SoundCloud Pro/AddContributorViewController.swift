@@ -51,10 +51,7 @@ extension AddContributorViewController {
   
   private func initTable()
   {
-    let yOffset = CGRectGetMaxY(searchBar.frame)
-    let height = UIView.rectWithinBars().height - searchBar.bounds.height
-    let tableRect = CGRect(x: 0, y: yOffset, width: view.bounds.width, height: height)
-    tableView = UITableView(frame: tableRect)
+    tableView = UITableView(frame: UIView.rectWithinBars())
     view.addSubview(tableView)
     
     tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kAddContributorCellIdentifier)

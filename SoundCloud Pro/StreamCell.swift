@@ -13,7 +13,7 @@ let kStreamCellPlaybackControlsHeight: CGFloat = 32
 let kStreamCellPlaybackControlsMargin: CGFloat = 4
 let kStreamCellVoteControlsWidth: CGFloat = 40
 
-protocol StreamCellDelegate {
+protocol StreamCellDelegate: NSObjectProtocol {
   func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
 }
@@ -34,7 +34,7 @@ class StreamCell: UITableViewCell {
     }
   }
   
-  var delegate: StreamCellDelegate?
+  weak var delegate: StreamCellDelegate?
   
   private var playState: PlayState = .Stopped {
     didSet { playingLabel.text = playState != .Stopped ? "[\(playState.rawValue)]" : "" }

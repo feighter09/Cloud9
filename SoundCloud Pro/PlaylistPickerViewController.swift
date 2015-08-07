@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol PlaylistPickerDelegate {
+protocol PlaylistPickerDelegate: NSObjectProtocol {
   func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
   func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
 }
@@ -18,7 +18,7 @@ class PlaylistPickerViewController: UITableViewController {
     didSet { tableView.reloadData() }
   }
   
-  var delegate: PlaylistPickerDelegate?
+  weak var delegate: PlaylistPickerDelegate?
 }
 
 // MARK: - View Life Cycle

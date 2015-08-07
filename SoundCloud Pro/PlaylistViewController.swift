@@ -36,6 +36,7 @@ extension PlaylistViewController {
   
   private func setupTracksList()
   {
+    tracksViewController.view.frame = view.bounds
     tracksViewController.addToView(view, inViewController: self, withDelegate: self)
     tracksViewController.tracks = playlist.tracks
   }

@@ -12,7 +12,7 @@ import Bond
 let kStreamCellIdentifier = "streamCell"
 let kStreamPlaylistMinimum = 1
 
-protocol TracksTableViewControllerDelegate {
+protocol TracksTableViewControllerDelegate: NSObjectProtocol {
   func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
   func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
 }
@@ -29,7 +29,7 @@ class TracksTableViewController: UITableViewController {
 
   var infiniteScrolling = false
   
-  var delegate: TracksTableViewControllerDelegate?
+  weak var delegate: TracksTableViewControllerDelegate?
   
   var listenerId = 0
   
@@ -47,7 +47,7 @@ extension TracksTableViewController {
     
     view.addSubview(tableView)
     viewController.addChildViewController(self)
-    self.didMoveToParentViewController(viewController)
+    didMoveToParentViewController(viewController)
   }
   
   func beginLoading()

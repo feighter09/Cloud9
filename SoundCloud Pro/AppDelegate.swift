@@ -26,7 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
     initParse()
-    initSlideMenu()
+    // TODO: set status bar color
+//    initSlideMenu()
     
     return true
   }
@@ -39,12 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   private func initSlideMenu()
-  {
-    let hamburgerImage = UIImage(named: "menu-button")!
-    SlideNavigationController.sharedInstance().leftBarButtonItem = UIBarButtonItem(image: hamburgerImage,
-                                                                                   style: .Plain,
-                                                                                   target: SlideNavigationController.sharedInstance(),
-                                                                                   action: "toggleLeftMenu")
+  {    
     SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
   }
 }

@@ -10,12 +10,12 @@ import UIKit
 
 let kSearchViewControllerNib = "SearchViewController"
 
-protocol SearchViewControllerDelegate {
+protocol SearchViewControllerDelegate: NSObjectProtocol {
   func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
 }
 
 class SearchViewController: UIViewController {
-  var delegate: SearchViewControllerDelegate?
+  weak var delegate: SearchViewControllerDelegate?
   
   @IBOutlet private weak var searchBar: UISearchBar!
   @IBOutlet private weak var containerView: UIView!

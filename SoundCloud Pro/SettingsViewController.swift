@@ -12,14 +12,13 @@ import Parse
 let kSettingsViewControllerNib = "SettingsViewController"
 let kSettingsCellIdentifier = "settingsCell"
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UITableViewController {
   class func instanceFromNib() -> UIViewController
   {
     let settingsViewController = SettingsViewController(nibName: kSettingsViewControllerNib, bundle: nil)
     return UINavigationController(rootViewController: settingsViewController)
   }
   
-  @IBOutlet private weak var tableView: UITableView!
   private var tableViewDataSource: LFSectionedTableViewDataSource!
 }
 
@@ -29,20 +28,14 @@ extension SettingsViewController {
   {
     super.viewDidLoad()
     
-    tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kSettingsCellIdentifier)
-    tableViewDataSource = LFSectionedTableViewDataSource(defaultCellIdentifier: kSettingsCellIdentifier) { (cell, data, section) -> Void in
-      cell.textLabel?.text = (data as! String)
-    }
-    tableViewDataSource.dataItems = [["Upvoted tracks", "Downvoted tracks"], ["Clear all settings"], ["Log out"]]
-
-    tableView.dataSource = tableViewDataSource
-    tableView.delegate = self
+    tableView.frame = UIView.rectWithinBars()
+    view.layoutIfNeeded()
   }
 }
 
 // MARK: - Table View Delegate
-extension SettingsViewController: UITableViewDelegate {
-  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+extension SettingsViewController {
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
     
