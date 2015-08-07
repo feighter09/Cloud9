@@ -221,13 +221,13 @@ extension SoundCloud {
                             responseHandler: callback)
   }
   
-  private class func requestSucceeded(response: NSURLResponse, error: NSError?) -> Bool
+  private class func requestSucceeded(response: NSURLResponse!, error: NSError?) -> Bool
   {
     if let httpResponse = response as? NSHTTPURLResponse {
       return httpResponse.statusCode >= 200 && httpResponse.statusCode < 300
     }
     
-    return error != nil
+    return error == nil
   }
   
   private class func userExists(error: NSError!) -> Bool

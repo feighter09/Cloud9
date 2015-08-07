@@ -10,10 +10,10 @@
 		7A02E5AD1B73B0D0007C8099 /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E5AB1B73B0D0007C8099 /* SearchViewController.xib */; };
 		7A02E5B51B73C43C007C8099 /* VotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E5B31B73C43C007C8099 /* VotesViewController.xib */; };
 		7A02E5B71B73D78E007C8099 /* LFSectionedTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02E5B61B73D78E007C8099 /* LFSectionedTableViewDataSource.swift */; };
-		7A02E5BA1B73DB12007C8099 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02E5B81B73DB12007C8099 /* TableViewController.swift */; };
 		7A02E5BB1B73DB12007C8099 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E5B91B73DB12007C8099 /* SettingsViewController.xib */; };
 		7A02E5BE1B73F99C007C8099 /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02E5BC1B73F99C007C8099 /* MusicPlayerViewController.swift */; };
 		7A02E5BF1B73F99C007C8099 /* MusicPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A02E5BD1B73F99C007C8099 /* MusicPlayerViewController.xib */; };
+		7A02E5C71B74577C007C8099 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02E5C61B74577C007C8099 /* Colors.swift */; };
 		7A1351C81B6822B700C2F7FA /* VotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351C71B6822B700C2F7FA /* VotesViewController.swift */; };
 		7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CB1B68544C00C2F7FA /* VoteCell.swift */; };
 		7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */; };
@@ -74,10 +74,10 @@
 		7A02E5AB1B73B0D0007C8099 /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		7A02E5B31B73C43C007C8099 /* VotesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VotesViewController.xib; sourceTree = "<group>"; };
 		7A02E5B61B73D78E007C8099 /* LFSectionedTableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LFSectionedTableViewDataSource.swift; sourceTree = "<group>"; };
-		7A02E5B81B73DB12007C8099 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		7A02E5B91B73DB12007C8099 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		7A02E5BC1B73F99C007C8099 /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		7A02E5BD1B73F99C007C8099 /* MusicPlayerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MusicPlayerViewController.xib; sourceTree = "<group>"; };
+		7A02E5C61B74577C007C8099 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7A1351C71B6822B700C2F7FA /* VotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesViewController.swift; sourceTree = "<group>"; };
 		7A1351CB1B68544C00C2F7FA /* VoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
 		7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +203,7 @@
 				7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */,
 				7A1F5A0B1B5F4DD6002F60F5 /* Utilities.swift */,
 				7A5FA5DD1B6865E8009467B7 /* ErrorHandler.swift */,
+				7A02E5C61B74577C007C8099 /* Colors.swift */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -233,7 +234,6 @@
 				7ABB799E1B718BC40065EEAE /* ViewContributorsViewController.swift */,
 				7ABB79A01B7197B60065EEAE /* AddContributorViewController.swift */,
 				7A62A5271B73A041004E61CF /* TabBarController.swift */,
-				7A02E5B81B73DB12007C8099 /* TableViewController.swift */,
 				7A02E5BC1B73F99C007C8099 /* MusicPlayerViewController.swift */,
 				7A02E5BD1B73F99C007C8099 /* MusicPlayerViewController.xib */,
 			);
@@ -526,7 +526,6 @@
 				7ABB79A31B7198710065EEAE /* LFTableViewDataSource.swift in Sources */,
 				7AFFA75D1B42E9BB0002BB84 /* StreamViewController.swift in Sources */,
 				7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */,
-				7A02E5BA1B73DB12007C8099 /* TableViewController.swift in Sources */,
 				7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */,
 				7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */,
 				7A8392831B71133000E8A3BB /* ParsePlaylist.swift in Sources */,
@@ -538,6 +537,7 @@
 				7A5FA5E41B69A9CA009467B7 /* Playlist.swift in Sources */,
 				7A8392851B713FC300E8A3BB /* PlaylistPickerViewController.swift in Sources */,
 				7AAB56071B518F3500817B5C /* TracksTableViewController.swift in Sources */,
+				7A02E5C71B74577C007C8099 /* Colors.swift in Sources */,
 				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
 				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
 				7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */,

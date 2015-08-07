@@ -19,22 +19,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SoundCloud Pro/PlayPauseButton.swift"
-            timestampString = "460561626.880015"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "removeBufferingView()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Pods/StreamingKit/StreamingKit/StreamingKit/STKAudioPlayer.m"
             timestampString = "459789653.738495"
             startingColumnNumber = "9223372036854775807"
@@ -132,11 +116,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/TabBarController.swift"
-            timestampString = "460575134.038695"
+            timestampString = "460608030.358649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "slideNavigationControllerShouldDisplayLeftMenu()"
             landmarkType = "5">
          </BreakpointContent>

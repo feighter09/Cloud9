@@ -14,7 +14,12 @@ class PlayPauseButton: UIButton, Listener {
     didSet { updateImage() }
   }
   
-  private var bufferingView: UIActivityIndicatorView!
+  private lazy var bufferingView: UIActivityIndicatorView = {
+    let bufferingView = UIActivityIndicatorView(frame: self.bounds)
+    bufferingView.color = .defaultColor
+    self.addSubview(bufferingView)
+    return bufferingView
+  }()
   
   required init?(coder aDecoder: NSCoder)
   {
@@ -43,17 +48,13 @@ extension PlayPauseButton {
       case .Buffering:
         addBufferingView()
       case .Stopped:
-        break
+        removeBufferingView()
+        setImage(playState.image, forState: .Normal)
     }
   }
   
   private func addBufferingView()
   {
-    if bufferingView == nil {
-      bufferingView = UIActivityIndicatorView(frame: bounds)
-      addSubview(bufferingView)
-    }
-    
     setImage(nil, forState: .Normal)
     bufferingView.startAnimating()
     bufferingView.hidden = false
@@ -61,7 +62,7 @@ extension PlayPauseButton {
 
   private func removeBufferingView()
   {
-    bufferingView?.stopAnimating()
-    bufferingView?.hidden = true
+    bufferingView.stopAnimating()
+    bufferingView.hidden = true
   }
 }

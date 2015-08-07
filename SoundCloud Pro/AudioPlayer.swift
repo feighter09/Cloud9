@@ -15,9 +15,9 @@ enum PlayState: String {
   var image: UIImage! {
     switch self {
       case .Playing: return UIImage(named: "Pause")
-      case .Paused: return UIImage(named: "Play")
-      case .Buffering: fallthrough
-      case .Stopped: return nil
+      case .Paused: fallthrough
+      case .Stopped: return UIImage(named: "Play")
+      case .Buffering: return nil
     }
   }
 }

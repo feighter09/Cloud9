@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
     initParse()
-    SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
+    initSlideMenu()
     
     return true
   }
@@ -36,6 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Parse.setApplicationId(kParseApplicationId, clientKey: kParseClientKey)
     PFUser.registerSubclass()
     ParsePlaylist.registerSubclass()
+  }
+  
+  private func initSlideMenu()
+  {
+    let hamburgerImage = UIImage(named: "menu-button")!
+    SlideNavigationController.sharedInstance().leftBarButtonItem = UIBarButtonItem(image: hamburgerImage,
+                                                                                   style: .Plain,
+                                                                                   target: SlideNavigationController.sharedInstance(),
+                                                                                   action: "toggleLeftMenu")
+    SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
   }
 }
 

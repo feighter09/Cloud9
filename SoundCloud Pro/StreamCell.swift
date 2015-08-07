@@ -107,22 +107,28 @@ extension StreamCell {
 extension StreamCell: AudioPlayerListener {
   func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   {
-    if track == self.track { playState = .Buffering }
+    updatePlayStateWithTrack(track)
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
   {
-    if track == self.track { playState = .Playing }
+    updatePlayStateWithTrack(track)
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
   {
-    if track == self.track { playState = .Paused }
+    updatePlayStateWithTrack(track)
   }
   
   func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
   {
-    if track == self.track { playState = .Stopped }
+    updatePlayStateWithTrack(track)
+  }
+  
+  private func updatePlayStateWithTrack(track: Track)
+  {
+    if track == self.track { playState = AudioPlayer.sharedPlayer.playState }
+    else { playState = .Stopped }
   }
 }
 
