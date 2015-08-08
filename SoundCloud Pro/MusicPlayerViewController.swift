@@ -60,22 +60,24 @@ extension MusicPlayerViewController {
 
   @IBAction func playPauseTapped(button: PlayPauseButton)
   {
-    if playPauseButton.playState == .Paused {
-  //    playTrack()
-    } else {
-      AudioPlayer.sharedPlayer.pause()
-  //    stopTrack()
-    }
+    switch button.playState {
+      case .Paused:
+        AudioPlayer.sharedPlayer.resume()
+      case .Playing:
+        AudioPlayer.sharedPlayer.pause()
+      default:
+        break
+    }    
   }
 
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    UserPreferences.addUpvote(track)
+    if track != nil { UserPreferences.addUpvote(track) }
   }
 
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    UserPreferences.addDownvote(track)
+    if track != nil { UserPreferences.addDownvote(track) }
     // TODO: remove from playlist
   //  delegate?.streamCell(self, didDownvoteTrack: track)
   }
@@ -108,6 +110,7 @@ extension MusicPlayerViewController {
   
   @IBAction func addToPlaylist(sender: AnyObject)
   {
+    
     // TODO: add to playlist
     //delegate?.streamCell(self, didTapAddToPlaylist: track)
   }

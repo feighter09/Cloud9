@@ -6,6 +6,8 @@
 //  Copyright © 2015 Lost in Flight. All rights reserved.
 //
 
+import MediaPlayer
+
 enum PlayState: String {
   case Playing
   case Paused
@@ -45,7 +47,10 @@ class AudioPlayer: NSObject {
   {
     super.init()
     AudioPlayer.audioPlayer.delegate = self
+    registerForRemoteControls()
   }
+  
+  
 }
 
 // MARK: - Interface
@@ -106,9 +111,14 @@ extension AudioPlayer {
   /// Pauses the player. Requires that the player is playing or buffering a track
   func pause()
   {
-    assert(AudioPlayer.audioPlayer.state == STKAudioPlayerState.Playing ||
-           AudioPlayer.audioPlayer.state == STKAudioPlayerState.Buffering) // TODO: Put the assert somewhere else?
+    assert(AudioPlayer.audioPlayer.state == .Playing || AudioPlayer.audioPlayer.state == .Buffering)
     AudioPlayer.audioPlayer.pause()
+  }
+  
+  func resume()
+  {
+    if AudioPlayer.audioPlayer.state != .Paused { return }
+    AudioPlayer.audioPlayer.resume()
   }
   
   /// Seeks the current track to time 0
@@ -175,6 +185,7 @@ extension AudioPlayer {
 extension AudioPlayer: STKAudioPlayerDelegate {
   func audioPlayer(audioPlayer: STKAudioPlayer!, didStartPlayingQueueItemId queueItemId: NSObject!)
   {
+    setNowPlayingMediaInfo()
     if currentTrack?.streamURL == queueItemId as? String { return }
     
     if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
@@ -201,6 +212,7 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   func audioPlayer(audioPlayer: STKAudioPlayer!, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState)
   {
     NSLog("State changed from: \(previousState.toString) to: \(state.toString)")
+    updateRemotePlayState()
     
     switch state {
     case .Buffering:
@@ -278,5 +290,35 @@ extension STKAudioPlayerState {
 
 // MARK: - Helpers
 extension AudioPlayer {
+  private var mediaRemote: MPRemoteCommandCenter { return MPRemoteCommandCenter.sharedCommandCenter() }
   
+  private func registerForRemoteControls()
+  {
+    mediaRemote.pauseCommand.addTarget(self, action: "pause")
+    mediaRemote.playCommand.addTarget(self, action: "resume")
+    mediaRemote.togglePlayPauseCommand.addTarget(self, action: "togglePlayPause")
+    mediaRemote.previousTrackCommand.addTarget(self, action: "restartTrack")
+    mediaRemote.nextTrackCommand.addTarget(self, action: "playNextTrack")
+  }
+  
+  private func updateRemotePlayState()
+  {
+    mediaRemote.playCommand.enabled = playState == .Paused
+    mediaRemote.pauseCommand.enabled = (playState == .Playing || playState == .Buffering)
+  }
+  
+  private func setNowPlayingMediaInfo()
+  {
+    let info =  [
+                  MPMediaItemPropertyTitle: currentTrack!.title,
+                  MPMediaItemPropertyArtist: currentTrack!.artist
+                ]
+    MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+  }
+  
+  func togglePlayPause()
+  {
+    if playState == .Paused { resume() }
+    else if playState == .Playing || playState == .Buffering { pause() }
+  }
 }

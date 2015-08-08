@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import AVFoundation
 
 let kSoundCloudClientID = "823363d3a8c33bfb0a1c608da13141b2"
 let kSoundCloudClientSecret = "ad456d110c3c4a8f7ac9dacfb2f3c6c6"
@@ -26,8 +27,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   {
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
     initParse()
+    initBackgroundAudio()
     // TODO: set status bar color
-//    initSlideMenu()
+    
     
     return true
   }
@@ -42,6 +44,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func initSlideMenu()
   {    
     SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
+  }
+  
+  private func initBackgroundAudio()
+  {
+    let audioSession = AVAudioSession.sharedInstance()
+    do {
+      try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+      try audioSession.setActive(true)
+    }
+    catch {
+      ErrorHandler.handleBackgroundAudioError()
+    }
   }
 }
 

@@ -403,6 +403,11 @@
 					7AFFA7511B42E9BB0002BB84 = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = 4KG26Y879R;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					7AFFA7691B42E9BB0002BB84 = {
 						CreatedOnToolsVersion = 6.3.1;

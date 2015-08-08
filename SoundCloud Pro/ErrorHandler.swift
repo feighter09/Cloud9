@@ -11,13 +11,19 @@ import UIKit
 class ErrorHandler {
   class func handleNetworkingError(requestDescription: String, error: NSError!)
   {
-    let alert = SCLAlertView()
-    alert.showError("There was a problem \(requestDescription), please check your internet connection and try again.", subTitle: nil, closeButtonTitle: "Ok", duration: 2)
+    let message = "There was a problem \(requestDescription), please check your internet connection and try again."
+    Utilities.showLoadingAlert(message, onViewController: nil)
     
     if error != nil {
       NSLog("Error \(requestDescription), details: \(error)")
     } else {
       NSLog("Error \(requestDescription)")
     }
+  }
+  
+  class func handleBackgroundAudioError()
+  {
+    SCLAlertView().showError("Something went wrong", subTitle: "I couldn't enable playing audio when you exit the app =/", closeButtonTitle: "Ok", duration: 0)    
+    NSLog("Could not enable background audio")
   }
 }

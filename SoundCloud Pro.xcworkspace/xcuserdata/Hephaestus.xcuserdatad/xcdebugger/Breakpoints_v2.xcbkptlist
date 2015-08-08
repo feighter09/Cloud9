@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/AudioPlayer.swift"
-            timestampString = "460561841.178113"
+            timestampString = "460698125.073091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "seekTimeForTrack(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,6 +122,22 @@
             startingLineNumber = "77"
             endingLineNumber = "77"
             landmarkName = "slideNavigationControllerShouldDisplayLeftMenu()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SoundCloud Pro/AudioPlayer.swift"
+            timestampString = "460700173.899752"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
+            landmarkName = "updateRemotePlayState()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
