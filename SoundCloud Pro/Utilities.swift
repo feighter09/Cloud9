@@ -19,20 +19,20 @@ protocol SearchPresenterDelegate: NSObjectProtocol {
 }
 
 extension Utilities {
-  class func addSearchButtonToNavigationController(navigationItem: UINavigationItem, searchPresenter: SearchPresenterDelegate)
-  {
-    let existingButtons: [UIBarButtonItem]
-    if let rightButtons = navigationItem.rightBarButtonItems {
-      existingButtons = rightButtons
-    } else if let rightButton = navigationItem.rightBarButtonItem {
-      existingButtons = [rightButton]
-    } else {
-      existingButtons = []
-    }
-    
-    let searchButton = UIBarButtonItem(barButtonSystemItem: .Search, target: searchPresenter, action: "presentSearchViewController")
-    navigationItem.rightBarButtonItems = existingButtons + [searchButton]
-  }
+//  class func addSearchButtonToNavigationController(navigationItem: UINavigationItem, searchPresenter: SearchPresenterDelegate)
+//  {
+//    let existingButtons: [UIBarButtonItem]
+//    if let rightButtons = navigationItem.rightBarButtonItems {
+//      existingButtons = rightButtons
+//    } else if let rightButton = navigationItem.rightBarButtonItem {
+//      existingButtons = [rightButton]
+//    } else {
+//      existingButtons = []
+//    }
+//    
+//    let searchButton = UIBarButtonItem(barButtonSystemItem: .Search, target: searchPresenter, action: "presentSearchViewController")
+//    navigationItem.rightBarButtonItems = existingButtons + [searchButton]
+//  }
 }
 
 // MARK: - Buffering Alert
@@ -57,7 +57,7 @@ extension UIView {
   class func rectWithinBars(navigationBar navigationBar: Bool = false, tabBar: Bool = true) -> CGRect
   {
     let screenSize = UIScreen.mainScreen().bounds
-    let yOffset: CGFloat = (navigationBar ? 64 : 0) + (tabBar ? kTabBarHeight : 0)
+    let yOffset: CGFloat = (navigationBar ? 44 : 0) + (tabBar ? kTabBarHeight : 0)
     let height = screenSize.height - yOffset - kMusicPlayerHeight
     
     return CGRect(x: 0, y: yOffset, width: screenSize.width, height: height)

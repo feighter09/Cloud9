@@ -19,7 +19,6 @@ protocol StreamCellDelegate: NSObjectProtocol {
 }
 
 class StreamCell: UITableViewCell {
-  var listenerId: Int = 0
   var track: Track! {
     didSet {
       assert(track != nil, "Cannot set Track to nil")
@@ -33,9 +32,11 @@ class StreamCell: UITableViewCell {
       }
     }
   }
+  var playsOnSelection = true
   
   weak var delegate: StreamCellDelegate?
   
+  var listenerId: Int = 0
   private var playState: PlayState = .Stopped {
     didSet { playingLabel.text = playState != .Stopped ? "[\(playState.rawValue)]" : "" }
   }
@@ -88,13 +89,13 @@ extension StreamCell {
   override func setSelected(selected: Bool, animated: Bool)
   {
     super.setSelected(selected, animated: animated)
+    if !selected { return }
     
-    if selected {
-      if !trackIsCurrentlyPlaying {
-        AudioPlayer.sharedPlayer.play(track, clearingPlaylist: true)
-      }
-      setSelected(false, animated: animated)
+    if !trackIsCurrentlyPlaying && playsOnSelection {
+      AudioPlayer.sharedPlayer.play(track, clearingPlaylist: true)
     }
+
+    setSelected(false, animated: animated)
   }
   
   @IBAction func addToPlaylist(sender: AnyObject)

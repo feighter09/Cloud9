@@ -19,6 +19,8 @@ typealias FetchPlaylistsCallback = (playlists: [Playlist]!, error: NSError!) -> 
 class SoundCloud: NSObject {
   private static var nextStreamUrl: String?
   private static var authCallback: SuccessCallback?
+
+  private static var searchInProgress: SCRequest?
 }
 
 // MARK: - Auth / Users
@@ -120,6 +122,8 @@ extension SoundCloud {
   
   class func getTracksMatching(searchString: String, callback: FetchTracksCallback)
   {
+    if searchInProgress != nil { SCRequest.cancelRequest(searchInProgress!) }
+    
     let params = ["q": searchString]
     GET(kSCSoundCloudAPIURL + "tracks", params: params) { (response, responseData, error) -> Void in
       if requestSucceeded(response, error: error) {
@@ -211,14 +215,14 @@ extension SoundCloud {
     }
   }
   
-  private class func GET(urlString: String, params: [NSObject: AnyObject]!, callback: NetworkCallback)
+  private class func GET(urlString: String, params: [NSObject: AnyObject]!, callback: NetworkCallback) -> SCRequest
   {
-    SCRequest.performMethod(SCRequestMethodGET,
-                            onResource: NSURL(string: urlString),
-                            usingParameters: params,
-                            withAccount: SCSoundCloud.account(),
-                            sendingProgressHandler: nil,
-                            responseHandler: callback)
+    return SCRequest.performMethod(SCRequestMethodGET,
+                                   onResource: NSURL(string: urlString),
+                                   usingParameters: params,
+                                   withAccount: SCSoundCloud.account(),
+                                   sendingProgressHandler: nil,
+                                   responseHandler: callback)
   }
   
   private class func requestSucceeded(response: NSURLResponse!, error: NSError?) -> Bool

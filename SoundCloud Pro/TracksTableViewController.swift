@@ -22,18 +22,20 @@ class TracksTableViewController: UITableViewController {
   var tracks: [Track] = [] {
     didSet {
       tableView.reloadData()
-      pullToRefresh.finishedLoading()
+      pullToRefresh?.finishedLoading()
       tableView.infiniteScrollingView?.stopAnimating()
     }
   }
 
-  var infiniteScrolling = false
+  var tracksPlayOnSelect = true
+  var pullToRefreshEnabled = false
+  var infiniteScrollingEnabled = false
   
   weak var delegate: TracksTableViewControllerDelegate?
   
   var listenerId = 0
   
-  private var pullToRefresh: BOZPongRefreshControl!
+  private var pullToRefresh: BOZPongRefreshControl?
   private var trackToAddToPlaylist: Track?
 }
 
@@ -52,13 +54,13 @@ extension TracksTableViewController {
   
   func beginLoading()
   {
-    pullToRefresh.beginLoading()
+    pullToRefresh?.beginLoading()
     tableView.setContentOffset(CGPoint(x: 0, y: -65), animated: true)
   }
   
   func finishedLoading()
   {
-    pullToRefresh.finishedLoading()
+    pullToRefresh?.finishedLoading()
     tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
   }
 }
@@ -82,10 +84,12 @@ extension TracksTableViewController {
 
     tableView.tableFooterView = UIView(frame: CGRectZero)
 
-    pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView, withRefreshTarget: self, andRefreshAction: "refreshTracks")
-    pullToRefresh.backgroundColor = .orangeColor()
+    if pullToRefreshEnabled {
+      pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView, withRefreshTarget: self, andRefreshAction: "refreshTracks")
+      pullToRefresh!.backgroundColor = .orangeColor()
+    }
     
-    if infiniteScrolling {
+    if infiniteScrollingEnabled {
       tableView.addInfiniteScrollingWithActionHandler { () -> Void in
         delegate?.tracksTableControllerDidScrollToEnd(self)
       }
@@ -172,13 +176,8 @@ extension TracksTableViewController: StreamCellDelegate {
 extension TracksTableViewController: PlaylistPickerDelegate {
   func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
   {
+    playlist.addTrack(trackToAddToPlaylist!)
     dismissPlaylistPicker()
-    
-    SoundCloud.addTrack(trackToAddToPlaylist!, toPlaylist: playlist) { (success, error) -> Void in
-      if !success {
-        ErrorHandler.handleNetworkingError("adding to playlist", error: nil)
-      }
-    }
   }
   
   func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
@@ -205,6 +204,7 @@ extension TracksTableViewController {
     let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
     
     cell.track = tracks[indexPath.row]
+    cell.playsOnSelection = tracksPlayOnSelect
     cell.delegate = self
     
     return cell
@@ -215,11 +215,11 @@ extension TracksTableViewController {
 extension TracksTableViewController {
   override func scrollViewDidScroll(scrollView: UIScrollView)
   {
-    pullToRefresh.scrollViewDidScroll()
+    pullToRefresh?.scrollViewDidScroll()
   }
   
   override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
   {
-    pullToRefresh.scrollViewDidEndDragging()
+    pullToRefresh?.scrollViewDidEndDragging()
   }
 }

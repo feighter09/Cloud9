@@ -43,12 +43,12 @@ typedef enum SCRequestMethod SCRequestMethod;
 
 #pragma mark Class Methods
 
-+ (id)   performMethod:(SCRequestMethod)aMethod
-            onResource:(NSURL *)resource
-       usingParameters:(NSDictionary *)parameters
-           withAccount:(SCAccount *)account
-sendingProgressHandler:(SCRequestSendingProgressHandler)progressHandler
-       responseHandler:(SCRequestResponseHandler)responseHandler;
++ (instancetype)performMethod:(SCRequestMethod)aMethod
+                   onResource:(NSURL *)resource
+              usingParameters:(NSDictionary *)parameters
+                  withAccount:(SCAccount *)account
+       sendingProgressHandler:(SCRequestSendingProgressHandler)progressHandler
+              responseHandler:(SCRequestResponseHandler)responseHandler;
 
 + (void)cancelRequest:(id)request;
 

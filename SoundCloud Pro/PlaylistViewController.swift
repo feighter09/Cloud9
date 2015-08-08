@@ -50,6 +50,9 @@ extension PlaylistViewController {
   func optionsTapped()
   {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+    alert.addAction(UIAlertAction(title: "Add Track", style: .Default) { (action) -> Void in
+      self.searchForTrack()
+    })
     alert.addAction(UIAlertAction(title: "View Contributors", style: .Default) { (action) -> Void in
       self.viewContributors()
     })
@@ -75,8 +78,30 @@ extension PlaylistViewController: TracksTableViewControllerDelegate {
   }
 }
 
+// MARK: - Tracks Table Delegate
+extension PlaylistViewController: SearchViewControllerDelegate {
+  func searchViewController(searchViewController: SearchViewController, didSelectTrack track: Track)
+  {
+    playlist.addTrack(track) { () -> Void in
+      self.tracksViewController.tracks = self.playlist.tracks
+    }
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
+  {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+}
+
 // MARK: - Helpers
 extension PlaylistViewController {
+  private func searchForTrack()
+  {
+    let searchVC = SearchViewController.instanceFromNib(delegate: self)
+    presentViewController(searchVC, animated: true, completion: nil)
+  }
+  
   private func viewContributors()
   {
     let viewContributorsVC = ViewContributorsViewController(playlist: playlist)

@@ -36,13 +36,14 @@ extension AddContributorViewController {
   {
     super.viewDidLoad()
 
-    initSearchBar()
     initTable()
+    initSearchBar()
   }
   
   private func initSearchBar()
   {
-    let searchFrame = CGRect(x: 0, y: 64, width: CGRectGetWidth(view.bounds), height: 44)
+    // TODO: make this not have to be +44
+    let searchFrame = CGRect(x: 0, y: 44, width: CGRectGetWidth(view.bounds), height: 44)
     searchBar = UISearchBar(frame: searchFrame)
     view.addSubview(searchBar)
     
@@ -51,7 +52,8 @@ extension AddContributorViewController {
   
   private func initTable()
   {
-    tableView = UITableView(frame: UIView.rectWithinBars())
+    let guideRect = UIView.rectWithinBars()
+    tableView = UITableView(frame: CGRect(x: 0, y: 44, width: guideRect.width, height: guideRect.height))
     view.addSubview(tableView)
     
     tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kAddContributorCellIdentifier)

@@ -14,7 +14,8 @@ let kTableViewOffset: CGFloat = 64
 class StreamViewController: UIViewController {
   private lazy var tracksList: TracksTableViewController = {
     let tracks = TracksTableViewController()
-    tracks.infiniteScrolling = true
+    tracks.pullToRefreshEnabled = true
+    tracks.infiniteScrollingEnabled = true
     return tracks
   }()
 }
@@ -24,7 +25,6 @@ extension StreamViewController {
   {
     super.viewDidLoad()
     setupStreamList()
-    Utilities.addSearchButtonToNavigationController(navigationItem, searchPresenter: self)
   }
 
   override func viewDidAppear(animated: Bool)
@@ -56,23 +56,6 @@ extension StreamViewController: TracksTableViewControllerDelegate {
   func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
   {
     loadMoreStream()
-  }
-}
-
-// MARK: - Search Presenter Delegate
-extension StreamViewController: SearchPresenterDelegate {
-  func presentSearchViewController()
-  {
-    let searchViewController = SearchViewController.instanceFromNib(delegate: self)
-    presentViewController(searchViewController, animated: true, completion: nil)
-  }
-}
-
-// MARK: - Search Presenter Delegate
-extension StreamViewController: SearchViewControllerDelegate {
-  func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
-  {
-    dismissViewControllerAnimated(true, completion: nil)
   }
 }
 

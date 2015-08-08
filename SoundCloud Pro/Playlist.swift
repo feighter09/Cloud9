@@ -41,6 +41,18 @@ class Playlist {
 
 // MARK: - Interface
 extension Playlist {
+  func addTrack(track: Track, onSuccess: (() -> Void)? = nil)
+  {
+    SoundCloud.addTrack(track, toPlaylist: self) { (success, error) -> Void in
+      if success {
+        self.tracks.append(track)
+        onSuccess?()
+      } else {
+        ErrorHandler.handleNetworkingError("adding to playlist", error: nil)
+      }
+    }
+  }
+  
   func addContributor(contributor: PFUser, callback: SuccessCallback)
   {
     if contributors.contains({ $0.objectId == contributor.objectId }) {

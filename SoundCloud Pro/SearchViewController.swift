@@ -11,6 +11,7 @@ import UIKit
 let kSearchViewControllerNib = "SearchViewController"
 
 protocol SearchViewControllerDelegate: NSObjectProtocol {
+  func searchViewController(searchViewController: SearchViewController, didSelectTrack track: Track)
   func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
 }
 
@@ -36,21 +37,33 @@ extension SearchViewController {
   {
     super.viewDidLoad()
     
-    searchBar.delegate = self
     setupSearchResults()
+    searchBar.delegate = self
     
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
   }
   
+  override func viewDidAppear(animated: Bool)
+  {
+    super.viewDidAppear(animated)
+    searchBar.becomeFirstResponder()
+  }
+  
   private func setupSearchResults()
   {
-    searchResultsController.tableView.frame = containerView.bounds
-    searchResultsController.addToView(containerView, inViewController: self, withDelegate: nil)
+    searchResultsController.tracksPlayOnSelect = false
     
     let hideKeyboardRecognizer = UITapGestureRecognizer(target: searchBar, action: "resignFirstResponder")
     hideKeyboardRecognizer.cancelsTouchesInView = false
-    searchResultsController.tableView.addGestureRecognizer(hideKeyboardRecognizer)
-    searchResultsController.tableView.keyboardDismissMode = .OnDrag
+
+    let resultsTableView = searchResultsController.tableView
+    resultsTableView.tableFooterView = nil
+    resultsTableView.addGestureRecognizer(hideKeyboardRecognizer)
+    resultsTableView.keyboardDismissMode = .OnDrag
+    resultsTableView.delegate = self
+    
+    resultsTableView.frame = containerView.bounds
+    searchResultsController.addToView(containerView, inViewController: self, withDelegate: nil)
   }
   
   func cancel()
@@ -87,3 +100,13 @@ extension SearchViewController: UISearchBarDelegate {
   }
 }
 
+// MARK: - Search Bar Delegate
+extension SearchViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+  {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+    let selectedTrack = searchResultsController.tracks[indexPath.row]
+    delegate?.searchViewController(self, didSelectTrack: selectedTrack)
+  }
+}
