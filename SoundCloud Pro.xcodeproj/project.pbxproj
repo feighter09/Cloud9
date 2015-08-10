@@ -25,6 +25,7 @@
 		7A5FA5E41B69A9CA009467B7 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5E31B69A9CA009467B7 /* Playlist.swift */; };
 		7A5FA5E61B69ACF8009467B7 /* PlaylistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5FA5E51B69ACF8009467B7 /* PlaylistCell.swift */; };
 		7A62A5281B73A041004E61CF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62A5271B73A041004E61CF /* TabBarController.swift */; };
+		7A759E3C1B7918AD0046EEAA /* MusicPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A759E3B1B7918AD0046EEAA /* MusicPlayerView.swift */; };
 		7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */; };
 		7A8392831B71133000E8A3BB /* ParsePlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8392821B71133000E8A3BB /* ParsePlaylist.swift */; };
 		7A8392851B713FC300E8A3BB /* PlaylistPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8392841B713FC300E8A3BB /* PlaylistPickerViewController.swift */; };
@@ -89,6 +90,7 @@
 		7A5FA5E31B69A9CA009467B7 /* Playlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		7A5FA5E51B69ACF8009467B7 /* PlaylistCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistCell.swift; sourceTree = "<group>"; };
 		7A62A5271B73A041004E61CF /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		7A759E3B1B7918AD0046EEAA /* MusicPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		7A81E3641B5D6B3C00339CA3 /* UserPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferences.swift; sourceTree = "<group>"; };
 		7A8392821B71133000E8A3BB /* ParsePlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsePlaylist.swift; sourceTree = "<group>"; };
 		7A8392841B713FC300E8A3BB /* PlaylistPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistPickerViewController.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				7AAB56161B52305900817B5C /* PlayPauseButton.swift */,
 				7AAB56181B52313300817B5C /* PlayPauseButton.xib */,
+				7A759E3B1B7918AD0046EEAA /* MusicPlayerView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				7A02E5C71B74577C007C8099 /* Colors.swift in Sources */,
 				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
 				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
+				7A759E3C1B7918AD0046EEAA /* MusicPlayerView.swift in Sources */,
 				7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7A5FA5E21B69A972009467B7 /* AllPlaylistsViewController.swift in Sources */,

@@ -8,8 +8,8 @@
 
 import UIKit
 
+let kStatusBarHeight: CGFloat = 20
 let kTabBarHeight: CGFloat = 49
-let kMusicPlayerHeight: CGFloat = 100
 
 class Utilities {}
 
@@ -57,8 +57,8 @@ extension UIView {
   class func rectWithinBars(navigationBar navigationBar: Bool = false, tabBar: Bool = true) -> CGRect
   {
     let screenSize = UIScreen.mainScreen().bounds
-    let yOffset: CGFloat = (navigationBar ? 44 : 0) + (tabBar ? kTabBarHeight : 0)
-    let height = screenSize.height - yOffset - kMusicPlayerHeight
+    let yOffset: CGFloat = kStatusBarHeight + (navigationBar ? 44 : 0)
+    let height = screenSize.height - yOffset - kMusicPlayerContractedHeight - (tabBar ? kTabBarHeight : 0)
     
     return CGRect(x: 0, y: yOffset, width: screenSize.width, height: height)
   }

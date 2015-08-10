@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+let kMusicPlayerContractedHeight: CGFloat = 50
+let kMusicPlayerExpandedHeight: CGFloat = 130
+let kVoteControlsDefaultHeight: CGFloat = 44
+let kPlaybackControlsHeight: CGFloat = 32
+
 @objc protocol MusicControllerListener: Listener {
   optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
   optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapUpvoteTrack track: Track)
@@ -38,6 +44,9 @@ class MusicPlayerViewController: UIViewController {
   @IBOutlet private weak var beginningButton: UIButton!
   @IBOutlet private weak var endButton: UIButton!
   @IBOutlet private weak var scrubber: UISlider!
+  
+  @IBOutlet weak var voteControlsHeight: NSLayoutConstraint!
+  @IBOutlet weak var playbackControlsHeight: NSLayoutConstraint!
   
   var listenerId = 0
   
@@ -139,11 +148,31 @@ extension MusicPlayerViewController {
     AudioPlayer.sharedPlayer.seekTrack(track, toTime: Double(slider.value))
   }
   
-  @IBAction func addToPlaylist(sender: AnyObject)
+  @IBAction private func addToPlaylist(sender: AnyObject)
   {
     let playlistPicker = PlaylistPickerViewController()
     // TODO: add to playlist
     //delegate?.streamCell(self, didTapAddToPlaylist: track)
+  }
+  
+  @IBAction private func toggleExpandContract(sender: AnyObject)
+  {
+    let oldFrame = view.frame
+    let expand = (view.bounds.height == kMusicPlayerContractedHeight)
+
+    let newHeight = (expand ? kMusicPlayerExpandedHeight : kMusicPlayerContractedHeight)
+    let heightDiff = kMusicPlayerExpandedHeight - kMusicPlayerContractedHeight
+    let yOffset = oldFrame.origin.y + (expand ? -1 : 1) * heightDiff
+
+    UIView.animateWithDuration(0.5) { () -> Void in
+      self.view.frame = CGRect(x: oldFrame.origin.x,
+                               y: yOffset,
+                               width: oldFrame.width,
+                               height: newHeight)
+      self.voteControlsHeight.constant = (expand ? kVoteControlsDefaultHeight : 0)
+      self.playbackControlsHeight.constant = (expand ? kPlaybackControlsHeight: 0)
+      self.view.layoutIfNeeded()
+    }
   }
 }
 
