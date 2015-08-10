@@ -139,7 +139,7 @@ extension AudioPlayer {
   /// Seeks the track provided to the time specified. Requires that the track provided is current playing track
   func seekTrack(track: Track, toTime time: Double)
   {
-    assert(currentTrack == track) // TODO: put assert before call?
+    assert(currentTrack == track)
     AudioPlayer.audioPlayer.seekToTime(time)
   }
   
@@ -191,8 +191,8 @@ extension AudioPlayer: STKAudioPlayerDelegate {
     if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
       let newTrack = playlist[trackIndex]
       listeners.announceOnMainQueue { listener in
-        if let currentTrack = self.currentTrack {
-          listener.audioPlayer?(self, didStopTrack: currentTrack)
+        if self.currentTrack != nil {
+          listener.audioPlayer?(self, didStopTrack: self.currentTrack!)
         }
         
         listener.audioPlayer?(self, didBeginPlayingTrack: newTrack)
@@ -205,7 +205,6 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   
   func audioPlayer(audioPlayer: STKAudioPlayer!, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject!)
   {
-    // TODO: can this cause "didBeginBufferingTrack" to not be called?
     NSLog("finished buffering item from queue: \(queueItemId)")
   }
   

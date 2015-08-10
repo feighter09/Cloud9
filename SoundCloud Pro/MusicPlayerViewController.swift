@@ -8,7 +8,16 @@
 
 import UIKit
 
+@objc protocol MusicControllerListener: Listener {
+  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
+  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapUpvoteTrack track: Track)
+  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapAddToPlaylist track: Track)
+}
+
 class MusicPlayerViewController: UIViewController {
+  static var sharedPlayer = MusicPlayerViewController.instanceFromNib()
+  
+  // Internals
   private var track: Track! {
     didSet {
       titleLabel.text = track.title
@@ -17,8 +26,10 @@ class MusicPlayerViewController: UIViewController {
     }
   }
   
+  private var listeners = ListenerArray<MusicControllerListener>()
   private var seekTimer: NSTimer!
   
+  // IB Outlets
   @IBOutlet private weak var playPauseButton: PlayPauseButton!
   
   @IBOutlet private weak var titleLabel: UILabel!
@@ -38,9 +49,8 @@ class MusicPlayerViewController: UIViewController {
 
 // MARK: - Interface
 extension MusicPlayerViewController {
-  
   private static var nibName: String { return "MusicPlayerViewController" }
-  class func instanceFromNib() -> MusicPlayerViewController
+  private class func instanceFromNib() -> MusicPlayerViewController
   {
     return MusicPlayerViewController(nibName: nibName, bundle: nil)
   }
@@ -51,7 +61,23 @@ extension MusicPlayerViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    titleLabel.text = ""
+    artistLabel.text = ""
     AudioPlayer.sharedPlayer.addListener(self)
+  }
+}
+
+// MARK: Listeners
+extension MusicPlayerViewController {
+  func addListener(listener: MusicControllerListener)
+  {
+    listeners.addListener(listener)
+  }
+  
+  func removeListener(listener: MusicControllerListener)
+  {
+    listeners.removeListener(listener)
   }
 }
 
@@ -72,14 +98,19 @@ extension MusicPlayerViewController {
 
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    if track != nil { UserPreferences.addUpvote(track) }
+    if track == nil { return }
+
+    UserPreferences.addUpvote(track)
+    listeners.announce { listener in listener.musicPlayer?(self, didTapUpvoteTrack: track) }
   }
 
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    if track != nil { UserPreferences.addDownvote(track) }
-    // TODO: remove from playlist
-  //  delegate?.streamCell(self, didDownvoteTrack: track)
+    if track == nil { return }
+
+    // TODO: subscribe listeners to remove from playlist
+    UserPreferences.addDownvote(track)
+    listeners.announce { listener in listener.musicPlayer?(self, didTapDownvoteTrack: track) }
   }
 
   @IBAction func beginningTapped(sender: AnyObject)
@@ -110,7 +141,7 @@ extension MusicPlayerViewController {
   
   @IBAction func addToPlaylist(sender: AnyObject)
   {
-    
+    let playlistPicker = PlaylistPickerViewController()
     // TODO: add to playlist
     //delegate?.streamCell(self, didTapAddToPlaylist: track)
   }

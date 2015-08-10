@@ -34,22 +34,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OMGHTTPURLRQ.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-SoundCloud Pro.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>PromiseKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -74,15 +64,10 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>iOS-Slide-Menu.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1366428AACFA0F62C17206E966CCB5AD</key>
+		<key>129732430F274207B130CC21EB3D6906</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,42 +77,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35BFA7BB1F782521256978DF9B32006B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>65EB674F5BA83DCC5DD33605CF3437EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7DA43966C67EE0BF93536FA072F2248C</key>
+		<key>7CFE8DD727D0510C0D7EBC4FE83CCCBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>865D0796086DD9260CEB170CAED9BDEB</key>
+		<key>9A94071C445A38E47465790AC92A70F7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>87E49C83A466C3331D47056BB70D1E02</key>
+		<key>AEAB9C8E44E1C036D2A9411E26B61D8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8ED6EAC0A50E2744F90B1F1118A50899</key>
+		<key>AEFE8BC80286DB28E62D5C8220207D71</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A91C531261883C60B6A58FE1DB59E549</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>ADFFF2B38025A920C7B6FE60A59C0727</key>
+		<key>B42B9287DB258399552845A8446EACFC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,22 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BB7029E302A66EF3B04C00B6A2E35D42</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C6F0F2FE203268519D59E74A71DB12E7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>CC87AE09EB9C90770709069EE4D786A1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D760EA73BF738BEDA6FD818463665319</key>
+		<key>E05C866C1AC1A2ED5F05C227FC2BB7E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE4428B754DBC8B6D5866B32352B6BD5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -26,10 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
   {
     SCSoundCloud.setClientID(kSoundCloudClientID, secret: kSoundCloudClientSecret, redirectURL: NSURL(string: kSoundCloudAuthURL))
+
     initParse()
     initBackgroundAudio()
-    // TODO: set status bar color
-    
     
     return true
   }
@@ -39,11 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Parse.setApplicationId(kParseApplicationId, clientKey: kParseClientKey)
     PFUser.registerSubclass()
     ParsePlaylist.registerSubclass()
-  }
-  
-  private func initSlideMenu()
-  {    
-    SlideNavigationController.sharedInstance().leftMenu = SettingsViewController.instanceFromNib()
   }
   
   private func initBackgroundAudio()

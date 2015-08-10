@@ -24,7 +24,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="1138"/>
+            <point key="canvasLocation" x="1498" y="1190"/>
         </scene>
         <!--All Playlists View Controller-->
         <scene sceneID="iwJ-tf-u8V">
@@ -240,7 +240,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gj-FC-8IJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="2533"/>
+            <point key="canvasLocation" x="1498" y="3159"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="60k-LG-Uqm">
@@ -259,12 +259,13 @@
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="yHf-HU-u17"/>
                         <segue destination="upW-tI-YCP" kind="relationship" relationship="viewControllers" id="nFG-uI-EaB"/>
+                        <segue destination="bMQ-rs-Isq" kind="relationship" relationship="viewControllers" id="ebv-TZ-tUe"/>
                         <segue destination="StR-4E-zuK" kind="relationship" relationship="viewControllers" id="LEE-cT-v8E"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EE-Ev-aGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="692" y="1567"/>
+            <point key="canvasLocation" x="718" y="2151"/>
         </scene>
         <!--Upvoted Tracks-->
         <scene sceneID="aJf-kB-HgK">
@@ -311,7 +312,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfz-5N-gGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2172" y="2533"/>
+            <point key="canvasLocation" x="2172" y="3159"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="fpE-js-iZU">
@@ -336,6 +337,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n9g-aq-Qtg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1498" y="1845"/>
+        </scene>
+        <!--Search-->
+        <scene sceneID="DBa-ZA-bVM">
+            <objects>
+                <viewController id="bMQ-rs-Isq" customClass="SearchViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DWz-ZG-XLk"/>
+                        <viewControllerLayoutGuide type="bottom" id="Iv8-Ih-oqy"/>
+                    </layoutGuides>
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OLM-YR-c1w">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mob-PE-1yR">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Gq8-Ho-eKt"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pt-fV-caB">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="0Pt-fV-caB" secondAttribute="bottom" id="734-Zo-PVc"/>
+                            <constraint firstItem="0Pt-fV-caB" firstAttribute="top" secondItem="mob-PE-1yR" secondAttribute="bottom" id="7gV-4K-dVu"/>
+                            <constraint firstAttribute="trailing" secondItem="0Pt-fV-caB" secondAttribute="trailing" id="OEP-xj-7SD"/>
+                            <constraint firstItem="mob-PE-1yR" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" id="RVv-vU-Kg4"/>
+                            <constraint firstItem="mob-PE-1yR" firstAttribute="top" secondItem="OLM-YR-c1w" secondAttribute="top" constant="64" id="fwH-03-OAB"/>
+                            <constraint firstAttribute="trailing" secondItem="mob-PE-1yR" secondAttribute="trailing" id="tuq-LD-0kS"/>
+                            <constraint firstItem="0Pt-fV-caB" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" id="v4g-wP-ePU"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Search" id="jaI-Tt-MUI"/>
+                    <connections>
+                        <outlet property="containerView" destination="0Pt-fV-caB" id="tb2-gK-fxp"/>
+                        <outlet property="searchBar" destination="mob-PE-1yR" id="mN4-T3-ewy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e20-nm-fo9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="2501"/>
         </scene>
     </scenes>
 </document>

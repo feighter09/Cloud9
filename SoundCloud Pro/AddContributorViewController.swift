@@ -56,6 +56,9 @@ extension AddContributorViewController {
     tableView = UITableView(frame: CGRect(x: 0, y: 44, width: guideRect.width, height: guideRect.height))
     view.addSubview(tableView)
     
+    tableView.keyboardDismissMode = .OnDrag
+    // TODO: also add tap recognizer
+    
     tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kAddContributorCellIdentifier)
     tableViewDataSource = LFTableViewDataSource(defaultCellIdentifier: kAddContributorCellIdentifier, constructCellBlock: { (cell, data) -> Void in
       let user = data as! PFUser

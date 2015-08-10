@@ -158,9 +158,13 @@ extension SoundCloud {
     query.whereKey("contributors", equalTo: PFUser.currentUser()!)
     query.includeKey("tracks")
     query.includeKey("contributors")
-    query.findObjectsInBackgroundWithBlock({ (playlists, error) -> Void in
-      let parsePlaylists = playlists as! [ParsePlaylist]
-      let playlists = parsePlaylists.map { Playlist(parsePlaylist: $0) }
+    query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+      var playlists: [Playlist]!
+      if error == nil {
+        let parsePlaylists = results as! [ParsePlaylist]
+        playlists = parsePlaylists.map { Playlist(parsePlaylist: $0) }
+      }
+      
       callback(playlists: playlists, error: error)
     })
   }

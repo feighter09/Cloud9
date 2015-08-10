@@ -15,8 +15,7 @@ let kSettingsCellIdentifier = "settingsCell"
 class SettingsViewController: UITableViewController {
   class func instanceFromNib() -> UIViewController
   {
-    let settingsViewController = SettingsViewController(nibName: kSettingsViewControllerNib, bundle: nil)
-    return UINavigationController(rootViewController: settingsViewController)
+    return SettingsViewController(nibName: kSettingsViewControllerNib, bundle: nil)
   }
   
   private var tableViewDataSource: LFSectionedTableViewDataSource!
@@ -52,7 +51,7 @@ extension SettingsViewController {
   {
     let votesTableViewController = VotesViewController.instanceFromNib()
     votesTableViewController.voteType = voteType
-    navigationController!.pushViewController(votesTableViewController, animated: true)
+    presentViewController(votesTableViewController, animated: true, completion: nil)
   }
   
   private func logOut()

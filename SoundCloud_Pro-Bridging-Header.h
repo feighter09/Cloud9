@@ -14,7 +14,6 @@
 #import "SCLAlertView.h"
 #import "UIScrollView+SVInfiniteScrolling.h"
 #import "BOZPongRefreshControl.h"
-#import "SlideNavigationController.h"
 
 #import "NXOAuth2.h"
 

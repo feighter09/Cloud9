@@ -33,6 +33,8 @@ class TracksTableViewController: UITableViewController {
   
   weak var delegate: TracksTableViewControllerDelegate?
   
+  // Internals
+  
   var listenerId = 0
   
   private var pullToRefresh: BOZPongRefreshControl?
@@ -73,6 +75,7 @@ extension TracksTableViewController {
     
     initTable()
     AudioPlayer.sharedPlayer.addListener(self)
+    MusicPlayerViewController.sharedPlayer.addListener(self)
   }
   
   private func initTable()
@@ -148,23 +151,25 @@ extension TracksTableViewController: AudioPlayerListener {
   }
 }
 
+// MARK: - Music Player Delegate
+extension TracksTableViewController: Listener, MusicControllerListener {
+  func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
+  {
+    removeTrack(track)
+  }
+}
+
 // MARK: - Stream Cell Delegate
 extension TracksTableViewController: StreamCellDelegate {
   func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
   {
-    tableView.beginUpdates()
-    
-    let indexPath = NSIndexPath(forRow: tracks.indexOf(track)!, inSection: 0)
-    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
-    tracks = tracks.filter { $0 != track }
-    
-    tableView.endUpdates()
+    removeTrack(track)
   }
   
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
   {
-    let playlistPicker = PlaylistPickerViewController()
     trackToAddToPlaylist = track
+    let playlistPicker = PlaylistPickerViewController()
     playlistPicker.delegate = self
     
     let presentingController: UIViewController = navigationController ?? self
@@ -221,5 +226,19 @@ extension TracksTableViewController {
   override func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
   {
     pullToRefresh?.scrollViewDidEndDragging()
+  }
+}
+
+// MARK: - Helpers
+extension TracksTableViewController {
+  private func removeTrack(track: Track)
+  {
+    tableView.beginUpdates()
+    
+    let indexPath = NSIndexPath(forRow: tracks.indexOf(track)!, inSection: 0)
+    tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
+    tracks = tracks.filter { $0 != track }
+    
+    tableView.endUpdates()
   }
 }
