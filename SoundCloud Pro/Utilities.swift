@@ -77,6 +77,12 @@ extension Array where Element: Track {
   {
     return contains { $0 == element }
   }
+  
+  func filterDownVotes() -> [Track]
+  {
+    let downvotes = UserPreferences.downvotes
+    return filter { !downvotes.contains($0) }
+  }
 }
 
 

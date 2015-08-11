@@ -47,19 +47,34 @@ extension VotesViewController {
   
   private func setupTableView()
   {
-    let dataSource = LFTableViewDataSource(defaultCellIdentifier: kVotesCellIdentifier, dataItems: votes) { (cell, data) -> Void in
-      let voteCell = cell as! VoteCell
-      voteCell.track = data as! Track
-    }
-    dataSource.deleteCellBlock = { self.removeItemAtIndexPath($0) }
-    tableView.dataSource = dataSource
-    
+    tableView.registerClass(VoteCell.self, forCellReuseIdentifier: kVotesCellIdentifier)
     tableView.tableFooterView = UIView(frame: CGRectZero)
+    
+    tableView.dataSource = self
+  }
+  
+  override func setEditing(editing: Bool, animated: Bool)
+  {
+    super.setEditing(editing, animated: animated)
+    tableView.setEditing(editing, animated: animated)
   }
 }
 
 // MARK: - Table view data source
-extension VotesViewController {
+extension VotesViewController: UITableViewDataSource {
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+  {
+    return votes.count
+  }
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+  {
+    let voteCell = tableView.dequeueReusableCellWithIdentifier(kVotesCellIdentifier, forIndexPath: indexPath) as! VoteCell
+    voteCell.track = votes[indexPath.row]
+    
+    return voteCell
+  }
+  
   func tableView(tableView: UITableView,
                           commitEditingStyle editingStyle: UITableViewCellEditingStyle,
                           forRowAtIndexPath indexPath: NSIndexPath)

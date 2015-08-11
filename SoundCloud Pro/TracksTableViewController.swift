@@ -156,7 +156,7 @@ extension TracksTableViewController: AudioPlayerListener {
 extension TracksTableViewController: Listener, MusicControllerListener {
   func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
   {
-    removeTrack(track)
+    if tracks.contains(track) { removeTrack(track) }
   }
 }
 

@@ -40,7 +40,7 @@ extension PlaylistViewController {
     tracksViewController.delegate = self
     tracksViewController.view.frame = view.bounds
     tracksViewController.addToView(view, inViewController: self, withDelegate: self)
-    tracksViewController.tracks = playlist.tracks
+    tracksViewController.tracks = playlist.tracks.filterDownVotes()
   }
   
   private func addOptions()
@@ -106,13 +106,13 @@ extension PlaylistViewController {
   
   private func beginEditing()
   {
-    tracksViewController.tableView.editing = true
+    tracksViewController.tableView.setEditing(true, animated: true)
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")
   }
   
   func endEditing()
   {
-    tracksViewController.tableView.editing = false
+    tracksViewController.tableView.setEditing(false, animated: true)
     navigationItem.rightBarButtonItem = optionsButton
   }
   
