@@ -182,6 +182,11 @@ extension SoundCloud {
   
   class func addTrack(track: Track, toPlaylist playlist: Playlist, callback: SuccessCallback)
   {
+    if playlist.tracks.contains({ $0 == track }) {
+      callback(success: false, error: NSError(domain: "scp", code: 101, userInfo: nil))
+      return
+    }
+    
     switch playlist.type {
     case .Normal:
       // TODO: Add to SC playlist

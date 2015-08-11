@@ -12,6 +12,7 @@ class PlaylistViewController: UIViewController {
   var playlist: Playlist
   
   private var tracksViewController = TracksTableViewController()
+  private var optionsButton: UIBarButtonItem!
   
   init(playlist: Playlist)
   {
@@ -36,6 +37,7 @@ extension PlaylistViewController {
   
   private func setupTracksList()
   {
+    tracksViewController.delegate = self
     tracksViewController.view.frame = view.bounds
     tracksViewController.addToView(view, inViewController: self, withDelegate: self)
     tracksViewController.tracks = playlist.tracks
@@ -43,7 +45,7 @@ extension PlaylistViewController {
   
   private func addOptions()
   {
-    let optionsButton = UIBarButtonItem(title: "Options", style: .Plain, target: self, action: "optionsTapped")
+    optionsButton = UIBarButtonItem(title: "Options", style: .Plain, target: self, action: "optionsTapped")
     navigationItem.rightBarButtonItem = optionsButton
   }
   
@@ -52,6 +54,9 @@ extension PlaylistViewController {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
     alert.addAction(UIAlertAction(title: "Add Track", style: .Default) { (action) -> Void in
       self.searchForTrack()
+    })
+    alert.addAction(UIAlertAction(title: "Delete Tracks", style: .Default) { (action) -> Void in
+      self.beginEditing()
     })
     alert.addAction(UIAlertAction(title: "View Contributors", style: .Default) { (action) -> Void in
       self.viewContributors()
@@ -67,18 +72,15 @@ extension PlaylistViewController {
 
 // MARK: - Tracks Table Delegate
 extension PlaylistViewController: TracksTableViewControllerDelegate {
-  func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
+  func tracksTableController(tracksTableController: TracksTableViewController, didDeleteTrack track: Track)
   {
-    
-  }
-  
-  func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
-  {
-    
+    playlist.removeTrack(track) { () -> Void in
+      self.tracksViewController.tracks = self.playlist.tracks
+    }
   }
 }
 
-// MARK: - Tracks Table Delegate
+// MARK: - Search Delegate
 extension PlaylistViewController: SearchViewControllerDelegate {
   func searchViewController(searchViewController: SearchViewController, didSelectTrack track: Track)
   {
@@ -100,6 +102,18 @@ extension PlaylistViewController {
   {
     let searchVC = SearchViewController.instanceFromNib(delegate: self)
     presentViewController(searchVC, animated: true, completion: nil)
+  }
+  
+  private func beginEditing()
+  {
+    tracksViewController.tableView.editing = true
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "endEditing")
+  }
+  
+  func endEditing()
+  {
+    tracksViewController.tableView.editing = false
+    navigationItem.rightBarButtonItem = optionsButton
   }
   
   private func viewContributors()

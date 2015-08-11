@@ -165,12 +165,13 @@ extension MusicPlayerViewController {
     let yOffset = oldFrame.origin.y + (expand ? -1 : 1) * heightDiff
 
     UIView.animateWithDuration(0.5) { () -> Void in
+      self.voteControlsHeight.constant = (expand ? kVoteControlsDefaultHeight : 0)
+      self.playbackControlsHeight.constant = (expand ? kPlaybackControlsHeight: 0)
+
       self.view.frame = CGRect(x: oldFrame.origin.x,
                                y: yOffset,
                                width: oldFrame.width,
                                height: newHeight)
-      self.voteControlsHeight.constant = (expand ? kVoteControlsDefaultHeight : 0)
-      self.playbackControlsHeight.constant = (expand ? kPlaybackControlsHeight: 0)
       self.view.layoutIfNeeded()
     }
   }

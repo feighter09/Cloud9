@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -16,39 +17,42 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsi-Tm-KZU">
-                        <rect key="frame" x="8" y="8" width="304" height="25"/>
+                        <rect key="frame" x="8" y="8" width="304" height="23"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBa-JJ-0Pz">
-                        <rect key="frame" x="8" y="37" width="304" height="17"/>
+                        <rect key="frame" x="8" y="35" width="304" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1B-e5-SqN">
-                        <rect key="frame" x="8" y="54" width="304" height="30"/>
+                        <rect key="frame" x="8" y="52" width="304" height="32"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-n6-pbt">
-                                <rect key="frame" x="182" y="0.0" width="40" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-n6-pbt">
+                                <rect key="frame" x="190" y="0.0" width="32" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="mCv-Og-i4V"/>
+                                    <constraint firstAttribute="width" secondItem="9lW-n6-pbt" secondAttribute="height" multiplier="1:1" id="ejb-jX-OMh"/>
+                                    <constraint firstAttribute="width" constant="32" id="mCv-Og-i4V"/>
                                 </constraints>
-                                <state key="normal" title="Up"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="2" maxX="4" maxY="2"/>
+                                <state key="normal" image="thumbsUp"/>
                                 <connections>
                                     <action selector="upVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VvX-dR-HyZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf">
-                                <rect key="frame" x="222" y="0.0" width="40" height="30"/>
-                                <state key="normal" title="Down"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf">
+                                <rect key="frame" x="230" y="0.0" width="32" height="32"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="2" maxX="4" maxY="2"/>
+                                <state key="normal" image="thumbsDown"/>
                                 <connections>
                                     <action selector="downVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hRM-in-oP2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-hL-sOB">
-                                <rect key="frame" x="270" y="0.0" width="34" height="30"/>
+                                <rect key="frame" x="270" y="0.0" width="34" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="Y0p-wg-qPv"/>
                                 </constraints>
@@ -57,7 +61,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[playing]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDj-TR-cJU">
-                                <rect key="frame" x="0.0" y="0.0" width="57" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="57" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -68,7 +72,7 @@
                             <constraint firstItem="aDj-TR-cJU" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="4oq-gO-SXn"/>
                             <constraint firstAttribute="trailing" secondItem="0ZD-hL-sOB" secondAttribute="trailing" id="Eue-L8-dqg"/>
                             <constraint firstItem="9lW-n6-pbt" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="HPb-Cv-kny"/>
-                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="leading" secondItem="9lW-n6-pbt" secondAttribute="trailing" id="Jec-qa-50C"/>
+                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="leading" secondItem="9lW-n6-pbt" secondAttribute="trailing" constant="8" id="Jec-qa-50C"/>
                             <constraint firstAttribute="bottom" secondItem="9lW-n6-pbt" secondAttribute="bottom" id="Lm4-t8-npE"/>
                             <constraint firstItem="0ZD-hL-sOB" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="Q4D-l4-uvn"/>
                             <constraint firstItem="0ZD-hL-sOB" firstAttribute="leading" secondItem="VPd-Wb-Brf" secondAttribute="trailing" constant="8" id="RWo-e7-KKQ"/>
@@ -102,4 +106,8 @@
             <point key="canvasLocation" x="674" y="686.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="thumbsDown" width="29" height="36"/>
+        <image name="thumbsUp" width="29" height="36"/>
+    </resources>
 </document>

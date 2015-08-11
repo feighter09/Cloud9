@@ -135,6 +135,11 @@ func ===(lhs: Track, rhs: Track) -> Bool
   return lhs == rhs
 }
 
+func ==(lhs: PFObject, rhs: Track) -> Bool
+{
+  return Track(object: lhs) == rhs
+}
+
 // MARK: - Hashable
 extension Track {
   override var hashValue: Int { return title.hashValue } // This doesn't work

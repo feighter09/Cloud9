@@ -54,11 +54,11 @@ extension Utilities {
 
 // MARK: - UIView Extensions
 extension UIView {
-  class func rectWithinBars(navigationBar navigationBar: Bool = false, tabBar: Bool = true) -> CGRect
+  class func rectWithinBars(navigationBar navigationBar: Bool = true, tabBar: Bool = true) -> CGRect
   {
     let screenSize = UIScreen.mainScreen().bounds
     let yOffset: CGFloat = kStatusBarHeight + (navigationBar ? 44 : 0)
-    let height = screenSize.height - yOffset - kMusicPlayerContractedHeight - (tabBar ? kTabBarHeight : 0)
+    let height = screenSize.height - yOffset - kMusicPlayerContractedHeight
     
     return CGRect(x: 0, y: yOffset, width: screenSize.width, height: height)
   }
@@ -71,6 +71,11 @@ extension Array where Element: Track {
     return self.reduce([], combine: { (uniques, element) -> [Track] in
       uniques.contains { element == $0 } ? uniques : uniques + [element]
     })
+  }
+  
+  public func contains(element: Array.Generator.Element) -> Bool
+  {
+    return contains { $0 == element }
   }
 }
 

@@ -63,26 +63,29 @@
                         <constraint firstAttribute="bottom" secondItem="meP-uY-LdL" secondAttribute="bottom" constant="4" id="zFo-6K-ROa"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANF-we-NZo" userLabel="Vote Controls">
-                    <rect key="frame" x="576" y="50" width="16" height="0.0"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANF-we-NZo" userLabel="Vote Controls">
+                    <rect key="frame" x="348" y="50" width="244" height="0.0"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-3E-G0n">
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-3E-G0n" userLabel="up">
+                            <rect key="frame" x="0.0" y="0.0" width="76" height="36"/>
                             <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Up"/>
+                            <inset key="imageEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                            <state key="normal" image="thumbsUp"/>
                             <connections>
                                 <action selector="upVoteTapped:" destination="-1" eventType="touchUpInside" id="j4p-H8-TLh"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-jd-pHh">
-                            <rect key="frame" x="8" y="0.0" width="0.0" height="0.0"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-jd-pHh" userLabel="down">
+                            <rect key="frame" x="84" y="0.0" width="76" height="36"/>
                             <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="Down"/>
+                            <inset key="imageEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                            <state key="normal" image="thumbsDown"/>
                             <connections>
                                 <action selector="downVoteTapped:" destination="-1" eventType="touchUpInside" id="Mn6-eF-6x9"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrP-ls-Ugq">
-                            <rect key="frame" x="16" y="0.0" width="0.0" height="0.0"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrP-ls-Ugq">
+                            <rect key="frame" x="168" y="0.0" width="76" height="36"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="DrP-ls-Ugq" secondAttribute="height" multiplier="1:1" id="lah-Ah-rDQ"/>
                             </constraints>
@@ -192,5 +195,7 @@
     <resources>
         <image name="Beginning" width="32" height="32"/>
         <image name="End" width="32" height="32"/>
+        <image name="thumbsDown" width="29" height="36"/>
+        <image name="thumbsUp" width="29" height="36"/>
     </resources>
 </document>

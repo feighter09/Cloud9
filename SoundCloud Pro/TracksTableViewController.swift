@@ -12,9 +12,10 @@ import Bond
 let kStreamCellIdentifier = "streamCell"
 let kStreamPlaylistMinimum = 1
 
-protocol TracksTableViewControllerDelegate: NSObjectProtocol {
-  func tracksTableControllerDidTriggerRefresh(streamTableController: TracksTableViewController)
-  func tracksTableControllerDidScrollToEnd(streamTableController: TracksTableViewController)
+@objc protocol TracksTableViewControllerDelegate: NSObjectProtocol {
+  optional func tracksTableControllerDidTriggerRefresh(tracksTableController: TracksTableViewController)
+  optional func tracksTableControllerDidScrollToEnd(tracksTableController: TracksTableViewController)
+  optional func tracksTableController(tracksTableController: TracksTableViewController, didDeleteTrack track: Track)
 }
 
 class TracksTableViewController: UITableViewController {
@@ -94,14 +95,14 @@ extension TracksTableViewController {
     
     if infiniteScrollingEnabled {
       tableView.addInfiniteScrollingWithActionHandler { () -> Void in
-        delegate?.tracksTableControllerDidScrollToEnd(self)
+        delegate?.tracksTableControllerDidScrollToEnd?(self)
       }
     }
   }
   
   func refreshTracks()
   {
-    delegate?.tracksTableControllerDidTriggerRefresh(self)
+    delegate?.tracksTableControllerDidTriggerRefresh?(self)
   }
 }
 
@@ -214,6 +215,16 @@ extension TracksTableViewController {
     
     return cell
   }
+  
+  override func tableView(tableView: UITableView,
+    commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+    forRowAtIndexPath indexPath: NSIndexPath)
+  {
+    if editingStyle == .Delete {
+      let track = tracks[indexPath.row]
+      removeTrack(track)
+    }
+  }
 }
 
 // MARK: - Scroll Delegate for Pong Refresh
@@ -237,8 +248,10 @@ extension TracksTableViewController {
     
     let indexPath = NSIndexPath(forRow: tracks.indexOf(track)!, inSection: 0)
     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Right)
-    tracks = tracks.filter { $0 != track }
-    
+    tracks.removeAtIndex(indexPath.row)   // mix between track / index of is bleh, there for deleting duplicates, 
+                                          // don't wanna delete both
     tableView.endUpdates()
+    
+    delegate?.tracksTableController?(self, didDeleteTrack: track)
   }
 }

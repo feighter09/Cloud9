@@ -47,9 +47,28 @@ extension Playlist {
       if success {
         self.tracks.append(track)
         onSuccess?()
-      } else {
+      }
+      else {
         ErrorHandler.handleNetworkingError("adding to playlist", error: nil)
       }
+    }
+  }
+  
+  func removeTrack(track: Track, onSuccess: (() -> Void)? = nil)
+  {
+    // TODO: move into network layer
+    parsePlaylist { (playlist) -> Void in
+      let indexToRemove = playlist.tracks.indexOf({ $0 == track })!
+      playlist.tracks.removeAtIndex(indexToRemove)
+      playlist.saveEventually({ (success, error) -> Void in
+        if success {
+          self.tracks.removeAtIndex(indexToRemove)
+          onSuccess?()
+        }
+        else {
+          ErrorHandler.handleNetworkingError("removing track", error: error)
+        }
+      })
     }
   }
   
@@ -69,7 +88,10 @@ extension Playlist {
   
   func parsePlaylist(callback: (playlist: ParsePlaylist!) -> Void)
   {
-    ParsePlaylist.query()?.getObjectInBackgroundWithId(parseId, block: { (object, error) -> Void in
+    let query = ParsePlaylist.query()!
+    query.includeKey("tracks")
+    
+    query.getObjectInBackgroundWithId(parseId, block: { (object, error) -> Void in
       if error == nil {
         callback(playlist: object as! ParsePlaylist)
       } else {

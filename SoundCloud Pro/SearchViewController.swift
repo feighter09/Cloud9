@@ -16,6 +16,7 @@ protocol SearchViewControllerDelegate: NSObjectProtocol {
 }
 
 class SearchViewController: UIViewController {
+  var shownModally = false
   weak var delegate: SearchViewControllerDelegate?
   
   @IBOutlet private weak var searchBar: UISearchBar!
@@ -23,16 +24,21 @@ class SearchViewController: UIViewController {
   
   private var searchResultsController = TracksTableViewController()
   
-  class func instanceFromNib(delegate delegate: SearchViewControllerDelegate? = nil) -> UIViewController
-  {
-    let searchController = SearchViewController(nibName: kSearchViewControllerNib, bundle: nil)
-    searchController.delegate = delegate
-    return UINavigationController(rootViewController: searchController)
-  }
+  private var searchesInProgress = 0
+  private var hud: SCLAlertView!
 }
 
 // MARK: - View Life Cycle
 extension SearchViewController {
+  class func instanceFromNib(delegate delegate: SearchViewControllerDelegate? = nil) -> UIViewController
+  {
+    let searchController = SearchViewController(nibName: kSearchViewControllerNib, bundle: nil)
+    searchController.delegate = delegate
+    searchController.shownModally = true
+    
+    return UINavigationController(rootViewController: searchController)
+  }
+  
   override func viewDidLoad()
   {
     super.viewDidLoad()
@@ -40,7 +46,9 @@ extension SearchViewController {
     setupSearchResults()
     searchBar.delegate = self
     
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
+    if shownModally {
+      navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
+    }
   }
   
   override func viewDidAppear(animated: Bool)
@@ -81,9 +89,10 @@ extension SearchViewController: UISearchBarDelegate {
       return
     }
     
-    searchResultsController.beginLoading()
+    
+    showLoadingView()
     SoundCloud.getTracksMatching(searchText) { (tracks, error) -> Void in
-      self.searchResultsController.finishedLoading()
+      self.hideLoadingView()
       
       if error == nil {
         self.searchResultsController.tracks = tracks
@@ -97,6 +106,20 @@ extension SearchViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(searchBar: UISearchBar)
   {
     searchBar.resignFirstResponder()
+  }
+  
+  private func showLoadingView()
+  {
+    if searchesInProgress++ == 0 {
+      hud = Utilities.showLoadingAlert("Loading tracks", onViewController: self)
+    }
+  }
+  
+  private func hideLoadingView()
+  {
+    if --searchesInProgress == 0 {
+      hud.hideView()
+    }
   }
 }
 

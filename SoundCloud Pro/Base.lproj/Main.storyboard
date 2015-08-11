@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Stream-->
+        <!--Stream View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="vXZ-lx-hvc" customClass="StreamViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,16 +15,15 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Stream" id="CAo-dw-QjO"/>
                     <navigationItem key="navigationItem" id="0ZF-AZ-zBc"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="1190"/>
+            <point key="canvasLocation" x="2172" y="1190"/>
         </scene>
         <!--All Playlists View Controller-->
         <scene sceneID="iwJ-tf-u8V">
@@ -35,7 +34,7 @@
                         <viewControllerLayoutGuide type="bottom" id="FeE-ML-9Ar"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gmw-VO-fW1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sgt-8r-Me9">
@@ -141,19 +140,19 @@
             </objects>
             <point key="canvasLocation" x="2172" y="1845"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="Q0K-Jh-7ae">
             <objects>
                 <tableViewController id="StR-4E-zuK" customClass="SettingsViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="qcc-Rc-4kH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="tyS-1q-QPx">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="4m1-SP-am4" style="IBUITableViewCellStyleDefault" id="T4D-6i-b94">
-                                        <rect key="frame" x="0.0" y="35" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="99" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="T4D-6i-b94" id="kVn-3S-ntU">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -170,7 +169,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Vc5-hW-1fQ" style="IBUITableViewCellStyleDefault" id="11B-Da-riZ">
-                                        <rect key="frame" x="0.0" y="79" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="11B-Da-riZ" id="yGe-4D-Bd3">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -191,7 +190,7 @@
                             <tableViewSection id="KWy-de-qrr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="1Q5-EW-9lo" style="IBUITableViewCellStyleDefault" id="qpo-TO-tw4">
-                                        <rect key="frame" x="0.0" y="143" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="207" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qpo-TO-tw4" id="4sp-OZ-hGf">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -212,7 +211,7 @@
                             <tableViewSection id="gC4-D5-hKr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="BaY-id-ERz" style="IBUITableViewCellStyleDefault" id="9ms-S1-7TF">
-                                        <rect key="frame" x="0.0" y="207" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="271" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9ms-S1-7TF" id="CeD-ee-8IX">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -236,11 +235,11 @@
                             <outlet property="delegate" destination="StR-4E-zuK" id="XpM-jS-0TB"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Settings" id="3FP-TT-FGA"/>
+                    <navigationItem key="navigationItem" id="gfs-yX-Ayj"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Gj-FC-8IJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1498" y="3159"/>
+            <point key="canvasLocation" x="2172" y="3159"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="60k-LG-Uqm">
@@ -249,7 +248,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="mVN-Un-dJ7"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="TpX-3y-lqa">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="TpX-3y-lqa">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
@@ -257,10 +256,10 @@
                         <color key="selectedImageTintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="yHf-HU-u17"/>
+                        <segue destination="fAx-5g-gFB" kind="relationship" relationship="viewControllers" id="yHf-HU-u17"/>
                         <segue destination="upW-tI-YCP" kind="relationship" relationship="viewControllers" id="nFG-uI-EaB"/>
-                        <segue destination="bMQ-rs-Isq" kind="relationship" relationship="viewControllers" id="ebv-TZ-tUe"/>
-                        <segue destination="StR-4E-zuK" kind="relationship" relationship="viewControllers" id="LEE-cT-v8E"/>
+                        <segue destination="gZ4-Jn-lEZ" kind="relationship" relationship="viewControllers" id="ebv-TZ-tUe"/>
+                        <segue destination="a1d-fT-bVC" kind="relationship" relationship="viewControllers" id="LEE-cT-v8E"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EE-Ev-aGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -312,13 +311,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bfz-5N-gGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2172" y="3159"/>
+            <point key="canvasLocation" x="2846" y="3159"/>
         </scene>
         <!--Playlists-->
         <scene sceneID="fpE-js-iZU">
             <objects>
-                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="upW-tI-YCP" customClass="NavigationController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Playlists" id="7K5-5Y-cjh"/>
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="upW-tI-YCP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Playlists" image="playlists" id="7K5-5Y-cjh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TcG-0x-CJC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -338,7 +337,7 @@
             </objects>
             <point key="canvasLocation" x="1498" y="1845"/>
         </scene>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="DBa-ZA-bVM">
             <objects>
                 <viewController id="bMQ-rs-Isq" customClass="SearchViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
@@ -347,7 +346,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Iv8-Ih-oqy"/>
                     </layoutGuides>
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OLM-YR-c1w">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mob-PE-1yR">
@@ -358,7 +357,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pt-fV-caB">
-                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -373,7 +372,7 @@
                             <constraint firstItem="0Pt-fV-caB" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" id="v4g-wP-ePU"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="jaI-Tt-MUI"/>
+                    <navigationItem key="navigationItem" id="btq-ee-PRQ"/>
                     <connections>
                         <outlet property="containerView" destination="0Pt-fV-caB" id="tb2-gK-fxp"/>
                         <outlet property="searchBar" destination="mob-PE-1yR" id="mN4-T3-ewy"/>
@@ -381,7 +380,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e20-nm-fo9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2172" y="2501"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="wrZ-ej-thp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="a1d-fT-bVC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="settings" id="3FP-TT-FGA"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k0R-bW-iJJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="StR-4E-zuK" kind="relationship" relationship="rootViewController" id="Htk-aL-n6A"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="a9I-XW-6iP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="3159"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="989-Wj-lPu">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gZ4-Jn-lEZ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="jaI-Tt-MUI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="z4I-wk-UCb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bMQ-rs-Isq" kind="relationship" relationship="rootViewController" id="njI-Zj-QUp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wHw-PH-5MK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="1498" y="2501"/>
         </scene>
+        <!--Stream-->
+        <scene sceneID="0Q6-mD-PZp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fAx-5g-gFB" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Stream" image="stream" id="CAo-dw-QjO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="r8K-wD-kkb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Iur-Z3-2Ne"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8xa-pF-8qt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1498" y="1190"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="playlists" width="25" height="25"/>
+        <image name="settings" width="25" height="25"/>
+        <image name="stream" width="25" height="25"/>
+    </resources>
 </document>

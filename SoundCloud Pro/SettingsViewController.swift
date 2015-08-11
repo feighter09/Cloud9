@@ -51,7 +51,7 @@ extension SettingsViewController {
   {
     let votesTableViewController = VotesViewController.instanceFromNib()
     votesTableViewController.voteType = voteType
-    presentViewController(votesTableViewController, animated: true, completion: nil)
+    navigationController!.pushViewController(votesTableViewController, animated: true)
   }
   
   private func logOut()

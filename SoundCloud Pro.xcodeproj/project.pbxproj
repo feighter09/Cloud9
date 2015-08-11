@@ -49,7 +49,6 @@
 		7ABB79A11B7197B60065EEAE /* AddContributorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB79A01B7197B60065EEAE /* AddContributorViewController.swift */; };
 		7ABB79A31B7198710065EEAE /* LFTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABB79A21B7198710065EEAE /* LFTableViewDataSource.swift */; };
 		7AF7224B1B54BA2400C4C945 /* UIImageView+AFNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF7224A1B54BA2400C4C945 /* UIImageView+AFNetworking.swift */; };
-		7AF9ABD31B6FBC6400919DA8 /* Parse+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF9ABD21B6FBC6400919DA8 /* Parse+PromiseKit.swift */; };
 		7AFFA7581B42E9BB0002BB84 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7571B42E9BB0002BB84 /* AppDelegate.swift */; };
 		7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA7591B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld */; };
 		7AFFA75D1B42E9BB0002BB84 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFA75C1B42E9BB0002BB84 /* StreamViewController.swift */; };
@@ -529,7 +528,6 @@
 				7ABB79A11B7197B60065EEAE /* AddContributorViewController.swift in Sources */,
 				7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */,
 				7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */,
-				7AF9ABD31B6FBC6400919DA8 /* Parse+PromiseKit.swift in Sources */,
 				7ABB79A31B7198710065EEAE /* LFTableViewDataSource.swift in Sources */,
 				7AFFA75D1B42E9BB0002BB84 /* StreamViewController.swift in Sources */,
 				7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */,

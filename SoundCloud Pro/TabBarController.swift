@@ -24,6 +24,7 @@ extension TabBarController {
 
 //    repositionTabBar()
     addPlayer()
+    tabBar.tintColor = .defaultColor
   }
   
   private func repositionTabBar()
