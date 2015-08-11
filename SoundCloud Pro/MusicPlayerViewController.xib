@@ -11,6 +11,7 @@
                 <outlet property="artistLabel" destination="meP-uY-LdL" id="AeY-5B-mCg"/>
                 <outlet property="beginningButton" destination="o0m-cy-u8S" id="Jrs-6R-YrN"/>
                 <outlet property="endButton" destination="NUV-Yf-5xv" id="eW2-pk-7j9"/>
+                <outlet property="expandContractButton" destination="yli-BO-sRW" id="aJl-Uk-vQn"/>
                 <outlet property="playPauseButton" destination="b2j-Sz-O9A" id="FZN-6x-um4"/>
                 <outlet property="playbackControlsHeight" destination="aKn-fK-ZHi" id="1QA-pa-bcl"/>
                 <outlet property="scrubber" destination="dFY-4l-shw" id="OeF-Fh-U8p"/>
@@ -63,11 +64,10 @@
                         <constraint firstAttribute="bottom" secondItem="meP-uY-LdL" secondAttribute="bottom" constant="4" id="zFo-6K-ROa"/>
                     </constraints>
                 </view>
-                <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANF-we-NZo" userLabel="Vote Controls">
-                    <rect key="frame" x="348" y="50" width="244" height="0.0"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANF-we-NZo" userLabel="Vote Controls">
+                    <rect key="frame" x="576" y="50" width="16" height="0.0"/>
                     <subviews>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-3E-G0n" userLabel="up">
-                            <rect key="frame" x="0.0" y="0.0" width="76" height="36"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-3E-G0n" userLabel="up">
                             <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
                             <inset key="imageEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
                             <state key="normal" image="thumbsUp"/>
@@ -75,8 +75,8 @@
                                 <action selector="upVoteTapped:" destination="-1" eventType="touchUpInside" id="j4p-H8-TLh"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-jd-pHh" userLabel="down">
-                            <rect key="frame" x="84" y="0.0" width="76" height="36"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoP-jd-pHh" userLabel="down">
+                            <rect key="frame" x="8" y="0.0" width="0.0" height="0.0"/>
                             <color key="tintColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
                             <inset key="imageEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
                             <state key="normal" image="thumbsDown"/>
@@ -84,8 +84,8 @@
                                 <action selector="downVoteTapped:" destination="-1" eventType="touchUpInside" id="Mn6-eF-6x9"/>
                             </connections>
                         </button>
-                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrP-ls-Ugq">
-                            <rect key="frame" x="168" y="0.0" width="76" height="36"/>
+                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrP-ls-Ugq">
+                            <rect key="frame" x="16" y="0.0" width="0.0" height="0.0"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="DrP-ls-Ugq" secondAttribute="height" multiplier="1:1" id="lah-Ah-rDQ"/>
                             </constraints>
@@ -158,14 +158,23 @@
                         <constraint firstItem="o0m-cy-u8S" firstAttribute="leading" secondItem="KwD-dO-7Kl" secondAttribute="leading" id="qIK-wL-Cp6"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yli-BO-sRW">
-                    <rect key="frame" x="277" y="-30" width="46" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yli-BO-sRW">
+                    <rect key="frame" x="284" y="-32" width="35" height="32"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <state key="normal" title="^"/>
+                    <state key="normal" image="upArrow">
+                        <color key="titleColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="toggleExpandContract:" destination="-1" eventType="touchUpInside" id="DZW-L1-dgQ"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k1f-TO-LcP">
+                    <rect key="frame" x="0.0" y="49" width="600" height="1"/>
+                    <color key="backgroundColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="CJ8-NO-SQV"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
@@ -173,9 +182,12 @@
                 <constraint firstItem="b2j-Sz-O9A" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" id="3Cj-gw-YEj"/>
                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="b2j-Sz-O9A" secondAttribute="bottom" id="Abl-Ii-Jfb"/>
                 <constraint firstItem="b2j-Sz-O9A" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="KyY-wl-2SD"/>
+                <constraint firstAttribute="bottom" secondItem="k1f-TO-LcP" secondAttribute="bottom" id="NkL-j4-vDm"/>
                 <constraint firstItem="ANF-we-NZo" firstAttribute="trailing" secondItem="Gin-E6-3dl" secondAttribute="trailing" id="QLh-aV-BQy"/>
                 <constraint firstAttribute="bottom" secondItem="ANF-we-NZo" secondAttribute="bottom" id="Tfy-TK-pDL"/>
                 <constraint firstItem="Gin-E6-3dl" firstAttribute="leading" secondItem="b2j-Sz-O9A" secondAttribute="trailing" id="UgH-ns-hK0"/>
+                <constraint firstItem="k1f-TO-LcP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WMP-ay-vs3"/>
+                <constraint firstAttribute="trailing" secondItem="k1f-TO-LcP" secondAttribute="trailing" id="YJM-Ch-2qf"/>
                 <constraint firstItem="KwD-dO-7Kl" firstAttribute="leading" secondItem="Gin-E6-3dl" secondAttribute="leading" constant="8" id="ZMJ-h5-YRV"/>
                 <constraint firstItem="b2j-Sz-O9A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="4" id="gdK-3n-2T8"/>
                 <constraint firstAttribute="top" secondItem="yli-BO-sRW" secondAttribute="bottom" id="igJ-2g-uy0"/>
@@ -197,5 +209,6 @@
         <image name="End" width="32" height="32"/>
         <image name="thumbsDown" width="29" height="36"/>
         <image name="thumbsUp" width="29" height="36"/>
+        <image name="upArrow" width="32" height="32"/>
     </resources>
 </document>

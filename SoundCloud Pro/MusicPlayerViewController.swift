@@ -45,8 +45,9 @@ class MusicPlayerViewController: UIViewController {
   @IBOutlet private weak var endButton: UIButton!
   @IBOutlet private weak var scrubber: UISlider!
   
-  @IBOutlet weak var voteControlsHeight: NSLayoutConstraint!
-  @IBOutlet weak var playbackControlsHeight: NSLayoutConstraint!
+  @IBOutlet private weak var expandContractButton: UIButton!
+  @IBOutlet private weak var voteControlsHeight: NSLayoutConstraint!
+  @IBOutlet private weak var playbackControlsHeight: NSLayoutConstraint!
   
   var listenerId = 0
   
@@ -165,6 +166,9 @@ extension MusicPlayerViewController {
     let yOffset = oldFrame.origin.y + (expand ? -1 : 1) * heightDiff
 
     UIView.animateWithDuration(0.5) { () -> Void in
+      let transform = (expand ? CATransform3DMakeRotation(CGFloat(M_PI), 1, 0, 0) : CATransform3DIdentity)
+      self.expandContractButton.imageView!.layer.transform = transform
+      
       self.voteControlsHeight.constant = (expand ? kVoteControlsDefaultHeight : 0)
       self.playbackControlsHeight.constant = (expand ? kPlaybackControlsHeight: 0)
 
