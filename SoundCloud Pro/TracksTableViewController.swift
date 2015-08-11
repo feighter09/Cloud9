@@ -169,20 +169,18 @@ extension TracksTableViewController: StreamCellDelegate {
   
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
   {
-    trackToAddToPlaylist = track
     let playlistPicker = PlaylistPickerViewController()
+    playlistPicker.track = track
     playlistPicker.delegate = self
     
-    let presentingController: UIViewController = navigationController ?? self
-    presentingController.presentViewController(UINavigationController(rootViewController: playlistPicker), animated: true, completion: nil)
+    navigationController!.presentViewController(UINavigationController(rootViewController: playlistPicker), animated: true, completion: nil)
   }
 }
 
 // MARK: - Stream Cell Delegate
 extension TracksTableViewController: PlaylistPickerDelegate {
-  func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
+  func playlistPickerDidTapDone(playlistPicker: PlaylistPickerViewController)
   {
-    playlist.addTrack(trackToAddToPlaylist!)
     dismissPlaylistPicker()
   }
   
@@ -193,8 +191,7 @@ extension TracksTableViewController: PlaylistPickerDelegate {
   
   private func dismissPlaylistPicker()
   {
-    let presentingController: UIViewController = navigationController ?? self
-    presentingController.dismissViewControllerAnimated(true, completion: nil)
+    navigationController!.dismissViewControllerAnimated(true, completion: nil)
   }
 }
 

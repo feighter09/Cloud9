@@ -151,9 +151,14 @@ extension MusicPlayerViewController {
   
   @IBAction private func addToPlaylist(sender: AnyObject)
   {
+    if track == nil { return }
+    
     let playlistPicker = PlaylistPickerViewController()
-    // TODO: add to playlist
-    //delegate?.streamCell(self, didTapAddToPlaylist: track)
+    playlistPicker.track = track
+    playlistPicker.delegate = self
+    
+    let navigationController = UINavigationController(rootViewController: playlistPicker)
+    parentViewController!.presentViewController(navigationController, animated: true, completion: nil)
   }
   
   @IBAction private func toggleExpandContract(sender: AnyObject)
@@ -208,6 +213,19 @@ extension MusicPlayerViewController: AudioPlayerListener {
     track = newTrack
     playPauseButton.playState = AudioPlayer.sharedPlayer.playState
     startUpdatingSeekTimeIfNecessary()
+  }
+}
+
+// MARK: - Playlist Picker Delegate
+extension MusicPlayerViewController: PlaylistPickerDelegate {
+  func playlistPickerDidTapDone(playlistPicker: PlaylistPickerViewController)
+  {
+    parentViewController!.dismissViewControllerAnimated(true, completion: nil)
+  }
+  
+  func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
+  {
+    parentViewController!.dismissViewControllerAnimated(true, completion: nil)
   }
 }
 

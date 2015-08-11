@@ -8,7 +8,6 @@
 
 import SwiftyJSON
 import Parse
-import PromiseKit
 
 typealias NetworkCallback = (response: NSURLResponse!, responseData: NSData!, error: NSError!) -> Void
 

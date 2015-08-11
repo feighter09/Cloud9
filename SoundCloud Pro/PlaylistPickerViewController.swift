@@ -9,16 +9,20 @@
 import UIKit
 
 protocol PlaylistPickerDelegate: NSObjectProtocol {
-  func playlistPicker(playlistPicker: PlaylistPickerViewController, didSelectPlaylist playlist: Playlist)
+  func playlistPickerDidTapDone(playlistPicker: PlaylistPickerViewController)
   func playlistPickerDidTapCancel(playlistPicker: PlaylistPickerViewController)
 }
 
 class PlaylistPickerViewController: UITableViewController {
+  /// Track to be added to playlists selected. Must be set before picker is presented
+  var track: Track!
   var playlists: [Playlist] = [] {
     didSet { tableView.reloadData() }
   }
   
   weak var delegate: PlaylistPickerDelegate?
+  
+  private var selectedIndices = Set<NSIndexPath>()
 }
 
 // MARK: - View Life Cycle
@@ -28,6 +32,8 @@ extension PlaylistPickerViewController {
     super.viewDidLoad()
     
     navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+
     tableView.registerNib(PlaylistCell.nib, forCellReuseIdentifier: kPlaylistCellIdentifier)
     loadPlaylists()
   }
@@ -45,6 +51,14 @@ extension PlaylistPickerViewController {
         ErrorHandler.handleNetworkingError("fetching playlists", error: error)
       }
     })
+  }
+  
+  func done()
+  {
+    let playlistsToAdd = selectedIndices.map { indexPath in return self.playlists[indexPath.row] }
+    playlistsToAdd.map { playlist in playlist.addTrack(track) }
+
+    delegate?.playlistPickerDidTapDone(self)
   }
   
   func cancel()
@@ -70,6 +84,9 @@ extension PlaylistPickerViewController {
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
-    delegate?.playlistPicker(self, didSelectPlaylist: playlists[indexPath.row])
+    let cell = tableView.cellForRowAtIndexPath(indexPath)!
+    let cellChecked = cell.accessoryType == .Checkmark
+    cell.accessoryType = (cellChecked ? .None : .Checkmark)
+    selectedIndices.insert(indexPath)
   }
 }

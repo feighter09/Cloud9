@@ -40,5 +40,10 @@ extension TabBarController {
     let width = UIScreen.mainScreen().bounds.width
     player.view.frame = CGRect(x: 0, y: yOffset, width: width, height: kMusicPlayerContractedHeight)
     view.addSubview(player.view)
+    
+    player.didMoveToParentViewController(self)
+    player.setValue(self, forKey: "parentViewController") // such a hack, didMoveToParentViewController doesn't set parentVC
   }
+  
+  func getTabBar() -> UITabBarController? { return self }
 }
