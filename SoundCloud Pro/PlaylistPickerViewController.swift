@@ -46,7 +46,7 @@ extension PlaylistPickerViewController {
       alert.hideView()
       
       if error == nil {
-        self.playlists = sharedPlaylists
+        self.playlists = [UserPreferences.onTheGoPlaylist] + sharedPlaylists
       } else {
         ErrorHandler.handleNetworkingError("fetching playlists", error: error)
       }
@@ -55,6 +55,8 @@ extension PlaylistPickerViewController {
   
   func done()
   {
+    saveOnTheGoPlaylistIfNecessary()
+    
     let playlistsToAdd = selectedIndices.map { indexPath in return self.playlists[indexPath.row] }
     playlistsToAdd.map { playlist in playlist.addTrack(track) }
 
@@ -88,5 +90,23 @@ extension PlaylistPickerViewController {
     let cellChecked = cell.accessoryType == .Checkmark
     cell.accessoryType = (cellChecked ? .None : .Checkmark)
     selectedIndices.insert(indexPath)
+  }
+}
+
+// MARK: - Helpers
+extension PlaylistPickerViewController {
+  private func isOnTheGoPlaylistIndex(indexPath: NSIndexPath) -> Bool
+  {
+    return indexPath.row == 0
+  }
+  
+  private func saveOnTheGoPlaylistIfNecessary()
+  {
+    if selectedIndices.contains({ indexPath in isOnTheGoPlaylistIndex(indexPath) }) {
+      UserPreferences.addTrackToOnTheGoPlaylist(track)
+
+      let selectedIndicesWithoutOnTheGo = selectedIndices.filter({ indexPath in !isOnTheGoPlaylistIndex(indexPath) })
+      selectedIndices = Set<NSIndexPath>(selectedIndicesWithoutOnTheGo)
+    }
   }
 }

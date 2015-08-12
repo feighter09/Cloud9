@@ -11,8 +11,9 @@ import UIKit
 let kLoadingCellIdentifier = "loadingCell"
 let kNoPlaylistsCellIdentifier = "noPlaylists"
 
-let kSharedPlaylistSection = 0
-let kMyPlaylistSection = 1
+let kOnTheGoPlaylistSection = 0
+let kSharedPlaylistSection = 1
+let kMyPlaylistSection = 2
 
 class AllPlaylistsViewController: UIViewController {
   var sharedPlaylists: [Playlist]! {
@@ -48,6 +49,7 @@ extension AllPlaylistsViewController {
     pullToRefresh?.finishedLoading()
     myPlaylists = nil
     sharedPlaylists = nil
+    
     
     loadSharedPlaylists()
     loadMyPlaylists()
@@ -91,7 +93,7 @@ extension AllPlaylistsViewController {
 extension AllPlaylistsViewController: UITableViewDataSource {
   func numberOfSectionsInTableView(tableView: UITableView) -> Int
   {
-    return 2
+    return 3
   }
   
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
@@ -170,6 +172,7 @@ extension AllPlaylistsViewController {
   private func playlistsForSection(section: Int) -> [Playlist]!
   {
     switch section {
+      case kOnTheGoPlaylistSection: return [UserPreferences.onTheGoPlaylist]
       case kSharedPlaylistSection: return sharedPlaylists
       case kMyPlaylistSection: return myPlaylists
       default: fatalError()

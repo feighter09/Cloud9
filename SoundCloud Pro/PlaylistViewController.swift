@@ -58,12 +58,16 @@ extension PlaylistViewController {
     alert.addAction(UIAlertAction(title: "Delete Tracks", style: .Default) { (action) -> Void in
       self.beginEditing()
     })
-    alert.addAction(UIAlertAction(title: "View Contributors", style: .Default) { (action) -> Void in
-      self.viewContributors()
-    })
-    alert.addAction(UIAlertAction(title: "Add Contributors", style: .Default) { (action) -> Void in
-      self.addContributors()
-    })
+
+    if playlist.type == .Shared {
+      alert.addAction(UIAlertAction(title: "View Contributors", style: .Default) { (action) -> Void in
+        self.viewContributors()
+      })
+      alert.addAction(UIAlertAction(title: "Add Contributors", style: .Default) { (action) -> Void in
+        self.addContributors()
+      })
+    }
+    
     alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
     
     presentViewController(alert, animated: true, completion: nil)
@@ -74,8 +78,13 @@ extension PlaylistViewController {
 extension PlaylistViewController: TracksTableViewControllerDelegate {
   func tracksTableController(tracksTableController: TracksTableViewController, didDeleteTrack track: Track)
   {
-    playlist.removeTrack(track) { () -> Void in
-      self.tracksViewController.tracks = self.playlist.tracks
+    if playlist.name == kOnTheGoPlaylistName {
+      UserPreferences.removeTrackFromOnTheGoPlaylist(track)
+    }
+    else {
+      playlist.removeTrack(track) { () -> Void in
+        self.tracksViewController.tracks = self.playlist.tracks
+      }
     }
   }
 }

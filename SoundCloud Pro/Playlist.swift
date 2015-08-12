@@ -22,6 +22,12 @@ class Playlist {
   
   var type: PlaylistType { return parseId == nil ? .Normal : .Shared }
   private var parseId: String!
+  
+  init(name: String, tracks: [Track])
+  {
+    self.name = name
+    self.tracks = tracks
+  }
 
   init(json: JSON)
   {

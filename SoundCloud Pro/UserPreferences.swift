@@ -8,14 +8,26 @@
 
 import UIKit
 
+let kOnTheGoPlaylistName = "On The Go"
+
 class UserPreferences {
   private static let settings = NSUserDefaults.standardUserDefaults()
 
   private static let upvoteKey = "upvotes"
   private static let downvoteKey = "downvotes"
+  private static let onTheGoPlaylistKey = "onTheGoPlaylist"
 }
 
-// MARK: - Interface
+// MARK: - General
+extension UserPreferences {
+  class func clearAllSettings()
+  {
+    upvotes = []
+    downvotes = []
+  }
+}
+
+// MARK: - Votes
 extension UserPreferences {
   class func addUpvote(track: Track)
   {
@@ -57,11 +69,29 @@ extension UserPreferences {
     get { return getTracksForKey(downvoteKey) }
     set { saveTracks(newValue, forKey: downvoteKey) }
   }
-  
-  class func clearAllSettings()
+}
+
+// MARK: - On The Go Playlist
+extension UserPreferences {
+  class func addTrackToOnTheGoPlaylist(track: Track)
   {
-    upvotes = []
-    downvotes = []
+    let newTracks = onTheGoPlaylist.tracks + [track]
+    saveTracks(newTracks, forKey: onTheGoPlaylistKey)
+  }
+  
+  class func removeTrackFromOnTheGoPlaylist(track: Track)
+  {
+    var tracks = onTheGoPlaylist.tracks
+
+    if let index = tracks.indexOf({ $0 == track }) {
+      tracks.removeAtIndex(index)
+      saveTracks(tracks, forKey: onTheGoPlaylistKey)
+    }
+  }
+  
+  private(set) static var onTheGoPlaylist: Playlist {
+    get { return Playlist(name: kOnTheGoPlaylistName, tracks: getTracksForKey(onTheGoPlaylistKey)) }
+    set { saveTracks(newValue.tracks, forKey: onTheGoPlaylistKey) }
   }
 }
 
