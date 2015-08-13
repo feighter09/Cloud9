@@ -11,7 +11,7 @@ import UIKit
 let kLoadingCellIdentifier = "loadingCell"
 let kNoPlaylistsCellIdentifier = "noPlaylists"
 
-let kOnTheGoPlaylistSection = 0
+let kLocalPlaylistSection = 0
 let kSharedPlaylistSection = 1
 let kMyPlaylistSection = 2
 
@@ -25,9 +25,7 @@ class AllPlaylistsViewController: UIViewController {
   }
 
   @IBOutlet private weak var tableView: UITableView!
-  private var pullToRefresh: BOZPongRefreshControl!
 }
-
 
 // MARK: - View Life Cycle
 extension AllPlaylistsViewController {
@@ -35,33 +33,23 @@ extension AllPlaylistsViewController {
   {
     super.viewDidLoad()
     
+    setupTable()
     loadPlaylists()
-  }
-  
-  override func viewDidAppear(animated: Bool)
-  {
-    super.viewDidAppear(animated)
-    setupTableIfNecessary()
   }
   
   func loadPlaylists()
   {
-    pullToRefresh?.finishedLoading()
     myPlaylists = nil
     sharedPlaylists = nil
-    
     
     loadSharedPlaylists()
     loadMyPlaylists()
   }
 
-  private func setupTableIfNecessary()
+  private func setupTable()
   {
-    if pullToRefresh != nil { return }
-    
     tableView.dataSource = self
     tableView.delegate = self
-    pullToRefresh = BOZPongRefreshControl.attachToTableView(tableView, withRefreshTarget: self, andRefreshAction: "loadPlaylists")
   }
   
   private func loadMyPlaylists()
@@ -160,6 +148,11 @@ extension AllPlaylistsViewController: UITableViewDelegate {
     presentViewController(alert, animated: true, completion: nil)
   }
   
+  @IBAction func refreshTapped(sender: AnyObject)
+  {
+    loadPlaylists()
+  }
+  
   private func presentPlaylist(playlist: Playlist)
   {
     let playlistVC = PlaylistViewController(playlist: playlist)
@@ -172,7 +165,7 @@ extension AllPlaylistsViewController {
   private func playlistsForSection(section: Int) -> [Playlist]!
   {
     switch section {
-      case kOnTheGoPlaylistSection: return [UserPreferences.onTheGoPlaylist]
+      case kLocalPlaylistSection: return [UserPreferences.onTheGoPlaylist, UserPreferences.recentsPlaylist]
       case kSharedPlaylistSection: return sharedPlaylists
       case kMyPlaylistSection: return myPlaylists
       default: fatalError()
@@ -212,18 +205,5 @@ extension AllPlaylistsViewController {
     else {
       ErrorHandler.handleNetworkingError("creating playlists", error: error!)
     }
-  }
-}
-
-// MARK: - Pull To Refresh
-extension AllPlaylistsViewController {
-  func scrollViewDidScroll(scrollView: UIScrollView)
-  {
-    pullToRefresh.scrollViewDidScroll()
-  }
-  
-  func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
-  {
-    pullToRefresh.scrollViewDidEndDragging()
   }
 }

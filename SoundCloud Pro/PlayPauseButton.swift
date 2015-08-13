@@ -16,7 +16,7 @@ class PlayPauseButton: UIButton, Listener {
   
   private lazy var bufferingView: UIActivityIndicatorView = {
     let bufferingView = UIActivityIndicatorView(frame: self.bounds)
-    bufferingView.color = .defaultColor
+    bufferingView.color = .detailColor
     self.addSubview(bufferingView)
     return bufferingView
   }()

@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     initParse()
     initBackgroundAudio()
+    initNavBar()
     
     return true
   }
@@ -50,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     catch {
       ErrorHandler.handleBackgroundAudioError()
     }
+  }
+  
+  private func initNavBar()
+  {
+//    UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
+    
+    UINavigationBar.appearance().barTintColor = .backgroundColor
+    UINavigationBar.appearance().tintColor = .detailColor
   }
 }
 

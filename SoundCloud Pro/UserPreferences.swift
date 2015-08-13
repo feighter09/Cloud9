@@ -9,6 +9,7 @@
 import UIKit
 
 let kOnTheGoPlaylistName = "On The Go"
+let kRecentsPlaylistName = "Recents"
 
 class UserPreferences {
   private static let settings = NSUserDefaults.standardUserDefaults()
@@ -16,6 +17,7 @@ class UserPreferences {
   private static let upvoteKey = "upvotes"
   private static let downvoteKey = "downvotes"
   private static let onTheGoPlaylistKey = "onTheGoPlaylist"
+  private static let recentsPlaylistKey = "recentsPlaylist"
 }
 
 // MARK: - General
@@ -24,6 +26,9 @@ extension UserPreferences {
   {
     upvotes = []
     downvotes = []
+
+    recentsPlaylist = Playlist(name: "", tracks: [])
+    onTheGoPlaylist = Playlist(name: "", tracks: [])
   }
 }
 
@@ -31,32 +36,24 @@ extension UserPreferences {
 extension UserPreferences {
   class func addUpvote(track: Track)
   {
-    upvotes = upvotes + [track]
+    addTrack(track, toTracksForKey: upvoteKey)
     removeDownvote(track)
   }
   
   class func removeUpvote(track: Track)
   {
-    // Can only delete 1 at a time as per UITableView's requirements on deletion of a row
-    if let index = upvotes.indexOf({ $0 == track }) {
-      upvotes.removeAtIndex(index)
-      saveTracks(upvotes, forKey: upvoteKey)
-    }
+    removeTrack(track, fromTracksForKey: upvoteKey)
   }
   
   class func addDownvote(track: Track)
   {
-    downvotes = downvotes + [track]
+    addTrack(track, toTracksForKey: downvoteKey)
     removeUpvote(track)
   }
   
   class func removeDownvote(track: Track)
   {
-    // Can only delete 1 at a time as per UITableView's requirements on deletion of a row
-    if let index = downvotes.indexOf({ $0 == track }) {
-      downvotes.removeAtIndex(index)
-      saveTracks(downvotes, forKey: downvoteKey)
-    }
+    removeTrack(track, fromTracksForKey: downvoteKey)
   }
   
   private(set) static var upvotes: [Track] {
@@ -75,18 +72,12 @@ extension UserPreferences {
 extension UserPreferences {
   class func addTrackToOnTheGoPlaylist(track: Track)
   {
-    let newTracks = onTheGoPlaylist.tracks + [track]
-    saveTracks(newTracks, forKey: onTheGoPlaylistKey)
+    addTrack(track, toTracksForKey: onTheGoPlaylistKey)
   }
   
   class func removeTrackFromOnTheGoPlaylist(track: Track)
   {
-    var tracks = onTheGoPlaylist.tracks
-
-    if let index = tracks.indexOf({ $0 == track }) {
-      tracks.removeAtIndex(index)
-      saveTracks(tracks, forKey: onTheGoPlaylistKey)
-    }
+    removeTrack(track, fromTracksForKey: onTheGoPlaylistKey)
   }
   
   private(set) static var onTheGoPlaylist: Playlist {
@@ -95,8 +86,50 @@ extension UserPreferences {
   }
 }
 
+// MARK: - Recently Played
+extension UserPreferences {
+  class func addTrackToRecentlyPlayed(track: Track)
+  {
+    addTrack(track, toTracksForKey: recentsPlaylistKey, toBeginning: true)
+  }
+  
+  class func removeTrackFromRecentlyPlayed(track: Track)
+  {
+    removeTrack(track, fromTracksForKey: recentsPlaylistKey)
+  }
+  
+  private(set) static var recentsPlaylist: Playlist {
+    get { return Playlist(name: kRecentsPlaylistName, tracks: getTracksForKey(recentsPlaylistKey)) }
+    set { saveTracks(newValue.tracks, forKey: recentsPlaylistKey) }
+  }
+}
+
 // MARK: - Helpers
 extension UserPreferences {
+  private class func addTrack(track: Track, toTracksForKey key: String, toBeginning beginning: Bool = false)
+  {
+    var tracks = getTracksForKey(key)
+    
+    if beginning {
+      tracks.insert(track, atIndex: 0)
+    }
+    else {
+      tracks.append(track)
+    }
+    
+    saveTracks(tracks, forKey: key)
+  }
+  
+  private class func removeTrack(track: Track, fromTracksForKey key: String)
+  {
+    var tracks = getTracksForKey(key)
+    
+    if let index = tracks.indexOf({ $0 == track }) {
+      tracks.removeAtIndex(index)
+      saveTracks(tracks, forKey: key)
+    }
+  }
+  
   private class func saveTracks(tracks: [Track], forKey key: String)
   {
     let tracksData = tracks.map { NSKeyedArchiver.archivedDataWithRootObject($0) }

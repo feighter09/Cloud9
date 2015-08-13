@@ -9,7 +9,8 @@
 import UIKit
 
 extension UIColor {
-  static var defaultColor: UIColor { return UIColor.fromHex("#FF9500") }
+  static var detailColor: UIColor { return UIColor.fromHex("#FF9500") }
+  static var backgroundColor: UIColor { return UIColor.fromHex("#2B2B2B") }
 }
 
 extension UIColor {

@@ -42,6 +42,9 @@ extension SettingsViewController {
       let voteType: VoteType = (indexPath.row == 0 ? .Up : .Down)
       showVotesViewController(voteType)
     }
+    else if indexPath.section == 1 {
+      UserPreferences.clearAllSettings()
+    }
     else if indexPath.section == 2 {
       logOut()
     }

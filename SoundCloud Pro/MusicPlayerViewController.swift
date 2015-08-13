@@ -233,12 +233,15 @@ extension MusicPlayerViewController: PlaylistPickerDelegate {
 extension MusicPlayerViewController {
   func updateSeekTime()
   {
-    if track != nil {
-      let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(track)
-      scrubber.setValue(Float(seekTime), animated: true)
-    } else {
+    if track == nil {
       scrubber.setValue(0, animated: true)
+      return
     }
+    
+    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(track)
+    scrubber.setValue(Float(seekTime), animated: true)
+
+    addTrackToRecentlyPlayedIfNecessary(seekTime)
   }
   
   private func startUpdatingSeekTimeIfNecessary()
@@ -260,5 +263,17 @@ extension MusicPlayerViewController {
   {
     seekTimer?.invalidate()
     seekTimer = nil
+  }
+  
+  private func addTrackToRecentlyPlayedIfNecessary(seekTime: Double)
+  {
+    if seekTime > 30 { // I want this to shortcut going to NSUserDefaults, and you cant do an && before an 'if let'
+      if let mostRecentlyPlayed = UserPreferences.recentsPlaylist.tracks.first {
+        if mostRecentlyPlayed != track { UserPreferences.addTrackToRecentlyPlayed(track) }
+      }
+      else {
+        UserPreferences.addTrackToRecentlyPlayed(track)
+      }
+    }
   }
 }
