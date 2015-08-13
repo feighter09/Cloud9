@@ -52,7 +52,6 @@ code_sign_if_enabled() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework 'Pods-SoundCloud Pro/Alamofire.framework'
   install_framework 'Pods-SoundCloud Pro/BOZPongRefreshControl.framework'
   install_framework 'Pods-SoundCloud Pro/Bolts.framework'
   install_framework 'Pods-SoundCloud Pro/Bond.framework'
@@ -65,7 +64,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-SoundCloud Pro/SwiftyJSON.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework 'Pods-SoundCloud Pro/Alamofire.framework'
   install_framework 'Pods-SoundCloud Pro/BOZPongRefreshControl.framework'
   install_framework 'Pods-SoundCloud Pro/Bolts.framework'
   install_framework 'Pods-SoundCloud Pro/Bond.framework'

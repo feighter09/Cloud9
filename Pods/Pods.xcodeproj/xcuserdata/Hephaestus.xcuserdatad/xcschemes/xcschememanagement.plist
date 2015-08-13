@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Alamofire.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>BOZPongRefreshControl.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -72,12 +67,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>16010529C6AF82D7F24843B653916595</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1BB35621ABAFED707F12BF15B6E914A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4F7F8577F96AEBFFC46B45A66C9FC998</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>65EB674F5BA83DCC5DD33605CF3437EC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>665DFC136D512B37594B968863AC4F87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -88,6 +98,11 @@
 			<true/>
 		</dict>
 		<key>9A94071C445A38E47465790AC92A70F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A05AD231C601257C0B6E6F74662B2942</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,7 +132,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CE33E24B695916D457AFDA790E8B4A3B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D68749E7E1567ECDD3FBB643A2227320</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E05C866C1AC1A2ED5F05C227FC2BB7E6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F2AC4C21930DA8C1CA2C25A7BCB928B4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
