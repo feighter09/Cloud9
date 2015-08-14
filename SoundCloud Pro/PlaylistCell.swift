@@ -20,3 +20,13 @@ class PlaylistCell: UITableViewCell {
   
   class var nib: UINib { return UINib(nibName: "PlaylistCell", bundle: nil) }
 }
+
+// View life cycle
+extension PlaylistCell {
+  override func awakeFromNib()
+  {
+    super.awakeFromNib()
+
+    textLabel?.textColor = .detailColor    
+  }
+}

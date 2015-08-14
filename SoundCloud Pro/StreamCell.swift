@@ -44,6 +44,7 @@ class StreamCell: UITableViewCell {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var artistLabel: UILabel!
   @IBOutlet private weak var playingLabel: UILabel!
+  @IBOutlet private weak var addToPlaylistButton: UIButton!
   
   required init?(coder aDecoder: NSCoder)
   {
@@ -64,11 +65,24 @@ extension StreamCell {
   override func awakeFromNib()
   {
     super.awakeFromNib()
+    
+    setColors()
   }
   
   override func prepareForReuse()
   {
     playState = .Stopped
+  }
+  
+  private func setColors()
+  {
+    backgroundColor = .backgroundColor
+
+    titleLabel.textColor = .detailColor
+    artistLabel.textColor = .lightDetailColor
+    playingLabel.textColor = .detailColor
+    
+    addToPlaylistButton.tintColor = .detailColor
   }
 }
 

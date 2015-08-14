@@ -67,7 +67,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aDj-TR-cJU" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="4oq-gO-SXn"/>
                             <constraint firstAttribute="trailing" secondItem="0ZD-hL-sOB" secondAttribute="trailing" id="Eue-L8-dqg"/>
@@ -99,6 +99,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addToPlaylistButton" destination="0ZD-hL-sOB" id="pKH-WD-u1O"/>
                 <outlet property="artistLabel" destination="nBa-JJ-0Pz" id="dpn-Ri-B8h"/>
                 <outlet property="playingLabel" destination="aDj-TR-cJU" id="pAC-nh-li2"/>
                 <outlet property="titleLabel" destination="zsi-Tm-KZU" id="pK8-t8-Myh"/>

@@ -75,6 +75,7 @@ extension TracksTableViewController {
     super.viewDidLoad()
     
     initTable()
+    setColors()
     AudioPlayer.sharedPlayer.addListener(self)
     MusicPlayerViewController.sharedPlayer.addListener(self)
   }
@@ -98,6 +99,11 @@ extension TracksTableViewController {
         delegate?.tracksTableControllerDidScrollToEnd?(self)
       }
     }
+  }
+  
+  private func setColors()
+  {
+    tableView.separatorColor = .detailColor
   }
   
   func refreshTracks()

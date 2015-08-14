@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     initParse()
     initBackgroundAudio()
-    initNavBar()
+    setGlobalColors()
     
     return true
   }
@@ -53,12 +53,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  private func initNavBar()
-  {
-//    UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: false)
-    
+  private func setGlobalColors()
+  {    
     UINavigationBar.appearance().barTintColor = .backgroundColor
     UINavigationBar.appearance().tintColor = .detailColor
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.detailColor]
+    
+    UITableView.appearance().separatorColor = .detailColor
+    UITableView.appearance().sectionIndexBackgroundColor = .lightBackgroundColor
+    UITableView.appearance().sectionIndexColor = .detailColor
+    UITableView.appearance().backgroundColor = .backgroundColor
+
+    UITableViewCell.appearance().backgroundColor = .backgroundColor
+    UITableViewCell.appearance().textLabel?.textColor = .detailColor
   }
 }
 

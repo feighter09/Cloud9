@@ -9,6 +9,9 @@
 import UIKit
 
 class LoadingCell: UITableViewCell {
+  static var classVariable: String!
+  var instanceVariable: String!
+  
   @IBOutlet private weak var spinner: UIActivityIndicatorView!
 }
 
@@ -17,5 +20,14 @@ extension LoadingCell {
   func animate()
   {
     spinner.startAnimating()
+  }
+}
+
+// MARK: - Life Cycle
+extension LoadingCell {
+  override func awakeFromNib() {
+    super.awakeFromNib()
+
+    spinner.color = .detailColor
   }
 }

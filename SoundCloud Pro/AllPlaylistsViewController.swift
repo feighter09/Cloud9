@@ -102,21 +102,35 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
   {
+    var cell: UITableViewCell
+    
     if !rowsLoadedForSection(indexPath.section) {
       let loadingCell = tableView.dequeueReusableCellWithIdentifier(kLoadingCellIdentifier, forIndexPath: indexPath) as! LoadingCell
       loadingCell.animate()
-      return loadingCell
+      cell = loadingCell
     }
     else if playlistForSectionIsEmpty(indexPath.section) {
-      let cell = tableView.dequeueReusableCellWithIdentifier(kNoPlaylistsCellIdentifier, forIndexPath: indexPath)
-      cell.textLabel?.text = "No playlists!"
-      return cell
+      let normalCell = tableView.dequeueReusableCellWithIdentifier(kNoPlaylistsCellIdentifier, forIndexPath: indexPath)
+      normalCell.textLabel?.text = "No playlists!"
+      cell = normalCell
     }
     else {
       let playlistCell = tableView.dequeueReusableCellWithIdentifier(kPlaylistCellIdentifier, forIndexPath: indexPath) as! PlaylistCell
       playlistCell.playlist = playlistForIndexPath(indexPath)
-      return playlistCell
+      cell = playlistCell
     }
+    
+    cell.backgroundColor = .backgroundColor
+    cell.tintColor = .detailColor
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
+  {
+    let headerView = view as! UITableViewHeaderFooterView
+    headerView.contentView.backgroundColor = .backgroundColor
+    headerView.textLabel?.textColor = .detailColor
   }
   
   private func rowsLoadedForSection(section: Int) -> Bool

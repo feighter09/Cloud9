@@ -44,6 +44,4 @@ extension TabBarController {
     player.didMoveToParentViewController(self)
     player.setValue(self, forKey: "parentViewController") // such a hack, didMoveToParentViewController doesn't set parentVC
   }
-  
-  func getTabBar() -> UITabBarController? { return self }
 }
