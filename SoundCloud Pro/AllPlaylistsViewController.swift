@@ -87,6 +87,7 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
   {
     switch section {
+      case kLocalPlaylistSection: return "Local Playlists"
       case kSharedPlaylistSection: return "Shared Playlists"
       case kMyPlaylistSection: return "My Playlists"
       default: return nil
@@ -106,7 +107,6 @@ extension AllPlaylistsViewController: UITableViewDataSource {
     
     if !rowsLoadedForSection(indexPath.section) {
       let loadingCell = tableView.dequeueReusableCellWithIdentifier(kLoadingCellIdentifier, forIndexPath: indexPath) as! LoadingCell
-      loadingCell.animate()
       cell = loadingCell
     }
     else if playlistForSectionIsEmpty(indexPath.section) {
@@ -129,8 +129,13 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
   {
     let headerView = view as! UITableViewHeaderFooterView
-    headerView.contentView.backgroundColor = .backgroundColor
+    headerView.contentView.backgroundColor = .lightBackgroundColor
     headerView.textLabel?.textColor = .detailColor
+  }
+  
+  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
+  {
+    return 0.000001
   }
   
   private func rowsLoadedForSection(section: Int) -> Bool

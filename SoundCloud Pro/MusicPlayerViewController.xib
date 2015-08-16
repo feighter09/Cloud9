@@ -8,8 +8,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MusicPlayerViewController" customModule="SoundCloud_Pro" customModuleProvider="target">
             <connections>
+                <outlet property="addToPlaylistButton" destination="DrP-ls-Ugq" id="XrP-mD-NFd"/>
                 <outlet property="artistLabel" destination="meP-uY-LdL" id="AeY-5B-mCg"/>
                 <outlet property="beginningButton" destination="o0m-cy-u8S" id="Jrs-6R-YrN"/>
+                <outlet property="borderLine" destination="k1f-TO-LcP" id="Be4-7N-aJ8"/>
                 <outlet property="endButton" destination="NUV-Yf-5xv" id="eW2-pk-7j9"/>
                 <outlet property="expandContractButton" destination="yli-BO-sRW" id="aJl-Uk-vQn"/>
                 <outlet property="playPauseButton" destination="b2j-Sz-O9A" id="FZN-6x-um4"/>

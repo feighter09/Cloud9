@@ -25,6 +25,7 @@ class PlayPauseButton: UIButton, Listener {
   {
     super.init(coder: aDecoder)
     
+    setColors()
     makeCircular()
     updateImage()
   }
@@ -32,6 +33,11 @@ class PlayPauseButton: UIButton, Listener {
 
 // MARK: - Helpers
 extension PlayPauseButton {
+  private func setColors()
+  {
+    tintColor = .detailColor
+  }
+  
   private func makeCircular()
   {
     layer.cornerRadius = CGRectGetWidth(bounds) / 2

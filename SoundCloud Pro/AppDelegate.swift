@@ -60,12 +60,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.detailColor]
     
     UITableView.appearance().separatorColor = .detailColor
-    UITableView.appearance().sectionIndexBackgroundColor = .lightBackgroundColor
-    UITableView.appearance().sectionIndexColor = .detailColor
     UITableView.appearance().backgroundColor = .backgroundColor
 
     UITableViewCell.appearance().backgroundColor = .backgroundColor
-    UITableViewCell.appearance().textLabel?.textColor = .detailColor
+
+    let selectedBackgroundView = UIView()
+    selectedBackgroundView.backgroundColor = .lightBackgroundColor
+    UITableViewCell.appearance().selectedBackgroundView = selectedBackgroundView
+    
+    if #available(iOS 9.0, *) {
+      UILabel.appearanceWhenContainedInInstancesOfClasses([UITableViewCell.self]).textColor = .detailColor
+    }
+
   }
 }
 

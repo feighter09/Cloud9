@@ -29,5 +29,6 @@ extension LoadingCell {
     super.awakeFromNib()
 
     spinner.color = .detailColor
+    animate()
   }
 }

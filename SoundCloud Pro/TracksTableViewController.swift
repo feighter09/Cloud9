@@ -75,7 +75,6 @@ extension TracksTableViewController {
     super.viewDidLoad()
     
     initTable()
-    setColors()
     AudioPlayer.sharedPlayer.addListener(self)
     MusicPlayerViewController.sharedPlayer.addListener(self)
   }
@@ -84,26 +83,38 @@ extension TracksTableViewController {
   {
     tableView.registerNib(StreamCell.nib, forCellReuseIdentifier: kStreamCellIdentifier)
     
+    setupTableViewAppearance()
+    setupPullToRefreshAndInfiniteScrollingIfNecessary()
+  }
+  
+  private func setupTableViewAppearance()
+  {
     tableView.estimatedRowHeight = 59
     tableView.rowHeight = UITableViewAutomaticDimension
 
-    tableView.tableFooterView = UIView(frame: CGRectZero)
+    tableView.separatorInset = UIEdgeInsetsZero
+    tableView.separatorColor = .detailColor
 
+    tableView.tableFooterView = UIView(frame: CGRectZero)
+  }
+  
+  private func setupPullToRefreshAndInfiniteScrollingIfNecessary()
+  {
     if pullToRefreshEnabled {
-      pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView, withRefreshTarget: self, andRefreshAction: "refreshTracks")
-      pullToRefresh!.backgroundColor = .orangeColor()
+      pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView,
+                                                               withRefreshTarget: self,
+                                                               andRefreshAction: "refreshTracks")
+      pullToRefresh!.backgroundColor = .detailColor
     }
     
     if infiniteScrollingEnabled {
       tableView.addInfiniteScrollingWithActionHandler { () -> Void in
         delegate?.tracksTableControllerDidScrollToEnd?(self)
       }
+      
+      let activityIndicator = tableView.infiniteScrollingView.valueForKey("activityIndicatorView") as! UIActivityIndicatorView
+      activityIndicator.color = .detailColor
     }
-  }
-  
-  private func setColors()
-  {
-    tableView.separatorColor = .detailColor
   }
   
   func refreshTracks()

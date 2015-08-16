@@ -46,6 +46,9 @@ class MusicPlayerViewController: UIViewController {
   @IBOutlet private weak var scrubber: UISlider!
   
   @IBOutlet private weak var expandContractButton: UIButton!
+  @IBOutlet private weak var addToPlaylistButton: UIButton!
+  @IBOutlet private weak var borderLine: UIView!
+  
   @IBOutlet private weak var voteControlsHeight: NSLayoutConstraint!
   @IBOutlet private weak var playbackControlsHeight: NSLayoutConstraint!
   
@@ -72,9 +75,22 @@ extension MusicPlayerViewController {
   {
     super.viewDidLoad()
     
-    titleLabel.text = ""
+    titleLabel.text = "No song playing"
     artistLabel.text = ""
+    setColors()
+    
     AudioPlayer.sharedPlayer.addListener(self)
+  }
+  
+  private func setColors()
+  {
+    titleLabel.textColor = .detailColor
+    artistLabel.textColor = .detailColor
+    scrubber.tintColor = .detailColor
+    addToPlaylistButton.tintColor = .detailColor
+
+    expandContractButton.tintColor = .lightDetailColor
+    borderLine.backgroundColor = .lightDetailColor
   }
 }
 
