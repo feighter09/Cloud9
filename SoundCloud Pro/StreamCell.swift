@@ -46,6 +46,7 @@ class StreamCell: UITableViewCell {
   {
     super.init(coder: aDecoder)
     AudioPlayer.sharedPlayer.addListener(self)
+    MusicPlayerViewController.sharedPlayer.addListener(self)
   }
 
   deinit
@@ -154,6 +155,14 @@ extension StreamCell: AudioPlayerListener {
   {
     if track == self.track { playState = AudioPlayer.sharedPlayer.playState }
     else { playState = .Stopped }
+  }
+}
+
+// MARK: - Music Player Listener
+extension StreamCell: Listener, MusicControllerListener {
+  func musicPlayer(musicPlayer: MusicPlayerViewController, didTapUpvoteTrack track: Track)
+  {
+    if track == self.track { updateUpDownButtons() }
   }
 }
 

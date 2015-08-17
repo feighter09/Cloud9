@@ -8,11 +8,9 @@
 
 import UIKit
 
-
-let kMusicPlayerContractedHeight: CGFloat = 50
-let kMusicPlayerExpandedHeight: CGFloat = 130
-let kVoteControlsDefaultHeight: CGFloat = 44
-let kPlaybackControlsHeight: CGFloat = 32
+let kMusicPlayerContractedHeight: CGFloat = 64
+let kMusicPlayerExpandedHeight: CGFloat = 98
+let kAdditionalControlsHeight: CGFloat = 32
 
 @objc protocol MusicControllerListener: Listener {
   optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
@@ -49,7 +47,7 @@ class MusicPlayerViewController: UIViewController {
   @IBOutlet private weak var addToPlaylistButton: UIButton!
   @IBOutlet private weak var borderLine: UIView!
   
-  @IBOutlet private weak var voteControlsHeight: NSLayoutConstraint!
+  @IBOutlet private weak var addToPlaylistHeight: NSLayoutConstraint!
   @IBOutlet private weak var playbackControlsHeight: NSLayoutConstraint!
   
   var listenerId = 0
@@ -193,8 +191,8 @@ extension MusicPlayerViewController {
       let transform = (expand ? CATransform3DMakeRotation(CGFloat(M_PI), 1, 0, 0) : CATransform3DIdentity)
       self.expandContractButton.imageView!.layer.transform = transform
       
-      self.voteControlsHeight.constant = (expand ? kVoteControlsDefaultHeight : 0)
-      self.playbackControlsHeight.constant = (expand ? kPlaybackControlsHeight: 0)
+      self.addToPlaylistHeight.constant = (expand ? kAdditionalControlsHeight : 0)
+      self.playbackControlsHeight.constant = (expand ? kAdditionalControlsHeight: 0)
 
       self.view.frame = CGRect(x: oldFrame.origin.x,
                                y: yOffset,
