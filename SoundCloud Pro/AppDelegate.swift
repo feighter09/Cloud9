@@ -31,6 +31,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     initBackgroundAudio()
     setGlobalColors()
     
+    showLoginViewControllerIfNecessary()
+    
     return true
   }
   
@@ -61,6 +63,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setTableViewCellColors()
     
     setSearchBarColors()
+  }
+  
+  private func showLoginViewControllerIfNecessary()
+  {
+    if SCSoundCloud.account() == nil || PFUser.currentUser() == nil {
+      let storyboard = UIStoryboard(name: "Main", bundle: nil)
+      let loginViewController = storyboard.instantiateViewControllerWithIdentifier(kLoginViewControllerIdentifier)
+      window!.rootViewController = loginViewController
+      window?.makeKeyAndVisible()
+    }
   }
   
   private func setNavigationBarColors()

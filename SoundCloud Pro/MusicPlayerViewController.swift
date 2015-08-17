@@ -86,7 +86,7 @@ extension MusicPlayerViewController {
   {
     titleLabel.textColor = .primaryColor
     artistLabel.textColor = .primaryColor
-    scrubber.tintColor = .primaryColor
+    scrubber.tintColor = .secondaryColor
     addToPlaylistButton.tintColor = .secondaryColor
 
     expandContractButton.tintColor = .secondaryColor

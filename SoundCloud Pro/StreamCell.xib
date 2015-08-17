@@ -9,26 +9,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" verticalCompressionResistancePriority="250" selectionStyle="default" indentationWidth="10" reuseIdentifier="streamCell" rowHeight="114" id="KGk-i7-Jjw" customClass="StreamCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="105"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="97"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="104"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="96"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsi-Tm-KZU">
-                        <rect key="frame" x="8" y="8" width="262" height="45"/>
+                        <rect key="frame" x="8" y="8" width="262" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBa-JJ-0Pz">
-                        <rect key="frame" x="8" y="57" width="36" height="17"/>
+                        <rect key="frame" x="8" y="33" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1B-e5-SqN">
-                        <rect key="frame" x="274" y="4" width="38" height="96"/>
+                        <rect key="frame" x="274" y="0.0" width="38" height="96"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf" userLabel="downVote">
                                 <rect key="frame" x="0.0" y="32" width="38" height="32"/>
@@ -55,12 +55,12 @@
                                     <action selector="upVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VvX-dR-HyZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-hL-sOB">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-hL-sOB">
                                 <rect key="frame" x="0.0" y="64" width="38" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="xFy-4V-W7O"/>
                                 </constraints>
-                                <inset key="contentEdgeInsets" minX="1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="1" minY="-5" maxX="1" maxY="5"/>
                                 <state key="normal" image="plus"/>
                                 <connections>
                                     <action selector="addToPlaylist:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fIu-VN-Ha7"/>
@@ -83,7 +83,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="[playing]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDj-TR-cJU">
-                        <rect key="frame" x="8" y="78" width="57" height="22"/>
+                        <rect key="frame" x="8" y="54" width="57" height="22"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="22" id="qSl-KJ-S2e"/>
                         </constraints>
@@ -93,15 +93,15 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="aDj-TR-cJU" secondAttribute="bottom" constant="4" id="3kk-xp-6Cy"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aDj-TR-cJU" secondAttribute="bottom" constant="4" id="3kk-xp-6Cy"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="top" secondItem="zsi-Tm-KZU" secondAttribute="bottom" constant="4" id="7RR-S6-Few"/>
                     <constraint firstAttribute="trailing" secondItem="d1B-e5-SqN" secondAttribute="trailing" constant="8" id="Fvr-3M-SiG"/>
-                    <constraint firstItem="d1B-e5-SqN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Sk1-fd-e1I"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" id="Sk1-fd-e1I"/>
                     <constraint firstItem="zsi-Tm-KZU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="UOI-RB-2vv"/>
                     <constraint firstItem="aDj-TR-cJU" firstAttribute="top" secondItem="nBa-JJ-0Pz" secondAttribute="bottom" constant="4" id="Y65-zw-Fzy"/>
                     <constraint firstItem="zsi-Tm-KZU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bKx-dj-9v8"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="d1B-e5-SqN" secondAttribute="bottom" constant="4" id="fbL-ae-crJ"/>
-                    <constraint firstItem="d1B-e5-SqN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hJy-nF-vDN"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="d1B-e5-SqN" secondAttribute="bottom" id="fbL-ae-crJ"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" priority="750" id="hJy-nF-vDN"/>
                     <constraint firstItem="d1B-e5-SqN" firstAttribute="leading" secondItem="zsi-Tm-KZU" secondAttribute="trailing" constant="4" id="pjB-sQ-PjS"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="plW-0w-QP4"/>
                     <constraint firstItem="aDj-TR-cJU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="slX-sg-3ii"/>

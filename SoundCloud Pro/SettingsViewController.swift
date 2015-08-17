@@ -63,19 +63,26 @@ extension SettingsViewController {
   
   private func logOut()
   {
+    let keyWindow = UIApplication.sharedApplication().keyWindow!
+    if keyWindow.rootViewController! is LoginViewController {
+      keyWindow.rootViewController!.dismissViewControllerAnimated(true, completion: { () -> Void in
+        self.revokeAccess()
+      })
+    }
+    else {
+      revokeAccess()
+      let loginViewController = storyboard!.instantiateViewControllerWithIdentifier(kLoginViewControllerIdentifier)
+      keyWindow.rootViewController = loginViewController
+    }
+  }
+  
+  private func revokeAccess()
+  {
     SCSoundCloud.removeAccess()
     PFUser.logOutInBackgroundWithBlock({ (error) -> Void in
-      if error == nil {
-        self.showLogin()
-      }
-      else {
+      if error != nil {
         ErrorHandler.handleNetworkingError("logging out - lol", error: error)
       }
     })
-  }
-  
-  private func showLogin()
-  {
-    tabBarController?.selectedIndex = 0
   }
 }

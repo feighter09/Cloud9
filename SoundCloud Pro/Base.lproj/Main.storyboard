@@ -251,6 +251,43 @@
             </objects>
             <point key="canvasLocation" x="2172" y="3159"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="OEX-g2-jfY">
+            <objects>
+                <viewController id="JWf-lZ-Mmu" customClass="LoginViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="80R-ca-KqU"/>
+                        <viewControllerLayoutGuide type="bottom" id="J9t-ev-jBh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YKa-H4-Qxg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7k-kU-JoU">
+                                <rect key="frame" x="178" y="511" width="245" height="69"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <inset key="contentEdgeInsets" minX="8" minY="20" maxX="8" maxY="20"/>
+                                <state key="normal" title="Login To SoundCloud"/>
+                                <connections>
+                                    <action selector="loginTapped:" destination="JWf-lZ-Mmu" eventType="touchUpInside" id="xj0-Cj-mgX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Y7k-kU-JoU" firstAttribute="centerX" secondItem="YKa-H4-Qxg" secondAttribute="centerX" id="dXj-Vu-vnE"/>
+                            <constraint firstItem="J9t-ev-jBh" firstAttribute="top" secondItem="Y7k-kU-JoU" secondAttribute="bottom" constant="20" id="tcV-A3-aRR"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="QF8-iE-g3z"/>
+                    <connections>
+                        <outlet property="loginButton" destination="Y7k-kU-JoU" id="fAi-nX-srY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="27m-CZ-87U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="718" y="1412"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="60k-LG-Uqm">
             <objects>
@@ -449,6 +486,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8xa-pF-8qt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1498" y="1190"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TJO-jq-rRT">
+            <objects>
+                <navigationController storyboardIdentifier="loginViewController" automaticallyAdjustsScrollViewInsets="NO" id="Dc1-8m-kSB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="s6R-am-aTj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JWf-lZ-Mmu" kind="relationship" relationship="rootViewController" id="IoG-Hp-ZQR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2pU-kN-fFI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50" y="1412"/>
         </scene>
     </scenes>
     <resources>
