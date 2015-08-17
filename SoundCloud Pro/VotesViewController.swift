@@ -47,8 +47,11 @@ extension VotesViewController {
   
   private func setupTableView()
   {
-    tableView.registerClass(VoteCell.self, forCellReuseIdentifier: kVotesCellIdentifier)
+    tableView.registerNib(VoteCell.nib, forCellReuseIdentifier: kVotesCellIdentifier)
     tableView.tableFooterView = UIView(frame: CGRectZero)
+    
+    tableView.estimatedRowHeight = 44
+    tableView.rowHeight = UITableViewAutomaticDimension
     
     tableView.dataSource = self
   }

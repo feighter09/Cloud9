@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setTableViewColors()
     setTableViewCellColors()
     
-    setSearchBarColors()
+    setSearchColors()
   }
   
   private func showLoginViewControllerIfNecessary()
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func setTableViewColors()
   {
-    UITableView.appearance().separatorColor = .primaryColor
+    UITableView.appearance().separatorColor = .secondaryColor
     UITableView.appearance().backgroundColor = .backgroundColor
   }
   
@@ -101,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
   }
   
-  private func setSearchBarColors()
+  private func setSearchColors()
   {
     UISearchBar.appearance().backgroundColor = .backgroundColor
     UISearchBar.appearance().tintColor = .lightBackgroundColor
@@ -109,6 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if #available(iOS 9.0, *) {
       UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = .secondaryColor
     }
+    
+    UITextField.appearance().keyboardAppearance = .Dark
   }
 }
 

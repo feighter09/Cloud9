@@ -93,7 +93,6 @@ extension TracksTableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
 
     tableView.separatorInset = UIEdgeInsetsZero
-    tableView.separatorColor = .primaryColor
 
     tableView.tableFooterView = UIView(frame: CGRectZero)
   }
@@ -255,6 +254,11 @@ extension TracksTableViewController {
       let track = tracks[indexPath.row]
       removeTrack(track)
     }
+  }
+  
+  override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle
+  {
+    return tableView.editing ? .Delete : .None
   }
 }
 

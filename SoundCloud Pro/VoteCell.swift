@@ -19,4 +19,17 @@ class VoteCell: UITableViewCell {
 
 // MARK: - Life Cycle
 extension VoteCell {
+  class var nib: UINib { return UINib(nibName: "VoteCell", bundle: nil) }
+  
+  override func awakeFromNib()
+  {
+    super.awakeFromNib()    
+    setColors()
+  }
+  
+  private func setColors()
+  {
+    textLabel?.textColor = .primaryColor
+    detailTextLabel?.textColor = .secondaryColor
+  }
 }
