@@ -59,7 +59,7 @@ extension SearchViewController {
   
   private func setupSearchResults()
   {
-    searchResultsController.tracksPlayOnSelect = false
+//    searchResultsController.tracksPlayOnSelect = false
     
     let hideKeyboardRecognizer = UITapGestureRecognizer(target: searchBar, action: "resignFirstResponder")
     hideKeyboardRecognizer.cancelsTouchesInView = false

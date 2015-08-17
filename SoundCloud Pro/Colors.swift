@@ -9,10 +9,10 @@
 import UIKit
 
 extension UIColor {
-  static var detailColor: UIColor { return UIColor.fromHex("#FF5E3A") }
-  static var lightDetailColor: UIColor { return UIColor.fromHex("#FF2A68") }
-  static var backgroundColor: UIColor { return UIColor.fromHex("#2B2B2B") }
-  static var lightBackgroundColor: UIColor { return UIColor.fromHex("#4A4A4A") }
+  static var primaryColor: UIColor { return UIColor.fromHex("#F4F7F5") }
+  static var secondaryColor: UIColor { return UIColor.fromHex("#EF2D56") }
+  static var backgroundColor: UIColor { return UIColor.fromHex("#1B2021") }
+  static var lightBackgroundColor: UIColor { return UIColor.fromHex("#747572") }
 }
 
 extension UIColor {

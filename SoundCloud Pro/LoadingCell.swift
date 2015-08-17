@@ -28,7 +28,7 @@ extension LoadingCell {
   override func awakeFromNib() {
     super.awakeFromNib()
 
-    spinner.color = .detailColor
+    spinner.color = .secondaryColor
     animate()
   }
 }

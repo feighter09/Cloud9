@@ -93,7 +93,7 @@ extension TracksTableViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
 
     tableView.separatorInset = UIEdgeInsetsZero
-    tableView.separatorColor = .detailColor
+    tableView.separatorColor = .primaryColor
 
     tableView.tableFooterView = UIView(frame: CGRectZero)
   }
@@ -104,7 +104,7 @@ extension TracksTableViewController {
       pullToRefresh = BOZPongRefreshControl.attachToScrollView(tableView,
                                                                withRefreshTarget: self,
                                                                andRefreshAction: "refreshTracks")
-      pullToRefresh!.backgroundColor = .detailColor
+      pullToRefresh!.backgroundColor = .secondaryColor
     }
     
     if infiniteScrollingEnabled {
@@ -113,7 +113,7 @@ extension TracksTableViewController {
       }
       
       let activityIndicator = tableView.infiniteScrollingView.valueForKey("activityIndicatorView") as! UIActivityIndicatorView
-      activityIndicator.color = .detailColor
+      activityIndicator.color = .primaryColor
     }
   }
   

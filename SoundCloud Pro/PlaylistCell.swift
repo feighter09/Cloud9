@@ -27,6 +27,6 @@ extension PlaylistCell {
   {
     super.awakeFromNib()
 
-    textLabel?.textColor = .detailColor    
+    textLabel?.textColor = .primaryColor    
   }
 }

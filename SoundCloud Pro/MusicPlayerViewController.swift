@@ -84,13 +84,16 @@ extension MusicPlayerViewController {
   
   private func setColors()
   {
-    titleLabel.textColor = .detailColor
-    artistLabel.textColor = .detailColor
-    scrubber.tintColor = .detailColor
-    addToPlaylistButton.tintColor = .detailColor
+    titleLabel.textColor = .primaryColor
+    artistLabel.textColor = .primaryColor
+    scrubber.tintColor = .primaryColor
+    addToPlaylistButton.tintColor = .secondaryColor
 
-    expandContractButton.tintColor = .lightDetailColor
-    borderLine.backgroundColor = .lightDetailColor
+    expandContractButton.tintColor = .secondaryColor
+    expandContractButton.backgroundColor = .lightBackgroundColor
+    borderLine.backgroundColor = .secondaryColor
+    
+    view.backgroundColor = .lightBackgroundColor
   }
 }
 

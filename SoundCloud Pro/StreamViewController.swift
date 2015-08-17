@@ -25,6 +25,8 @@ extension StreamViewController {
   {
     super.viewDidLoad()
     setupStreamList()
+    
+    navigationItem.titleView = UIImageView(image: UIImage(named: "cloud9LogoRedWhite")!)
   }
 
   override func viewDidAppear(animated: Bool)

@@ -55,11 +55,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func setGlobalColors()
   {    
-    UINavigationBar.appearance().barTintColor = .backgroundColor
-    UINavigationBar.appearance().tintColor = .detailColor
-    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.detailColor]
+    UINavigationBar.appearance().barTintColor = .lightBackgroundColor
+    UINavigationBar.appearance().tintColor = .primaryColor
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.primaryColor]
     
-    UITableView.appearance().separatorColor = .detailColor
+    UITableView.appearance().separatorColor = .primaryColor
     UITableView.appearance().backgroundColor = .backgroundColor
 
     UITableViewCell.appearance().backgroundColor = .backgroundColor
@@ -69,9 +69,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     UITableViewCell.appearance().selectedBackgroundView = selectedBackgroundView
     
     if #available(iOS 9.0, *) {
-      UILabel.appearanceWhenContainedInInstancesOfClasses([UITableViewCell.self]).textColor = .detailColor
+      UILabel.appearanceWhenContainedInInstancesOfClasses([UITableViewCell.self]).textColor = .primaryColor
     }
-
+    
+//    UIFont.setNewDefaultFont()
   }
 }
 

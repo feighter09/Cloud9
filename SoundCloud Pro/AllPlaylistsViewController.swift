@@ -96,9 +96,9 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
-    if !rowsLoadedForSection(section) || playlistForSectionIsEmpty(section) { return 1 }
+    if !rowsLoadedForSection(section) || playlistsForSectionIsEmpty(section) { return 1 }
     
-    return playlistsForSection(section).count
+    return playlistsForSection(section)!.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
@@ -107,9 +107,10 @@ extension AllPlaylistsViewController: UITableViewDataSource {
     
     if !rowsLoadedForSection(indexPath.section) {
       let loadingCell = tableView.dequeueReusableCellWithIdentifier(kLoadingCellIdentifier, forIndexPath: indexPath) as! LoadingCell
+      loadingCell.animate()
       cell = loadingCell
     }
-    else if playlistForSectionIsEmpty(indexPath.section) {
+    else if playlistsForSectionIsEmpty(indexPath.section) {
       let normalCell = tableView.dequeueReusableCellWithIdentifier(kNoPlaylistsCellIdentifier, forIndexPath: indexPath)
       normalCell.textLabel?.text = "No playlists!"
       cell = normalCell
@@ -121,7 +122,7 @@ extension AllPlaylistsViewController: UITableViewDataSource {
     }
     
     cell.backgroundColor = .backgroundColor
-    cell.tintColor = .detailColor
+    cell.tintColor = .primaryColor
     
     return cell
   }
@@ -129,8 +130,8 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
   {
     let headerView = view as! UITableViewHeaderFooterView
-    headerView.contentView.backgroundColor = .lightBackgroundColor
-    headerView.textLabel?.textColor = .detailColor
+    headerView.contentView.backgroundColor = .backgroundColor
+    headerView.textLabel?.textColor = .secondaryColor
   }
   
   func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
@@ -181,7 +182,7 @@ extension AllPlaylistsViewController: UITableViewDelegate {
 
 // MARK: - Helpers
 extension AllPlaylistsViewController {
-  private func playlistsForSection(section: Int) -> [Playlist]!
+  private func playlistsForSection(section: Int) -> [Playlist]?
   {
     switch section {
       case kLocalPlaylistSection: return [UserPreferences.onTheGoPlaylist, UserPreferences.recentsPlaylist]
@@ -191,15 +192,22 @@ extension AllPlaylistsViewController {
     }
   }
   
-  private func playlistForIndexPath(indexPath: NSIndexPath) -> Playlist!
+  private func playlistForIndexPath(indexPath: NSIndexPath) -> Playlist?
   {
-    let playlist = playlistsForSection(indexPath.section)
-    return playlist.count > 0 ? playlist[indexPath.row] : nil
+    if let playlists = playlistsForSection(indexPath.section) {
+      return playlists.count > 0 ? playlists[indexPath.row] : nil
+    }
+
+    return nil
   }
   
-  private func playlistForSectionIsEmpty(section: Int) -> Bool
+  private func playlistsForSectionIsEmpty(section: Int) -> Bool
   {
-    return playlistsForSection(section).count == 0
+    if let playlists = playlistsForSection(section) {
+      return playlists.count == 0
+    }
+    
+    return true
   }
 
   private func showAddPlaylistAlert(playlistType: PlaylistType)

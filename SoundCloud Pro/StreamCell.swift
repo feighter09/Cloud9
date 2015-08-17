@@ -78,11 +78,11 @@ extension StreamCell {
   {
     backgroundColor = .backgroundColor
 
-    titleLabel.textColor = .detailColor
-    artistLabel.textColor = .lightDetailColor
-    playingLabel.textColor = .detailColor
+    titleLabel.textColor = .primaryColor
+    artistLabel.textColor = .secondaryColor
+    playingLabel.textColor = .primaryColor
     
-    addToPlaylistButton.tintColor = .detailColor
+    addToPlaylistButton.tintColor = .secondaryColor
   }
 }
 

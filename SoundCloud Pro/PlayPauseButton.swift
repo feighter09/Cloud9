@@ -16,7 +16,7 @@ class PlayPauseButton: UIButton, Listener {
   
   private lazy var bufferingView: UIActivityIndicatorView = {
     let bufferingView = UIActivityIndicatorView(frame: self.bounds)
-    bufferingView.color = .detailColor
+    bufferingView.color = .primaryColor
     self.addSubview(bufferingView)
     return bufferingView
   }()
@@ -35,7 +35,8 @@ class PlayPauseButton: UIButton, Listener {
 extension PlayPauseButton {
   private func setColors()
   {
-    tintColor = .detailColor
+    tintColor = .primaryColor
+    backgroundColor = .clearColor()
   }
   
   private func makeCircular()
