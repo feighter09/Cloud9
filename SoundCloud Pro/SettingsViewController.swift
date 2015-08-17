@@ -27,6 +27,10 @@ extension SettingsViewController {
   {
     super.viewDidLoad()
     
+    navigationItem.titleView = UIImageView(image: UIImage(named: "cloud9LogoRedWhite")!)
+    
+    tableView.separatorColor = .secondaryColor
+    
     tableView.frame = UIView.rectWithinBars()
     view.layoutIfNeeded()
   }

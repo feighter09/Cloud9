@@ -15,7 +15,7 @@ let kLocalPlaylistSection = 0
 let kSharedPlaylistSection = 1
 let kMyPlaylistSection = 2
 
-class AllPlaylistsViewController: UIViewController {
+class AllPlaylistsViewController: LogoImageViewController {
   var sharedPlaylists: [Playlist]! {
     didSet { tableView.reloadData() }
   }
@@ -87,7 +87,7 @@ extension AllPlaylistsViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
   {
     switch section {
-      case kLocalPlaylistSection: return "Local Playlists"
+      case kLocalPlaylistSection: return "Offline Playlists"
       case kSharedPlaylistSection: return "Shared Playlists"
       case kMyPlaylistSection: return "My Playlists"
       default: return nil

@@ -15,6 +15,8 @@
 		7A02E5C91B750607007C8099 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A02E5C81B750607007C8099 /* NavigationController.swift */; };
 		7A07D87A1B80FC77006ADBEB /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07D8791B80FC77006ADBEB /* Fonts.swift */; };
 		7A07D87D1B814767006ADBEB /* Fonts.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A07D87C1B814767006ADBEB /* Fonts.m */; };
+		7A07D87F1B81951E006ADBEB /* LogoImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A07D87E1B81951E006ADBEB /* LogoImageViewController.swift */; };
+		7A07D8811B81A39A006ADBEB /* Attributions in Resources */ = {isa = PBXBuildFile; fileRef = 7A07D8801B81A39A006ADBEB /* Attributions */; };
 		7A1351C81B6822B700C2F7FA /* VotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351C71B6822B700C2F7FA /* VotesViewController.swift */; };
 		7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CB1B68544C00C2F7FA /* VoteCell.swift */; };
 		7A1351D01B68594600C2F7FA /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */; };
@@ -82,6 +84,8 @@
 		7A07D8791B80FC77006ADBEB /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		7A07D87B1B814767006ADBEB /* Fonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fonts.h; sourceTree = "<group>"; };
 		7A07D87C1B814767006ADBEB /* Fonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fonts.m; sourceTree = "<group>"; };
+		7A07D87E1B81951E006ADBEB /* LogoImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoImageViewController.swift; sourceTree = "<group>"; };
+		7A07D8801B81A39A006ADBEB /* Attributions */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Attributions; sourceTree = "<group>"; };
 		7A1351C71B6822B700C2F7FA /* VotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VotesViewController.swift; sourceTree = "<group>"; };
 		7A1351CB1B68544C00C2F7FA /* VoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
 		7A1351CF1B68594600C2F7FA /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +250,7 @@
 				7A02E5BC1B73F99C007C8099 /* MusicPlayerViewController.swift */,
 				7A02E5BD1B73F99C007C8099 /* MusicPlayerViewController.xib */,
 				7A02E5C81B750607007C8099 /* NavigationController.swift */,
+				7A07D87E1B81951E006ADBEB /* LogoImageViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				7AFFA7611B42E9BB0002BB84 /* Images.xcassets */,
 				7A3BE03B1B50336900652345 /* SoundCloud_Pro-Bridging-Header.h */,
 				7AFFA7561B42E9BB0002BB84 /* Info.plist */,
+				7A07D8801B81A39A006ADBEB /* Attributions */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				7A5D24DB1B78383F00C6CEF6 /* SearchViewController.xib in Resources */,
 				7AFFA7621B42E9BB0002BB84 /* Images.xcassets in Resources */,
 				7A02E5B51B73C43C007C8099 /* VotesViewController.xib in Resources */,
+				7A07D8811B81A39A006ADBEB /* Attributions in Resources */,
 				7AAB560D1B5197A600817B5C /* StreamCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -555,6 +562,7 @@
 				7AFFA75B1B42E9BB0002BB84 /* SoundCloud_Pro.xcdatamodeld in Sources */,
 				7A1F5A0C1B5F4DD6002F60F5 /* Utilities.swift in Sources */,
 				7A759E3C1B7918AD0046EEAA /* MusicPlayerView.swift in Sources */,
+				7A07D87F1B81951E006ADBEB /* LogoImageViewController.swift in Sources */,
 				7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */,
 				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7A5FA5E21B69A972009467B7 /* AllPlaylistsViewController.swift in Sources */,

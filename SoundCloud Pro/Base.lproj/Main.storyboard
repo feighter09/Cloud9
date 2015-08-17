@@ -360,7 +360,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="mob-PE-1yR">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="mob-PE-1yR">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Gq8-Ho-eKt"/>

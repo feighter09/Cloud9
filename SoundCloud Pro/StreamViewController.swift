@@ -11,7 +11,7 @@ import Parse
 
 let kTableViewOffset: CGFloat = 64
 
-class StreamViewController: UIViewController {
+class StreamViewController: LogoImageViewController {
   private lazy var tracksList: TracksTableViewController = {
     let tracks = TracksTableViewController()
     tracks.pullToRefreshEnabled = true
@@ -25,8 +25,6 @@ extension StreamViewController {
   {
     super.viewDidLoad()
     setupStreamList()
-    
-    navigationItem.titleView = UIImageView(image: UIImage(named: "cloud9LogoRedWhite")!)
   }
 
   override func viewDidAppear(animated: Bool)
@@ -82,6 +80,7 @@ extension StreamViewController {
   
   private func loadStreamWithAlert(showAlert: Bool)
   {
+    // TODO: If it's still loading, going away and back to this VC makes 2 alerts show
     let alert: SCLAlertView? = (showAlert ? Utilities.showLoadingAlert("Buffering Stream", onViewController: self) : nil)
 
     SoundCloud.getStream({ (tracks, error) -> Void in

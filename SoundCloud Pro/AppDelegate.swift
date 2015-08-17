@@ -55,15 +55,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   private func setGlobalColors()
   {    
+    setNavigationBarColors()
+
+    setTableViewColors()
+    setTableViewCellColors()
+    
+    setSearchBarColors()
+  }
+  
+  private func setNavigationBarColors()
+  {
     UINavigationBar.appearance().barTintColor = .lightBackgroundColor
     UINavigationBar.appearance().tintColor = .primaryColor
     UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.primaryColor]
-    
+  }
+  
+  private func setTableViewColors()
+  {
     UITableView.appearance().separatorColor = .primaryColor
     UITableView.appearance().backgroundColor = .backgroundColor
-
+  }
+  
+  private func setTableViewCellColors()
+  {
     UITableViewCell.appearance().backgroundColor = .backgroundColor
-
+    
     let selectedBackgroundView = UIView()
     selectedBackgroundView.backgroundColor = .lightBackgroundColor
     UITableViewCell.appearance().selectedBackgroundView = selectedBackgroundView
@@ -71,8 +87,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if #available(iOS 9.0, *) {
       UILabel.appearanceWhenContainedInInstancesOfClasses([UITableViewCell.self]).textColor = .primaryColor
     }
+  }
+  
+  private func setSearchBarColors()
+  {
+    UISearchBar.appearance().backgroundColor = .backgroundColor
+    UISearchBar.appearance().tintColor = .lightBackgroundColor
     
-//    UIFont.setNewDefaultFont()
+    if #available(iOS 9.0, *) {
+      UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = .secondaryColor
+    }
   }
 }
 

@@ -31,8 +31,7 @@ extension PlaylistPickerViewController {
   {
     super.viewDidLoad()
     
-    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+    setupNavBar()
 
     tableView.registerNib(PlaylistCell.nib, forCellReuseIdentifier: kPlaylistCellIdentifier)
     loadPlaylists()
@@ -86,15 +85,28 @@ extension PlaylistPickerViewController {
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    
     let cell = tableView.cellForRowAtIndexPath(indexPath)!
     let cellChecked = cell.accessoryType == .Checkmark
     cell.accessoryType = (cellChecked ? .None : .Checkmark)
+    cell.tintColor = .secondaryColor
+    
     selectedIndices.insert(indexPath)
   }
 }
 
 // MARK: - Helpers
 extension PlaylistPickerViewController {
+  private func setupNavBar()
+  {
+    navigationItem.title = "Add To Playlist"
+    navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.secondaryColor]
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done")
+  }
+  
   private func isOnTheGoPlaylistIndex(indexPath: NSIndexPath) -> Bool
   {
     return indexPath.row == 0

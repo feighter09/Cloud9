@@ -113,7 +113,7 @@ extension TracksTableViewController {
       }
       
       let activityIndicator = tableView.infiniteScrollingView.valueForKey("activityIndicatorView") as! UIActivityIndicatorView
-      activityIndicator.color = .primaryColor
+      activityIndicator.color = .secondaryColor
     }
   }
   
@@ -185,6 +185,23 @@ extension TracksTableViewController: StreamCellDelegate {
   }
   
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
+  {
+    showAddToPlaylistWithTrack(track)
+  }
+  
+  func streamCell(streamCell: StreamCell, didTapMoreWithTrack track: Track)
+  {
+    let alert = UIAlertController(title: nil, message: nil, preferredStyle: .Alert)
+    alert.addAction(UIAlertAction(title: "Add to playlist", style: .Default, handler: { (action) -> Void in
+      self.showAddToPlaylistWithTrack(track)
+    }))
+    alert.addAction(UIAlertAction(title: "Save locally (coming soon)", style: .Default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .Destructive, handler: nil))
+    
+    presentViewController(alert, animated: true, completion: nil)
+  }
+  
+  private func showAddToPlaylistWithTrack(track: Track)
   {
     let playlistPicker = PlaylistPickerViewController()
     playlistPicker.track = track

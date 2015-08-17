@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SoundCloud Pro/Utilities.swift"
-            timestampString = "460990654.872721"
+            timestampString = "461478010.060826"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "contains(_:)"
             landmarkType = "5">
          </BreakpointContent>

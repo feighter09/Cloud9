@@ -40,11 +40,12 @@ extension Utilities {
   class func showLoadingAlert(title: String, onViewController vc: UIViewController?) -> SCLAlertView
   {
     let alert = SCLAlertView()
-    alert.customViewColor = .orangeColor()
+    alert.customViewColor = .secondaryColor
     
     if vc == nil {
       alert.showWaiting(title, subTitle: nil, closeButtonTitle: nil, duration: 0)
-    } else {
+    }
+    else {
       alert.showWaiting(vc, title: title, subTitle: nil, closeButtonTitle: nil, duration: 0)
     }
     

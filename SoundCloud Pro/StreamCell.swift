@@ -87,16 +87,27 @@ extension StreamCell {
   
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    UserPreferences.addUpvote(track)
+    if !UserPreferences.upvotes.contains(track) {
+      UserPreferences.addUpvote(track)
+    }
+    else {
+      UserPreferences.removeUpvote(track)
+    }
+    
     updateUpDownButtons()
   }
   
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    UserPreferences.addDownvote(track)
-    updateUpDownButtons()
+    if !UserPreferences.downvotes.contains(track) {
+      UserPreferences.addDownvote(track)
+      delegate?.streamCell(self, didDownvoteTrack: track)
+    }
+    else {  // Right now this is not possible to get to, track won't be shown if it's downvoted
+      UserPreferences.removeUpvote(track)
+    }
     
-    delegate?.streamCell(self, didDownvoteTrack: track)
+    updateUpDownButtons()
   }
 
   override func setSelected(selected: Bool, animated: Bool)

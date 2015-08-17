@@ -15,7 +15,7 @@ protocol SearchViewControllerDelegate: NSObjectProtocol {
   func searchViewControllerDidTapCancel(searchViewController: SearchViewController)
 }
 
-class SearchViewController: UIViewController {
+class SearchViewController: LogoImageViewController {
   var shownModally = false
   weak var delegate: SearchViewControllerDelegate?
   
