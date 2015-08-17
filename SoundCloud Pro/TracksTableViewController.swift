@@ -89,7 +89,7 @@ extension TracksTableViewController {
   
   private func setupTableViewAppearance()
   {
-    tableView.estimatedRowHeight = 59
+    tableView.estimatedRowHeight = 97
     tableView.rowHeight = UITableViewAutomaticDimension
 
     tableView.separatorInset = UIEdgeInsetsZero

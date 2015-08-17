@@ -22,14 +22,7 @@ class StreamCell: UITableViewCell {
   var track: Track! {
     didSet {
       assert(track != nil, "Cannot set Track to nil")
-      titleLabel.text = track.title
-      artistLabel.text = track.artist
-      
-      if let currentTrack = AudioPlayer.sharedPlayer.currentTrack where track == currentTrack {
-        playState = AudioPlayer.sharedPlayer.playState
-      } else {
-        playState = .Stopped
-      }
+      updateLabelsAndButtons()
     }
   }
   var playsOnSelection = true
@@ -44,6 +37,9 @@ class StreamCell: UITableViewCell {
   @IBOutlet private weak var titleLabel: UILabel!
   @IBOutlet private weak var artistLabel: UILabel!
   @IBOutlet private weak var playingLabel: UILabel!
+  
+  @IBOutlet private weak var upVoteButton: UIButton!
+  @IBOutlet private weak var downVoteButton: UIButton!
   @IBOutlet private weak var addToPlaylistButton: UIButton!
   
   required init?(coder aDecoder: NSCoder)
@@ -92,11 +88,14 @@ extension StreamCell {
   @IBAction func upVoteTapped(sender: AnyObject)
   {
     UserPreferences.addUpvote(track)
+    updateUpDownButtons()
   }
   
   @IBAction func downVoteTapped(sender: AnyObject)
   {
     UserPreferences.addDownvote(track)
+    updateUpDownButtons()
+    
     delegate?.streamCell(self, didDownvoteTrack: track)
   }
 
@@ -149,8 +148,29 @@ extension StreamCell: AudioPlayerListener {
 
 // MARK: - Helpers
 extension StreamCell {
-  private var trackIsCurrentlyPlaying: Bool {
+  private var trackIsCurrentlyPlaying: Bool
+  {
     return AudioPlayer.sharedPlayer.currentTrack == track && AudioPlayer.sharedPlayer.isPlaying
-  }  
+  }
+  
+  private func updateLabelsAndButtons()
+  {
+    titleLabel.text = track.title
+    artistLabel.text = track.artist
+    
+    if let currentTrack = AudioPlayer.sharedPlayer.currentTrack where track == currentTrack {
+      playState = AudioPlayer.sharedPlayer.playState
+    } else {
+      playState = .Stopped
+    }
+
+    updateUpDownButtons()
+  }
+  
+  private func updateUpDownButtons()
+  {
+    upVoteButton.selected = UserPreferences.upvotes.contains(track)
+    downVoteButton.selected = UserPreferences.downvotes.contains(track)
+  }
 }
 

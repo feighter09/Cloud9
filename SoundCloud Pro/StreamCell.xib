@@ -3,112 +3,125 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" verticalCompressionResistancePriority="250" selectionStyle="default" indentationWidth="10" reuseIdentifier="streamCell" rowHeight="97" id="KGk-i7-Jjw" customClass="StreamCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+        <tableViewCell contentMode="scaleToFill" verticalCompressionResistancePriority="250" selectionStyle="default" indentationWidth="10" reuseIdentifier="streamCell" rowHeight="114" id="KGk-i7-Jjw" customClass="StreamCell" customModule="SoundCloud_Pro" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="92"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsi-Tm-KZU">
-                        <rect key="frame" x="8" y="8" width="304" height="23"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsi-Tm-KZU">
+                        <rect key="frame" x="8" y="8" width="262" height="35"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBa-JJ-0Pz">
-                        <rect key="frame" x="8" y="35" width="304" height="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBa-JJ-0Pz">
+                        <rect key="frame" x="8" y="47" width="36" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1B-e5-SqN">
-                        <rect key="frame" x="8" y="52" width="304" height="32"/>
+                        <rect key="frame" x="274" y="4" width="38" height="86"/>
                         <subviews>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-n6-pbt">
-                                <rect key="frame" x="190" y="0.0" width="32" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf" userLabel="downVote">
+                                <rect key="frame" x="0.0" y="32" width="38" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="9lW-n6-pbt" secondAttribute="height" multiplier="1:1" id="ejb-jX-OMh"/>
-                                    <constraint firstAttribute="width" constant="32" id="mCv-Og-i4V"/>
+                                    <constraint firstAttribute="height" constant="32" id="uje-J1-Wke"/>
                                 </constraints>
-                                <inset key="contentEdgeInsets" minX="4" minY="2" maxX="4" maxY="2"/>
-                                <state key="normal" image="thumbsUp"/>
-                                <connections>
-                                    <action selector="upVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VvX-dR-HyZ"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPd-Wb-Brf">
-                                <rect key="frame" x="230" y="0.0" width="32" height="32"/>
-                                <inset key="contentEdgeInsets" minX="4" minY="2" maxX="4" maxY="2"/>
-                                <state key="normal" image="thumbsDown"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="-2" maxX="4" maxY="2"/>
+                                <state key="normal" image="downVote"/>
+                                <state key="selected" image="downVoteFilled"/>
                                 <connections>
                                     <action selector="downVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hRM-in-oP2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-hL-sOB">
-                                <rect key="frame" x="270" y="0.0" width="34" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9lW-n6-pbt" userLabel="upVote">
+                                <rect key="frame" x="0.0" y="0.0" width="38" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="Y0p-wg-qPv"/>
+                                    <constraint firstAttribute="height" constant="32" id="JUt-RB-4M1"/>
+                                    <constraint firstAttribute="width" constant="38" id="mCv-Og-i4V"/>
                                 </constraints>
+                                <inset key="contentEdgeInsets" minX="4" minY="2" maxX="4" maxY="-2"/>
+                                <state key="normal" image="upVote"/>
+                                <state key="selected" image="upVoteFilled"/>
+                                <connections>
+                                    <action selector="upVoteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="VvX-dR-HyZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ZD-hL-sOB">
+                                <rect key="frame" x="0.0" y="64" width="38" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="xFy-4V-W7O"/>
+                                </constraints>
+                                <state key="normal" image="more"/>
                                 <connections>
                                     <action selector="addToPlaylist:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fIu-VN-Ha7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[playing]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDj-TR-cJU">
-                                <rect key="frame" x="0.0" y="0.0" width="57" height="32"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="aDj-TR-cJU" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="4oq-gO-SXn"/>
-                            <constraint firstAttribute="trailing" secondItem="0ZD-hL-sOB" secondAttribute="trailing" id="Eue-L8-dqg"/>
-                            <constraint firstItem="9lW-n6-pbt" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="HPb-Cv-kny"/>
-                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="leading" secondItem="9lW-n6-pbt" secondAttribute="trailing" constant="8" id="Jec-qa-50C"/>
-                            <constraint firstAttribute="bottom" secondItem="9lW-n6-pbt" secondAttribute="bottom" id="Lm4-t8-npE"/>
-                            <constraint firstItem="0ZD-hL-sOB" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="Q4D-l4-uvn"/>
-                            <constraint firstItem="0ZD-hL-sOB" firstAttribute="leading" secondItem="VPd-Wb-Brf" secondAttribute="trailing" constant="8" id="RWo-e7-KKQ"/>
-                            <constraint firstAttribute="bottom" secondItem="VPd-Wb-Brf" secondAttribute="bottom" id="XC6-rW-vaW"/>
+                            <constraint firstAttribute="trailing" secondItem="9lW-n6-pbt" secondAttribute="trailing" id="AEg-O4-bZ5"/>
+                            <constraint firstAttribute="trailing" secondItem="0ZD-hL-sOB" secondAttribute="trailing" id="FGL-aX-3eQ"/>
+                            <constraint firstAttribute="bottom" secondItem="0ZD-hL-sOB" secondAttribute="bottom" id="Hyd-td-7gn"/>
+                            <constraint firstItem="9lW-n6-pbt" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="Lcg-18-Ure"/>
+                            <constraint firstItem="0ZD-hL-sOB" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="OhV-Bb-xdk"/>
+                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="PcJ-B4-AGl"/>
+                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="top" secondItem="9lW-n6-pbt" secondAttribute="bottom" id="PmA-SN-aJ6"/>
+                            <constraint firstItem="9lW-n6-pbt" firstAttribute="leading" secondItem="d1B-e5-SqN" secondAttribute="leading" id="ZJr-HH-o0Y"/>
                             <constraint firstItem="VPd-Wb-Brf" firstAttribute="width" secondItem="9lW-n6-pbt" secondAttribute="width" id="b3S-ek-dyx"/>
-                            <constraint firstAttribute="bottom" secondItem="aDj-TR-cJU" secondAttribute="bottom" id="cKp-5V-jCh"/>
-                            <constraint firstItem="VPd-Wb-Brf" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="daW-WA-bEr"/>
-                            <constraint firstItem="aDj-TR-cJU" firstAttribute="top" secondItem="d1B-e5-SqN" secondAttribute="top" id="h9V-HP-doh"/>
-                            <constraint firstAttribute="bottom" secondItem="0ZD-hL-sOB" secondAttribute="bottom" id="k4B-fh-CDa"/>
+                            <constraint firstItem="0ZD-hL-sOB" firstAttribute="top" secondItem="VPd-Wb-Brf" secondAttribute="bottom" id="pFP-gN-NcF"/>
+                            <constraint firstAttribute="trailing" secondItem="VPd-Wb-Brf" secondAttribute="trailing" id="x0y-rM-UE9"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="249" text="[playing]" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDj-TR-cJU">
+                        <rect key="frame" x="8" y="68" width="57" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="qSl-KJ-S2e"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="1" green="0.67762703769999999" blue="0.1286450113" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="d1B-e5-SqN" firstAttribute="top" secondItem="nBa-JJ-0Pz" secondAttribute="bottom" id="1zH-Vq-EMo"/>
+                    <constraint firstAttribute="bottom" secondItem="aDj-TR-cJU" secondAttribute="bottom" constant="4" id="3kk-xp-6Cy"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="top" secondItem="zsi-Tm-KZU" secondAttribute="bottom" constant="4" id="7RR-S6-Few"/>
-                    <constraint firstItem="d1B-e5-SqN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="8BW-Co-Vor"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="d1B-e5-SqN" secondAttribute="bottom" id="IZR-Rk-wUb"/>
-                    <constraint firstItem="d1B-e5-SqN" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="LVk-PN-ZJp"/>
+                    <constraint firstAttribute="trailing" secondItem="d1B-e5-SqN" secondAttribute="trailing" constant="8" id="Fvr-3M-SiG"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="Sk1-fd-e1I"/>
                     <constraint firstItem="zsi-Tm-KZU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="UOI-RB-2vv"/>
-                    <constraint firstItem="zsi-Tm-KZU" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="V1N-17-vyE"/>
+                    <constraint firstItem="aDj-TR-cJU" firstAttribute="top" secondItem="nBa-JJ-0Pz" secondAttribute="bottom" constant="4" id="Y65-zw-Fzy"/>
                     <constraint firstItem="zsi-Tm-KZU" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bKx-dj-9v8"/>
-                    <constraint firstItem="nBa-JJ-0Pz" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="cS7-PO-4ry"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="d1B-e5-SqN" secondAttribute="bottom" constant="4" id="fbL-ae-crJ"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="hJy-nF-vDN"/>
+                    <constraint firstItem="d1B-e5-SqN" firstAttribute="leading" secondItem="zsi-Tm-KZU" secondAttribute="trailing" constant="4" id="pjB-sQ-PjS"/>
                     <constraint firstItem="nBa-JJ-0Pz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="plW-0w-QP4"/>
+                    <constraint firstItem="aDj-TR-cJU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="slX-sg-3ii"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="addToPlaylistButton" destination="0ZD-hL-sOB" id="pKH-WD-u1O"/>
                 <outlet property="artistLabel" destination="nBa-JJ-0Pz" id="dpn-Ri-B8h"/>
+                <outlet property="downVoteButton" destination="VPd-Wb-Brf" id="aHv-XY-8dQ"/>
                 <outlet property="playingLabel" destination="aDj-TR-cJU" id="pAC-nh-li2"/>
                 <outlet property="titleLabel" destination="zsi-Tm-KZU" id="pK8-t8-Myh"/>
+                <outlet property="upVoteButton" destination="9lW-n6-pbt" id="gBJ-3N-OqG"/>
             </connections>
-            <point key="canvasLocation" x="674" y="686.5"/>
+            <point key="canvasLocation" x="674" y="695"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="thumbsDown" width="29" height="36"/>
-        <image name="thumbsUp" width="29" height="36"/>
+        <image name="downVote" width="30" height="15"/>
+        <image name="downVoteFilled" width="30" height="15"/>
+        <image name="more" width="30" height="9"/>
+        <image name="upVote" width="30" height="15"/>
+        <image name="upVoteFilled" width="30" height="15"/>
     </resources>
 </document>
