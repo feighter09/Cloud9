@@ -16,6 +16,7 @@ class MusicPlayerViewController: UIViewController {
   static var sharedPlayer = MusicPlayerViewController.instanceFromNib()
   
   // Internals
+  // TODO: change to ?
   private var currentTrack: Track! {
     didSet {
       titleLabel.text = currentTrack.title
@@ -218,7 +219,7 @@ extension MusicPlayerViewController: AudioPlayerListener {
 extension MusicPlayerViewController: Listener, UserPreferencesListener {
   func upvoteStatusChangedForTrack(track: Track, upvoted: Bool)
   {
-    if track == currentTrack {
+    if currentTrack != nil && track == currentTrack {
       upVoteButton.selected = upvoted
     }
   }
@@ -246,7 +247,7 @@ extension MusicPlayerViewController {
       return
     }
     
-    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(currentTrack)
+    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(currentTrack!)
     scrubber.setValue(Float(seekTime), animated: true)
 
     addTrackToRecentlyPlayedIfNecessary(seekTime)

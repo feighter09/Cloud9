@@ -31,6 +31,8 @@ extension PlaylistViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    navigationItem.title = playlist.name
     setupTracksList()
     addOptions()
   }
