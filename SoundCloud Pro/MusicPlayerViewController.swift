@@ -12,25 +12,19 @@ let kMusicPlayerContractedHeight: CGFloat = 64
 let kMusicPlayerExpandedHeight: CGFloat = 98
 let kAdditionalControlsHeight: CGFloat = 32
 
-@objc protocol MusicControllerListener: Listener {
-  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
-  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapUpvoteTrack track: Track)
-  optional func musicPlayer(musicPlayer: MusicPlayerViewController, didTapAddToPlaylist track: Track)
-}
-
 class MusicPlayerViewController: UIViewController {
   static var sharedPlayer = MusicPlayerViewController.instanceFromNib()
   
   // Internals
-  private var track: Track! {
+  private var currentTrack: Track! {
     didSet {
-      titleLabel.text = track.title
-      artistLabel.text = track.artist
-      scrubber.maximumValue = Float(track.duration)
+      titleLabel.text = currentTrack.title
+      artistLabel.text = currentTrack.artist
+      scrubber.maximumValue = Float(currentTrack.duration)
+      updateVoteButton()
     }
   }
   
-  private var listeners = ListenerArray<MusicControllerListener>()
   private var seekTimer: NSTimer!
   
   // IB Outlets
@@ -42,6 +36,7 @@ class MusicPlayerViewController: UIViewController {
   @IBOutlet private weak var beginningButton: UIButton!
   @IBOutlet private weak var endButton: UIButton!
   @IBOutlet private weak var scrubber: UISlider!
+  @IBOutlet private weak var upVoteButton: UIButton!
   
   @IBOutlet private weak var expandContractButton: UIButton!
   @IBOutlet private weak var addToPlaylistButton: UIButton!
@@ -55,6 +50,9 @@ class MusicPlayerViewController: UIViewController {
   deinit
   {
     stopUpdatingSeekTime()
+
+    AudioPlayer.sharedPlayer.removeListener(self)
+    UserPreferences.listeners.removeListener(self)
   }
 }
 
@@ -78,6 +76,7 @@ extension MusicPlayerViewController {
     setColors()
     
     AudioPlayer.sharedPlayer.addListener(self)
+    UserPreferences.listeners.addListener(self)
   }
   
   private func setColors()
@@ -92,19 +91,6 @@ extension MusicPlayerViewController {
     borderLine.backgroundColor = .secondaryColor
     
     view.backgroundColor = .lightBackgroundColor
-  }
-}
-
-// MARK: Listeners
-extension MusicPlayerViewController {
-  func addListener(listener: MusicControllerListener)
-  {
-    listeners.addListener(listener)
-  }
-  
-  func removeListener(listener: MusicControllerListener)
-  {
-    listeners.removeListener(listener)
   }
 }
 
@@ -125,19 +111,14 @@ extension MusicPlayerViewController {
 
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    if track == nil { return }
-
-    UserPreferences.addUpvote(track)
-    listeners.announce { listener in listener.musicPlayer?(self, didTapUpvoteTrack: track) }
+    if currentTrack == nil { return }
+    UserPreferences.toggleUpvote(currentTrack)
   }
 
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    if track == nil { return }
-
-    // TODO: subscribe listeners to remove from playlist
-    UserPreferences.addDownvote(track)
-    listeners.announce { listener in listener.musicPlayer?(self, didTapDownvoteTrack: track) }
+    if currentTrack == nil { return }
+    UserPreferences.toggleDownvote(currentTrack)
   }
 
   @IBAction func beginningTapped(sender: AnyObject)
@@ -162,16 +143,16 @@ extension MusicPlayerViewController {
 
   @IBAction func seekValueChanged(slider: UISlider)
   {
-    if track == nil { return }
-    AudioPlayer.sharedPlayer.seekTrack(track, toTime: Double(slider.value))
+    if currentTrack == nil { return }
+    AudioPlayer.sharedPlayer.seekTrack(currentTrack, toTime: Double(slider.value))
   }
   
   @IBAction private func addToPlaylist(sender: AnyObject)
   {
-    if track == nil { return }
+    if currentTrack == nil { return }
     
     let playlistPicker = PlaylistPickerViewController()
-    playlistPicker.track = track
+    playlistPicker.track = currentTrack
     playlistPicker.delegate = self
     
     let navigationController = UINavigationController(rootViewController: playlistPicker)
@@ -227,9 +208,19 @@ extension MusicPlayerViewController: AudioPlayerListener {
   
   private func updateTrackAndPlayState(newTrack: Track)
   {
-    track = newTrack
+    currentTrack = newTrack
     playPauseButton.playState = AudioPlayer.sharedPlayer.playState
     startUpdatingSeekTimeIfNecessary()
+  }
+}
+
+// MARK: - Playlist Picker Delegate
+extension MusicPlayerViewController: Listener, UserPreferencesListener {
+  func upvoteStatusChangedForTrack(track: Track, upvoted: Bool)
+  {
+    if track == currentTrack {
+      upVoteButton.selected = upvoted
+    }
   }
 }
 
@@ -250,12 +241,12 @@ extension MusicPlayerViewController: PlaylistPickerDelegate {
 extension MusicPlayerViewController {
   func updateSeekTime()
   {
-    if track == nil {
+    if currentTrack == nil {
       scrubber.setValue(0, animated: true)
       return
     }
     
-    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(track)
+    let seekTime = AudioPlayer.sharedPlayer.seekTimeForTrack(currentTrack)
     scrubber.setValue(Float(seekTime), animated: true)
 
     addTrackToRecentlyPlayedIfNecessary(seekTime)
@@ -286,11 +277,16 @@ extension MusicPlayerViewController {
   {
     if seekTime > 30 { // I want this to shortcut going to NSUserDefaults, and you cant do an && before an 'if let'
       if let mostRecentlyPlayed = UserPreferences.recentsPlaylist.tracks.first {
-        if mostRecentlyPlayed != track { UserPreferences.addTrackToRecentlyPlayed(track) }
+        if mostRecentlyPlayed != currentTrack { UserPreferences.addTrackToRecentlyPlayed(currentTrack) }
       }
       else {
-        UserPreferences.addTrackToRecentlyPlayed(track)
+        UserPreferences.addTrackToRecentlyPlayed(currentTrack)
       }
     }
+  }
+  
+  private func updateVoteButton()
+  {
+    upVoteButton.selected = UserPreferences.upvotes.contains(currentTrack)
   }
 }

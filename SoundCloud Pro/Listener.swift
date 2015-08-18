@@ -7,7 +7,7 @@
 //
 
 @objc protocol Listener: NSObjectProtocol {
-  var listenerId: Int { get set }
+  var listenerId: Int { get set } //TODO: might be able to get around this w/ objc associated values
 }
 
 func ==(lhs: Listener, rhs: Listener) -> Bool
@@ -57,6 +57,9 @@ extension ListenerArray {
 extension ListenerArray {
   private func setListenerUniqueId(listener: Listener)
   {
+    if listener.listenerId != 0 { return }  // HACK: can't tell if this is a good solution for listeners being in multiple
+                                            // listener arrays
+    
     while true {
       listener.listenerId = Int(arc4random() % UInt32(INT32_MAX))
       

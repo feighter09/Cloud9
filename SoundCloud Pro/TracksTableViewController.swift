@@ -40,6 +40,11 @@ class TracksTableViewController: UITableViewController {
   
   private var pullToRefresh: BOZPongRefreshControl?
   private var trackToAddToPlaylist: Track?
+  
+  deinit
+  {
+    UserPreferences.listeners.removeListener(self)
+  }
 }
 
 // MARK: - Interface
@@ -75,8 +80,7 @@ extension TracksTableViewController {
     super.viewDidLoad()
     
     initTable()
-    AudioPlayer.sharedPlayer.addListener(self)
-    MusicPlayerViewController.sharedPlayer.addListener(self)
+    UserPreferences.listeners.addListener(self)
   }
   
   private func initTable()
@@ -122,55 +126,9 @@ extension TracksTableViewController {
   }
 }
 
-// MARK: - Audio Playback Delegate
-extension TracksTableViewController: AudioPlayerListener {
-  func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
-  {
-    addStreamToPlaylistAfterTrack(track)
-  }
-  
-  func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
-  {
-    addStreamToPlaylistAfterTrack(track)
-  }
-  
-  private func addStreamToPlaylistAfterTrack(track: Track)
-  {
-    if let tracksToAdd = tracksFollowingTrack(track) {
-      if tracksToAdd.first != AudioPlayer.sharedPlayer.playlist.first || AudioPlayer.sharedPlayer.playlist.count == 0 {
-//        tracksToAdd.map { print($0) }
-        AudioPlayer.sharedPlayer.addTracksToPlaylist(tracksToAdd, clearExisting: true)
-      }
-    } else {
-      // TODO: Handle end of stream
-    }
-  }
-  
-  private func tracksFollowingTrack(track: Track) -> [Track]?
-  {
-    if let index = tracks.indexOf(track) {
-      if index + 1 < tracks.count { return Array(tracks[index + 1 ..< tracks.count]) }
-    }
-    
-    return nil
-  }
-  
-  private func shouldAddStreamToPlaylistBeginningWithTrack(track: Track) -> Bool
-  {
-    if AudioPlayer.sharedPlayer.currentTrack == nil { return true }
-    
-    let toAddIndex = tracks.indexOf(track)!
-    if let currentlyPlayingIndex = tracks.indexOf(AudioPlayer.sharedPlayer.currentTrack!) {
-      return toAddIndex > currentlyPlayingIndex
-    } else {
-      return true
-    }
-  }
-}
-
-// MARK: - Music Player Delegate
-extension TracksTableViewController: Listener, MusicControllerListener {
-  func musicPlayer(musicPlayer: MusicPlayerViewController, didTapDownvoteTrack track: Track)
+// MARK: - User Preferences Listener
+extension TracksTableViewController: UserPreferencesListener {
+  func downvoteStatusChangedForTrack(track: Track, downvoted: Bool)
   {
     if tracks.contains(track) { removeTrack(track) }
   }
@@ -178,11 +136,6 @@ extension TracksTableViewController: Listener, MusicControllerListener {
 
 // MARK: - Stream Cell Delegate
 extension TracksTableViewController: StreamCellDelegate {
-  func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
-  {
-    removeTrack(track)
-  }
-  
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
   {
     showAddToPlaylistWithTrack(track)
@@ -210,7 +163,7 @@ extension TracksTableViewController: StreamCellDelegate {
   }
 }
 
-// MARK: - Stream Cell Delegate
+// MARK: - Playlist Picker Delegate
 extension TracksTableViewController: PlaylistPickerDelegate {
   func playlistPickerDidTapDone(playlistPicker: PlaylistPickerViewController)
   {
@@ -259,6 +212,25 @@ extension TracksTableViewController {
   override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle
   {
     return tableView.editing ? .Delete : .None
+  }
+}
+
+// MARK: - Table View Delegate
+extension TracksTableViewController {
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+  {
+    addStreamToPlaylistAfterTrackWithIndex(indexPath.row)
+  }
+  
+  private func addStreamToPlaylistAfterTrackWithIndex(index: Int)
+  {
+    if index + 1 >= tracks.count { return }
+    
+    let start = index + 1
+    let tracksToAdd = Array(tracks[start ..< tracks.count])
+
+    AudioPlayer.sharedPlayer.addTracksToPlaylist(tracksToAdd, clearExisting: true)
+    // TODO: Handle end of stream
   }
 }
 

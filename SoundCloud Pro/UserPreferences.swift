@@ -11,7 +11,14 @@ import UIKit
 let kOnTheGoPlaylistName = "On The Go"
 let kRecentsPlaylistName = "Recents"
 
+@objc protocol UserPreferencesListener: Listener {
+  optional func upvoteStatusChangedForTrack(track: Track, upvoted: Bool)
+  optional func downvoteStatusChangedForTrack(track: Track, downvoted: Bool)
+}
+
 class UserPreferences {
+  static var listeners = ListenerArray<UserPreferencesListener>()
+  
   private static let settings = NSUserDefaults.standardUserDefaults()
 
   private static let upvoteKey = "upvotes"
@@ -34,26 +41,43 @@ extension UserPreferences {
 
 // MARK: - Votes
 extension UserPreferences {
-  class func addUpvote(track: Track)
-  {
-    addTrack(track, toTracksForKey: upvoteKey)
-    removeDownvote(track)
-  }
-  
   class func removeUpvote(track: Track)
   {
     removeTrack(track, fromTracksForKey: upvoteKey)
   }
   
-  class func addDownvote(track: Track)
+  class func toggleUpvote(track: Track)
   {
-    addTrack(track, toTracksForKey: downvoteKey)
-    removeUpvote(track)
+    let addUpvote = !upvotes.contains(track)
+    if addUpvote {
+      addTrack(track, toTracksForKey: upvoteKey)
+      removeTrack(track, fromTracksForKey: downvoteKey)
+    }
+    else {
+      removeTrack(track, fromTracksForKey: upvoteKey)
+    }
+    
+    // Usually a UI update for vote buttons, announce on main queue here to forget about it in multiple implementations
+    listeners.announceOnMainQueue { listener in listener.upvoteStatusChangedForTrack?(track, upvoted: addUpvote) }
   }
   
   class func removeDownvote(track: Track)
   {
     removeTrack(track, fromTracksForKey: downvoteKey)
+  }
+  
+  class func toggleDownvote(track: Track)
+  {
+    let addDownvote = !downvotes.contains(track)
+    if addDownvote {
+      addTrack(track, toTracksForKey: downvoteKey)
+      removeTrack(track, fromTracksForKey: upvoteKey)
+    }
+    else {
+      removeTrack(track, fromTracksForKey: downvoteKey)
+    }
+    
+    listeners.announceOnMainQueue { listener in listener.downvoteStatusChangedForTrack?(track, downvoted: addDownvote) }
   }
   
   private(set) static var upvotes: [Track] {

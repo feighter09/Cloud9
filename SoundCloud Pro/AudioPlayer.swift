@@ -41,16 +41,22 @@ class AudioPlayer: NSObject {
   var currentTrack: Track?
   private(set) var playlist: [Track] = []
 
+  var listenerId = 0
   var listeners = ListenerArray<AudioPlayerListener>()
   
   override init()
   {
     super.init()
+
     AudioPlayer.audioPlayer.delegate = self
+    UserPreferences.listeners.addListener(self)
     registerForRemoteControls()
   }
   
-  
+  deinit
+  {
+    UserPreferences.listeners.removeListener(self)
+  }
 }
 
 // MARK: - Interface
@@ -283,6 +289,16 @@ extension STKAudioPlayerState {
       return "Error"
     case .Disposed:
       return "Disposed"
+    }
+  }
+}
+
+// MARK: - User Preferences Listener
+extension AudioPlayer: UserPreferencesListener {
+  func downvoteStatusChangedForTrack(track: Track, downvoted: Bool)
+  {
+    if track == currentTrack {
+      playNextTrack()
     }
   }
 }

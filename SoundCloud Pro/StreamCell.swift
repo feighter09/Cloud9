@@ -14,7 +14,6 @@ let kStreamCellPlaybackControlsMargin: CGFloat = 4
 let kStreamCellVoteControlsWidth: CGFloat = 40
 
 protocol StreamCellDelegate: NSObjectProtocol {
-  func streamCell(streamCell: StreamCell, didDownvoteTrack track: Track)
   func streamCell(streamCell: StreamCell, didTapAddToPlaylist track: Track)
 }
 
@@ -29,7 +28,7 @@ class StreamCell: UITableViewCell {
   
   weak var delegate: StreamCellDelegate?
   
-  var listenerId: Int = 0
+  var listenerId = 0
   private var playState: PlayState = .Stopped {
     didSet { playingLabel.text = playState != .Stopped ? "[\(playState.rawValue)]" : "" }
   }
@@ -46,12 +45,12 @@ class StreamCell: UITableViewCell {
   {
     super.init(coder: aDecoder)
     AudioPlayer.sharedPlayer.addListener(self)
-    MusicPlayerViewController.sharedPlayer.addListener(self)
   }
 
   deinit
   {
     AudioPlayer.sharedPlayer.removeListener(self)
+    UserPreferences.listeners.removeListener(self)
   }
 }
 
@@ -64,6 +63,7 @@ extension StreamCell {
     super.awakeFromNib()
     
     setColors()
+    UserPreferences.listeners.addListener(self)
   }
   
   override func prepareForReuse()
@@ -88,27 +88,12 @@ extension StreamCell {
   
   @IBAction func upVoteTapped(sender: AnyObject)
   {
-    if !UserPreferences.upvotes.contains(track) {
-      UserPreferences.addUpvote(track)
-    }
-    else {
-      UserPreferences.removeUpvote(track)
-    }
-    
-    updateUpDownButtons()
+    UserPreferences.toggleUpvote(track)
   }
   
   @IBAction func downVoteTapped(sender: AnyObject)
   {
-    if !UserPreferences.downvotes.contains(track) {
-      UserPreferences.addDownvote(track)
-      delegate?.streamCell(self, didDownvoteTrack: track)
-    }
-    else {  // Right now this is not possible to get to, track won't be shown if it's downvoted
-      UserPreferences.removeUpvote(track)
-    }
-    
-    updateUpDownButtons()
+    UserPreferences.toggleDownvote(track)
   }
 
   override func setSelected(selected: Bool, animated: Bool)
@@ -159,10 +144,10 @@ extension StreamCell: AudioPlayerListener {
 }
 
 // MARK: - Music Player Listener
-extension StreamCell: Listener, MusicControllerListener {
-  func musicPlayer(musicPlayer: MusicPlayerViewController, didTapUpvoteTrack track: Track)
+extension StreamCell: Listener, UserPreferencesListener {
+  func upvoteStatusChangedForTrack(track: Track, upvoted: Bool)
   {
-    if track == self.track { updateUpDownButtons() }
+    if track == self.track { upVoteButton.selected = upvoted }
   }
 }
 
@@ -184,11 +169,6 @@ extension StreamCell {
       playState = .Stopped
     }
 
-    updateUpDownButtons()
-  }
-  
-  private func updateUpDownButtons()
-  {
     upVoteButton.selected = UserPreferences.upvotes.contains(track)
     downVoteButton.selected = UserPreferences.downvotes.contains(track)
   }
