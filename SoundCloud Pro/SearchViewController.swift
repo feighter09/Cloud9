@@ -8,7 +8,7 @@
 
 import UIKit
 
-let kSearchViewControllerNib = "SearchViewController"
+let kSearchViewControllerIdentifier = "SearchViewController"
 
 protocol SearchViewControllerDelegate: NSObjectProtocol {
   func searchViewController(searchViewController: SearchViewController, didSelectTrack track: Track)
@@ -30,9 +30,10 @@ class SearchViewController: LogoImageViewController {
 
 // MARK: - View Life Cycle
 extension SearchViewController {
-  class func instanceFromNib(delegate delegate: SearchViewControllerDelegate? = nil) -> UIViewController
+  class func instance(delegate delegate: SearchViewControllerDelegate?) -> UIViewController
   {
-    let searchController = SearchViewController(nibName: kSearchViewControllerNib, bundle: nil)
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let searchController = storyboard.instantiateViewControllerWithIdentifier(kSearchViewControllerIdentifier) as! SearchViewController
     searchController.delegate = delegate
     searchController.shownModally = true
     
@@ -45,6 +46,12 @@ extension SearchViewController {
     
     setupSearchResults()
     searchBar.delegate = self
+
+    // how you express !(#available) apparantly
+    if #available(iOS 9, *){} else {
+      let textField = searchBar.valueForKey("_searchField") as! UITextField
+      textField.textColor = .secondaryColor
+    }
     
     if shownModally {
       navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")

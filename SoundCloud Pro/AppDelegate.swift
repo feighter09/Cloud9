@@ -104,7 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func setSearchColors()
   {
     UISearchBar.appearance().backgroundColor = .backgroundColor
-    UISearchBar.appearance().tintColor = .lightBackgroundColor
+    UISearchBar.appearance().barTintColor = .secondaryColor
+    UISearchBar.appearance().tintColor = .primaryColor
     
     if #available(iOS 9.0, *) {
       UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).textColor = .secondaryColor

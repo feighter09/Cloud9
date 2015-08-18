@@ -28,9 +28,11 @@ class TracksTableViewController: UITableViewController {
     }
   }
 
+  // Options
   var tracksPlayOnSelect = true
   var pullToRefreshEnabled = false
   var infiniteScrollingEnabled = false
+  var swipeToDeleteEnabled = false
   
   weak var delegate: TracksTableViewControllerDelegate?
   
@@ -86,6 +88,7 @@ extension TracksTableViewController {
   private func initTable()
   {
     tableView.registerNib(StreamCell.nib, forCellReuseIdentifier: kStreamCellIdentifier)
+    tableView.delegate = self
     
     setupTableViewAppearance()
     setupPullToRefreshAndInfiniteScrollingIfNecessary()
@@ -211,7 +214,7 @@ extension TracksTableViewController {
   
   override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle
   {
-    return tableView.editing ? .Delete : .None
+    return tableView.editing || swipeToDeleteEnabled ? .Delete : .None
   }
 }
 

@@ -12,6 +12,7 @@ let kLoginViewControllerIdentifier = "loginViewController"
 
 class LoginViewController: LogoImageViewController {
   @IBOutlet private weak var loginButton: UIButton!
+  private var loadingHud: SCLAlertView?
 }
 
 // MARK: - View Life Cycle
@@ -21,6 +22,13 @@ extension LoginViewController {
     super.viewDidLoad()
     
     setupVisuals()
+  }
+  
+  override func viewDidAppear(animated: Bool)
+  {
+    super.viewDidAppear(animated)
+    
+    loadingHud?.activityIndicatorView.startAnimating()
   }
   
   private func setupVisuals()
@@ -37,7 +45,11 @@ extension LoginViewController {
 extension LoginViewController {
   @IBAction func loginTapped(sender: AnyObject)
   {
+    loadingHud = Utilities.showLoadingAlert("Logging in...", onViewController: self)
+    
     SoundCloud.authenticateUser({ (success, error) -> Void in
+      self.loadingHud!.hideView()
+      
       if success {
         let tabBarController = self.storyboard!.instantiateInitialViewController()!
         self.presentViewController(tabBarController, animated: true, completion: nil)

@@ -37,6 +37,7 @@ extension PlaylistViewController {
   
   private func setupTracksList()
   {
+    tracksViewController.swipeToDeleteEnabled = true
     tracksViewController.delegate = self
     tracksViewController.view.frame = view.bounds
     tracksViewController.addToView(view, inViewController: self, withDelegate: self)
@@ -109,7 +110,7 @@ extension PlaylistViewController: SearchViewControllerDelegate {
 extension PlaylistViewController {
   private func searchForTrack()
   {
-    let searchVC = SearchViewController.instanceFromNib(delegate: self)
+    let searchVC = SearchViewController.instance(delegate: self)
     presentViewController(searchVC, animated: true, completion: nil)
   }
   
