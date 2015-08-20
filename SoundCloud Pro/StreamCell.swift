@@ -171,6 +171,8 @@ extension StreamCell {
 
     upVoteButton.selected = UserPreferences.upvotes.contains(track)
     downVoteButton.selected = UserPreferences.downvotes.contains(track)
+    
+    layoutIfNeeded()  // makes sure title and artist labels resize to fit text
   }
 }
 

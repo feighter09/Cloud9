@@ -45,6 +45,7 @@ extension AddContributorViewController {
     // TODO: make this not have to be +44
     let searchFrame = CGRect(x: 0, y: 64, width: CGRectGetWidth(view.bounds), height: 44)
     searchBar = UISearchBar(frame: searchFrame)
+    searchBar.searchBarStyle = .Minimal
     view.addSubview(searchBar)
     
     searchBar.delegate = self

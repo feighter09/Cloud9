@@ -45,13 +45,7 @@ extension SearchViewController {
     super.viewDidLoad()
     
     setupSearchResults()
-    searchBar.delegate = self
-
-    // how you express !(#available) apparantly
-    if #available(iOS 9, *){} else {
-      let textField = searchBar.valueForKey("_searchField") as! UITextField
-      textField.textColor = .secondaryColor
-    }
+    setupSearchBar()
     
     if shownModally {
       navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
@@ -81,6 +75,19 @@ extension SearchViewController {
     searchResultsController.addToView(containerView, inViewController: self, withDelegate: nil)
   }
   
+  private func setupSearchBar()
+  {
+    searchBar.delegate = self
+
+    searchBar.returnKeyType = .Done
+    
+    // how you express !(#available) apparantly
+    if #available(iOS 9, *){} else {
+      let textField = searchBar.valueForKey("_searchField") as! UITextField
+      textField.textColor = .secondaryColor
+    }
+  }
+  
   func cancel()
   {
     delegate?.searchViewControllerDidTapCancel(self)
@@ -95,7 +102,6 @@ extension SearchViewController: UISearchBarDelegate {
       searchResultsController.tracks = []
       return
     }
-    
     
     showLoadingView()
     SoundCloud.getTracksMatching(searchText) { (tracks, error) -> Void in

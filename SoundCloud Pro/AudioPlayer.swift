@@ -25,7 +25,7 @@ enum PlayState: String {
 }
 
 @objc protocol AudioPlayerListener: Listener {
-  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)//, forTheFirstTime firstTime: Bool)
+  optional func audioPlayer(audioPlayer: AudioPlayer, didBeginBufferingTrack track: Track)
   optional func audioPlayer(audioPlayer: AudioPlayer, didBeginPlayingTrack track: Track)
   optional func audioPlayer(audioPlayer: AudioPlayer, didPauseTrack track: Track)
   optional func audioPlayer(audioPlayer: AudioPlayer, didStopTrack track: Track)
@@ -192,7 +192,7 @@ extension AudioPlayer: STKAudioPlayerDelegate {
   func audioPlayer(audioPlayer: STKAudioPlayer!, didStartPlayingQueueItemId queueItemId: NSObject!)
   {
     setNowPlayingMediaInfo()
-    if currentTrack?.streamURL == queueItemId as? String { return }
+    guard currentTrack?.streamURL == queueItemId as? String else { return }
     
     if let trackIndex = playlist.indexOf({ $0.streamURL == queueItemId as! String }) {
       let newTrack = playlist[trackIndex]

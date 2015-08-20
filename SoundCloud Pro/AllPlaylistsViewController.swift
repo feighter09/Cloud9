@@ -50,6 +50,8 @@ extension AllPlaylistsViewController {
   {
     tableView.dataSource = self
     tableView.delegate = self
+    
+    tableView.backgroundColor = .backgroundColor
   }
   
   private func loadMyPlaylists()
