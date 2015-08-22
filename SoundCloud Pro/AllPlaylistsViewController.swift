@@ -48,6 +48,8 @@ extension AllPlaylistsViewController {
 
   private func setupTable()
   {
+    tableView.registerNib(LoadingCell.nib, forCellReuseIdentifier: kLoadingCellIdentifier)
+
     tableView.dataSource = self
     tableView.delegate = self
     

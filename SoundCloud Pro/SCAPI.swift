@@ -124,11 +124,13 @@ extension SoundCloud {
     if searchInProgress != nil { SCRequest.cancelRequest(searchInProgress!) }
     
     let params = ["q": searchString]
+    // TODO: GET can return a nil SCRequest if auth params aren't gucci, handle this
     GET(kSCSoundCloudAPIURL + "tracks", params: params) { (response, responseData, error) -> Void in
       if requestSucceeded(response, error: error) {
         let tracks = parseSearchJSON(responseData)
         callback(tracks: tracks, error: nil)
-      } else {
+      }
+      else {
         callback(tracks: nil, error: error)
       }
     }

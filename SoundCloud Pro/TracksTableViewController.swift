@@ -33,6 +33,9 @@ class TracksTableViewController: UITableViewController {
   var pullToRefreshEnabled = false
   var infiniteScrollingEnabled = false
   var swipeToDeleteEnabled = false
+  var showLoadingCell = false {
+    didSet { tableView.reloadData() }
+  }
   
   weak var delegate: TracksTableViewControllerDelegate?
   
@@ -61,18 +64,6 @@ extension TracksTableViewController {
     viewController.addChildViewController(self)
     didMoveToParentViewController(viewController)
   }
-  
-  func beginLoading()
-  {
-    pullToRefresh?.beginLoading()
-    tableView.setContentOffset(CGPoint(x: 0, y: -65), animated: true)
-  }
-  
-  func finishedLoading()
-  {
-    pullToRefresh?.finishedLoading()
-    tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-  }
 }
 
 // MARK: - Life Cycle
@@ -88,6 +79,7 @@ extension TracksTableViewController {
   private func initTable()
   {
     tableView.registerNib(StreamCell.nib, forCellReuseIdentifier: kStreamCellIdentifier)
+    tableView.registerNib(LoadingCell.nib, forCellReuseIdentifier: kLoadingCellIdentifier)
     tableView.delegate = self
     
     setupTableViewAppearance()
@@ -188,14 +180,21 @@ extension TracksTableViewController: PlaylistPickerDelegate {
 extension TracksTableViewController {
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
-    return tracks.count
+    return tracks.count + (showLoadingCell ? 1 : 0)
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
   {
-    let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
+    if showLoadingCellForIndexPath(indexPath) {
+      let cell = tableView.dequeueReusableCellWithIdentifier(kLoadingCellIdentifier, forIndexPath: indexPath) as! LoadingCell
+      cell.animate()
+      return cell
+    }
     
-    cell.track = tracks[indexPath.row]
+    let cell = tableView.dequeueReusableCellWithIdentifier(kStreamCellIdentifier, forIndexPath: indexPath) as! StreamCell
+    let trackIndex = showLoadingCell ? indexPath.row - 1 : indexPath.row
+    
+    cell.track = tracks[trackIndex]
     cell.playsOnSelection = tracksPlayOnSelect
     cell.delegate = self
     
@@ -263,5 +262,10 @@ extension TracksTableViewController {
     tableView.endUpdates()
     
     delegate?.tracksTableController?(self, didDeleteTrack: track)
+  }
+  
+  private func showLoadingCellForIndexPath(indexPath: NSIndexPath) -> Bool
+  {
+    return showLoadingCell && indexPath.row == 0
   }
 }

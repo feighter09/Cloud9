@@ -73,28 +73,8 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadingCell" id="IKr-cS-h8R" customClass="LoadingCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IKr-cS-h8R" id="OZs-w6-JL6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="15e-z4-aR0">
-                                                            <rect key="frame" x="290" y="12" width="20" height="20"/>
-                                                        </activityIndicatorView>
-                                                    </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="15e-z4-aR0" firstAttribute="centerX" secondItem="OZs-w6-JL6" secondAttribute="centerX" id="40d-Uy-jyx"/>
-                                                        <constraint firstItem="15e-z4-aR0" firstAttribute="centerY" secondItem="OZs-w6-JL6" secondAttribute="centerY" id="f3z-yc-Nkd"/>
-                                                    </constraints>
-                                                </tableViewCellContentView>
-                                                <connections>
-                                                    <outlet property="spinner" destination="15e-z4-aR0" id="S2y-yZ-V7a"/>
-                                                </connections>
-                                            </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlaylists" textLabel="adi-PA-S8B" style="IBUITableViewCellStyleDefault" id="GRi-dz-0FK" customClass="LoadingCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="202" width="600" height="44"/>
+                                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GRi-dz-0FK" id="Ehy-gx-X8e">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>

@@ -19,6 +19,22 @@ protocol SearchPresenterDelegate: NSObjectProtocol {
 }
 
 extension Utilities {
+  class func subviewsOfView(view: UIView, withType type: String) -> [UIView]
+  {
+    let prefix = "<\(type)"
+    var subviewArray = [UIView]()
+    
+    for subview in view.subviews {
+      subviewArray += subviewsOfView(subview, withType: type)
+    }
+
+    if view.description.hasPrefix(prefix) {
+      subviewArray.append(view)
+    }
+    
+    return subviewArray
+  }
+  
 //  class func addSearchButtonToNavigationController(navigationItem: UINavigationItem, searchPresenter: SearchPresenterDelegate)
 //  {
 //    let existingButtons: [UIBarButtonItem]

@@ -17,6 +17,8 @@ class LoadingCell: UITableViewCell {
 
 // MARK: - Interface
 extension LoadingCell {
+  class var nib: UINib { return UINib(nibName: "LoadingCell", bundle: nil) }
+  
   func animate()
   {
     spinner.startAnimating()

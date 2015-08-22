@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="loadingCell" id="JcH-4T-MoG" customClass="LoadingCell" customModule="SoundCloud_Pro" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JcH-4T-MoG" id="7xB-qT-D8i">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vL0-fP-DWL">
+                        <rect key="frame" x="290" y="12" width="20" height="20"/>
+                    </activityIndicatorView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="vL0-fP-DWL" secondAttribute="bottom" constant="3" id="3WA-cV-20O"/>
+                    <constraint firstItem="vL0-fP-DWL" firstAttribute="centerY" secondItem="7xB-qT-D8i" secondAttribute="centerY" id="hcd-Yh-10M"/>
+                    <constraint firstItem="vL0-fP-DWL" firstAttribute="top" secondItem="7xB-qT-D8i" secondAttribute="topMargin" constant="4" id="oRr-Cc-Of0"/>
+                    <constraint firstItem="vL0-fP-DWL" firstAttribute="centerX" secondItem="7xB-qT-D8i" secondAttribute="centerX" id="zOa-WM-POa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="spinner" destination="vL0-fP-DWL" id="6xQ-bM-kb6"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
