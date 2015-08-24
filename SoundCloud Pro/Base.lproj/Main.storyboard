@@ -394,24 +394,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="mob-PE-1yR">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="108" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Gq8-Ho-eKt"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Pt-fV-caB">
-                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <rect key="frame" x="0.0" y="152" width="600" height="399"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="CkA-QB-IGF">
+                                <rect key="frame" x="8" y="72" width="584" height="29"/>
+                                <segments>
+                                    <segment title="Songs"/>
+                                    <segment title="Artists"/>
+                                    <segment title="Collectives"/>
+                                </segments>
+                                <connections>
+                                    <action selector="searchTypeChanged:" destination="bMQ-rs-Isq" eventType="valueChanged" id="LI7-9t-riW"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="CkA-QB-IGF" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" constant="8" id="0Yb-on-MvQ"/>
                             <constraint firstAttribute="bottom" secondItem="0Pt-fV-caB" secondAttribute="bottom" id="734-Zo-PVc"/>
                             <constraint firstItem="0Pt-fV-caB" firstAttribute="top" secondItem="mob-PE-1yR" secondAttribute="bottom" id="7gV-4K-dVu"/>
+                            <constraint firstAttribute="trailing" secondItem="CkA-QB-IGF" secondAttribute="trailing" constant="8" id="Mbj-G4-CsI"/>
                             <constraint firstAttribute="trailing" secondItem="0Pt-fV-caB" secondAttribute="trailing" id="OEP-xj-7SD"/>
                             <constraint firstItem="mob-PE-1yR" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" id="RVv-vU-Kg4"/>
-                            <constraint firstItem="mob-PE-1yR" firstAttribute="top" secondItem="OLM-YR-c1w" secondAttribute="top" constant="64" id="fwH-03-OAB"/>
+                            <constraint firstItem="mob-PE-1yR" firstAttribute="top" secondItem="CkA-QB-IGF" secondAttribute="bottom" constant="8" id="Wti-Lg-L9U"/>
+                            <constraint firstItem="CkA-QB-IGF" firstAttribute="top" secondItem="DWz-ZG-XLk" secondAttribute="bottom" constant="8" id="efa-9W-kEf"/>
                             <constraint firstAttribute="trailing" secondItem="mob-PE-1yR" secondAttribute="trailing" id="tuq-LD-0kS"/>
                             <constraint firstItem="0Pt-fV-caB" firstAttribute="leading" secondItem="OLM-YR-c1w" secondAttribute="leading" id="v4g-wP-ePU"/>
                         </constraints>
@@ -420,6 +434,7 @@
                     <connections>
                         <outlet property="containerView" destination="0Pt-fV-caB" id="tb2-gK-fxp"/>
                         <outlet property="searchBar" destination="mob-PE-1yR" id="mN4-T3-ewy"/>
+                        <outlet property="searchTypeControl" destination="CkA-QB-IGF" id="Q9t-hd-g8G"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e20-nm-fo9" userLabel="First Responder" sceneMemberID="firstResponder"/>

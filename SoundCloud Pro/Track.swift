@@ -10,10 +10,10 @@ import SwiftyJSON
 import Parse
 
 @objc class Track: NSObject, NSCoding {
-  var title: String!
-  var artist: String!
-  var duration: Double!
-  var streamURL: String!
+  let title: String
+  let artist: String
+  let duration: Double
+  let streamURL: String
   
   init(json: JSON)
   {
@@ -24,15 +24,13 @@ import Parse
       duration = json["origin"]["duration"].doubleValue / 1000
       streamURL = json["origin"]["stream_url"].string! + "?client_id=\(kSoundCloudClientID)"
     } else {
-      title = json["title"].string
-      artist = json["user"]["username"].string
-      duration = json["duration"].doubleValue / 1000
+      title = json["title"].string!
+      artist = json["user"]["username"].string!
+      duration = json["duration"].double! / 1000
       streamURL = json["stream_url"].string! + "?client_id=\(kSoundCloudClientID)"
     }
     
     super.init()
-
-    assert(title != nil && artist != nil && duration != nil && streamURL != nil)
   }
   
   required init?(coder aDecoder: NSCoder)

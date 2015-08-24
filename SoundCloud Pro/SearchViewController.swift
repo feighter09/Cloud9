@@ -19,6 +19,7 @@ class SearchViewController: LogoImageViewController {
   var shownModally = false
   weak var delegate: SearchViewControllerDelegate?
   
+  @IBOutlet private weak var searchTypeControl: UISegmentedControl!
   @IBOutlet private weak var searchBar: UISearchBar!
   @IBOutlet private weak var containerView: UIView!
   
@@ -50,6 +51,8 @@ extension SearchViewController {
   override func viewDidLoad()
   {
     super.viewDidLoad()
+    
+    view.backgroundColor = .backgroundColor
     
     setupSearchResults()
     setupSearchBar()
@@ -107,47 +110,24 @@ extension SearchViewController {
 extension SearchViewController: UISearchBarDelegate {
   func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
   {
-    if searchText == "" {
-      searchResultsController.tracks = []
-      return
-    }
-    
-    showLoadingView()
-    SoundCloud.getTracksMatching(searchText) { (tracks, error) -> Void in
-      self.hideLoadingView()
-      
-      if error == nil {
-        self.searchResultsController.tracks = tracks
-      }
-      else {
-        ErrorHandler.handleNetworkingError("tracks", error: error)
-      }
-    }
+    performSearch()
   }
   
   func searchBarSearchButtonClicked(searchBar: UISearchBar)
   {
     searchBar.resignFirstResponder()
   }
-  
-  private func showLoadingView()
-  {
-    if searchesInProgress++ == 0 {
-      searchResultsController.showLoadingCell = true
-//      hud = Utilities.showLoadingAlert("Loading tracks", onViewController: self)
-    }
-  }
-  
-  private func hideLoadingView()
-  {
-    if --searchesInProgress == 0 {
-      searchResultsController.showLoadingCell = false
-//      hud.hideView()
-    }
-  }
 }
 
 // MARK: - Search Bar Delegate
+extension SearchViewController {
+  @IBAction func searchTypeChanged(sender: AnyObject)
+  {
+    performSearch()
+  }
+}
+
+// MARK: - Table View Delegate
 extension SearchViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
@@ -217,5 +197,55 @@ extension SearchViewController {
     newButton.addTarget(self.searchBar, action: "resignFirstResponder", forControlEvents: .TouchUpInside)
     
     return newButton
+  }
+}
+
+// MARK: - Helpers
+extension SearchViewController {
+  private func performSearch()
+  {
+    if searchBar.text == nil || searchBar.text == "" {
+      searchResultsController.tracks = []
+      return
+    }
+    
+    let searchText = searchBar.text!
+    let searchType = currentSearchType()
+    
+    showLoadingView()
+    SoundCloud.search(searchType, containing: searchText) { (tracks, error) -> Void in
+      self.hideLoadingView()
+      
+      if error == nil {
+        self.searchResultsController.tracks = tracks
+      }
+      else {
+        ErrorHandler.handleNetworkingError("tracks", error: error)
+      }
+    }
+  }
+  
+  private func currentSearchType() -> SearchType
+  {
+    switch searchTypeControl.selectedSegmentIndex {
+    case 0:
+      return .Sounds
+    case 1:
+      return .Artists
+    case 2:
+      return .Collectives
+    default:
+      fatalError()
+    }
+  }
+  
+  private func showLoadingView()
+  {
+    searchResultsController.showLoadingCell = (searchesInProgress++ == 0)
+  }
+  
+  private func hideLoadingView()
+  {
+    searchResultsController.showLoadingCell = (--searchesInProgress != 0)
   }
 }

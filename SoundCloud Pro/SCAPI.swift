@@ -118,23 +118,6 @@ extension SoundCloud {
   {
     getStreamWithURLString(nextStreamUrl!, callback: callback)
   }
-  
-  class func getTracksMatching(searchString: String, callback: FetchTracksCallback)
-  {
-    if searchInProgress != nil { SCRequest.cancelRequest(searchInProgress!) }
-    
-    let params = ["q": searchString]
-    // TODO: GET can return a nil SCRequest if auth params aren't gucci, handle this
-    GET(kSCSoundCloudAPIURL + "tracks", params: params) { (response, responseData, error) -> Void in
-      if requestSucceeded(response, error: error) {
-        let tracks = parseSearchJSON(responseData)
-        callback(tracks: tracks, error: nil)
-      }
-      else {
-        callback(tracks: nil, error: error)
-      }
-    }
-  }
 }
 
 // MARK: - Playlists
@@ -237,6 +220,34 @@ extension SoundCloud {
         playlist.saveInBackgroundWithBlock(callback)
       } else {
         callback(success: false, error: nil)
+      }
+    }
+  }
+}
+
+// MARK: - Search
+enum SearchType: String {
+  case Sounds = "tracks"
+  case Artists = "users"
+  case Collectives = "groups"
+  case Playlists = "playlists"
+}
+
+extension SoundCloud {
+  class func search(type: SearchType, containing searchString: String, callback: FetchTracksCallback)
+  {
+    // TODO: switch on type - haha
+    if searchInProgress != nil { SCRequest.cancelRequest(searchInProgress!) }
+    
+    let params = ["q": searchString]
+    // TODO: GET can return a nil SCRequest if auth params aren't gucci, handle this
+    GET(kSCSoundCloudAPIURL + type.rawValue, params: params) { (response, responseData, error) -> Void in
+      if requestSucceeded(response, error: error) {
+        let tracks = parseSearchJSON(responseData)
+        callback(tracks: tracks, error: nil)
+      }
+      else {
+        callback(tracks: nil, error: error)
       }
     }
   }
