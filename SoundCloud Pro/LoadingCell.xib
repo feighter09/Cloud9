@@ -17,12 +17,16 @@
                 <subviews>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vL0-fP-DWL">
                         <rect key="frame" x="290" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="NkX-FH-BjT"/>
+                            <constraint firstAttribute="width" constant="20" id="pqT-dF-4DY"/>
+                        </constraints>
                     </activityIndicatorView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="vL0-fP-DWL" secondAttribute="bottom" constant="3" id="3WA-cV-20O"/>
+                    <constraint firstItem="vL0-fP-DWL" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7xB-qT-D8i" secondAttribute="topMargin" priority="750" constant="4" id="dM7-y7-8h3"/>
                     <constraint firstItem="vL0-fP-DWL" firstAttribute="centerY" secondItem="7xB-qT-D8i" secondAttribute="centerY" id="hcd-Yh-10M"/>
-                    <constraint firstItem="vL0-fP-DWL" firstAttribute="top" secondItem="7xB-qT-D8i" secondAttribute="topMargin" constant="4" id="oRr-Cc-Of0"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="vL0-fP-DWL" secondAttribute="bottom" priority="750" constant="3" id="vFa-cm-W2X"/>
                     <constraint firstItem="vL0-fP-DWL" firstAttribute="centerX" secondItem="7xB-qT-D8i" secondAttribute="centerX" id="zOa-WM-POa"/>
                 </constraints>
             </tableViewCellContentView>

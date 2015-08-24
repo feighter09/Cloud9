@@ -11,20 +11,26 @@ import UIKit
 let kLoadingCellIdentifier = "loadingCell"
 let kNoPlaylistsCellIdentifier = "noPlaylists"
 
-let kLocalPlaylistSection = 0
-let kSharedPlaylistSection = 1
-let kMyPlaylistSection = 2
+enum PlaylistMode: Int {
+  case ContributingPlaylists = 0
+  case FollowingPlaylists
+  case PersonalPlaylists
+}
 
 class AllPlaylistsViewController: LogoImageViewController {
-  var sharedPlaylists: [Playlist]! {
-    didSet { tableView.reloadData() }
-  }
-  
-  var myPlaylists: [Playlist]! {
+//  var sharedPlaylists: [Playlist]! {
+//    didSet { tableView.reloadData() }
+//  }
+//  var myPlaylists: [Playlist]! {
+//    didSet { tableView.reloadData() }
+//  }
+
+  var playlists: [Playlist]! {
     didSet { tableView.reloadData() }
   }
 
   @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet private weak var segmentedControl: UISegmentedControl!
 }
 
 // MARK: - View Life Cycle
@@ -34,94 +40,87 @@ extension AllPlaylistsViewController {
     super.viewDidLoad()
     
     setupTable()
+    setColors()
     loadPlaylists()
+  }
+  
+  private func setColors()
+  {
+    view.backgroundColor = .backgroundColor
+    
   }
   
   func loadPlaylists()
   {
-    myPlaylists = nil
-    sharedPlaylists = nil
+    playlists = nil
     
-    loadSharedPlaylists()
-    loadMyPlaylists()
+    let currentPlaylistMode = PlaylistMode(rawValue: segmentedControl.selectedSegmentIndex)!
+    SoundCloud.getPlaylistsOfMode(currentPlaylistMode) { (playlists, error) -> Void in
+      if error == nil {
+        self.playlists = playlists
+      }
+      else {
+        ErrorHandler.handleNetworkingError("fetching playlists", error: error)
+      }
+    }
+//    myPlaylists = nil
+//    sharedPlaylists = nil
+//    
+//    loadSharedPlaylists()
+//    loadMyPlaylists()
   }
 
   private func setupTable()
   {
     tableView.registerNib(LoadingCell.nib, forCellReuseIdentifier: kLoadingCellIdentifier)
+    tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: kNoPlaylistsCellIdentifier)
 
     tableView.dataSource = self
     tableView.delegate = self
     
     tableView.backgroundColor = .backgroundColor
   }
-  
-  private func loadMyPlaylists()
-  {
-    SoundCloud.getMyPlaylists { (playlists, error) -> Void in
-      if error == nil {
-        self.myPlaylists = playlists
-      }
-      else {
-        ErrorHandler.handleNetworkingError("my playlists", error: error)
-      }
-    }
-  }
-  
-  private func loadSharedPlaylists()
-  {
-    SoundCloud.getSharedPlaylists { (playlists, error) -> Void in
-      if error == nil {
-        self.sharedPlaylists = playlists
-      }
-      else {
-        ErrorHandler.handleNetworkingError("shared playlists", error: error)
-      }
-    }
-  }
 }
 
 // MARK: - Table View Data Source
 extension AllPlaylistsViewController: UITableViewDataSource {
-  func numberOfSectionsInTableView(tableView: UITableView) -> Int
-  {
-    return 3
-  }
-  
-  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
-  {
-    switch section {
-      case kLocalPlaylistSection: return "Offline Playlists"
-      case kSharedPlaylistSection: return "Shared Playlists"
-      case kMyPlaylistSection: return "My Playlists"
-      default: return nil
-    }
-  }
+//  func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+//  {
+//    switch section {
+//      case kLocalPlaylistSection: return "Offline Playlists"
+//      case kSharedPlaylistSection: return "Shared Playlists"
+//      case kMyPlaylistSection: return "My Playlists"
+//      default: return nil
+//    }
+//  }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
   {
-    if !rowsLoadedForSection(section) || playlistsForSectionIsEmpty(section) { return 1 }
-    
-    return playlistsForSection(section)!.count
+    if playlists == nil || playlists.count == 0 {
+      return 1
+    }
+
+    return playlists.count
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
   {
     var cell: UITableViewCell
     
-    if !rowsLoadedForSection(indexPath.section) {
+    if playlists == nil {
       let loadingCell = tableView.dequeueReusableCellWithIdentifier(kLoadingCellIdentifier, forIndexPath: indexPath) as! LoadingCell
       loadingCell.animate()
       cell = loadingCell
     }
-    else if playlistsForSectionIsEmpty(indexPath.section) {
+    else if playlists.count == 0 {
       let normalCell = tableView.dequeueReusableCellWithIdentifier(kNoPlaylistsCellIdentifier, forIndexPath: indexPath)
       normalCell.textLabel?.text = "No playlists!"
+      normalCell.textLabel?.textColor = .primaryColor
       cell = normalCell
     }
     else {
       let playlistCell = tableView.dequeueReusableCellWithIdentifier(kPlaylistCellIdentifier, forIndexPath: indexPath) as! PlaylistCell
-      playlistCell.playlist = playlistForIndexPath(indexPath)
+      playlistCell.playlist = playlists[indexPath.row]
       cell = playlistCell
     }
     
@@ -130,23 +129,6 @@ extension AllPlaylistsViewController: UITableViewDataSource {
     
     return cell
   }
-  
-  func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
-  {
-    let headerView = view as! UITableViewHeaderFooterView
-    headerView.contentView.backgroundColor = .backgroundColor
-    headerView.textLabel?.textColor = .secondaryColor
-  }
-  
-  func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat
-  {
-    return 0.000001
-  }
-  
-  private func rowsLoadedForSection(section: Int) -> Bool
-  {
-    return playlistsForSection(section) != nil
-  }
 }
 
 // MARK: - UI Actions
@@ -154,8 +136,8 @@ extension AllPlaylistsViewController: UITableViewDelegate {
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
   {
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    if let playlist = playlistForIndexPath(indexPath) {
-      presentPlaylist(playlist)
+    if playlists != nil {
+      presentPlaylist(playlists[indexPath.row])
     }
   }
   
@@ -177,6 +159,11 @@ extension AllPlaylistsViewController: UITableViewDelegate {
     loadPlaylists()
   }
   
+  @IBAction func playlistTypeChanged(sender: AnyObject)
+  {
+    loadPlaylists()
+  }
+  
   private func presentPlaylist(playlist: Playlist)
   {
     let playlistVC = PlaylistViewController(playlist: playlist)
@@ -186,34 +173,6 @@ extension AllPlaylistsViewController: UITableViewDelegate {
 
 // MARK: - Helpers
 extension AllPlaylistsViewController {
-  private func playlistsForSection(section: Int) -> [Playlist]?
-  {
-    switch section {
-      case kLocalPlaylistSection: return [UserPreferences.onTheGoPlaylist, UserPreferences.recentsPlaylist]
-      case kSharedPlaylistSection: return sharedPlaylists
-      case kMyPlaylistSection: return myPlaylists
-      default: fatalError()
-    }
-  }
-  
-  private func playlistForIndexPath(indexPath: NSIndexPath) -> Playlist?
-  {
-    if let playlists = playlistsForSection(indexPath.section) {
-      return playlists.count > 0 ? playlists[indexPath.row] : nil
-    }
-
-    return nil
-  }
-  
-  private func playlistsForSectionIsEmpty(section: Int) -> Bool
-  {
-    if let playlists = playlistsForSection(section) {
-      return playlists.count == 0
-    }
-    
-    return true
-  }
-
   private func showAddPlaylistAlert(playlistType: PlaylistType)
   {
     let alert = UIAlertController(title: "New \(playlistType.rawValue) Playlist", message: nil, preferredStyle: .Alert)

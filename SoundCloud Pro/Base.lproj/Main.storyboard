@@ -33,7 +33,7 @@
         <!--All Playlists View Controller-->
         <scene sceneID="iwJ-tf-u8V">
             <objects>
-                <viewController id="5fP-qD-hKb" customClass="AllPlaylistsViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="5fP-qD-hKb" customClass="AllPlaylistsViewController" customModule="SoundCloud_Pro" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HF5-16-gvY"/>
                         <viewControllerLayoutGuide type="bottom" id="FeE-ML-9Ar"/>
@@ -46,11 +46,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="jmI-fb-6YA">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="501"/>
-                                        <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="108" width="600" height="393"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="playlistCell" textLabel="I79-Zw-9hG" detailTextLabel="M3i-B6-yry" style="IBUITableViewCellStyleValue1" id="YcK-HQ-nkp" customClass="PlaylistCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                                <rect key="frame" x="0.0" y="50" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YcK-HQ-nkp" id="mfT-c6-cYX">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -74,7 +74,7 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="noPlaylists" textLabel="adi-PA-S8B" style="IBUITableViewCellStyleDefault" id="GRi-dz-0FK" customClass="LoadingCell" customModule="SoundCloud_Pro" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="158" width="600" height="44"/>
+                                                <rect key="frame" x="0.0" y="94" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GRi-dz-0FK" id="Ehy-gx-X8e">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -92,13 +92,28 @@
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zzF-gP-pKa">
+                                        <rect key="frame" x="8" y="72" width="584" height="29"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <segments>
+                                            <segment title="Contributing"/>
+                                            <segment title="Following"/>
+                                            <segment title="Personal"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="playlistTypeChanged:" destination="5fP-qD-hKb" eventType="valueChanged" id="9if-3k-KCH"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="zzF-gP-pKa" firstAttribute="leading" secondItem="Sgt-8r-Me9" secondAttribute="leading" constant="8" id="0dZ-aa-hRZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="zzF-gP-pKa" secondAttribute="trailing" constant="8" id="2RA-uc-esP"/>
+                                    <constraint firstItem="zzF-gP-pKa" firstAttribute="top" secondItem="Sgt-8r-Me9" secondAttribute="top" constant="72" id="5oM-XG-yuI"/>
                                     <constraint firstAttribute="bottom" secondItem="jmI-fb-6YA" secondAttribute="bottom" constant="50" id="IP2-7Q-Qa2"/>
                                     <constraint firstItem="jmI-fb-6YA" firstAttribute="leading" secondItem="Sgt-8r-Me9" secondAttribute="leading" id="Lal-2f-a6i"/>
+                                    <constraint firstItem="jmI-fb-6YA" firstAttribute="top" secondItem="zzF-gP-pKa" secondAttribute="bottom" constant="8" id="Q8T-wN-uo8"/>
                                     <constraint firstAttribute="trailing" secondItem="jmI-fb-6YA" secondAttribute="trailing" id="buZ-gh-WvS"/>
-                                    <constraint firstItem="jmI-fb-6YA" firstAttribute="top" secondItem="Sgt-8r-Me9" secondAttribute="top" id="dw3-hC-HHs"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -123,6 +138,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="segmentedControl" destination="zzF-gP-pKa" id="H75-od-X8t"/>
                         <outlet property="tableView" destination="jmI-fb-6YA" id="qRY-5g-d23"/>
                     </connections>
                 </viewController>

@@ -166,7 +166,7 @@ extension SearchViewController {
       self.changeKeyboardDoneKeyColor()
     }
   }
-  
+
   private func changeKeyboardDoneKeyColor()
   {
     let (keyboard, keys) = getKeyboardAndKeys()
@@ -178,7 +178,7 @@ extension SearchViewController {
       }
     }
   }
-  
+
   private func getKeyboardAndKeys() -> (keyboard: UIView, keys: [UIView])!
   {
     for keyboardWindow in UIApplication.sharedApplication().windows {
@@ -192,7 +192,7 @@ extension SearchViewController {
     
     return nil
   }
-  
+
   private func keyIsOnBottomRightEdge(key: UIView, keyboardView: UIView) -> Bool
   {
     let margin: CGFloat = 5
@@ -201,7 +201,7 @@ extension SearchViewController {
     
     return onRightEdge && onBottom
   }
-  
+
   private func newDoneButtonWithOld(oldButton: UIView) -> UIButton
   {
     let oldFrame = oldButton.frame

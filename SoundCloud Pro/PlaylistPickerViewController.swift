@@ -41,12 +41,13 @@ extension PlaylistPickerViewController {
   {
     let alert = Utilities.showLoadingAlert("Loading playlists", onViewController: self)
     
-    SoundCloud.getSharedPlaylists({ (sharedPlaylists, error) -> Void in
+    SoundCloud.getContributingPlaylists({ (sharedPlaylists, error) -> Void in
       alert.hideView()
       
       if error == nil {
         self.playlists = [UserPreferences.onTheGoPlaylist] + sharedPlaylists
-      } else {
+      }
+      else {
         ErrorHandler.handleNetworkingError("fetching playlists", error: error)
       }
     })

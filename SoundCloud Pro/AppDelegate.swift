@@ -39,8 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   private func initParse()
   {
     Parse.setApplicationId(kParseApplicationId, clientKey: kParseClientKey)
+
     PFUser.registerSubclass()
     ParsePlaylist.registerSubclass()
+    Follow.registerSubclass()
   }
   
   private func initBackgroundAudio()
@@ -63,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setTableViewCellColors()
     
     setSearchColors()
+    setSegmentedControlColors()
   }
   
   private func showLoginViewControllerIfNecessary()
@@ -112,6 +115,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     UITextField.appearance().keyboardAppearance = .Dark
+  }
+  
+  private func setSegmentedControlColors()
+  {
+    UISegmentedControl.appearance().tintColor = .secondaryColor
+    
+    let textAttributes = [NSForegroundColorAttributeName : UIColor.primaryColor]
+    UISegmentedControl.appearance().setTitleTextAttributes(textAttributes, forState: .Normal)
   }
 }
 

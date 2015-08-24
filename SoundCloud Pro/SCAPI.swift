@@ -139,6 +139,18 @@ extension SoundCloud {
 
 // MARK: - Playlists
 extension SoundCloud {
+  class func getPlaylistsOfMode(mode: PlaylistMode, callback: FetchPlaylistsCallback)
+  {
+    switch mode {
+      case .ContributingPlaylists:
+        getContributingPlaylists(callback)
+      case .FollowingPlaylists:
+        getFollowingPlaylists(callback)
+      case .PersonalPlaylists:
+        getMyPlaylists(callback)
+    }
+  }
+  
   class func getMyPlaylists(callback: FetchPlaylistsCallback)
   {
     let urlString = kSCSoundCloudAPIURL + "me/playlists"
@@ -153,13 +165,15 @@ extension SoundCloud {
     }
   }
   
-  class func getSharedPlaylists(callback: FetchPlaylistsCallback)
+  class func getContributingPlaylists(callback: FetchPlaylistsCallback)
   {
     let query = ParsePlaylist.query()!
     query.whereKey("contributors", equalTo: PFUser.currentUser()!)
     query.includeKey("tracks")
     query.includeKey("contributors")
+    
     query.findObjectsInBackgroundWithBlock({ (results, error) -> Void in
+      // TODO: refactor 1
       var playlists: [Playlist]!
       if error == nil {
         let parsePlaylists = results as! [ParsePlaylist]
@@ -168,6 +182,24 @@ extension SoundCloud {
       
       callback(playlists: playlists, error: error)
     })
+  }
+  
+  class func getFollowingPlaylists(callback: FetchPlaylistsCallback)
+  {
+    let query = Follow.query()!
+    query.whereKey(FollowUserKey, equalTo: PFUser.currentUser()!)
+    query.includeKey(FollowPlaylistKey)
+    
+    query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+      // TODO: refactor 1
+      var playlists: [Playlist]!
+      if error == nil {
+        let follows = results as! [Follow]
+        playlists = follows.map { follow in Playlist(parsePlaylist: follow.playlist) }
+      }
+      
+      callback(playlists: playlists, error: error)
+    }
   }
   
   class func createPlaylistWithName(name: String, type: PlaylistType, callback: SuccessCallback)
