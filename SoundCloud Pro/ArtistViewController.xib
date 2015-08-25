@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistViewController" customModule="SoundCloud_Pro" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="VHz-WT-hhO" id="MJ9-lm-UDp"/>
+                <outlet property="listControl" destination="W25-Ug-Fbp" id="Vb4-o9-Rb0"/>
+                <outlet property="playlistsTableView" destination="OuK-mc-X44" id="jJ6-JL-imL"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="OuK-mc-X44">
+                    <rect key="frame" x="0.0" y="244" width="600" height="356"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VHz-WT-hhO">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="t7t-rc-h1A"/>
+                    </constraints>
+                </imageView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="W25-Ug-Fbp">
+                    <rect key="frame" x="8" y="208" width="584" height="29"/>
+                    <segments>
+                        <segment title="Tracks"/>
+                        <segment title="Playlists"/>
+                        <segment title="Reposts"/>
+                    </segments>
+                </segmentedControl>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="W25-Ug-Fbp" secondAttribute="trailing" constant="8" id="0da-Mb-L2d"/>
+                <constraint firstItem="VHz-WT-hhO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="28h-vz-LMq"/>
+                <constraint firstItem="W25-Ug-Fbp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="DSO-W6-ECy"/>
+                <constraint firstItem="VHz-WT-hhO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DcM-La-DF2"/>
+                <constraint firstAttribute="trailing" secondItem="VHz-WT-hhO" secondAttribute="trailing" id="Qva-6A-vHW"/>
+                <constraint firstItem="OuK-mc-X44" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="XXR-XO-AKy"/>
+                <constraint firstItem="W25-Ug-Fbp" firstAttribute="top" secondItem="VHz-WT-hhO" secondAttribute="bottom" constant="8" id="XgM-Re-Z0S"/>
+                <constraint firstItem="OuK-mc-X44" firstAttribute="top" secondItem="W25-Ug-Fbp" secondAttribute="bottom" constant="8" id="gy1-lF-XvD"/>
+                <constraint firstAttribute="bottom" secondItem="OuK-mc-X44" secondAttribute="bottom" id="hnl-b4-wfi"/>
+                <constraint firstAttribute="trailing" secondItem="OuK-mc-X44" secondAttribute="trailing" id="uPp-V2-WxP"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

@@ -137,15 +137,9 @@ extension SoundCloud {
   class func getMyPlaylists(callback: FetchPlaylistsCallback)
   {
     let urlString = kSCSoundCloudAPIURL + "me/playlists"
-    GET(urlString, params: nil) { (response, responseData, error) -> Void in
-      if requestSucceeded(response, error: error) {
-        let playlists = parsePlaylistJSON(responseData)
-        callback(playlists: playlists, error: nil)
-      } else {
-        NSLog("response: \(response)")
-        callback(playlists: [], error: error)
-      }
-    }
+    let handler = getPlaylistsHandler(callback)
+
+    GET(urlString, params: nil, callback: handler)
   }
   
   class func getContributingPlaylists(callback: FetchPlaylistsCallback)
@@ -182,6 +176,34 @@ extension SoundCloud {
       }
       
       callback(playlists: playlists, error: error)
+    }
+  }
+  
+  class func getPlaylistsForArtist(artist: Artist, callback: FetchPlaylistsCallback)
+  {
+    // TODO:
+  }
+  
+  class func getPlaylistsForCollective(collective: Collective, callback: FetchPlaylistsCallback)
+  {
+    // TODO:
+  }
+  
+  private class func getPlaylistsForEntity(entity: String, callback: FetchPlaylistsCallback)
+  {
+//    SoundCloud.g
+  }
+  
+  private class func getPlaylistsHandler(callback: FetchPlaylistsCallback) -> NetworkCallback
+  {
+    return { (response, responseData, error) -> Void in
+      if requestSucceeded(response, error: error) {
+        let playlists = parsePlaylistJSON(responseData)
+        callback(playlists: playlists, error: nil)
+      } else {
+        NSLog("response: \(response)")
+        callback(playlists: [], error: error)
+      }
     }
   }
   
