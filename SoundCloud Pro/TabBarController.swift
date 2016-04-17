@@ -33,7 +33,7 @@ extension TabBarController {
   {
     let tabBarHeight = tabBar.bounds.height
     let dy = -(UIScreen.mainScreen().bounds.height - tabBarHeight)
-    tabBar.frame.offset(dx: 0, dy: dy)
+    tabBar.frame.offsetInPlace(dx: 0, dy: dy)
   }
   
   private func addPlayer()

@@ -86,7 +86,7 @@ extension Array where Element: Track {
     })
   }
   
-  public func contains(element: Array.Generator.Element) -> Bool
+  func contains(element: Array.Generator.Element) -> Bool
   {
     return contains { $0 == element }
   }

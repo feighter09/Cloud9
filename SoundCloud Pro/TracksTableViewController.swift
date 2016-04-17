@@ -107,7 +107,7 @@ extension TracksTableViewController {
     
     if infiniteScrollingEnabled {
       tableView.addInfiniteScrollingWithActionHandler { () -> Void in
-        delegate?.tracksTableControllerDidScrollToEnd?(self)
+        self.delegate?.tracksTableControllerDidScrollToEnd?(self)
       }
       
       let activityIndicator = tableView.infiniteScrollingView.valueForKey("activityIndicatorView") as! UIActivityIndicatorView

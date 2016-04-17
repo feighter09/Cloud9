@@ -44,9 +44,6 @@
 		7A8B63181B717A5700EF1562 /* PlaylistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A8B63171B717A5700EF1562 /* PlaylistCell.xib */; };
 		7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA4BF371B6A60B500F07E12 /* LoadingCell.swift */; };
 		7AA4BF3A1B6A6BFB00F07E12 /* AsyncAggregator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA4BF391B6A6BFB00F07E12 /* AsyncAggregator.swift */; };
-		7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56001B5186B700817B5C /* ManagedTableController.swift */; };
-		7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56011B5186B700817B5C /* SingleSectionTableController.swift */; };
-		7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56021B5186B700817B5C /* MultiSectionTableController.swift */; };
 		7AAB56071B518F3500817B5C /* TracksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB56061B518F3500817B5C /* TracksTableViewController.swift */; };
 		7AAB560C1B5197A600817B5C /* StreamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAB560A1B5197A600817B5C /* StreamCell.swift */; };
 		7AAB560D1B5197A600817B5C /* StreamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AAB560B1B5197A600817B5C /* StreamCell.xib */; };
@@ -569,7 +566,6 @@
 			files = (
 				7A07D8831B81AC7B006ADBEB /* LoginViewController.swift in Sources */,
 				7ABB79A11B7197B60065EEAE /* AddContributorViewController.swift in Sources */,
-				7AAB56041B5186B700817B5C /* SingleSectionTableController.swift in Sources */,
 				7A81E3651B5D6B3C00339CA3 /* UserPreferences.swift in Sources */,
 				7ABB79A31B7198710065EEAE /* LFTableViewDataSource.swift in Sources */,
 				7A07D87D1B814767006ADBEB /* Fonts.m in Sources */,
@@ -583,7 +579,6 @@
 				7AAEC36B1B506F7A00AE6945 /* SCAPI.swift in Sources */,
 				7A1351CD1B68544C00C2F7FA /* VoteCell.swift in Sources */,
 				7ABB799F1B718BC40065EEAE /* ViewContributorsViewController.swift in Sources */,
-				7AAB56031B5186B700817B5C /* ManagedTableController.swift in Sources */,
 				7A5FA5E41B69A9CA009467B7 /* Playlist.swift in Sources */,
 				7A8392851B713FC300E8A3BB /* PlaylistPickerViewController.swift in Sources */,
 				7AAB56071B518F3500817B5C /* TracksTableViewController.swift in Sources */,
@@ -593,7 +588,6 @@
 				7A759E3C1B7918AD0046EEAA /* MusicPlayerView.swift in Sources */,
 				7A07D87F1B81951E006ADBEB /* LogoImageViewController.swift in Sources */,
 				7AA4BF381B6A60B500F07E12 /* LoadingCell.swift in Sources */,
-				7AAB56051B5186B700817B5C /* MultiSectionTableController.swift in Sources */,
 				7A5FA5E21B69A972009467B7 /* AllPlaylistsViewController.swift in Sources */,
 				7A62A5281B73A041004E61CF /* TabBarController.swift in Sources */,
 				7AA4BF3A1B6A6BFB00F07E12 /* AsyncAggregator.swift in Sources */,
@@ -753,6 +747,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
+				"OTHER_CPLUSPLUSFLAGS[arch=*]" = "$(OTHER_CFLAGS)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.LostInFlight.Cloud9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

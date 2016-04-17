@@ -48,7 +48,7 @@ extension ListenerArray {
   func announceOnMainQueue(announcement: (ListenerType) -> Void)
   {
     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-      listeners.map { listener in announcement(listener) }
+      self.listeners.map { listener in announcement(listener) }
     })
   }
 }

@@ -144,7 +144,7 @@ extension Track {
 }
 
 // MARK: - Debug Printing
-extension Track: CustomDebugStringConvertible {
+extension Track {
   override var description: String { return "\(artist): \(title)" }
   override var debugDescription: String { return description }
 }
